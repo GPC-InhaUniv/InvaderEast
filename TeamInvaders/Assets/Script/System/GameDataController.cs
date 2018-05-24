@@ -8,14 +8,36 @@ public class GameDataController : MonoBehaviour
     /// 직접 GameData.cs를 함부로 만지 마세요
     /// 데이터 변경시 변경되었다는 Log를 Console창에 출력합니다.
     /// </summary>
-    public int PlayerDamage { get { return GameData.Instance.PlayerDamage; } set { GameData.Instance.PlayerDamage = value; ChangeDatas(); } }
+  
+    public enum Difficulty
+    {
+        Easy,
+        Normal,
+        Hard,
+    }
+    public enum ShipType
+    {
+        Red,
+        Yello,
+        Green,
+    }
+    private int playerDamage;
+    private int playerLife;
+    private bool playerShild;
+    private bool powerItem;
+    private bool lifeItem;
+    private bool magnaticItem;
+    private ShipType playerShip;
+    private Difficulty difficulte;
+
+    public int PlayerDamage { get { return playerDamage; } set { playerDamage = value;ChangeDatas(); } }
+    public int PlayerLife { get { return playerLife; } set { playerLife = value; ChangeDatas(); } }
+    public bool PlayerShild { get { return playerShild; } set { playerShild = value; ChangeDatas(); } }
+    public bool PowerItem { get { return powerItem; } set { powerItem = value; ChangeDatas(); } }
+    public bool LifeItem { get { return lifeItem; } set { lifeItem = value; ChangeDatas(); } }
+    public bool MagnaticItem { get { return magnaticItem; } set { magnaticItem = value; ChangeDatas(); } }
     public int PlayerHaveGold { get { return GameData.Instance.PlayerHaveGold; } set { GameData.Instance.PlayerHaveGold = value; ChangeDatas(); } } 
-    public Difficulty Difficulte { get { return GameData.Instance.Difficulte; } set { GameData.Instance.Difficulte = value; ChangeDatas(); } }
-    public ShipType PlayerShipType { get { return GameData.Instance.PlayerShipType; } set{ GameData.Instance.PlayerShipType = value; ChangeDatas(); } }
-    public bool PowerItem{ get { return GameData.Instance.PowerItem; } set { GameData.Instance.PowerItem = value; ChangeDatas(); } }
-    public bool LifeItem{get { return GameData.Instance.LifeItem; } set { GameData.Instance.LifeItem = value; ChangeDatas(); } }  
-    public bool UltimateItem { get { return GameData.Instance.UltimateItem; } set { GameData.Instance.UltimateItem = value; ChangeDatas(); } }
-    public bool MagnaticItem { get { return GameData.Instance.MagnaticItem; } set { GameData.Instance.MagnaticItem = value; ChangeDatas(); } }
+    public int MaxCount { get { return GameData.Instance.MaxScore; } set { GameData.Instance.MaxScore = value; ChangeDatas(); } }
 
     public void Start()
     {
