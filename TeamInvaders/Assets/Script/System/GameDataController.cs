@@ -37,13 +37,15 @@ public class GameDataController : MonoBehaviour
     public bool LifeItem { get { return lifeItem; } set { lifeItem = value; ChangeDatas(); } }
     public bool MagnaticItem { get { return magnaticItem; } set { magnaticItem = value; ChangeDatas(); } }
     public int PlayerHaveGold { get { return GameData.Instance.PlayerHaveGold; } set { GameData.Instance.PlayerHaveGold = value; ChangeDatas(); } } 
-    public int MaxCount { get { return GameData.Instance.MaxScore; } set { GameData.Instance.MaxScore = value; ChangeDatas(); } }
+    public int MaxScore { get { return GameData.Instance.MaxScore; } set { GameData.Instance.MaxScore = value; ChangeDatas(); } }
+    public ShipType PlayerShip { get { return playerShip; } set { playerShip = value; ChangeDatas(); } }
+    public Difficulty Difficulte { get { return difficulte; } set { difficulte = value; ChangeDatas(); } }
 
     public void Start()
     {
         DontDestroyOnLoad(gameObject);
     }
-    public void ChangeDatas()
+    private void ChangeDatas()
     {
         Debug.Log("값 변경됨");
     }
