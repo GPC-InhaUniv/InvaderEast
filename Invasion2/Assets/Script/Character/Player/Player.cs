@@ -23,9 +23,22 @@ public enum SubAttack
 
 public class Player : Character
 {
-    public override void Move(Vector3 direction)
+    new Rigidbody rigidbody;
+    public Vector3 pos;
+
+    private void Start()
     {
-        base.Move(direction);
+        rigidbody = GetComponent<Rigidbody>();
+    }
+
+    private void FixedUpdate()
+    {
+        Move(pos);
+    }
+
+    public override void Move(Vector3 position)
+    {
+        //rigidbody.position = position;
     }
 
     public override void OnTriggerEnter(Collider other)

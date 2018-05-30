@@ -12,18 +12,17 @@ public enum EnemyType
 
 }
 
-public enum Direction
-{
-    UP,
-    DOWN,
-    RIGHT,
-    LEFT,
-}
-
 public class Enemy : Character
 {
+    Vector3 direction;
+
     public int giveScore;
     public int giveMaxGold;
+
+    private void FixedUpdate()
+    {
+        Move(direction);
+    }
 
     public override void Move(Vector3 direction)
     {
