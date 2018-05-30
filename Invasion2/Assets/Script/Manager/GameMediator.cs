@@ -11,11 +11,16 @@ public class GameMediator : MonoBehaviour {
 	void Start () {
         DontDestroyOnLoad(gameObject);
         gameDatamanager = GameDataManager.Instance;
+        
         itemMangager = ItemManager.Instance;
         stageManager = StageManager.Instance;
         sceneController = SceneController.Instance;
         
 	}
 	
+    void LoadData()
+    {
+
+    }
 	
 }

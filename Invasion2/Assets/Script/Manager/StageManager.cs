@@ -21,9 +21,14 @@ public class StageManager : Singleton<StageManager> {
     public int CurrentStage;
     public List<Enemy> EnemyList;
     public EnemyFactory Factory;
+    GameMediator gameMediator;
 
     const int MaxStage = 3;
 
+    private void Start()
+    {
+        gameMediator = GameObject.FindGameObjectWithTag("GameMediator").GetComponent<GameMediator>();
+    }
     public void Spawn(Enemy enemy)
     {
         Debug.Log("Enemy Spawn");

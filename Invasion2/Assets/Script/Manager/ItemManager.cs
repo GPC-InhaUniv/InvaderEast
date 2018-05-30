@@ -3,13 +3,14 @@
 public class ItemManager : Singleton<ItemManager> {
 
     protected ItemManager() { }
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public GameMediator gameMediator;
+    public int PowerItemCount;
+    public int LifeItemCount;
+    public bool MagnaticItem;
+    public bool PowerRegenItem;
+
+    private void Start()
+    {
+        gameMediator = GameObject.FindGameObjectWithTag("GameMediator").GetComponent<GameMediator>();
+    }
 }
