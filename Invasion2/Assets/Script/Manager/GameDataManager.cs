@@ -2,7 +2,7 @@
 
 public class GameDataManager : Singleton<GameDataManager>{
 
-    public GameMediator gameMediator;
+    GameMediator gameMediator;
     protected GameDataManager() { }
     public int Gold;
     
