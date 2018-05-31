@@ -26,12 +26,11 @@ public class Player : Character
     private void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
-        pos = rigidbody.position;
     }
 
     private void FixedUpdate()
     {
-       base.Move(direction);
+       Move(direction);
     }
 
     public override void OnTriggerEnter(Collider other)

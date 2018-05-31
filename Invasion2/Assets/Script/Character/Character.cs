@@ -23,7 +23,6 @@ public class Character : MonoBehaviour
     public float moveSpeed;
     public int damage;
     public int life;
-    public Vector3 pos;
 
     public new Rigidbody rigidbody;
 
@@ -42,19 +41,16 @@ public class Character : MonoBehaviour
                 Attack();
                 break;
             case Direction.DOWN:
-                pos = rigidbody.position;
                 target = new Vector3(0.0f, -1.0f, 0.0f);
                 rigidbody.velocity = target * moveSpeed;
                 Attack();
                 break;
             case Direction.LEFT:
-                pos = rigidbody.position;
                 target = new Vector3(-1.0f, 0.0f, 0.0f);
                 rigidbody.velocity = target * moveSpeed;
                 Attack();
                 break;
             case Direction.RIGHT:
-                pos = rigidbody.position;
                 target = new Vector3(1.0f, 0.0f, 0.0f);
                 rigidbody.velocity = target * moveSpeed;
                 Attack();

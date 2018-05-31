@@ -22,7 +22,6 @@ public class Enemy : Character
     private void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
-        pos = rigidbody.position;
     }
 
     private void FixedUpdate()
@@ -35,7 +34,7 @@ public class Enemy : Character
         Vector3 target;
         switch (direction)
         {
-            
+
             case Direction.UP:
                 target = new Vector3(0.0f, 1.0f, 0.0f);
                 rigidbody.velocity = target * moveSpeed;
@@ -91,7 +90,7 @@ public class Enemy : Character
 
     public override void Attack()
     {
-        
+
     }
 
     public void Pattern()
