@@ -31,7 +31,6 @@ public class Character : MonoBehaviour
     public virtual void Move(Direction direction)
     {
         Vector3 target;
-        Vector3 targetDirection;
         switch (direction)
         {
             case Direction.STOP:

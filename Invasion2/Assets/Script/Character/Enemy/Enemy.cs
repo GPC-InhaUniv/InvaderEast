@@ -84,6 +84,11 @@ public class Enemy : Character
         }
     }
 
+    void Died()
+    {
+        StageManager.Instance.RemoveEnemy(this);
+    }
+
     public override void Attack()
     {
         
