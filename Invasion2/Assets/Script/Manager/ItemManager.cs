@@ -13,4 +13,5 @@ public class ItemManager : Singleton<ItemManager> {
     {
         gameMediator = GameObject.FindGameObjectWithTag("GameMediator").GetComponent<GameMediator>();
     }
+   
 }

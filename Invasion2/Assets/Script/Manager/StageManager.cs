@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public enum Difficult
 {
     Easy,
@@ -10,7 +11,7 @@ public enum Difficult
     Hard,
 }
 
-public class StageManager : Singleton<StageManager> {
+public class StageManager : Singleton<StageManager>{
 
     protected StageManager()
     {
