@@ -10,9 +10,10 @@ using UnityEngine.EventSystems;
 /// </summary>
 public class MoveController : MonoBehaviour
 {
-    Character character;
+    Player player;
 
     public Transform Stick;
+    public Transform StickPannel;
     public Vector3 centerPos;
     public Vector3 directionPos;
     Direction direction;
@@ -21,7 +22,9 @@ public class MoveController : MonoBehaviour
 
     private void Start()
     {
+        player = FindObjectOfType<Player>();
         Stick = GameObject.Find("JoyStick").GetComponent<RectTransform>();
+        StickPannel = GameObject.Find("StickPannel").GetComponent<RectTransform>();
         pannelRaius = GetComponent<RectTransform>().sizeDelta.y / 2;
         Stick.gameObject.SetActive(false);
     }
@@ -38,8 +41,9 @@ public class MoveController : MonoBehaviour
             Stick.gameObject.SetActive(true);
             touchPos = Input.mousePosition;
             centerPos = touchPos;
-            this.gameObject.transform.position = centerPos;
+            StickPannel.position = centerPos;
             Debug.Log("좌표 : " + touchPos);
+            Debug.Log("패널 좌표 : " + StickPannel.position);
         }
     }
 
@@ -48,25 +52,27 @@ public class MoveController : MonoBehaviour
     {
         Vector3 dragPos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0.0f);
         directionPos = (dragPos - centerPos).normalized;
-        Debug.Log("드래그 좌표 : " + directionPos);
-        /*if(directionPos.y>centerPos.y)
+        Debug.Log("드래그 좌표 : " + dragPos);
+        if(directionPos.y>centerPos.y)
         {
-            character.Move(Direction.UP);
+            player.Move(Direction.UP);
             Debug.Log("위쪽 : " + directionPos);
         }
         else if(directionPos.y<centerPos.y)
         {
-            character.Move(Direction.DOWN);
+            player.Move(Direction.DOWN);
             Debug.Log("아래 : " + directionPos);
         }
         else if(directionPos.x<centerPos.x)
         {
-            character.Move(Direction.LEFT);
+            player.Move(Direction.LEFT);
+            Debug.Log("왼쪽 : " + directionPos);
         }
         else
         {
-            character.Move(Direction.RIGHT);
-        }*/
+            player.Move(Direction.RIGHT);
+            Debug.Log("오른쪽 : " + directionPos);
+        }
         //Debug.Log("방향 : " + directionPos);
         float stickDistance = Vector3.Distance(dragPos, centerPos);
         if (stickDistance > pannelRaius)
