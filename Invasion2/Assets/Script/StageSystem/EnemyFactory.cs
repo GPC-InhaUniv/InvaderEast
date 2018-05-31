@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// 에너미 생성하는 팩토리
+/// 에너미를 생성하는 팩토리
+/// CreateEnemy(Enemy EnemyPrefab)
 /// </summary>
 public class EnemyFactory : MonoBehaviour
 {
