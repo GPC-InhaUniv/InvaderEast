@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
-
+using System;
+using System.Runtime.Serialization;
 /// <summary>
 ///  이것이 싱글톤이 아닌 생성자를 막지 못하는것을 인지하고 있어야 한다.
 ///   `T myT = new T();` 이것과 같이 객체를 만들면 안된다!!
@@ -7,7 +8,9 @@
 /// 
 /// Coroutines를 필요로 하기 때문에 MonoBehaviour로 만들어졌다.
 /// </summary>
-public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
+
+
+public class Singleton<T> : MonoBehaviour where T : MonoBehaviour 
 {
     private static T _instance;
     
@@ -61,6 +64,7 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
                 return _instance;
             }
         }
+       
     }
 
     private static bool applicationIsQuitting = false;
@@ -76,4 +80,6 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     {
         applicationIsQuitting = true;
     }
+
+    
 }
