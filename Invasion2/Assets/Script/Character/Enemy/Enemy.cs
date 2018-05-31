@@ -19,8 +19,6 @@ public class Enemy : Character
     public int giveScore;
     public int giveMaxGold;
 
-    new Rigidbody rigidbody;
-
     private void Start()
     {
         rigidbody = GetComponent<Rigidbody>();

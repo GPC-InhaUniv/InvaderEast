@@ -16,6 +16,7 @@ public enum Direction
     RIGHTUP,
     LEFTDOWN,
     RIGHTDOWN,
+    STOP,
 }
 public class Character : MonoBehaviour
 {
@@ -24,13 +25,7 @@ public class Character : MonoBehaviour
     public int life;
     public Vector3 pos;
 
-    new Rigidbody rigidbody;
-
-    private void Start()
-    {
-        rigidbody = GameObject.Find("Player").GetComponent<Rigidbody>();
-        pos = rigidbody.position;
-    }
+    public new Rigidbody rigidbody;
 
     public Direction direction;
     public virtual void Move(Direction direction)
