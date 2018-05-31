@@ -10,10 +10,13 @@ using UnityEngine.EventSystems;
 /// </summary>
 public class MoveController : MonoBehaviour
 {
+    Character character;
+
     public Transform Stick;
+    public Vector3 centerPos;
+    public Vector3 directionPos;
+    Direction direction;
     Vector3 touchPos;
-    Vector3 centerPos;
-    Vector3 direction;
     float pannelRaius;
 
     private void Start()
@@ -23,13 +26,12 @@ public class MoveController : MonoBehaviour
         Stick.gameObject.SetActive(false);
     }
 
-    /*private void Update()
+    private void Update()
     {
-        StickMove();
-    }*/
+        CenterPos();
+    }
 
-    
-    public void StickMove()
+    void CenterPos()
     {
         if(Input.GetMouseButtonDown(0))
         {
@@ -39,35 +41,51 @@ public class MoveController : MonoBehaviour
             this.gameObject.transform.position = centerPos;
             Debug.Log("좌표 : " + touchPos);
         }
+    }
 
-        if(Input.GetMouseButton(0))
+    
+    public void StickMove()
+    {
+        Vector3 dragPos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0.0f);
+        directionPos = (dragPos - centerPos).normalized;
+        Debug.Log("드래그 좌표 : " + directionPos);
+        /*if(directionPos.y>centerPos.y)
         {
-            Vector3 dragPos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0.0f);
-            direction = (dragPos - centerPos).normalized;
-            float stickDistance = Vector3.Distance(dragPos, centerPos);
-            if(stickDistance>pannelRaius)
-            {
-                touchPos = centerPos + direction * pannelRaius;
-                Stick.position = centerPos + direction * pannelRaius;
-            }
-            else
-            {
-                touchPos = centerPos + direction * stickDistance;
-                Stick.position = centerPos + direction * pannelRaius;
-            }
-            Debug.Log("드래그 중");
+            character.Move(Direction.UP);
+            Debug.Log("위쪽 : " + directionPos);
         }
-
-        if(Input.GetMouseButtonUp(0))
+        else if(directionPos.y<centerPos.y)
         {
-            StickMoveEnd();
+            character.Move(Direction.DOWN);
+            Debug.Log("아래 : " + directionPos);
         }
+        else if(directionPos.x<centerPos.x)
+        {
+            character.Move(Direction.LEFT);
+        }
+        else
+        {
+            character.Move(Direction.RIGHT);
+        }*/
+        //Debug.Log("방향 : " + directionPos);
+        float stickDistance = Vector3.Distance(dragPos, centerPos);
+        if (stickDistance > pannelRaius)
+        {
+            //touchPos = centerPos + directionPos * pannelRaius;
+            Stick.position = centerPos + directionPos * pannelRaius;
+        }
+        else
+        {
+            //touchPos = centerPos + directionPos * stickDistance;
+            Stick.position = centerPos + directionPos * pannelRaius;
+        }
+        
     }
 
     public void StickMoveEnd()
     {
         Stick.position = centerPos;
-        direction = Vector3.zero;
+        directionPos = Vector3.zero;
         Stick.gameObject.SetActive(false);
     }
 }
