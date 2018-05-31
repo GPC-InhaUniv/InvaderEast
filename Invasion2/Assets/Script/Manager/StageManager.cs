@@ -23,13 +23,14 @@ public class StageManager : Singleton<StageManager> {
         CurrentStage = 0;
     }
 
-    public Difficult difficult;
-    public int CurrentStage;
-    public List<Enemy> EnemyList;
-    public EnemyFactory Factory;
+    Difficult difficult;
+    List<Enemy> EnemyList;
     GameMediator gameMediator;
-
     const int MaxStage = 3;
+    int CurrentStage;
+
+    [SerializeField]
+    EnemyFactory Factory;
 
     private void Start()
     {
@@ -70,10 +71,8 @@ public class StageManager : Singleton<StageManager> {
 
     public void NextStage()
     {
-        
         if (CurrentStage == 0)
         {
-            
             StartCoroutine(StageCoroutine(CurrentStage));
             CurrentStage++;
         }
@@ -86,7 +85,6 @@ public class StageManager : Singleton<StageManager> {
         {
             Debug.Log("다음 스테이지 없음");
         }
-        
     }
 
     public void SetDifficulty(Difficult difficult)
