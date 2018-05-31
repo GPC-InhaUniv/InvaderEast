@@ -33,63 +33,51 @@ public class Enemy : Character
     public override void Move(Direction direction)
     {
         Vector3 target;
-        Vector3 targetDirection;
         switch (direction)
         {
+            
             case Direction.UP:
-                target = new Vector3(0.0f, 10.0f, 0.0f);
-                targetDirection = (target - pos).normalized;
-                rigidbody.velocity = targetDirection * moveSpeed;
+                target = new Vector3(0.0f, 1.0f, 0.0f);
+                rigidbody.velocity = target * moveSpeed;
                 Attack();
                 break;
             case Direction.DOWN:
-                pos = rigidbody.position;
-                target = new Vector3(0.0f, -10.0f, 0.0f);
-                targetDirection = (target - pos).normalized;
-                rigidbody.velocity = targetDirection * moveSpeed;
+                target = new Vector3(0.0f, -1.0f, 0.0f);
+                rigidbody.velocity = target * moveSpeed;
                 Attack();
                 break;
             case Direction.LEFT:
-                pos = rigidbody.position;
-                target = new Vector3(-10.0f, 0.0f, 0.0f);
-                targetDirection = (target - pos).normalized;
-                rigidbody.velocity = targetDirection * moveSpeed;
+                target = new Vector3(-1.0f, 0.0f, 0.0f);
+                rigidbody.velocity = target * moveSpeed;
                 Attack();
                 break;
             case Direction.RIGHT:
-                pos = rigidbody.position;
-                target = new Vector3(10.0f, 0.0f, 0.0f);
-                targetDirection = (target - pos).normalized;
-                rigidbody.velocity = targetDirection * moveSpeed;
+                target = new Vector3(1.0f, 0.0f, 0.0f);
+                rigidbody.velocity = target * moveSpeed;
                 Attack();
                 break;
             case Direction.LEFTUP:
-                pos = rigidbody.position;
-                target = new Vector3(-10.0f, 10.0f, 0.0f);
-                targetDirection = (target - pos).normalized;
-                rigidbody.velocity = targetDirection * moveSpeed;
+                target = new Vector3(-1.0f, 1.0f, 0.0f);
+                rigidbody.velocity = target * moveSpeed;
                 Attack();
                 break;
             case Direction.RIGHTUP:
-                pos = rigidbody.position;
-                target = new Vector3(10.0f, 10.0f, 0.0f);
-                targetDirection = (target - pos).normalized;
-                rigidbody.velocity = targetDirection * moveSpeed;
+                target = new Vector3(1.0f, 1.0f, 0.0f);
+                rigidbody.velocity = target * moveSpeed;
                 Attack();
                 break;
             case Direction.LEFTDOWN:
-                pos = rigidbody.position;
-                target = new Vector3(-10.0f, -10.0f, 0.0f);
-                targetDirection = (target - pos).normalized;
-                rigidbody.velocity = targetDirection * moveSpeed;
+                target = new Vector3(-1.0f, -1.0f, 0.0f);
+                rigidbody.velocity = target * moveSpeed;
                 Attack();
                 break;
             case Direction.RIGHTDOWN:
-                pos = rigidbody.position;
-                target = new Vector3(10.0f, -10.0f, 0.0f);
-                targetDirection = (target - pos).normalized;
-                rigidbody.velocity = targetDirection * moveSpeed;
+                target = new Vector3(1.0f, -1.0f, 0.0f);
+                rigidbody.velocity = target * moveSpeed;
                 Attack();
+                break;
+            case Direction.STOP:
+                rigidbody.velocity = Vector3.zero;
                 break;
             default:
                 break;
