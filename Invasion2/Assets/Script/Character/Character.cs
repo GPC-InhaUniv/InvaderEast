@@ -20,13 +20,15 @@ public enum Direction
 }
 public class Character : MonoBehaviour
 {
-    public float moveSpeed;
-    public int damage;
-    public int life;
+    [SerializeField]
+    protected float moveSpeed;
+    protected int damage;
+    protected int life;
 
-    public new Rigidbody rigidbody;
+    protected new Rigidbody rigidbody;
 
-    public Direction direction;
+    [SerializeField]
+    protected Direction direction;
     public virtual void Move(Direction direction)
     {
         Vector3 target;
