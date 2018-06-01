@@ -1,22 +1,20 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
+
 public class GameMediator : MonoBehaviour
 {
 
-    public GameDataManager gameDatamanager;
+    GameDataManager gameDataManager;
     ItemManager itemMangager;
     SceneController sceneController;
-    StageManager stageManager;
-
-
+    InputManager inputManagere;
     // Use this for initialization
     void Start()
     {
         DontDestroyOnLoad(gameObject);
-        gameDatamanager = GameDataManager.Instance;
+        gameDataManager = GameDataManager.Instance;
         itemMangager = ItemManager.Instance;
-        stageManager = StageManager.Instance;
         sceneController = SceneController.Instance;
+        inputManagere = InputManager.Instance;
     }
     /// <summary>
     /// 게임 오버시 score 값 0 입력
@@ -25,13 +23,13 @@ public class GameMediator : MonoBehaviour
     public void ChangeScore(int score)
     {
         if (score == 0)
-            GameDataManager.Instance.CurrentScore = 0;
+            gameDataManager.CurrentScore = 0;
         else
         {
-            GameDataManager.Instance.CurrentScore += score;
-            if(GameDataManager.Instance.MaxScore <= GameDataManager.Instance.CurrentScore)
+            gameDataManager.CurrentScore += score;
+            if(gameDataManager.MaxScore <= gameDataManager.CurrentScore)
             {
-                GameDataManager.Instance.MaxScore = GameDataManager.Instance.CurrentScore;
+                gameDataManager.MaxScore = gameDataManager.CurrentScore;
             }
         } 
 
@@ -42,7 +40,7 @@ public class GameMediator : MonoBehaviour
     /// <param name="gold"></param>
     public void ChangeGold(int gold)
     {
-        GameDataManager.Instance.Gold = gold;
+        gameDataManager.Gold = gold;
         SaveAndLoader.SaveData();
     }
     /// <summary>

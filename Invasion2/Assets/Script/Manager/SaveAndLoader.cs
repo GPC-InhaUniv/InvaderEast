@@ -8,7 +8,7 @@ using System;
 public class SaveAndLoader : MonoBehaviour
 {
     [Serializable]
-    public class GameData
+    private class GameData
     {
         public int Gold;
         public int MaxScore;
@@ -18,7 +18,7 @@ public class SaveAndLoader : MonoBehaviour
             filePath = Application.dataPath + "/GameData.bin";
         }
     }
-    static GameData Data = new GameData();
+    private static GameData Data = new GameData();
     public static void SaveData()
     {
         Data.Gold = GameDataManager.Instance.Gold;
@@ -37,13 +37,13 @@ public class SaveAndLoader : MonoBehaviour
         Debug.Log("소지 골드: " + Data.Gold);
         Debug.Log("최대 스코어: " + Data.MaxScore);
     }
-    public static void BinarySeriallize(GameData data)
+    private static void BinarySeriallize(GameData data)
     {
         BinaryFormatter formattere = new BinaryFormatter();
         using (FileStream stream = new FileStream(data.filePath, FileMode.Create))
             formattere.Serialize(stream, data);
     }
-    public static void BinaryDeserialize()
+    private static void BinaryDeserialize()
     {
         BinaryFormatter formatter = new BinaryFormatter();
         using (FileStream stream = new FileStream(Data.filePath, FileMode.Open))
