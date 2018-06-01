@@ -16,8 +16,8 @@ public enum EnemyType
 
 public class Enemy : Character
 {
-    public int giveScore;
-    public int giveMaxGold;
+    protected int giveScore;
+    protected int giveMaxGold;
 
     private void Start()
     {
