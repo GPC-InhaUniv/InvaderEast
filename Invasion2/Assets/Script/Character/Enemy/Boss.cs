@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Boss : Enemy {
+public class Boss : Enemy
+{
 
     [SerializeField]
     private GameObject bullet;
+    [SerializeField]
+    private GameObject enemy;
     [SerializeField]
     private GameObject laser;
     [SerializeField]
@@ -22,8 +25,9 @@ public class Boss : Enemy {
     Vector3 addPostion;
 
     private int shotCount;
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         rigidbody = GetComponent<Rigidbody>();
         life = 1000;
@@ -31,14 +35,15 @@ public class Boss : Enemy {
         giveMaxGold = 100;
         StartCoroutine(FirstPattern());
         shotCount = 0;
-        
+
 
     }
-	
-	// Update is called once per frame
-	void Update () {
-       
-	}
+
+    // Update is called once per frame
+    void Update()
+    {
+    
+    }
 
     IEnumerator FirstPattern()
     {
@@ -55,24 +60,44 @@ public class Boss : Enemy {
             yield return new WaitForSeconds(2.0f);
             shotCount = 0;
         }
-       
+
         StartCoroutine(FirstPattern());
     }
     IEnumerator SecondPattern()
     {
-        
-        
-        for (int i = 0; i<12;i++)
+
+
+        for (int i = 0; i < 12; i++)
         {
-           Quaternion test = Quaternion.Euler(15 * i, -90, -90);
-            Instantiate(bullet, subShotPos.transform.position, subShotPos.transform.rotation = test );
-            
+            Quaternion test = Quaternion.Euler(15 * i, -90, -90);
+            Instantiate(bullet, subShotPos.transform.position, subShotPos.transform.rotation = test);
+
             yield return new WaitForSeconds(0.1f);
-            
+
         }
-        yield return new WaitForSeconds(0);
-        
+        StartCoroutine(ThirdPattern());
+
+
     }
 
-    
+    IEnumerator ThirdPattern()
+    {
+        Vector3 setPos = new Vector3(1f, 0, 0);
+        Instantiate(enemy, enemyEjectPos.transform.position + setPos, enemyEjectPos.transform.rotation);
+        Instantiate(enemy, enemyEjectPos.transform.position - setPos, enemyEjectPos.transform.rotation);
+        yield return new WaitForSeconds(0);
+        StartCoroutine(FourthPattern());
+
+    }
+
+    IEnumerator FourthPattern()
+    {
+        StopCoroutine(FirstPattern());
+        //StopAllCoroutines();
+
+        //direction = Direction.LEFT;
+
+        yield return new WaitForSeconds(0);
+    }
+
 }
