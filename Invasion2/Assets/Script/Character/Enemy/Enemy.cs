@@ -2,6 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+public enum EnemyType
+{
+
+}
+
 /// <summary>
 /// Character를 상속받는다.
 /// enum은 다른 클래스에서 사용하기 편하도록
@@ -9,13 +15,12 @@ using UnityEngine;
 /// Move는 재정의하여 Enemy에 맞도록
 /// 내용을 채워넣었음.
 /// </summary>
-public enum EnemyType
-{
-
-}
-
+/// 
 public class Enemy : Character
 {
+    [SerializeField]
+    protected Direction direction;
+
     protected int giveScore;
     protected int giveMaxGold;
 
