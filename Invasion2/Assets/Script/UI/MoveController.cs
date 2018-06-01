@@ -31,44 +31,41 @@ public class MoveController : MonoBehaviour
 
     private void Update()
     {
-        CenterPos();
+        //CenterPos();
     }
 
-    void CenterPos()
+    public void CenterPos()
     {
-        if(Input.GetMouseButtonDown(0))
-        {
-            Stick.gameObject.SetActive(true);
-            touchPos = Input.mousePosition;
-            centerPos = touchPos;
-            StickPannel.position = centerPos;
-            Debug.Log("좌표 : " + touchPos);
-            Debug.Log("패널 좌표 : " + StickPannel.position);
-        }
+        Stick.gameObject.SetActive(true);
+        touchPos = Input.mousePosition;
+        centerPos = touchPos;
+        StickPannel.position = centerPos;
+        Debug.Log("좌표 : " + centerPos);
+        Debug.Log("패널 좌표 : " + StickPannel.position);
     }
 
-    
+
     public void StickMove()
     {
         Vector3 dragPos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0.0f);
         directionPos = (dragPos - centerPos).normalized;
         Debug.Log("드래그 좌표 : " + dragPos);
-        if(directionPos.y>centerPos.y)
+        if (dragPos.y > centerPos.y)
         {
             player.Move(Direction.UP);
             Debug.Log("위쪽 : " + directionPos);
         }
-        else if(directionPos.y<centerPos.y)
+        else if (dragPos.y < centerPos.y)
         {
             player.Move(Direction.DOWN);
             Debug.Log("아래 : " + directionPos);
         }
-        else if(directionPos.x<centerPos.x)
+        else if (dragPos.x < centerPos.x)
         {
             player.Move(Direction.LEFT);
             Debug.Log("왼쪽 : " + directionPos);
         }
-        else
+        else if (dragPos.x > centerPos.x)
         {
             player.Move(Direction.RIGHT);
             Debug.Log("오른쪽 : " + directionPos);
@@ -79,13 +76,15 @@ public class MoveController : MonoBehaviour
         {
             //touchPos = centerPos + directionPos * pannelRaius;
             Stick.position = centerPos + directionPos * pannelRaius;
+            Debug.Log("너 어디갔냐 : " + Stick.position);
         }
         else
         {
             //touchPos = centerPos + directionPos * stickDistance;
-            Stick.position = centerPos + directionPos * pannelRaius;
+            Stick.position = centerPos + directionPos * stickDistance;
+            Debug.Log("너 어디갔냐 : " + Stick.position);
         }
-        
+
     }
 
     public void StickMoveEnd()
