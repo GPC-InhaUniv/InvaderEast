@@ -89,8 +89,8 @@ public class StageManager : Singleton<StageManager> {
 
     public void SetDifficulty(Difficult difficult)
     {
-        Debug.Log("Set Difficulty : " + difficult);
         this.difficult = difficult;
+        Debug.Log("Set Difficulty : " + difficult);
     }
 
     public Difficult GetDifficulty()
@@ -104,4 +104,4 @@ public class StageManager : Singleton<StageManager> {
         Debug.Log("스테이지 " + stageLevel + " 시작");
         yield break;
     }
-}
+} 

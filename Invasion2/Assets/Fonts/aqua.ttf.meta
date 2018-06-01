@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 013cab843f1b1b64fb3bf7701c46e284
+timeCreated: 1527832089
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Aqua Grotesque
+  fontNames:
+  - Aqua Grotesque
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
