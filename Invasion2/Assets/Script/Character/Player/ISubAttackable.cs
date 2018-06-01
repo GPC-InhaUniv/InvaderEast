@@ -1,6 +1,6 @@
 ﻿public interface ISubAttackable
 {
-    void Attack(int Count);
+    void Attack(int power);
 
 }
 
