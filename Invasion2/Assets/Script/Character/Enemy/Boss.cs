@@ -10,8 +10,6 @@ public class Boss : Enemy
     [SerializeField]
     private GameObject enemy;
     [SerializeField]
-    private GameObject laser;
-    [SerializeField]
     private GameObject mainShotPos;
     [SerializeField]
     private GameObject laserShotPos;
@@ -35,7 +33,7 @@ public class Boss : Enemy
         giveMaxGold = 100;
         StartCoroutine(FirstPattern());
         shotCount = 0;
-
+        laserShotPos.SetActive(false);
 
     }
 
@@ -53,15 +51,17 @@ public class Boss : Enemy
             Instantiate(bullet, mainShotPos.transform.position, mainShotPos.transform.rotation);
             yield return new WaitForSeconds(0.2f);
             shotCount++;
+            StartCoroutine(FirstPattern());
         }
         else
         {
+            shotCount = 0;
             StartCoroutine(SecondPattern());
             yield return new WaitForSeconds(2.0f);
-            shotCount = 0;
+            
         }
 
-        StartCoroutine(FirstPattern());
+        
     }
     IEnumerator SecondPattern()
     {
@@ -69,7 +69,9 @@ public class Boss : Enemy
 
         for (int i = 0; i < 12; i++)
         {
-            Quaternion test = Quaternion.Euler(15 * i, -90, -90);
+            if (i % 4 == 0)
+                continue;
+            Quaternion test = Quaternion.Euler(i*15, -90, -90);
             Instantiate(bullet, subShotPos.transform.position, subShotPos.transform.rotation = test);
 
             yield return new WaitForSeconds(0.1f);
@@ -86,18 +88,31 @@ public class Boss : Enemy
         Instantiate(enemy, enemyEjectPos.transform.position + setPos, enemyEjectPos.transform.rotation);
         Instantiate(enemy, enemyEjectPos.transform.position - setPos, enemyEjectPos.transform.rotation);
         yield return new WaitForSeconds(0);
+        StopAllCoroutines();
         StartCoroutine(FourthPattern());
 
     }
 
     IEnumerator FourthPattern()
     {
-        StopCoroutine(FirstPattern());
-        //StopAllCoroutines();
-
-        //direction = Direction.LEFT;
-
-        yield return new WaitForSeconds(0);
+       
+        
+        
+        direction = Direction.LEFT;
+        yield return new WaitForSeconds(1.5f); 
+        direction = Direction.STOP;
+        yield return new WaitForSeconds(1.5f);
+        laserShotPos.SetActive(true);
+        direction = Direction.RIGHT;
+        yield return new WaitForSeconds(3f);
+        direction = Direction.STOP;
+        yield return new WaitForSeconds(1.5f);
+        direction = Direction.LEFT;
+        yield return new WaitForSeconds(1.5f);
+        direction = Direction.STOP;
+        yield return new WaitForSeconds(0.5f);
+        laserShotPos.SetActive(false);
+        StartCoroutine(FirstPattern());
     }
 
 }
