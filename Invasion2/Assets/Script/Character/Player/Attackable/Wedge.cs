@@ -1,10 +1,12 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-public class Sector : MonoBehaviour,IMainAttackable
+public class Wedge : MonoBehaviour, IMainAttackable
 {
     public GameObject SpawnPosition;
     public GameObject BulletPrefab;
-   
+    
     Vector3 SpaPosition;
 
     public void Attack(int power)
@@ -13,7 +15,7 @@ public class Sector : MonoBehaviour,IMainAttackable
         {
 
         }
-        else if(power == 20)
+        else if (power == 20)
         {
 
         }
@@ -23,15 +25,14 @@ public class Sector : MonoBehaviour,IMainAttackable
         }
     }
 
-   
-    void Start ()
+    void Start()
     {
-		
-	}
-	
-	
-	void Update ()
+
+    }
+
+    
+    void Update()
     {
-		
-	}
+
+    }
 }

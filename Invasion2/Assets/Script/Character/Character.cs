@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 /// <summary>
-/// 캐릭터 이동 공통부분 전반 담당
-/// Player와 Enemy에서 Character를 상속받아 사용
+/// 캐릭터가 이동할 방향
 /// </summary>
 public enum Direction
 {
@@ -18,20 +18,28 @@ public enum Direction
     LEFTDOWN,
     RIGHTDOWN,
 }
+
+/// <summary>
+/// 캐릭터 이동 공통부분 전반 담당
+/// Player와 Enemy에서 Character를 상속받아 사용
+/// </summary>
 public class Character : MonoBehaviour
 {
     [SerializeField]
     protected float moveSpeed;
     protected int damage;
     protected int life;
+    protected Vector3 target;
 
     protected new Rigidbody rigidbody;
 
-    [SerializeField]
-    protected Direction direction;
+    /*[SerializeField]
+    protected Direction direction;*/
     public virtual void Move(Direction direction)
     {
-        Vector3 target;
+        Debug.Log(direction);
+        //this.direction = direction;
+        
         switch (direction)
         {
             case Direction.STOP:

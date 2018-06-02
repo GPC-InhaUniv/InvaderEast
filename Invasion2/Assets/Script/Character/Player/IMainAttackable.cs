@@ -1,5 +1,5 @@
 ﻿public interface IMainAttackable
 {
-    void Attack(int Count);
+    void Attack(int power);
     
 }

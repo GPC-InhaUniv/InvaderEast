@@ -1,45 +1,85 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Straight : MonoBehaviour, IMainAttackable, ISubAttackable
 {
+
     public GameObject SpawnPosition;
     public GameObject BulletPrefab;
-        
-    public float Power = 10;
+    
+    Vector3 SpaPosition;
 
-    public void Attack(int NumberofShot)
+    
+
+    public void Attack(int power)
     {
-        if (Power == 10)
+        if (power == 10)
         {
             Instantiate(BulletPrefab, SpawnPosition.transform.position,
-             SpawnPosition.transform.rotation);
+            SpawnPosition.transform.rotation);
+
+            Instantiate(BulletPrefab, SpawnPosition.transform.position + SpaPosition,
+            SpawnPosition.transform.rotation);
         }
-        else if (Power == 20 )
+        else if (power == 20)
         {
-            Instantiate(BulletPrefab, new Vector3(SpawnPosition.transform.position.x-1, SpawnPosition.transform.position.y, SpawnPosition.transform.position.z),
-             SpawnPosition.transform.rotation);
-            Instantiate(BulletPrefab, new Vector3(SpawnPosition.transform.position.x + 1, SpawnPosition.transform.position.y, SpawnPosition.transform.position.z),
-             SpawnPosition.transform.rotation);
+            Instantiate(BulletPrefab, SpawnPosition.transform.position,
+            SpawnPosition.transform.rotation);
+
+            Instantiate(BulletPrefab, SpawnPosition.transform.position + SpaPosition,
+            SpawnPosition.transform.rotation);
+
+            Instantiate(BulletPrefab, SpawnPosition.transform.position - SpaPosition,
+            SpawnPosition.transform.rotation);
+
+            Instantiate(BulletPrefab, SpawnPosition.transform.position + SpaPosition,
+            SpawnPosition.transform.rotation);
+
+            Instantiate(BulletPrefab, SpawnPosition.transform.position + SpaPosition,
+            SpawnPosition.transform.rotation);
+
+            Instantiate(BulletPrefab, SpawnPosition.transform.position + SpaPosition,
+            SpawnPosition.transform.rotation);
         }
-        else if(Power == 30)
+        else if (power == 30)
         {
-            Instantiate(BulletPrefab, SpawnPosition.transform.position,
-            SpawnPosition.transform.rotation);
-            Instantiate(BulletPrefab, SpawnPosition.transform.position,
-            SpawnPosition.transform.rotation);
-            Instantiate(BulletPrefab, SpawnPosition.transform.position,
-            SpawnPosition.transform.rotation);
+           Instantiate(BulletPrefab, SpawnPosition.transform.position + SpaPosition,
+           SpawnPosition.transform.rotation);
+
+           Instantiate(BulletPrefab, SpawnPosition.transform.position - SpaPosition,
+           SpawnPosition.transform.rotation);
+
+           Instantiate(BulletPrefab, SpawnPosition.transform.position + SpaPosition,
+           SpawnPosition.transform.rotation);
+
+           Instantiate(BulletPrefab, SpawnPosition.transform.position - SpaPosition,
+           SpawnPosition.transform.rotation);
+
+           Instantiate(BulletPrefab, SpawnPosition.transform.position + SpaPosition,
+           SpawnPosition.transform.rotation);
+
+           Instantiate(BulletPrefab, SpawnPosition.transform.position - SpaPosition,
+           SpawnPosition.transform.rotation);
+
+           Instantiate(BulletPrefab, SpawnPosition.transform.position + SpaPosition,
+           SpawnPosition.transform.rotation);
+
+           Instantiate(BulletPrefab, SpawnPosition.transform.position - SpaPosition,
+           SpawnPosition.transform.rotation);
+
+           Instantiate(BulletPrefab, SpawnPosition.transform.position + SpaPosition,
+           SpawnPosition.transform.rotation);
+
+           Instantiate(BulletPrefab, SpawnPosition.transform.position - SpaPosition,
+           SpawnPosition.transform.rotation);
+
         }
     }
 
-   
+
 
     void Start()
     {
-
+        SpaPosition = new Vector3(1.25f, 0, 0);
     }
 
 }
