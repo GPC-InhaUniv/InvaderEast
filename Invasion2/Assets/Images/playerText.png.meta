@@ -1,12 +1,12 @@
 fileFormatVersion: 2
-guid: ecb485d40087c764c917888d62d3b4bc
-timeCreated: 1528180296
+guid: e63ccceb132fe374eb2c4fceb95e0724
+timeCreated: 1528183486
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: playerText_Sin
-    21300002: playerText_Ho
-    21300004: playerText_Deung
+    21300000: playerText_sin
+    21300002: playerText_ho
+    21300004: playerText_deung
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -81,7 +81,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: playerText_Sin
+      name: playerText_sin
       rect:
         serializedVersion: 2
         x: 0
@@ -89,12 +89,12 @@ TextureImporter:
         width: 696
         height: 423
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: playerText_Ho
+      name: playerText_ho
       rect:
         serializedVersion: 2
         x: 696
@@ -102,12 +102,12 @@ TextureImporter:
         width: 696
         height: 423
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: playerText_Deung
+      name: playerText_deung
       rect:
         serializedVersion: 2
         x: 1392
@@ -115,7 +115,7 @@ TextureImporter:
         width: 696
         height: 423
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
