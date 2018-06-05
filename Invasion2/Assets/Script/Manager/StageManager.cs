@@ -99,8 +99,10 @@ public class StageManager : Singleton<StageManager> {
         return difficult;
     }
 
+    //실질석인 스테이지 타임라인
     IEnumerator StageCoroutine(int stageLevel)
     {
+        //에너미 쪽 완성 이후 매꿀것
         Debug.Log("스테이지 " + stageLevel + " 시작");
         yield break;
     }
