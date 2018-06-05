@@ -51,7 +51,7 @@ public class Character : MonoBehaviour
         gameMediator = GameObject.FindGameObjectWithTag("GameMediator").GetComponent<GameMediator>();
     }
 
-    public virtual void Move(Vector3 direction)
+    public void Move(Vector3 direction)
     {
         Debug.Log(direction);
         //this.direction = direction;
@@ -59,7 +59,7 @@ public class Character : MonoBehaviour
         rigidbody.velocity = direction * moveSpeed;
     }
 
-    public virtual void Move(Direction direction)
+    public void Move(Direction direction)
     {
         switch (direction)
         {
