@@ -44,6 +44,13 @@ public class Character : MonoBehaviour
 
     protected new Rigidbody rigidbody;
 
+    GameMediator gameMediator;
+
+    private void Start()
+    {
+        gameMediator = GameObject.FindGameObjectWithTag("GameMediator").GetComponent<GameMediator>();
+    }
+
     public virtual void Move(Vector3 direction)
     {
         Debug.Log(direction);
