@@ -11,4 +11,9 @@ public class InputManager : Singleton<InputManager> {
         gameMediator = GameObject.FindGameObjectWithTag("GameMediator").GetComponent<GameMediator>();
     }
 
+    public void PlayerMove(Vector3 direction)
+    {
+        gameMediator.PlayerMove(direction);
+    }
+
 }

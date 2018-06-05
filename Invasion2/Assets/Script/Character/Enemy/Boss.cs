@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Boss : Enemy
 {
-
+    
     [SerializeField]
     private GameObject bullet;
     [SerializeField]
@@ -64,7 +64,7 @@ public class Boss : Enemy
 
         if (lifeRatio < 30 && !fourthCRrunning)
         {
-            if (laserInterval > 10)
+            if (laserInterval > 5)
             {
                 if (fourthPatternFlag)
                     StartCoroutine(FourthPattern());

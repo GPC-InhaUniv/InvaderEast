@@ -7,6 +7,7 @@ public class GameMediator : MonoBehaviour
     ItemManager itemMangager;
     SceneController sceneController;
     InputManager inputManagere;
+    Character player;
     // Use this for initialization
     void Start()
     {
@@ -14,7 +15,8 @@ public class GameMediator : MonoBehaviour
         gameDataManager = GameDataManager.Instance;
         itemMangager = ItemManager.Instance;
         sceneController = SceneController.Instance;
-        inputManagere = InputManager.Instance;
+        inputManagere = InputManager.Instance;   
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
     /// <summary>
     /// 게임 오버시 score 값 0 입력
@@ -57,5 +59,34 @@ public class GameMediator : MonoBehaviour
     {
         itemMangager.GetItem(item);
     }
+
+    public void BuyItem(Item item)
+    {
+        itemMangager.BuyItem(item);
+        SaveAndLoader.SaveData();
+    }
+
+    public void SellItem(Item item)
+    {
+        itemMangager.SellItem(item);
+        SaveAndLoader.SaveData();
+    }
+
+    /// <summary>
+    /// 캐릭터 파워 변경
+    /// </summary>
+    /// <param name="count"></param>
+    public void ChangePlayerPower(int count)
+    {
+        player.Damage += count;
+    }
+
+    public void PlayerMove(Vector3 direction)
+    {
+        player.Move(direction);
+    }
+
+
+
 
 }
