@@ -34,60 +34,6 @@ public class Enemy : Character
         Move(direction);
     }
 
-    public override void Move(Direction direction)
-    {
-        Vector3 target;
-        switch (direction)
-        {
-
-            case Direction.UP:
-                target = new Vector3(0.0f, 1.0f, 0.0f);
-                rigidbody.velocity = target * moveSpeed;
-                Attack();
-                break;
-            case Direction.DOWN:
-                target = new Vector3(0.0f, -1.0f, 0.0f);
-                rigidbody.velocity = target * moveSpeed;
-                Attack();
-                break;
-            case Direction.LEFT:
-                target = new Vector3(-1.0f, 0.0f, 0.0f);
-                rigidbody.velocity = target * moveSpeed;
-                Attack();
-                break;
-            case Direction.RIGHT:
-                target = new Vector3(1.0f, 0.0f, 0.0f);
-                rigidbody.velocity = target * moveSpeed;
-                Attack();
-                break;
-            case Direction.LEFTUP:
-                target = new Vector3(-1.0f, 1.0f, 0.0f);
-                rigidbody.velocity = target * moveSpeed;
-                Attack();
-                break;
-            case Direction.RIGHTUP:
-                target = new Vector3(1.0f, 1.0f, 0.0f);
-                rigidbody.velocity = target * moveSpeed;
-                Attack();
-                break;
-            case Direction.LEFTDOWN:
-                target = new Vector3(-1.0f, -1.0f, 0.0f);
-                rigidbody.velocity = target * moveSpeed;
-                Attack();
-                break;
-            case Direction.RIGHTDOWN:
-                target = new Vector3(1.0f, -1.0f, 0.0f);
-                rigidbody.velocity = target * moveSpeed;
-                Attack();
-                break;
-            case Direction.STOP:
-                rigidbody.velocity = Vector3.zero;
-                break;
-            default:
-                break;
-        }
-    }
-
     void Died()
     {
         StageManager.Instance.RemoveEnemy(this);
