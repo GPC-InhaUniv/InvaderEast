@@ -15,9 +15,4 @@ public class Move : MonoBehaviour {
         rigidbody.velocity = transform.forward * speed;
 	}
 	
-	
-	void Update ()
-    {
-		
-	}
 }

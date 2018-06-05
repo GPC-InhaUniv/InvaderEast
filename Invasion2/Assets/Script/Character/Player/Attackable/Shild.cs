@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Shild : MonoBehaviour, ISubAttackable
 {
-  
+    public GameObject shild;
+    
     
     public void Attack(int power)
     {
@@ -16,11 +17,11 @@ public class Shild : MonoBehaviour, ISubAttackable
     }
     private void OnTriggerEnter(Collider other)
     {
-        
+        shild.SetActive(false);
     }
+    //IEnumerable ()
+    //{
 
-    void Update()
-    {
-
-    }
+    //}
+   
 }

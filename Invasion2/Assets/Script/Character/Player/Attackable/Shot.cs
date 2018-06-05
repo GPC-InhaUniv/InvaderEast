@@ -5,8 +5,9 @@ using UnityEngine;
 public class Shot : MonoBehaviour, IMainAttackable
 {
     public GameObject SpawnPosition;
+    public GameObject ShotSpawn;
     public GameObject BulletPrefab1;
-    public GameObject ShotEffect;
+    public GameObject ShotEffect;       
 
     public void Testbtn()
     {
@@ -31,7 +32,11 @@ public class Shot : MonoBehaviour, IMainAttackable
     }
     private void OnCollisionEnter(Collision collision)
     {
-        
+        if (collision.collider.tag == "Enemy")
+        {
+            Instantiate(BulletPrefab1, ShotSpawn.transform.position,
+            ShotSpawn.transform.rotation);
+        }
     }
 
 }
