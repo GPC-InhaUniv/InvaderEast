@@ -17,6 +17,7 @@ public class MoveController : MonoBehaviour
     protected Vector3 centerPos;
     protected Vector3 directionPos;
     Vector3 touchPos;
+    float StickRadius = 30f;
     float pannelRaius;
 
     private void Start()
@@ -52,36 +53,15 @@ public class MoveController : MonoBehaviour
         Vector3 dragPos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0.0f);
         directionPos = (dragPos - centerPos).normalized;
         Debug.Log("드래그 좌표 : " + dragPos);
-        if (directionPos.y > 0.2f)
-        {
-            //direction = Direction.UP;
-            player.Move(Direction.UP);
-            //Debug.Log("위쪽 : " + directionPos);
-        }
-        else if (directionPos.y < -0.2f)
-        {
-            //direction = Direction.DOWN;
-            player.Move(Direction.DOWN);
-            //Debug.Log("아래 : " + directionPos);
-        }
-        else if (directionPos.x < -0.2f)
-        {
-            //direction = Direction.LEFT;
-            player.Move(Direction.LEFT);
-            //Debug.Log("왼쪽 : " + directionPos);
-        }
-        else if (directionPos.x > 0.2f)
-        {
-            //direction = Direction.RIGHT;
-            player.Move(Direction.RIGHT);
-            //Debug.Log("오른쪽 : " + directionPos);
-        }
+
+        player.Move(directionPos);
+
         //Debug.Log("방향 : " + directionPos);
         float stickDistance = Vector3.Distance(dragPos, centerPos);
-        if (stickDistance > pannelRaius)
+        if (stickDistance > StickRadius)
         {
             //touchPos = centerPos + directionPos * pannelRaius;
-            Stick.position = centerPos + directionPos * pannelRaius;
+            Stick.position = centerPos + directionPos * StickRadius;
             Debug.Log("너 어디갔냐 : " + Stick.position);
         }
         else
