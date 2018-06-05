@@ -11,7 +11,10 @@ public class Player : Character
 
     private void Start()
     {
+        //gameMediator.SetPlayer();
+        DontDestroyOnLoad(gameObject);
         rigidbody = GetComponent<Rigidbody>();
+        mainAttack = new Straight();
     }
 
     public override void Attack()

@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// 플레이어 타입 선택
+/// </summary>
 public enum PlayerType
 {
     Deung,
@@ -48,7 +51,7 @@ public class Character : MonoBehaviour
 
     protected new Rigidbody rigidbody;
 
-    GameMediator gameMediator;
+    protected GameMediator gameMediator;
 
     private void Start()
     {
