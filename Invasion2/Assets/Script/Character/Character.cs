@@ -28,7 +28,7 @@ public class Character : MonoBehaviour
     [SerializeField]
     protected float moveSpeed;
     protected int damage;
-    protected int Damage
+    public int Damage
     {
         get
         {
