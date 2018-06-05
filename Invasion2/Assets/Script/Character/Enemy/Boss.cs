@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Boss : Enemy
@@ -31,7 +30,7 @@ public class Boss : Enemy
     private bool thirdCRrunning;
     private bool fourthCRrunning;
     private bool fourthPatternFlag;
-    float liferatio;
+    float lifeRatio;
     private int shotCount;
     private int laserInterval;
     // Use this for initialization
@@ -39,33 +38,33 @@ public class Boss : Enemy
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         rigidbody = GetComponent<Rigidbody>();
-        life = 1000;
-        currentLife = life;
+        maxLife = 1000;
+        currentLife = maxLife;
         giveScore = 1000;
         giveMaxGold = 100;
         StartCoroutine(BossPattern());
-        
+
         shotCount = 0;
-        laserInterval =0;
+        laserInterval = 0;
         laserShotPos.SetActive(false);
 
     }
 
     IEnumerator BossPattern()
     {
-        liferatio = (currentLife / life) * 100;
+        lifeRatio = (currentLife / maxLife) * 100;
         if (!firstCRrunning && !fourthCRrunning)
             StartCoroutine(FirstPattern());
-        if (liferatio < 80 && !secondCRrunning && !fourthCRrunning)
+        if (lifeRatio < 80 && !secondCRrunning && !fourthCRrunning)
             StartCoroutine(SecondPattern());
-        if (liferatio < 60 && !thirdCRrunning && !fourthCRrunning)
+        if (lifeRatio < 60 && !thirdCRrunning && !fourthCRrunning)
         {
             StartCoroutine(ThirdPattern());
         }
-        
-        if(liferatio < 30 &&!fourthCRrunning)
+
+        if (lifeRatio < 30 && !fourthCRrunning)
         {
-            if  (laserInterval > 10)
+            if (laserInterval > 10)
             {
                 if (fourthPatternFlag)
                     StartCoroutine(FourthPattern());
@@ -94,9 +93,8 @@ public class Boss : Enemy
             laserInterval++;
             yield return new WaitForSeconds(2.0f);
             firstCRrunning = false;
-           
-        }
 
+        }
 
     }
     IEnumerator SecondPattern()
@@ -114,12 +112,10 @@ public class Boss : Enemy
             yield return new WaitForSeconds(0.1f);
 
         }
-        
+
         yield return new WaitForSeconds(2.0f);
         laserInterval++;
         secondCRrunning = false;
-        
-
 
     }
 
