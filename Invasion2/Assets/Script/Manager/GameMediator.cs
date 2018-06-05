@@ -15,8 +15,8 @@ public class GameMediator : MonoBehaviour
         gameDataManager = GameDataManager.Instance;
         itemMangager = ItemManager.Instance;
         sceneController = SceneController.Instance;
-        inputManagere = InputManager.Instance;   
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        inputManagere = InputManager.Instance;
+      
     }
     /// <summary>
     /// 게임 오버시 score 값 0 입력
@@ -29,11 +29,11 @@ public class GameMediator : MonoBehaviour
         else
         {
             gameDataManager.CurrentScore += score;
-            if(gameDataManager.MaxScore <= gameDataManager.CurrentScore)
+            if (gameDataManager.MaxScore <= gameDataManager.CurrentScore)
             {
                 gameDataManager.MaxScore = gameDataManager.CurrentScore;
             }
-        } 
+        }
 
     }
     /// <summary>
@@ -51,7 +51,7 @@ public class GameMediator : MonoBehaviour
     /// </summary>
     /// <param name="item"></param>
     /// <param name="count"></param>
-    public void GetItem(Item item,int count)
+    public void GetItem(Item item, int count)
     {
         itemMangager.GetItem(item, count);
     }
@@ -86,7 +86,14 @@ public class GameMediator : MonoBehaviour
         player.Move(direction);
     }
 
-
+    public void SetPlayer()
+    {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+    }
+    public void ChangeScene(SceneState state)
+    {
+        sceneController.ChangeScene(state);
+    }
 
 
 }
