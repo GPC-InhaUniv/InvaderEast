@@ -1,5 +1,11 @@
 ﻿using UnityEngine;
 
+public enum PlayerType
+{
+    Deung,
+    Sin,
+    Ho,
+}
 
 /// <summary>
 /// 캐릭터가 이동할 방향
