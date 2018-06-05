@@ -1,8 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
 
 /// <summary>
 /// 화면을 터치한 부분의 좌표값을 받아
@@ -11,34 +8,28 @@ using UnityEngine.EventSystems;
 public class MoveController : MonoBehaviour
 {
     Player player;
-
+    public RawImage pannelImage;
+    [SerializeField]
     protected Transform Stick;
     protected Transform StickPannel;
     protected Vector3 centerPos;
     protected Vector3 directionPos;
     Vector3 touchPos;
     float StickRadius = 30f;
-    float pannelRaius;
 
     private void Start()
     {
+        pannelImage = GameObject.FindWithTag("StickPannel").GetComponent<RawImage>();
+        pannelImage.enabled = false;
         player = FindObjectOfType<Player>();
         Stick = GameObject.FindWithTag("JoyStick").GetComponent<RectTransform>();
         Stick.gameObject.SetActive(false);
         StickPannel = GameObject.FindWithTag("StickPannel").GetComponent<RectTransform>();
-        pannelRaius = GetComponent<RectTransform>().sizeDelta.y / 2;
-    }
-
-    private void Update()
-    {
-        /*if(Input.GetMouseButton(0))
-        {
-            StickMove();
-        }*/
     }
 
     public void CenterPos()
     {
+        pannelImage.enabled = true;
         Stick.gameObject.SetActive(true);
         touchPos = Input.mousePosition;
         centerPos = touchPos;
@@ -56,17 +47,14 @@ public class MoveController : MonoBehaviour
 
         player.Move(directionPos);
 
-        //Debug.Log("방향 : " + directionPos);
         float stickDistance = Vector3.Distance(dragPos, centerPos);
         if (stickDistance > StickRadius)
         {
-            //touchPos = centerPos + directionPos * pannelRaius;
             Stick.position = centerPos + directionPos * StickRadius;
             Debug.Log("너 어디갔냐 : " + Stick.position);
         }
         else
         {
-            //touchPos = centerPos + directionPos * stickDistance;
             Stick.position = centerPos + directionPos * stickDistance;
             Debug.Log("너 어디갔냐 : " + Stick.position);
         }
@@ -74,10 +62,10 @@ public class MoveController : MonoBehaviour
 
     public void StickMoveEnd()
     {
-        //direction = Direction.STOP;
-        player.Move(Direction.STOP);
         Stick.position = centerPos;
         directionPos = Vector3.zero;
+        player.Move(directionPos);
+        pannelImage.enabled = false;
         Stick.gameObject.SetActive(false);
     }
 }
