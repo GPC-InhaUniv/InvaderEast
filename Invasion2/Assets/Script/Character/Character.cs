@@ -28,7 +28,7 @@ public class Character : MonoBehaviour
     [SerializeField]
     protected float moveSpeed;
     protected int damage;
-    protected int life;
+    protected int maxLife;
     protected Vector3 target;
 
     protected new Rigidbody rigidbody;
