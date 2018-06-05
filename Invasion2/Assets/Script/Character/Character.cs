@@ -28,23 +28,35 @@ public class Character : MonoBehaviour
     [SerializeField]
     protected float moveSpeed;
     protected int damage;
+    protected int Damage
+    {
+        get
+        {
+            return damage;
+        }
+        set
+        {
+            damage = value;
+        }
+    }
     protected int maxLife;
     protected Vector3 target;
 
     protected new Rigidbody rigidbody;
 
-    /*[SerializeField]
-    protected Direction direction;*/
-    public virtual void Move(Direction direction)
+    public virtual void Move(Vector3 direction)
     {
         Debug.Log(direction);
         //this.direction = direction;
-        
+
+        rigidbody.velocity = direction * moveSpeed;
+    }
+
+    public virtual void Move(Direction direction)
+    {
         switch (direction)
         {
-            case Direction.STOP:
-                rigidbody.velocity = Vector3.zero;
-                break;
+
             case Direction.UP:
                 target = new Vector3(0.0f, 1.0f, 0.0f);
                 rigidbody.velocity = target * moveSpeed;
@@ -65,10 +77,34 @@ public class Character : MonoBehaviour
                 rigidbody.velocity = target * moveSpeed;
                 Attack();
                 break;
+            case Direction.LEFTUP:
+                target = new Vector3(-1.0f, 1.0f, 0.0f);
+                rigidbody.velocity = target * moveSpeed;
+                Attack();
+                break;
+            case Direction.RIGHTUP:
+                target = new Vector3(1.0f, 1.0f, 0.0f);
+                rigidbody.velocity = target * moveSpeed;
+                Attack();
+                break;
+            case Direction.LEFTDOWN:
+                target = new Vector3(-1.0f, -1.0f, 0.0f);
+                rigidbody.velocity = target * moveSpeed;
+                Attack();
+                break;
+            case Direction.RIGHTDOWN:
+                target = new Vector3(1.0f, -1.0f, 0.0f);
+                rigidbody.velocity = target * moveSpeed;
+                Attack();
+                break;
+            case Direction.STOP:
+                rigidbody.velocity = Vector3.zero;
+                break;
             default:
                 break;
         }
     }
+
     public virtual void Attack()
     {
 
