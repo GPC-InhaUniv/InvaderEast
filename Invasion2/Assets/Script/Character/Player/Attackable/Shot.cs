@@ -2,18 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Wedge : MonoBehaviour, IMainAttackable
+public class Shot : MonoBehaviour, IMainAttackable
 {
     public GameObject SpawnPosition;
-    public GameObject BulletPrefab;
-    
-    Vector3 SpaPosition;
+    public GameObject BulletPrefab1;
+    public GameObject ShotEffect;
+
+    public void Testbtn()
+    {
+        Attack(10);
+    }
 
     public void Attack(int power)
     {
         if (power == 10)
         {
-            Instantiate(BulletPrefab, SpawnPosition.transform.position,
+            Instantiate(BulletPrefab1, SpawnPosition.transform.position,
             SpawnPosition.transform.rotation);
         }
         else if (power == 20)
@@ -25,15 +29,9 @@ public class Wedge : MonoBehaviour, IMainAttackable
 
         }
     }
-
-    void Start()
+    private void OnCollisionEnter(Collision collision)
     {
-        SpaPosition = new Vector3(1.25f, 0, 0);
+        
     }
 
-    
-    void Update()
-    {
-
-    }
 }

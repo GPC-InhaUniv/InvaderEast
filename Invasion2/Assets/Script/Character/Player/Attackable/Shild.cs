@@ -14,7 +14,10 @@ public class Shild : MonoBehaviour, ISubAttackable
     {
 
     }
-
+    private void OnTriggerEnter(Collider other)
+    {
+        
+    }
 
     void Update()
     {
