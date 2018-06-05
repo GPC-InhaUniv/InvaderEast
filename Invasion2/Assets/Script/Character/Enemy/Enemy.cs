@@ -37,6 +37,11 @@ public class Enemy : Character
 
     }
 
+    public override void OnTriggerEnter(Collider other)
+    {
+        
+    }
+
     public void Pattern()
     {
 
