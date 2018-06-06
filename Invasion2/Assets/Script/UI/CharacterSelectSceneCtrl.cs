@@ -18,8 +18,62 @@ public class CharacterSelectSceneCtrl : MonoBehaviour
     [SerializeField]
     ScrollRect scrollRect;
 
+    [SerializeField]
+    Image DescriptionImage;
+
     private void Update()
     {
-        
+        ChangeDescriptionImage();
+        ChangeHorizontalNormalizedPosition();
+    }
+
+    void ChangeDescriptionImage()
+    {
+        if (scrollRect.horizontalNormalizedPosition <= 0.33f)
+        {
+            DescriptionImage.sprite = DescriptionImage_Red;
+        }
+        if (0.33f < scrollRect.horizontalNormalizedPosition
+            && scrollRect.horizontalNormalizedPosition <= 0.67f)
+        {
+            DescriptionImage.sprite = DescriptionImage_Orange;
+        }
+        if (0.67f < scrollRect.horizontalNormalizedPosition
+            && scrollRect.horizontalNormalizedPosition <= 1f)
+        {
+            DescriptionImage.sprite = DescriptionImage_Green;
+        }
+    }
+
+    void ChangeHorizontalNormalizedPosition()
+    {
+        if (0f <= scrollRect.horizontalNormalizedPosition
+            && scrollRect.horizontalNormalizedPosition < 0.05f)
+        {
+            scrollRect.horizontalNormalizedPosition = 0f;
+            return;
+        }
+        if (0.48f < scrollRect.horizontalNormalizedPosition
+            && scrollRect.horizontalNormalizedPosition < 0.52f)
+        {
+            scrollRect.horizontalNormalizedPosition = 0.5f;
+            return;
+        }
+        if (0.95f < scrollRect.horizontalNormalizedPosition
+            && scrollRect.horizontalNormalizedPosition <= 1f)
+        {
+            scrollRect.horizontalNormalizedPosition = 1f;
+            return;
+        }
+    }
+
+    void OnClickStoreButton()
+    {
+
+    }
+
+    void OnClickBattleStartButton()
+    {
+
     }
 }

@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: b7a4ed62351e01f41b0120bf1ea08716
+timeCreated: 1528272587
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: AROMA
+  fontNames:
+  - AROMA
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 1f69ba8ab535e384ab2a3f1e2055414d, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
