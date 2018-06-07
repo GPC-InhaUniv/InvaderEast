@@ -29,6 +29,7 @@ public class StageManager : Singleton<StageManager> {
     GameObject[] TransformList;
     [SerializeField]
     EnemyFactory Factory;
+
     GameMediator gameMediator;
     const int MaxStage = 3;
     int CurrentStage;
@@ -90,6 +91,15 @@ public class StageManager : Singleton<StageManager> {
         else
         {
             Debug.Log("다음 스테이지 없음");
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Enemy")
+        {
+            Enemy enemy = other.GetComponent<Enemy>();
+            enemy.Died();
         }
     }
 
