@@ -45,7 +45,14 @@ public class MoveController : MonoBehaviour
         directionPos = (dragPos - centerPos).normalized;
         Debug.Log("드래그 좌표 : " + dragPos);
 
-        player.Move(directionPos);
+        if (player)
+        {
+            player.Move(directionPos);
+        }
+        else
+        {
+            
+        }
 
         float stickDistance = Vector3.Distance(dragPos, centerPos);
         if (stickDistance > StickRadius)
