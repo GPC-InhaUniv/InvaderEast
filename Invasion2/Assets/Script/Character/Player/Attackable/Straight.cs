@@ -7,8 +7,9 @@ public class Straight : MonoBehaviour, IMainAttackable, ISubAttackable
     public GameObject BulletPrefab1;
     public GameObject BulletPrefab2;
     public GameObject BulletPrefab3;
+    public GameObject BulletPrefab4;
 
-    Vector3 SpaPosition;
+    
 
     public void Testbtn()
     {
@@ -33,6 +34,11 @@ public class Straight : MonoBehaviour, IMainAttackable, ISubAttackable
         else if (power == 30)
         {
             Instantiate(BulletPrefab3, SpawnPosition.transform.position,
+             SpawnPosition.transform.rotation);
+        }
+        else if (power == 40)
+        {
+            Instantiate(BulletPrefab4, SpawnPosition.transform.position,
              SpawnPosition.transform.rotation);
         }
     }
