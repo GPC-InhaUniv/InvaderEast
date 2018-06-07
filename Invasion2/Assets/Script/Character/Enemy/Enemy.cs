@@ -29,6 +29,7 @@ public class Enemy : Character
             direction = value;
         }
     }
+
     protected EnemyType enemyType;
     public EnemyType TypeEnemy
     {
@@ -37,6 +38,7 @@ public class Enemy : Character
             return enemyType;
         }
     }
+
     protected int giveScore;
     public int GiveScore
     {
@@ -45,6 +47,7 @@ public class Enemy : Character
             return giveScore;
         }
     }
+
     protected int giveMaxGold;
     public int GiveMaxGold
     {
@@ -64,7 +67,7 @@ public class Enemy : Character
         Move(direction);
     }
 
-    void Died()
+    public void Died()
     {
         StageManager.Instance.RemoveEnemy(this);
     }
