@@ -11,20 +11,20 @@ public class StoreUICtrl : MonoBehaviour
 
     public int SalePrice;
    
-    public Image ScrolledImage;
-
     private void Start()
     {
-        
         inputManager = FindObjectOfType<InputManager>();
-        ScrolledImage = gameObject.GetComponentInChildren<Image>();
         ScrollPanel = gameObject.GetComponent<ScrollRect>();
-        
     }
-    
-
+ 
+    public void Testbtn()
+    {
+        inputManager = FindObjectOfType<InputManager>();
+        inputManager.BuyItem(Item.PowerItem);
+    }
     public void OnTradePowerItem()
     {
+        
         
        if (ScrollPanel.horizontalNormalizedPosition > 0.7)
         {

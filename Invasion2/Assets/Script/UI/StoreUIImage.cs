@@ -7,30 +7,33 @@ public class StoreUIImage : MonoBehaviour {
     InputManager inputManager;
     public Sprite UnvailableItem;
     public Sprite AvailableItem;
-    public Image PowerScrolled;
-    public Image LifeScrolled;
-    public Image MagnaticScrolled;
-    public Image PowerRegenScrolled;
+    public Image ScrolledImage;
+    
     public int SalePrice;
     // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
+    private void Start()
+    {
+        
+
+    }
+    public void Testbtn2()
+    {
+        inputManager = FindObjectOfType<InputManager>();
+        inputManager.DelegateGold += new ChangeGold(ChangeImage);
+        
+    }
+    
     public void ChangeImage()
     {
+        
         if (inputManager.ReadPlayerGold() < SalePrice)
         {
-        //    ScrolledImage.sprite = UnvailableItem;
+            ScrolledImage.sprite = UnvailableItem;
         }
         else
         {
-        //    ScrolledImage.sprite = AvailableItem;
+            ScrolledImage.sprite = AvailableItem;
         }
     }
 }

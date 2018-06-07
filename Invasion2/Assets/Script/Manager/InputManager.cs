@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+public delegate void ChangeGold();
 
 public class InputManager : Singleton<InputManager> {
 
     GameMediator gameMediator;
-
+    public ChangeGold DelegateGold;
     private void Start()
     {
         gameMediator = GameObject.FindGameObjectWithTag("GameMediator").GetComponent<GameMediator>();
@@ -24,6 +25,7 @@ public class InputManager : Singleton<InputManager> {
     public int ReadPlayerGold()
     {
         return gameMediator.ReadPlayerGold();
+
     }
 
     public int ReadPlayerMaxScore()
@@ -33,8 +35,12 @@ public class InputManager : Singleton<InputManager> {
 
     public void BuyItem(Item item)
     {
-        gameMediator.BuyItem(item);
-       
+        DelegateGold();
+       // gameMediator.BuyItem(item);
     }
+
+   
+    
+    
 
 }
