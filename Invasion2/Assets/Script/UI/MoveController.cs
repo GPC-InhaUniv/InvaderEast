@@ -15,7 +15,7 @@ public class MoveController : MonoBehaviour
     protected Vector3 centerPos;
     protected Vector3 directionPos;
     Vector3 touchPos;
-    float StickRadius = 30f;
+    float StickRadius = 60f;
 
     private void Start()
     {
