@@ -8,9 +8,9 @@ using UnityEngine;
 /// </summary>
 public class EnemyFactory : MonoBehaviour
 {
-    public Enemy CreateEnemy(Enemy EnemyPrefab)
+    public Enemy CreateEnemy(Enemy EnemyPrefab, Transform transform)
     {
         Debug.Log("call CreateEnemy");
-        return Instantiate(EnemyPrefab);
+        return Instantiate(EnemyPrefab, transform);
     }
 }
