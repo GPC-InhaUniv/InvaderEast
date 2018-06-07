@@ -49,10 +49,6 @@ public class MoveController : MonoBehaviour
         {
             player.Move(directionPos);
         }
-        else
-        {
-            
-        }
 
         float stickDistance = Vector3.Distance(dragPos, centerPos);
         if (stickDistance > StickRadius)
@@ -71,7 +67,10 @@ public class MoveController : MonoBehaviour
     {
         Stick.position = centerPos;
         directionPos = Vector3.zero;
-        player.Move(directionPos);
+        if (player)
+        {
+            player.Move(directionPos);
+        }
         pannelImage.enabled = false;
         Stick.gameObject.SetActive(false);
     }
