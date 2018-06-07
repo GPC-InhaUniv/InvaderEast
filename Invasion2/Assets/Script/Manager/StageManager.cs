@@ -1,4 +1,4 @@
-﻿using System;
+﻿
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,25 +23,31 @@ public class StageManager : Singleton<StageManager> {
         CurrentStage = 0;
     }
 
-    Difficult difficult;
+    [SerializeField]
     List<Enemy> EnemyList;
+    [SerializeField]
+    GameObject[] TransformList;
+    [SerializeField]
+    EnemyFactory Factory;
     GameMediator gameMediator;
     const int MaxStage = 3;
     int CurrentStage;
-
-    [SerializeField]
-    EnemyFactory Factory;
+    Difficult difficult;
+  
+    int transformNumber;
 
     private void Start()
     {
         //gameMediator = GameObject.FindGameObjectWithTag("GameMediator").GetComponent<GameMediator>();
         CurrentStage = 0;
     }
+
     public void Spawn(Enemy enemy)
     {
         if(enemy.tag == "Enemy")
         {
-            Enemy SpwanEnemy = Factory.CreateEnemy(enemy);
+            transformNumber = Random.Range(0,TransformList.Length-1);
+            Enemy SpwanEnemy = Factory.CreateEnemy(enemy, TransformList[transformNumber].transform);
             EnemyList.Add(SpwanEnemy);
             Debug.Log("Enemy Spawn 완료");
         }

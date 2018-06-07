@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 
-
+/// <summary>
+/// 적의 전투기 타입
+/// </summary>
 public enum EnemyType
 {
     Gyo,
@@ -10,18 +12,50 @@ public enum EnemyType
 }
 /// <summary>
 /// Character를 상속받는다.
-/// enum은 다른 클래스에서 사용하기 편하도록
-/// 클래스 밖으로 빼놓았음.
-/// Move는 재정의하여 Enemy에 맞도록
-/// 내용을 채워넣었음.
+/// Move 메서드로 8방향 이동 가능
 /// </summary>
 public class Enemy : Character
 {
     [SerializeField]
     protected Direction direction;
+    public Direction EnemyDirection
+    {
+        get
+        {
+            return direction;
+        }
+        set
+        {
+            direction = value;
+        }
+    }
+
     protected EnemyType enemyType;
+    public EnemyType TypeEnemy
+    {
+        get
+        {
+            return enemyType;
+        }
+    }
+
     protected int giveScore;
+    public int GiveScore
+    {
+        get
+        {
+            return giveScore;
+        }
+    }
+
     protected int giveMaxGold;
+    public int GiveMaxGold
+    {
+        get
+        {
+            return giveMaxGold;
+        }
+    }
 
     private void Start()
     {
@@ -33,7 +67,7 @@ public class Enemy : Character
         Move(direction);
     }
 
-    void Died()
+    public void Died()
     {
         StageManager.Instance.RemoveEnemy(this);
     }

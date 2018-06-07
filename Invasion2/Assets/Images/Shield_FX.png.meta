@@ -1,9 +1,17 @@
 fileFormatVersion: 2
 guid: 628ecff3c37e0964db4d41de271b1dec
-timeCreated: 1528185656
+timeCreated: 1528348602
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: Shield_FX_0
+    21300002: Shield_FX_1
+    21300004: Shield_FX_2
+    21300006: Shield_FX_3
+    21300008: Shield_FX_4
+    21300010: Shield_FX_5
+    21300012: Shield_FX_6
+    21300014: Shield_FX_7
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -34,7 +42,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -76,7 +84,111 @@ TextureImporter:
     overridden: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Shield_FX_0
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 95
+        width: 72
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Shield_FX_1
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 92
+        width: 72
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Shield_FX_2
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 89
+        width: 72
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Shield_FX_3
+      rect:
+        serializedVersion: 2
+        x: 267
+        y: 88
+        width: 72
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Shield_FX_4
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 10
+        width: 69
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Shield_FX_5
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 10
+        width: 70
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Shield_FX_6
+      rect:
+        serializedVersion: 2
+        x: 177
+        y: 11
+        width: 72
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Shield_FX_7
+      rect:
+        serializedVersion: 2
+        x: 258
+        y: 8
+        width: 72
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
     outline: []
   spritePackingTag: 
   userData: 
