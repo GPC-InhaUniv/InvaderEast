@@ -19,7 +19,7 @@ public class Enemy : Character
 {
     [SerializeField]
     protected Direction direction;
-
+    protected EnemyType enemyType;
     protected int giveScore;
     protected int giveMaxGold;
 
