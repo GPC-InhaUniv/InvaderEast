@@ -47,6 +47,17 @@ public class Character : MonoBehaviour
         }
     }
     protected int maxLife;
+    public int MaxLife
+    {
+        get
+        {
+            return maxLife;
+        }
+        set
+        {
+            maxLife = value;
+        }
+    }
     protected Vector3 target;
 
     protected new Rigidbody rigidbody;
