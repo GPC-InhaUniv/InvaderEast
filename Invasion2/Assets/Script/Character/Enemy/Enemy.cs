@@ -1,5 +1,13 @@
 ﻿using UnityEngine;
 
+
+public enum EnemyType
+{
+    Gyo,
+    Tong,
+    Bub,
+    Gyu
+}
 /// <summary>
 /// Character를 상속받는다.
 /// enum은 다른 클래스에서 사용하기 편하도록
