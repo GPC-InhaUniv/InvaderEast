@@ -21,5 +21,15 @@ public class InputManager : Singleton<InputManager> {
         gameMediator.ChangeScene(state);
     }
 
-    
+    public int ReadPlayerGold()
+    {
+        return gameMediator.ReadPlayerGold();
+    }
+
+    public int ReadPlayerMaxScore()
+    {
+        return gameMediator.ReadPlayerMaxScore();
+    }
+
+
 }

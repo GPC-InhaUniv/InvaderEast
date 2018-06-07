@@ -37,7 +37,7 @@ public class MoveController : MonoBehaviour
         Debug.Log("좌표 : " + centerPos);
         Debug.Log("패널 좌표 : " + StickPannel.position);
     }
-
+  
 
     public void StickMove()
     {

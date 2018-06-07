@@ -18,6 +18,17 @@ public class GameMediator : MonoBehaviour
         inputManagere = InputManager.Instance;
       
     }
+
+    public int ReadPlayerGold()
+    {
+        return gameDataManager.Gold;
+    }
+
+    public int ReadPlayerMaxScore()
+    {
+        return gameDataManager.MaxScore;
+    }
+    
     /// <summary>
     /// 게임 오버시 score 값 0 입력
     /// </summary>
@@ -82,7 +93,7 @@ public class GameMediator : MonoBehaviour
     }
     public void ChangePlayerLife(int count)
     {
-      //  player.MaxLife += count;
+      player.MaxLife += count;
     }
 
     public void PlayerMove(Vector3 direction)
