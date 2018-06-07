@@ -106,8 +106,8 @@ public class Boss : Enemy
         {
             if (i % 4 == 0)
                 continue;
-            Quaternion test = Quaternion.Euler(i * 15, -90, -90);
-            Instantiate(bullet, subShotPos.transform.position, subShotPos.transform.rotation = test);
+            Quaternion AngleOfFire = Quaternion.Euler(i * 15, -90, -90);
+            Instantiate(bullet, subShotPos.transform.position, subShotPos.transform.rotation = AngleOfFire);
 
             yield return new WaitForSeconds(0.1f);
 

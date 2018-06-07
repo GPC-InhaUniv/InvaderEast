@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+
 public enum SceneState
 {
     Title,
@@ -9,7 +10,6 @@ public enum SceneState
     End,
 
 }
-
 public class SceneController : Singleton<SceneController> {
 
     protected SceneController() { }
