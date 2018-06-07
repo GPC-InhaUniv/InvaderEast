@@ -16,4 +16,10 @@ public class InputManager : Singleton<InputManager> {
         gameMediator.PlayerMove(direction);
     }
 
+    public void ChangeScene(SceneState state)
+    {
+        gameMediator.ChangeScene(state);
+    }
+
+    
 }

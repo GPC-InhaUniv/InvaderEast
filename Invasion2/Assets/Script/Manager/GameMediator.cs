@@ -71,14 +71,18 @@ public class GameMediator : MonoBehaviour
         itemMangager.SellItem(item);
         SaveAndLoader.SaveData();
     }
-
+    
     /// <summary>
-    /// 캐릭터 파워 변경
+    /// 캐릭터 파워,최대 체력 변경
     /// </summary>
     /// <param name="count"></param>
     public void ChangePlayerPower(int count)
     {
         player.Damage += count;
+    }
+    public void ChangePlayerLife(int count)
+    {
+      //  player.MaxLife += count;
     }
 
     public void PlayerMove(Vector3 direction)

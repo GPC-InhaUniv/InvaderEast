@@ -16,10 +16,10 @@ public class ItemManager : Singleton<ItemManager>
 
     protected ItemManager() { }
     public GameMediator gameMediator;
-    public int PowerItemCount;
-    public int LifeItemCount;
-    public bool MagnaticItem;
-    public bool PowerRegenItem;
+    private int PowerItemCount;
+    private int LifeItemCount;
+    private bool MagnaticItem;
+    private bool PowerRegenItem;
    
     private void Start()
     {
@@ -36,9 +36,11 @@ public class ItemManager : Singleton<ItemManager>
         {
             case Item.PowerItem:
                 PowerItemCount += 1;
+                gameMediator.ChangePlayerPower(PowerItemCount);
                 break;
             case Item.LifeItem:
                 LifeItemCount += 1;
+                gameMediator.ChangePlayerLife(LifeItemCount);
                 break;
            
             default:
@@ -66,9 +68,11 @@ public class ItemManager : Singleton<ItemManager>
         {
             case Item.PowerItem:
                 PowerItemCount += 10;
+                gameMediator.ChangePlayerPower(PowerItemCount);
                 break;
             case Item.LifeItem:
                 LifeItemCount += 10;
+                gameMediator.ChangePlayerLife(LifeItemCount);
                 break;
             case Item.MagnaticItem:
                 MagnaticItem = true;
