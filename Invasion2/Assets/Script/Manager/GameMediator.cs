@@ -9,6 +9,8 @@ public class GameMediator : MonoBehaviour
     InputManager inputManagere;
     Character player;
     // Use this for initialization
+
+   
     void Start()
     {
         DontDestroyOnLoad(gameObject);

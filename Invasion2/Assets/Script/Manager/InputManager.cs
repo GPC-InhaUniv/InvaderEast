@@ -31,5 +31,10 @@ public class InputManager : Singleton<InputManager> {
         return gameMediator.ReadPlayerMaxScore();
     }
 
+    public void BuyItem(Item item)
+    {
+        gameMediator.BuyItem(item);
+       
+    }
 
 }
