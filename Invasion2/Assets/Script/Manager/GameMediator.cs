@@ -30,7 +30,10 @@ public class GameMediator : MonoBehaviour
     {
         return gameDataManager.MaxScore;
     }
-    
+    public int ReadPlayerLife()
+    {
+        return player.CurrentLife;
+    }
     /// <summary>
     /// 게임 오버시 score 값 0 입력
     /// </summary>
@@ -97,6 +100,7 @@ public class GameMediator : MonoBehaviour
     {
       player.MaxLife += count;
     }
+     
 
     public void PlayerMove(Vector3 direction)
     {
