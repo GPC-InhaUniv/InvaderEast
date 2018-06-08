@@ -14,15 +14,10 @@ public class StoreUIImage : MonoBehaviour {
 
     private void Start()
     {
-        
-
-    }
-    public void Testbtn2()
-    {
         inputManager = FindObjectOfType<InputManager>();
         inputManager.DelegateGold += new ChangeGold(ChangeImage);
-        
     }
+   
     
     public void ChangeImage()
     {

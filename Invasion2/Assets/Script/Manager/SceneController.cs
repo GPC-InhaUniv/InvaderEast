@@ -35,6 +35,7 @@ public class SceneController : Singleton<SceneController> {
                 SceneManager.LoadScene(3);
                 break;
             case SceneState.End:
+                Application.Quit();
                 break;
             default:
                 break;

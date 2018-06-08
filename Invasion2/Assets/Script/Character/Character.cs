@@ -36,40 +36,35 @@ public class Character : MonoBehaviour
     protected float moveSpeed;
     [SerializeField]
     protected int damage;
+    protected int currentLife;
+    protected int maxLife;
+    protected Vector3 target;
+    protected new Rigidbody rigidbody;
+    protected GameMediator gameMediator;
+    protected bool attacking = false;
+
+    public bool Attacking
+    {
+        get { return attacking; }
+        set { attacking = value; }
+    }
+
     public int Damage
     {
-        get
-        {
-            return damage;
-        }
-        set
-        {
-            damage = value;
-        }
+        get { return damage; }
+        set { damage = value; }
     }
-    protected int currentLife;
     public int CurrentLife
     {
         get { return currentLife; }
         set { currentLife = value; }
     }
-    protected int maxLife;
+
     public int MaxLife
     {
-        get
-        {
-            return maxLife;
-        }
-        set
-        {
-            maxLife = value;
-        }
+        get { return maxLife; }
+        set { maxLife = value; }
     }
-    protected Vector3 target;
-
-    protected new Rigidbody rigidbody;
-
-    protected GameMediator gameMediator;
 
     private void Start()
     {
@@ -78,9 +73,7 @@ public class Character : MonoBehaviour
 
     public void Move(Vector3 direction)
     {
-        //Debug.Log(direction);
         rigidbody.velocity = direction * moveSpeed;
-        Attack();
     }
 
     public void Move(Direction direction)

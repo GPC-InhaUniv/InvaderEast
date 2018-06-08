@@ -10,6 +10,7 @@ public enum EnemyType
     Bub,
     Gyu
 }
+
 /// <summary>
 /// Character를 상속받는다.
 /// Move 메서드로 8방향 이동 가능
@@ -60,6 +61,7 @@ public class Enemy : Character
     private void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
+        StageManager.Instance.callBackEnemyDead += new CallBackEnemyDead(Died);
     }
 
     private void FixedUpdate()
@@ -69,9 +71,13 @@ public class Enemy : Character
 
     public void Died()
     {
-        StageManager.Instance.RemoveEnemy(this);
+        if(transform.position.y < -7f)
+        {
+            StageManager.Instance.callBackEnemyDead -= new CallBackEnemyDead(Died);
+            StageManager.Instance.RemoveEnemy(this);
+        }
     }
-
+  
     public override void Attack()
     {
 
