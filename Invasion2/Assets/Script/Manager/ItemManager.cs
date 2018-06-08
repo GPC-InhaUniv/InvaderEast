@@ -66,13 +66,16 @@ public class ItemManager : Singleton<ItemManager>
     {
         switch(item)
         {
+            
             case Item.PowerItem:
+                
                 PowerItemCount += 10;
-                gameMediator.ChangePlayerPower(PowerItemCount);
+
+                gameMediator.ChangePlayerPower(10);
                 break;
             case Item.LifeItem:
                 LifeItemCount += 10;
-                gameMediator.ChangePlayerLife(LifeItemCount);
+                gameMediator.ChangePlayerLife(10);
                 break;
             case Item.MagnaticItem:
                 MagnaticItem = true;
@@ -91,9 +94,11 @@ public class ItemManager : Singleton<ItemManager>
         {
             case Item.PowerItem:
                 PowerItemCount -= 10;
+                gameMediator.ChangePlayerPower(-10);
                 break;
             case Item.LifeItem:
                 LifeItemCount -= 10;
+                gameMediator.ChangePlayerLife(-10);
                 break;
             case Item.MagnaticItem:
                 MagnaticItem = false;

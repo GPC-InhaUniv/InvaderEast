@@ -44,11 +44,27 @@ public class InputManager : Singleton<InputManager> {
     {
         return gameMediator.ReadPlayerPower();
     }
-    public void BuyItem(Item item)
+    public void BuyItem(Item item,int SalePrice)
     {
+       
+
+        gameMediator.ChangeGold(-SalePrice);
         DelegateGold();
-       // gameMediator.BuyItem(item);
+        gameMediator.BuyItem(item);
+       
+
     }
+
+    public void SellItem(Item item,int SalePrice)
+    {
+      
+        gameMediator.ChangeGold(+SalePrice);
+        DelegateGold();
+        gameMediator.SellItem(item);
+       
+    }
+
+
 
     
    

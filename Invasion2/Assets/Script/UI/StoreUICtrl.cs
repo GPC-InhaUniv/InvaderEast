@@ -5,62 +5,145 @@ using UnityEngine.UI;
 
 public class StoreUICtrl : MonoBehaviour
 {
-    InputManager inputManager;
+    public InputManager inputManager;
     [SerializeField]
     ScrollRect ScrollPanel;
 
+    [SerializeField]
+    Text PlayerGold;
     public int SalePrice;
-   
+
+    bool purchase;
     private void Start()
     {
         inputManager = FindObjectOfType<InputManager>();
-        ScrollPanel = gameObject.GetComponent<ScrollRect>();
+        ScrollPanel = gameObject.GetComponentInChildren<ScrollRect>();
+        try
+        {
+            
+           // inputManager.DelegateGold();
+        }
+        catch
+        {
+            inputManager = FindObjectOfType<InputManager>();
+          //  PlayerGold.text = inputManager.ReadPlayerGold().ToString();
+        }
+
     }
- 
-    public void Testbtn()
+    
+    public void EquipManager()
     {
         inputManager = FindObjectOfType<InputManager>();
-        inputManager.BuyItem(Item.PowerItem);
     }
+    
     public void OnTradePowerItem()
     {
-        
-        
-       if (ScrollPanel.horizontalNormalizedPosition > 0.7)
+        try
         {
-            ScrollPanel.horizontalNormalizedPosition = 1;
-            inputManager.BuyItem(Item.PowerItem); 
+            if (ScrollPanel.horizontalNormalizedPosition > 0.8)
+            {
+                ScrollPanel.horizontalNormalizedPosition = 1;
+               
+                if (inputManager.ReadPlayerGold()>= SalePrice && !purchase)
+                {
+                    Debug.Log("구입!");
+                    purchase = true;
+                    inputManager.BuyItem(Item.PowerItem, SalePrice);
+                }
+                    
+            }
+            else if(ScrollPanel.horizontalNormalizedPosition < 0.8 && purchase)
+            {
+                Debug.Log("판매");
+                purchase = false;
+                inputManager.SellItem(Item.PowerItem, SalePrice);
+                
+            }
         }
+        catch { EquipManager(); }
+      
     }
 
     public void OnTradeLifeItem()
     {
-        
-        if (ScrollPanel.horizontalNormalizedPosition > 0.7)
+        try
         {
-            ScrollPanel.horizontalNormalizedPosition = 1;
-            inputManager.BuyItem(Item.LifeItem);  
+            if (ScrollPanel.horizontalNormalizedPosition > 0.8)
+            {
+                ScrollPanel.horizontalNormalizedPosition = 1;
+
+                if (inputManager.ReadPlayerGold() >= SalePrice && !purchase)
+                {
+                    Debug.Log("구입!");
+                    purchase = true;
+                    inputManager.BuyItem(Item.LifeItem, SalePrice);
+                }
+
+            }
+            else if (ScrollPanel.horizontalNormalizedPosition < 0.8 && purchase)
+            {
+                Debug.Log("판매");
+                purchase = false;
+                inputManager.SellItem(Item.LifeItem, SalePrice);
+                
+            }
         }
+        catch { EquipManager(); }
     }
 
     public void OnTradePowerRegenItem()
     {
-        
-        if (ScrollPanel.horizontalNormalizedPosition > 0.7)
+        try
         {
-            ScrollPanel.horizontalNormalizedPosition = 1;
-            inputManager.BuyItem(Item.PowerRegenItem);
+            if (ScrollPanel.horizontalNormalizedPosition > 0.8)
+            {
+                ScrollPanel.horizontalNormalizedPosition = 1;
+
+                if (inputManager.ReadPlayerGold() >= SalePrice && !purchase)
+                {
+                    Debug.Log("구입!");
+                    purchase = true;
+                    inputManager.BuyItem(Item.PowerRegenItem, SalePrice);
+                }
+
+            }
+            else if (ScrollPanel.horizontalNormalizedPosition < 0.8 && purchase)
+            {
+                Debug.Log("판매");
+                purchase = false;
+                inputManager.SellItem(Item.PowerRegenItem, SalePrice);
+              
+            }
         }
+        catch { EquipManager(); }
     }
 
-    public void TradeMagnaticItem()
+    public void OnTradeMagnaticItem()
     {
-     
-        if (ScrollPanel.horizontalNormalizedPosition > 0.7)
+
+        try
         {
-            ScrollPanel.horizontalNormalizedPosition = 1;
-            inputManager.BuyItem(Item.MagnaticItem);
+            if (ScrollPanel.horizontalNormalizedPosition > 0.8)
+            {
+                ScrollPanel.horizontalNormalizedPosition = 1;
+
+                if (inputManager.ReadPlayerGold() >= SalePrice && !purchase)
+                {
+                    Debug.Log("구입!");
+                    purchase = true;
+                    inputManager.BuyItem(Item.MagnaticItem, SalePrice);
+                }
+
+            }
+            else if (ScrollPanel.horizontalNormalizedPosition < 0.8 && purchase)
+            {
+                Debug.Log("판매");
+                purchase = false;
+                inputManager.SellItem(Item.MagnaticItem, SalePrice);
+               
+            }
         }
+        catch { EquipManager(); }
     }
 
 }

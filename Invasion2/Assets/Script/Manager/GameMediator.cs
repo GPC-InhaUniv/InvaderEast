@@ -18,14 +18,13 @@ public class GameMediator : MonoBehaviour
         itemMangager = ItemManager.Instance;
         sceneController = SceneController.Instance;
         inputManagere = InputManager.Instance;
-      
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Character>();
     }
 
     public int ReadPlayerGold()
     {
         return gameDataManager.Gold;
     }
-
     public int ReadPlayerMaxScore()
     {
         return gameDataManager.MaxScore;
@@ -66,8 +65,9 @@ public class GameMediator : MonoBehaviour
     /// <param name="gold"></param>
     public void ChangeGold(int gold)
     {
-        gameDataManager.Gold = gold;
-        SaveAndLoader.SaveData();
+        Debug.Log("골드 변경");
+        gameDataManager.Gold += gold;
+       // SaveAndLoader.SaveData();
     }
     /// <summary>
     /// Item 종류 : PowerItem, LifeItem, GoldItem,ScoreItem,MagnaticItem, PowerRegenItem
@@ -86,14 +86,16 @@ public class GameMediator : MonoBehaviour
 
     public void BuyItem(Item item)
     {
+        Debug.Log(item + "구입");
         itemMangager.BuyItem(item);
-        SaveAndLoader.SaveData();
+      //  SaveAndLoader.SaveData();
     }
 
     public void SellItem(Item item)
     {
+        Debug.Log(item + "판매");
         itemMangager.SellItem(item);
-        SaveAndLoader.SaveData();
+      //  SaveAndLoader.SaveData();
     }
     
     /// <summary>
@@ -102,6 +104,7 @@ public class GameMediator : MonoBehaviour
     /// <param name="count"></param>
     public void ChangePlayerPower(int count)
     {
+       
         player.Damage += count;
     }
     public void ChangePlayerLife(int count)

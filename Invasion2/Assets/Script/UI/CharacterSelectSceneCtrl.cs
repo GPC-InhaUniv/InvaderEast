@@ -24,7 +24,11 @@ public class CharacterSelectSceneCtrl : MonoBehaviour
     const int haveGoldMax = 999999;
     [SerializeField]
     Text goldText;
-
+    InputManager inputManager;
+    private void Start()
+    {
+        inputManager = FindObjectOfType<InputManager>();
+    }
     private void Update()
     {
         ChangeDescriptionImage();
@@ -80,13 +84,13 @@ public class CharacterSelectSceneCtrl : MonoBehaviour
         }
     }
 
-    void OnClickStoreButton()
+    public void OnClickStoreButton()
     {
-
+        inputManager.ChangeScene(SceneState.Store);
     }
 
-    void OnClickBattleStartButton()
+    public void OnClickBattleStartButton()
     {
-
+        inputManager.ChangeScene(SceneState.Battle);
     }
 }
