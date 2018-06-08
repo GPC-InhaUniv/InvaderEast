@@ -1,5 +1,4 @@
-﻿
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -24,18 +23,17 @@ public delegate void CallBackEnemyDead();
 /// </summary>
 public class StageManager : Singleton<StageManager>
 {
-    protected StageManager()
-    {
-        CurrentStage = 0;
-    }
-
     [SerializeField]
     List<Enemy> EnemyList;
     [SerializeField]
     GameObject[] TransformList;
     [SerializeField]
     EnemyFactory Factory;
+    [SerializeField]
+    Enemy enemyPrefab;
 
+
+    CoroutineCtrl stageCoroutineCtrl;
     GameMediator gameMediator;
     const int MaxStage = 3;
     int CurrentStage;
@@ -43,12 +41,16 @@ public class StageManager : Singleton<StageManager>
     int transformNumber;
     public CallBackEnemyDead callBackEnemyDead;
 
-
+    protected StageManager()
+    {
+        CurrentStage = 0;
+    }
 
     private void Start()
     {
         //gameMediator = GameObject.FindGameObjectWithTag("GameMediator").GetComponent<GameMediator>();
         CurrentStage = 0;
+        stageCoroutineCtrl = new CoroutineCtrl(this, enemyPrefab);
     }
 
     public void Spawn(Enemy enemy)
@@ -58,7 +60,6 @@ public class StageManager : Singleton<StageManager>
             transformNumber = Random.Range(0,TransformList.Length-1);
             Enemy SpwanEnemy = Factory.CreateEnemy(enemy, TransformList[transformNumber].transform);
             EnemyList.Add(SpwanEnemy);
-            Debug.Log("Enemy Spawn 완료");
         }
         else Debug.Log("Spawn() 메서드의 tag 불일치!");
     }
@@ -74,8 +75,7 @@ public class StageManager : Singleton<StageManager>
     }
 
     public void RemoveEnemy(Enemy enemy)
-    {
-        Debug.Log("Enemy remove");  
+    { 
         EnemyList.Remove(enemy);
         Destroy(enemy.gameObject);
     }
@@ -103,8 +103,6 @@ public class StageManager : Singleton<StageManager>
         if (other.tag == "Enemy")
         {
             callBackEnemyDead();
-            //Enemy enemy = other.GetComponent<Enemy>();
-            //enemy.Died();
         }
     }
 
@@ -120,11 +118,23 @@ public class StageManager : Singleton<StageManager>
         return difficult;
     }
 
+    //스테이지 패턴 발생 간격
+    float callCoroutineTick = 5f;
+
     //실질석인 스테이지 타임라인
     IEnumerator StageCoroutine(int stageLevel)
     {
-        //에너미 쪽 완성 이후 매꿀것
         Debug.Log("스테이지 " + stageLevel + " 시작");
+
+        StartCoroutine(stageCoroutineCtrl.StagePattern1());
+        yield return new WaitForSeconds(callCoroutineTick);
+
+        StartCoroutine(stageCoroutineCtrl.StagePattern2());
+        yield return new WaitForSeconds(callCoroutineTick);
+
+        StartCoroutine(stageCoroutineCtrl.StagePattern3());
+        yield return new WaitForSeconds(callCoroutineTick);
+
         yield break;
     }
 } 
