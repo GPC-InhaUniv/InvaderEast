@@ -36,7 +36,14 @@ public class InputManager : Singleton<InputManager> {
     {
         return gameMediator.ReadPlayerLife();
     }
-
+    public int ReadCurrentScore()
+    {
+        return gameMediator.ReadCurrentScore();
+    }
+    public int ReadPlayerPower()
+    {
+        return gameMediator.ReadPlayerPower();
+    }
     public void BuyItem(Item item)
     {
         DelegateGold();

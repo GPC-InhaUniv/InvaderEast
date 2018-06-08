@@ -34,6 +34,14 @@ public class GameMediator : MonoBehaviour
     {
         return player.CurrentLife;
     }
+    public int ReadCurrentScore()
+    {
+        return gameDataManager.CurrentScore;
+    }
+    public int ReadPlayerPower()
+    {
+        return player.Damage;
+    }
     /// <summary>
     /// 게임 오버시 score 값 0 입력
     /// </summary>
