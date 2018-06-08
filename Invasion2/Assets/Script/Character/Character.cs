@@ -34,6 +34,7 @@ public class Character : MonoBehaviour
 {
     [SerializeField]
     protected float moveSpeed;
+    [SerializeField]
     protected int damage;
     public int Damage
     {
@@ -45,6 +46,12 @@ public class Character : MonoBehaviour
         {
             damage = value;
         }
+    }
+    protected int currentLife;
+    public int CurrentLife
+    {
+        get { return currentLife; }
+        set { currentLife = value; }
     }
     protected int maxLife;
     public int MaxLife
@@ -71,9 +78,7 @@ public class Character : MonoBehaviour
 
     public void Move(Vector3 direction)
     {
-        Debug.Log(direction);
-        //this.direction = direction;
-
+        //Debug.Log(direction);
         rigidbody.velocity = direction * moveSpeed;
         Attack();
     }
