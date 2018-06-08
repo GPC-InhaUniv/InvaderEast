@@ -34,8 +34,13 @@ public class MoveController : MonoBehaviour
         touchPos = Input.mousePosition;
         centerPos = touchPos;
         StickPannel.position = centerPos;
-        Debug.Log("좌표 : " + centerPos);
-        Debug.Log("패널 좌표 : " + StickPannel.position);
+        if(player)
+        {
+            player.Move(Vector3.zero);
+            player.Attacking = true;
+        }
+        //Debug.Log("좌표 : " + centerPos);
+        //Debug.Log("패널 좌표 : " + StickPannel.position);
     }
   
 
@@ -43,9 +48,14 @@ public class MoveController : MonoBehaviour
     {
         Vector3 dragPos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0.0f);
         directionPos = (dragPos - centerPos).normalized;
-        Debug.Log("드래그 좌표 : " + dragPos);
+        //Debug.Log("드래그 좌표 : " + dragPos);
 
-        if (player)
+        /*if (player)
+        {
+            Debug.Log("드래그 좌표 : " + directionPos);
+            player.Move(Vector3.zero);
+        }*/
+        if(player)
         {
             player.Move(directionPos);
         }
@@ -54,23 +64,24 @@ public class MoveController : MonoBehaviour
         if (stickDistance > StickRadius)
         {
             Stick.position = centerPos + directionPos * StickRadius;
-            Debug.Log("너 어디갔냐 : " + Stick.position);
+            //Debug.Log("너 어디갔냐 : " + Stick.position);
         }
         else
         {
             Stick.position = centerPos + directionPos * stickDistance;
-            Debug.Log("너 어디갔냐 : " + Stick.position);
+            //Debug.Log("너 어디갔냐 : " + Stick.position);
         }
     }
 
     public void StickMoveEnd()
     {
-        Stick.position = centerPos;
         directionPos = Vector3.zero;
         if (player)
         {
             player.Move(directionPos);
+            player.Attacking = false;
         }
+        Stick.position = centerPos;
         pannelImage.enabled = false;
         Stick.gameObject.SetActive(false);
     }

@@ -2,14 +2,28 @@
 
 public class Straight : MonoBehaviour, IMainAttackable, ISubAttackable
 {
-
-    public GameObject SpawnPosition;
+    public Transform SpawnPosition;
     public GameObject BulletPrefab1;
     public GameObject BulletPrefab2;
     public GameObject BulletPrefab3;
     public GameObject BulletPrefab4;
 
-    
+    float fireRate = 0.2f;
+    float timeRate = 0.0f;
+    protected bool fire = false;
+    public bool Fire
+    {
+        get { return fire; }
+    }
+
+    void Start()
+    {
+        SpawnPosition = GameObject.FindWithTag("FirePos").GetComponent<Transform>();
+        BulletPrefab1 = Resources.Load("Straight1", typeof(GameObject)) as GameObject;
+        BulletPrefab2 = Resources.Load("Straight2", typeof(GameObject)) as GameObject;
+        BulletPrefab3 = Resources.Load("Straight3", typeof(GameObject)) as GameObject;
+        BulletPrefab4 = Resources.Load("Straight4", typeof(GameObject)) as GameObject;
+    }
 
     public void Testbtn()
     {
@@ -18,34 +32,39 @@ public class Straight : MonoBehaviour, IMainAttackable, ISubAttackable
 
     public void Attack(int power)
     {
-       
+        if(timeRate <= fireRate)
+        {
+            timeRate += Time.deltaTime;
+            return;
+        }
         if (power == 10)
         {
+            timeRate = 0.0f;
+            fire = true;
             Instantiate(BulletPrefab1, SpawnPosition.transform.position,
             SpawnPosition.transform.rotation);
-                     
         }
         else if (power == 20)
         {
+            timeRate = 0.0f;
+            fire = true;
             Debug.Log(power);
             Instantiate(BulletPrefab2, SpawnPosition.transform.position,
              SpawnPosition.transform.rotation);
         }
         else if (power == 30)
         {
+            timeRate = 0.0f;
+            fire = true;
             Instantiate(BulletPrefab3, SpawnPosition.transform.position,
              SpawnPosition.transform.rotation);
         }
         else if (power == 40)
         {
+            timeRate = 0.0f;
+            fire = true;
             Instantiate(BulletPrefab4, SpawnPosition.transform.position,
              SpawnPosition.transform.rotation);
         }
     }
-    
-    void Start()
-    {
-
-    }
-
 }

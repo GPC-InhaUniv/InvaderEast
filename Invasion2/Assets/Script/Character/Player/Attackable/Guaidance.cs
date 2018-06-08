@@ -2,25 +2,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Guaidance : MonoBehaviour,ISubAttackable
+public class Guaidance : MonoBehaviour, ISubAttackable
 {
-    
-    public void Attack(int power)
+    [SerializeField]
+    GameObject homingMissile;
+    [SerializeField]
+    Transform spawnPos;
+
+    void Start()
     {
-        if (power == 40)
-        {
-           
-        }
+        homingMissile = Resources.Load("HomingMissile",typeof(GameObject)) as GameObject;
+        spawnPos = GameObject.FindWithTag("FirePos").GetComponent<Transform>();
+        
     }
 
-	void Start ()
-    {
-		
-	}
-	
 
-	void Update ()
+    void Update()
     {
-      
-	}
+
+    }
+
+    public void Attack(int power)
+    {
+        Debug.Log("호밍 미사일 : " + homingMissile);
+        Debug.Log("스폰 좌표 : " + spawnPos);
+        if (power == 40)
+        {
+            Instantiate(homingMissile, spawnPos.transform.position,spawnPos.transform.rotation);
+        }
+    }
 }
