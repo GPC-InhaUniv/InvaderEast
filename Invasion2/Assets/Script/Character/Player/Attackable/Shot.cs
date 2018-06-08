@@ -7,8 +7,12 @@ public class Shot : MonoBehaviour, IMainAttackable
     public GameObject SpawnPosition;
     public GameObject ShotSpawn;
     public GameObject BulletPrefab1;
-    public GameObject ShotEffect;       
+    public GameObject ShotEffect;
 
+    public void Start()
+    {
+        
+    }
     public void Testbtn()
     {
         Attack(10);

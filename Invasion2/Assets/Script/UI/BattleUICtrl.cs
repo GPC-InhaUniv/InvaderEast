@@ -12,7 +12,7 @@ public class BattleUICtrl : MonoBehaviour
     public Text lifeText;
     public Image powerGauge;
     public Text score;
-    public Image characters;
+    //public Image characters;
     
     private bool isPaused;
 
@@ -39,11 +39,8 @@ void Start()
         Time.timeScale = (isPaused) ? 0.0f : 1.0f;
        
     }
-    void ChangeCharacters()
-    {
-        //PlayerType.Sin.gam
-
-      
-
-    }
+    //void ChangeCharacters()
+    //{
+    //    PlayerType.Sin.
+    //}
 }

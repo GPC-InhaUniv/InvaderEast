@@ -6,8 +6,17 @@ public class Sector : MonoBehaviour, IMainAttackable
     public GameObject BulletPrefab1;
     public GameObject BulletPrefab2;
     public GameObject BulletPrefab3;
+    public GameObject BulletPrefab4;
 
-    Vector3 SpaPosition;
+    void Start()
+    {
+
+    }
+
+    public void Testbtn()
+    {
+        Attack(30);
+    }
 
     public void Attack(int power)
     {
@@ -24,6 +33,11 @@ public class Sector : MonoBehaviour, IMainAttackable
         else if (power == 30)
         {
             Instantiate(BulletPrefab3, SpawnPosition.transform.position,
+            SpawnPosition.transform.rotation);
+        }
+        else if (power == 40)
+        {
+            Instantiate(BulletPrefab4, SpawnPosition.transform.position,
             SpawnPosition.transform.rotation);
         }
     }
