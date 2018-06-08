@@ -12,7 +12,7 @@ public class Guaidance : MonoBehaviour, ISubAttackable
     void Start()
     {
         homingMissile = Resources.Load("HomingMissile",typeof(GameObject)) as GameObject;
-        spawnPos = GameObject.FindWithTag("FirePos").GetComponent<Transform>();
+        spawnPos = GameObject.FindWithTag("SubFirePos").GetComponent<Transform>();
         
     }
 
