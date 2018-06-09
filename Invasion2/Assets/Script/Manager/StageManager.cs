@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// 난이도 설정용
+/// 난이도 설정
 /// </summary>
 public enum Difficult
 {
@@ -17,8 +17,8 @@ public enum Difficult
 public delegate void CallBackEnemyDead();
 
 /// <summary>
-/// 중재자를 통해 스테이지 시작 요청 받으면 코루틴 시작
-/// 코루틴 내부에서 스테이지에 맞게 적 생성
+/// 중재자를 통해 스테이지 시작 요청 받으면 코루틴 시작, 
+/// 코루틴 내부에서 스테이지에 맞게 적 생성, 
 /// List를 통해 에너미 관리
 /// </summary>
 public class StageManager : Singleton<StageManager>
@@ -130,9 +130,12 @@ public class StageManager : Singleton<StageManager>
         yield return new WaitForSeconds(callCoroutineTick);
 
         StartCoroutine(stageCoroutineCtrl.StagePattern2());
-        yield return new WaitForSeconds(callCoroutineTick);
+        yield return new WaitForSeconds(callCoroutineTick * 3);
 
         StartCoroutine(stageCoroutineCtrl.StagePattern3());
+        yield return new WaitForSeconds(callCoroutineTick * 2);
+
+        StartCoroutine(stageCoroutineCtrl.StagePattern4());
         yield return new WaitForSeconds(callCoroutineTick);
 
         yield break;

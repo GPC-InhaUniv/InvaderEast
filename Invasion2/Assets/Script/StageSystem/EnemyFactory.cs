@@ -10,7 +10,6 @@ public class EnemyFactory : MonoBehaviour
 {
     public Enemy CreateEnemy(Enemy EnemyPrefab, Transform transform)
     {
-        Debug.Log("call CreateEnemy");
         return Instantiate(EnemyPrefab, transform);
     }
 }
