@@ -116,7 +116,14 @@ public class GameMediator : MonoBehaviour
     public void PlayerMove(Vector3 direction)
     {
         player.Move(direction);
+        
     }
+
+    public void PlayerAttack(bool CheckedAttack)
+    {
+        player.Attacking = CheckedAttack;
+    }
+
 
     public void SetPlayer()
     {
@@ -127,5 +134,16 @@ public class GameMediator : MonoBehaviour
         sceneController.ChangeScene(state);
     }
 
+    public void PlayerEquipMainWeapon(IMainAttackable MainWeapon)
+    {
+        
+        Player playerWeapon = player as Player;
+        playerWeapon.EquipMainAttack(MainWeapon);
+    }
 
+    public void PlayerEquipSubWeapon(ISubAttackable SubWeapon)
+    {
+        Player playerWeapon = player as Player;
+        playerWeapon.EquipSubAttack(SubWeapon);
+    }
 }

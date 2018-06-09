@@ -20,8 +20,8 @@ public class Player : Character
         DontDestroyOnLoad(gameObject);
         rigidbody = GetComponent<Rigidbody>();
         //guaidance = FindObjectOfType<Guaidance>();
-        mainAttack = FindObjectOfType<Straight>();
-        subAttack = FindObjectOfType<Guaidance>();
+       
+     
     }
 
     private void Update()
@@ -51,7 +51,7 @@ public class Player : Character
         
         if(attackCount==3)
         {
-            subAttack.Attack(damage);
+           // subAttack.Attack(damage);
             attackCount = 0;
         }
     }
@@ -66,6 +66,22 @@ public class Player : Character
         if(other.tag=="EnemyBullet" || other.tag=="Enemy")
         {
 
+        }
+    }
+
+    public void EquipMainAttack(IMainAttackable MainWeapon)
+    {
+
+        if (MainWeapon is Straight)
+        {
+            mainAttack = FindObjectOfType<Straight>();
+        }
+    }
+    public void EquipSubAttack(ISubAttackable SubWeapon)
+    {
+        if (SubWeapon is Guaidance)
+        {
+            subAttack = FindObjectOfType<Guaidance>();
         }
     }
 }

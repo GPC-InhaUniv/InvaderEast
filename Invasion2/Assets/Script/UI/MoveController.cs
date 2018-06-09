@@ -7,7 +7,8 @@ using UnityEngine.UI;
 /// </summary>
 public class MoveController : MonoBehaviour
 {
-    Player player;
+    InputManager inputManager;
+    //Player player;
     public RawImage pannelImage;
     [SerializeField]
     protected Transform Stick;
@@ -19,9 +20,10 @@ public class MoveController : MonoBehaviour
 
     private void Start()
     {
+        inputManager = FindObjectOfType<InputManager>();
         pannelImage = GameObject.FindWithTag("StickPannel").GetComponent<RawImage>();
         pannelImage.enabled = false;
-        player = FindObjectOfType<Player>();
+       // player = FindObjectOfType<Player>();
         Stick = GameObject.FindWithTag("JoyStick").GetComponent<RectTransform>();
         Stick.gameObject.SetActive(false);
         StickPannel = GameObject.FindWithTag("StickPannel").GetComponent<RectTransform>();
@@ -34,11 +36,17 @@ public class MoveController : MonoBehaviour
         touchPos = Input.mousePosition;
         centerPos = touchPos;
         StickPannel.position = centerPos;
-        if(player)
+
+        if (inputManager)
+        {
+            inputManager.PlayerMove(Vector3.zero);
+            inputManager.PlayerAttack(true);
+        }
+        /*if (player)
         {
             player.Move(Vector3.zero);
             player.Attacking = true;
-        }
+        }*/
         //Debug.Log("좌표 : " + centerPos);
         //Debug.Log("패널 좌표 : " + StickPannel.position);
     }
@@ -55,9 +63,9 @@ public class MoveController : MonoBehaviour
             Debug.Log("드래그 좌표 : " + directionPos);
             player.Move(Vector3.zero);
         }*/
-        if(player)
+        if(inputManager)
         {
-            player.Move(directionPos);
+            inputManager.PlayerMove(directionPos);
         }
 
         float stickDistance = Vector3.Distance(dragPos, centerPos);
@@ -76,10 +84,10 @@ public class MoveController : MonoBehaviour
     public void StickMoveEnd()
     {
         directionPos = Vector3.zero;
-        if (player)
+        if (inputManager)
         {
-            player.Move(directionPos);
-            player.Attacking = false;
+            inputManager.PlayerMove(directionPos);
+            inputManager.PlayerAttack(false);
         }
         Stick.position = centerPos;
         pannelImage.enabled = false;

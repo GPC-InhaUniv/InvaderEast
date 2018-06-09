@@ -25,15 +25,18 @@ public class CharacterSelectSceneCtrl : MonoBehaviour
     [SerializeField]
     Text goldText;
     InputManager inputManager;
+
+    IMainAttackable straight;
     private void Start()
     {
         inputManager = FindObjectOfType<InputManager>();
+        straight = FindObjectOfType<Straight>();
     }
     private void Update()
     {
         ChangeDescriptionImage();
         ChangeHorizontalNormalizedPosition();
-        haveGold = InputManager.Instance.ReadPlayerGold();
+        haveGold = inputManager.ReadPlayerGold();
         if (haveGold > haveGoldMax)
         {
             goldText.text = haveGoldMax.ToString("N0") + "+";
@@ -49,6 +52,7 @@ public class CharacterSelectSceneCtrl : MonoBehaviour
         if (scrollRect.horizontalNormalizedPosition <= 0.33f)
         {
             DescriptionImage.sprite = DescriptionImage_Red;
+            inputManager.PlayerEquipMainWeapon(straight);
         }
         if (0.33f < scrollRect.horizontalNormalizedPosition
             && scrollRect.horizontalNormalizedPosition <= 0.67f)

@@ -16,7 +16,10 @@ public class InputManager : Singleton<InputManager> {
     {
         gameMediator.PlayerMove(direction);
     }
-
+    public void PlayerAttack(bool CheckedAttack)
+    {
+        gameMediator.PlayerAttack(CheckedAttack);
+    }
     public void ChangeScene(SceneState state)
     {
         gameMediator.ChangeScene(state);
@@ -64,11 +67,18 @@ public class InputManager : Singleton<InputManager> {
        
     }
 
+    public void PlayerEquipMainWeapon(IMainAttackable MainWeapon)
+    {
+        gameMediator.PlayerEquipMainWeapon(MainWeapon);
+    }
+    public void PlayerEquipSubWeapon(ISubAttackable SubWeapon)
+    {
+
+    }
 
 
-    
-   
-    
-    
+
+
+
 
 }
