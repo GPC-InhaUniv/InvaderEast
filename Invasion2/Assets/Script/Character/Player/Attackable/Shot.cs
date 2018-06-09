@@ -13,6 +13,7 @@ public class Shot : MonoBehaviour, IMainAttackable
     {
         
     }
+
     public void Testbtn()
     {
         Attack(10);
@@ -27,7 +28,7 @@ public class Shot : MonoBehaviour, IMainAttackable
         }
         else if (power == 20)
         {
-
+            1uik
         }
         else if (power == 30)
         {
