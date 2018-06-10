@@ -5,13 +5,13 @@ using UnityEngine;
 public class Shot : MonoBehaviour, IMainAttackable
 {
     public GameObject SpawnPosition;
-    public GameObject ShotSpawn;
     public GameObject BulletPrefab1;
+    public GameObject ShotSpawn;
     public GameObject ShotEffect;
 
     public void Start()
     {
-        
+
     }
 
     public void Testbtn()
@@ -21,25 +21,33 @@ public class Shot : MonoBehaviour, IMainAttackable
 
     public void Attack(int power)
     {
-        if (power == 10)
+        if (power <= 10)
         {
             Instantiate(BulletPrefab1, SpawnPosition.transform.position,
             SpawnPosition.transform.rotation);
         }
-        else if (power == 20)
+        else if (power <= 20)
         {
-          
+            Instantiate(BulletPrefab1, SpawnPosition.transform.position,
+              SpawnPosition.transform.rotation);
         }
-        else if (power == 30)
+        else if (power <= 30)
         {
-
+            Instantiate(BulletPrefab1, SpawnPosition.transform.position,
+            SpawnPosition.transform.rotation);
+        }
+        else if (power <= 40)
+        {
+            Instantiate(BulletPrefab1, SpawnPosition.transform.position,
+            SpawnPosition.transform.rotation);
         }
     }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.collider.tag == "Enemy")
         {
-            Instantiate(BulletPrefab1, ShotSpawn.transform.position,
+            Instantiate(ShotEffect, ShotSpawn.transform.position,
             ShotSpawn.transform.rotation);
         }
     }
