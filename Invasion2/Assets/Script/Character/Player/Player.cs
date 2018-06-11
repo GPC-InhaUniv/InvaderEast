@@ -16,7 +16,7 @@ public class Player : Character
 
     private void Start()
     {
-        //gameMediator.SetPlayer();
+        gameMediator = GameObject.FindGameObjectWithTag("GameMediator").GetComponent<GameMediator>();
         DontDestroyOnLoad(gameObject);
         rigidbody = GetComponent<Rigidbody>();
         //guaidance = FindObjectOfType<Guaidance>();
@@ -60,7 +60,8 @@ public class Player : Character
     {
         if(other.tag=="Item")
         {
-
+            Item itemType = other.GetComponent<Item>();
+            gameMediator.GetItem(itemType.ItemType);  
         }
 
         if(other.tag=="EnemyBullet" || other.tag=="Enemy")

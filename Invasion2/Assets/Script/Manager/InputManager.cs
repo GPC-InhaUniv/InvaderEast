@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 public delegate void ChangeGold();
 
-public class InputManager : Singleton<InputManager> {
+public class InputManager : Singleton<InputManager>
+{
 
     GameMediator gameMediator;
     public ChangeGold DelegateGold;
@@ -47,24 +48,18 @@ public class InputManager : Singleton<InputManager> {
     {
         return gameMediator.ReadPlayerPower();
     }
-    public void BuyItem(Item item,int SalePrice)
+    public void BuyItem(ItemType item, int SalePrice)
     {
-       
-
         gameMediator.ChangeGold(-SalePrice);
         DelegateGold();
         gameMediator.BuyItem(item);
-       
-
     }
 
-    public void SellItem(Item item,int SalePrice)
+    public void SellItem(ItemType item, int SalePrice)
     {
-      
         gameMediator.ChangeGold(+SalePrice);
         DelegateGold();
         gameMediator.SellItem(item);
-       
     }
 
     public void PlayerEquipMainWeapon(IMainAttackable MainWeapon)
@@ -75,6 +70,8 @@ public class InputManager : Singleton<InputManager> {
     {
 
     }
+
+   
 
 
 

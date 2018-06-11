@@ -75,23 +75,23 @@ public class GameMediator : MonoBehaviour
     /// </summary>
     /// <param name="item"></param>
     /// <param name="count"></param>
-    public void GetItem(Item item, int count)
+    public void GetItem(ItemType item, int count)
     {
         itemMangager.GetItem(item, count);
     }
-    public void GetItem(Item item)
+    public void GetItem(ItemType item)
     {
         itemMangager.GetItem(item);
     }
 
-    public void BuyItem(Item item)
+    public void BuyItem(ItemType item)
     {
         Debug.Log(item + "구입");
         itemMangager.BuyItem(item);
       //  SaveAndLoader.SaveData();
     }
 
-    public void SellItem(Item item)
+    public void SellItem(ItemType item)
     {
         Debug.Log(item + "판매");
         itemMangager.SellItem(item);
@@ -124,11 +124,6 @@ public class GameMediator : MonoBehaviour
         player.Attacking = CheckedAttack;
     }
 
-
-    public void SetPlayer()
-    {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-    }
     public void ChangeScene(SceneState state)
     {
         sceneController.ChangeScene(state);
@@ -145,5 +140,10 @@ public class GameMediator : MonoBehaviour
     {
         Player playerWeapon = player as Player;
         playerWeapon.EquipSubAttack(SubWeapon);
+    }
+
+    public void SpawnItem(ItemType type, Transform enemyPos)
+    {
+        itemMangager.SpawnItem(type,enemyPos);
     }
 }

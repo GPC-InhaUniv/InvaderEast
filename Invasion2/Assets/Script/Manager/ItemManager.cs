@@ -1,15 +1,7 @@
 ﻿using UnityEngine;
 
 
-public enum Item
-{
-    PowerItem,
-    LifeItem,
-    GoldItem,
-    ScoreItem,
-    MagnaticItem,
-    PowerRegenItem,
-}
+
 
 public class ItemManager : Singleton<ItemManager>
 {
@@ -20,7 +12,13 @@ public class ItemManager : Singleton<ItemManager>
     private int LifeItemCount;
     private bool MagnaticItem;
     private bool PowerRegenItem;
-   
+
+    
+    private GameObject powerItemPrefab;
+    private GameObject lifeItemPrefab;
+    private GameObject goldItemPrefab;
+    private GameObject scoreItemPrefab;
+
     private void Start()
     {
         gameMediator = GameObject.FindGameObjectWithTag("GameMediator").GetComponent<GameMediator>();
@@ -28,59 +26,64 @@ public class ItemManager : Singleton<ItemManager>
         LifeItemCount = 0;
         MagnaticItem = false;
         PowerRegenItem = false;
+
+        powerItemPrefab = Resources.Load("PowerItem") as GameObject;
+        lifeItemPrefab = Resources.Load("LifeItem") as GameObject;
+        goldItemPrefab = Resources.Load("GoldItem") as GameObject;
+        scoreItemPrefab = Resources.Load("ScoreItem") as GameObject;
     }
 
-    public void GetItem(Item item)
+    public void GetItem(ItemType item)
     {
         switch (item)
         {
-            case Item.PowerItem:
+            case ItemType.PowerItem:
                 PowerItemCount += 1;
                 gameMediator.ChangePlayerPower(PowerItemCount);
                 break;
-            case Item.LifeItem:
+            case ItemType.LifeItem:
                 LifeItemCount += 1;
                 gameMediator.ChangePlayerLife(LifeItemCount);
                 break;
-           
+
             default:
                 break;
         }
     }
-    public void GetItem(Item item, int count)
+    public void GetItem(ItemType item, int count)
     {
         switch (item)
         {
-            case Item.GoldItem:
+            case ItemType.GoldItem:
                 gameMediator.ChangeGold(count);
                 break;
-            case Item.ScoreItem:
+            case ItemType.ScoreItem:
                 gameMediator.ChangeScore(count);
                 break;
             default:
                 break;
         }
     }
-    
-    public void BuyItem(Item item)
+
+    public void BuyItem(ItemType item)
     {
-        switch(item)
+        switch (item)
         {
-            
-            case Item.PowerItem:
-                
+
+            case ItemType.PowerItem:
+
                 PowerItemCount += 10;
 
                 gameMediator.ChangePlayerPower(10);
                 break;
-            case Item.LifeItem:
+            case ItemType.LifeItem:
                 LifeItemCount += 10;
                 gameMediator.ChangePlayerLife(10);
                 break;
-            case Item.MagnaticItem:
+            case ItemType.MagnaticItem:
                 MagnaticItem = true;
                 break;
-            case Item.PowerRegenItem:
+            case ItemType.PowerRegenItem:
                 PowerRegenItem = true;
                 break;
             default:
@@ -88,26 +91,47 @@ public class ItemManager : Singleton<ItemManager>
         }
     }
 
-    public void SellItem(Item item)
+    public void SellItem(ItemType item)
     {
         switch (item)
         {
-            case Item.PowerItem:
+            case ItemType.PowerItem:
                 PowerItemCount -= 10;
                 gameMediator.ChangePlayerPower(-10);
                 break;
-            case Item.LifeItem:
+            case ItemType.LifeItem:
                 LifeItemCount -= 10;
                 gameMediator.ChangePlayerLife(-10);
                 break;
-            case Item.MagnaticItem:
+            case ItemType.MagnaticItem:
                 MagnaticItem = false;
                 break;
-            case Item.PowerRegenItem:
+            case ItemType.PowerRegenItem:
                 PowerRegenItem = false;
                 break;
             default:
                 break;
         }
+    }
+
+    public void SpawnItem(ItemType item,Transform enemyPos)
+    {
+        switch (item)
+        {
+            case ItemType.PowerItem:
+                 Instantiate(powerItemPrefab,enemyPos);
+                break;
+            case ItemType.LifeItem:
+                Instantiate(powerItemPrefab, enemyPos);
+                break;
+            case ItemType.GoldItem:
+                Instantiate(powerItemPrefab, enemyPos);
+                break;
+            case ItemType.ScoreItem:
+                 Instantiate(powerItemPrefab, enemyPos);
+                break;
+
+        }
+
     }
 }

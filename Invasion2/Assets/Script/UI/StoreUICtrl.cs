@@ -48,7 +48,7 @@ public class StoreUICtrl : MonoBehaviour
                 {
                     Debug.Log("구입!");
                     purchase = true;
-                    inputManager.BuyItem(Item.PowerItem, SalePrice);
+                    inputManager.BuyItem(ItemType.PowerItem, SalePrice);
                 }
                     
             }
@@ -56,7 +56,7 @@ public class StoreUICtrl : MonoBehaviour
             {
                 Debug.Log("판매");
                 purchase = false;
-                inputManager.SellItem(Item.PowerItem, SalePrice);
+                inputManager.SellItem(ItemType.PowerItem, SalePrice);
                 
             }
         }
@@ -76,7 +76,7 @@ public class StoreUICtrl : MonoBehaviour
                 {
                     Debug.Log("구입!");
                     purchase = true;
-                    inputManager.BuyItem(Item.LifeItem, SalePrice);
+                    inputManager.BuyItem(ItemType.LifeItem, SalePrice);
                 }
 
             }
@@ -84,7 +84,7 @@ public class StoreUICtrl : MonoBehaviour
             {
                 Debug.Log("판매");
                 purchase = false;
-                inputManager.SellItem(Item.LifeItem, SalePrice);
+                inputManager.SellItem(ItemType.LifeItem, SalePrice);
                 
             }
         }
@@ -103,7 +103,7 @@ public class StoreUICtrl : MonoBehaviour
                 {
                     Debug.Log("구입!");
                     purchase = true;
-                    inputManager.BuyItem(Item.PowerRegenItem, SalePrice);
+                    inputManager.BuyItem(ItemType.PowerRegenItem, SalePrice);
                 }
 
             }
@@ -111,7 +111,7 @@ public class StoreUICtrl : MonoBehaviour
             {
                 Debug.Log("판매");
                 purchase = false;
-                inputManager.SellItem(Item.PowerRegenItem, SalePrice);
+                inputManager.SellItem(ItemType.PowerRegenItem, SalePrice);
               
             }
         }
@@ -131,16 +131,14 @@ public class StoreUICtrl : MonoBehaviour
                 {
                     Debug.Log("구입!");
                     purchase = true;
-                    inputManager.BuyItem(Item.MagnaticItem, SalePrice);
+                    inputManager.BuyItem(ItemType.MagnaticItem, SalePrice);
                 }
-
             }
             else if (ScrollPanel.horizontalNormalizedPosition < 0.8 && purchase)
             {
                 Debug.Log("판매");
                 purchase = false;
-                inputManager.SellItem(Item.MagnaticItem, SalePrice);
-               
+                inputManager.SellItem(ItemType.MagnaticItem, SalePrice);
             }
         }
         catch { EquipManager(); }
