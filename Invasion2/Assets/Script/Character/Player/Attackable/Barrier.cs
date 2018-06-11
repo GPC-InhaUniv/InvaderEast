@@ -4,9 +4,10 @@ public class Barrier : MonoBehaviour, ISubAttackable
 {
     public GameObject barrier;
 
+
     void Start()
     {
-
+        
     }
 
     public void Attack(int power)
@@ -18,5 +19,5 @@ public class Barrier : MonoBehaviour, ISubAttackable
     {
         barrier.SetActive(false);
     }
-   
+    
 }
