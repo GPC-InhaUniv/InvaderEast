@@ -14,7 +14,7 @@ public class Straight : MonoBehaviour, IMainAttackable, ISubAttackable
         BulletPrefab1 = Resources.Load("Straight1", typeof(GameObject)) as GameObject;
         BulletPrefab2 = Resources.Load("Straight2", typeof(GameObject)) as GameObject;
         BulletPrefab3 = Resources.Load("Straight3", typeof(GameObject)) as GameObject;
-        BulletPrefab4 = Resources.Load("Straight4", typeof(GameObject)) as GameObject;
+        BulletPrefab4 = Resources.Load("Sector1", typeof(GameObject)) as GameObject;
     }
 
     public void Testbtn()
