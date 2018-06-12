@@ -61,6 +61,7 @@ public class Enemy : Character
     private void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
+        gameMediator = GameObject.FindGameObjectWithTag("GameMediator").GetComponent<GameMediator>();
         StageManager.Instance.callBackEnemyDead += new CallBackEnemyDead(Died);
     }
 
@@ -71,10 +72,12 @@ public class Enemy : Character
 
     public void Died()
     {
-        if(transform.position.y < -7f)
+
+        gameMediator.SpawnItem(ItemType.PowerItem, this.transform);
+        if (transform.position.y < -7f)
         {
-            StageManager.Instance.callBackEnemyDead -= new CallBackEnemyDead(Died);
-            StageManager.Instance.RemoveEnemy(this);
+           StageManager.Instance.callBackEnemyDead -= new CallBackEnemyDead(Died);
+           StageManager.Instance.RemoveEnemy(this);
         }
     }
   

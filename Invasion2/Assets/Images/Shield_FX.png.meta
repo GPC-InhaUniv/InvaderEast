@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 628ecff3c37e0964db4d41de271b1dec
-timeCreated: 1528348602
+timeCreated: 1528646842
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -12,6 +12,16 @@ TextureImporter:
     21300010: Shield_FX_5
     21300012: Shield_FX_6
     21300014: Shield_FX_7
+    21300016: Shield_FX_8
+    21300018: Shield_FX_9
+    21300020: Shield_FX_10
+    21300022: Shield_FX_11
+    21300024: Shield_FX_12
+    21300026: Shield_FX_13
+    21300028: Shield_FX_14
+    21300030: Shield_FX_15
+    21300032: Shield_FX_16
+    21300034: Shield_FX_17
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -43,7 +53,7 @@ TextureImporter:
   lightmap: 0
   compressionQuality: 50
   spriteMode: 2
-  spriteExtrude: 1
+  spriteExtrude: 0
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
@@ -90,11 +100,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 14
-        y: 95
-        width: 72
-        height: 66
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        y: 93
+        width: 73
+        height: 68
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -102,12 +112,12 @@ TextureImporter:
       name: Shield_FX_1
       rect:
         serializedVersion: 2
-        x: 99
-        y: 92
-        width: 72
-        height: 66
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 98
+        y: 91
+        width: 73
+        height: 68
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -115,12 +125,12 @@ TextureImporter:
       name: Shield_FX_2
       rect:
         serializedVersion: 2
-        x: 184
-        y: 89
-        width: 72
-        height: 66
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 183
+        y: 88
+        width: 74
+        height: 67
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -128,12 +138,12 @@ TextureImporter:
       name: Shield_FX_3
       rect:
         serializedVersion: 2
-        x: 267
-        y: 88
-        width: 72
+        x: 266
+        y: 89
+        width: 74
         height: 63
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -142,11 +152,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 17
-        y: 10
-        width: 69
-        height: 66
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        y: 8
+        width: 72
+        height: 69
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -154,12 +164,12 @@ TextureImporter:
       name: Shield_FX_5
       rect:
         serializedVersion: 2
-        x: 99
+        x: 98
         y: 10
-        width: 70
-        height: 66
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 71
+        height: 68
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -167,12 +177,12 @@ TextureImporter:
       name: Shield_FX_6
       rect:
         serializedVersion: 2
-        x: 177
-        y: 11
-        width: 72
-        height: 63
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 176
+        y: 10
+        width: 76
+        height: 66
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -180,12 +190,12 @@ TextureImporter:
       name: Shield_FX_7
       rect:
         serializedVersion: 2
-        x: 258
-        y: 8
-        width: 72
-        height: 66
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 257
+        y: 6
+        width: 74
+        height: 69
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0

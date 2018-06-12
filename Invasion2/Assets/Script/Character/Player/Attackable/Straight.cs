@@ -24,23 +24,23 @@ public class Straight : MonoBehaviour, IMainAttackable, ISubAttackable
 
     public void Attack(int power)
     {
-        if (power == 10)
+        if (power <= 10)
         {
             Instantiate(BulletPrefab1, SpawnPosition.transform.position,
             SpawnPosition.transform.rotation);
         }
-        else if (power == 20)
+        else if (power <= 20)
         {
             Debug.Log(power);
             Instantiate(BulletPrefab2, SpawnPosition.transform.position,
              SpawnPosition.transform.rotation);
         }
-        else if (power == 30)
+        else if (power <= 30)
         {
             Instantiate(BulletPrefab3, SpawnPosition.transform.position,
              SpawnPosition.transform.rotation);
         }
-        else if (power == 40)
+        else if (power <= 40)
         {
             Instantiate(BulletPrefab4, SpawnPosition.transform.position,
              SpawnPosition.transform.rotation);

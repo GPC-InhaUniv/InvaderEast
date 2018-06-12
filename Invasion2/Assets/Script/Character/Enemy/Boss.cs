@@ -19,11 +19,10 @@ public class Boss : Enemy
     [SerializeField]
     private Transform player;
     [SerializeField]
-    private float currentLife;
+    
     public float MoveLength;
     [Range(1, 2)]
     public float SaveZone;
-
 
     private bool firstCRrunning;
     private bool secondCRrunning;
