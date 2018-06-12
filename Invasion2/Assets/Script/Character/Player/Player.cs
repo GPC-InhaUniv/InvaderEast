@@ -2,25 +2,28 @@
 
 /// <summary>
 /// Character를 상속받는다.
+/// 스크립트 주석친 부분은 테스트용으로
+/// 남겨둔 부분입니다.
 /// </summary>
 
 public class Player : Character
 {
     IMainAttackable mainAttack;
     ISubAttackable subAttack;
-    Guaidance guaidance;
     int attackCount;
     float fireRate = 0.2f;
     float timeRate = 0.0f;
     bool fire = false;
-   
+    //Straight st;
+    //Guaidance gu;
+
     private void Start()
     {
         gameMediator = GameObject.FindGameObjectWithTag("GameMediator").GetComponent<GameMediator>();
         DontDestroyOnLoad(gameObject);
         rigidbody = GetComponent<Rigidbody>();
-        //guaidance = FindObjectOfType<Guaidance>();
-       
+        //st = FindObjectOfType<Straight>();
+        //gu = FindObjectOfType<Guaidance>();
      
     }
 
@@ -43,6 +46,7 @@ public class Player : Character
         }
         else if(timeRate>=fireRate)
         {
+            //EquipMainAttack(st);
             mainAttack.Attack(damage);
             timeRate = 0.0f;
             attackCount++;
@@ -51,7 +55,8 @@ public class Player : Character
         
         if(attackCount==3)
         {
-           // subAttack.Attack(damage);
+            //EquipSubAttack(gu);
+            subAttack.Attack(damage);
             attackCount = 0;
         }
     }

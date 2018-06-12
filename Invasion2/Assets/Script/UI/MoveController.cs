@@ -7,8 +7,6 @@ using UnityEngine.UI;
 /// </summary>
 public class MoveController : MonoBehaviour
 {
-
-    //Player player;
     public RawImage pannelImage;
     [SerializeField]
     protected Transform Stick;
@@ -23,7 +21,6 @@ public class MoveController : MonoBehaviour
 
         pannelImage = GameObject.FindWithTag("StickPannel").GetComponent<RawImage>();
         pannelImage.enabled = false;
-        // player = FindObjectOfType<Player>();
         Stick = GameObject.FindWithTag("JoyStick").GetComponent<RectTransform>();
         Stick.gameObject.SetActive(false);
         StickPannel = GameObject.FindWithTag("StickPannel").GetComponent<RectTransform>();
@@ -40,14 +37,6 @@ public class MoveController : MonoBehaviour
 
         InputManager.Instance.PlayerMove(Vector3.zero);
         InputManager.Instance.PlayerAttack(true);
-
-        /*if (player)
-        {
-            player.Move(Vector3.zero);
-            player.Attacking = true;
-        }*/
-        //Debug.Log("좌표 : " + centerPos);
-        //Debug.Log("패널 좌표 : " + StickPannel.position);
     }
 
 
@@ -55,13 +44,6 @@ public class MoveController : MonoBehaviour
     {
         Vector3 dragPos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0.0f);
         directionPos = (dragPos - centerPos).normalized;
-        //Debug.Log("드래그 좌표 : " + dragPos);
-
-        /*if (player)
-        {
-            Debug.Log("드래그 좌표 : " + directionPos);
-            player.Move(Vector3.zero);
-        }*/
         
             InputManager.Instance.PlayerMove(directionPos);
         
@@ -70,12 +52,10 @@ public class MoveController : MonoBehaviour
         if (stickDistance > StickRadius)
         {
             Stick.position = centerPos + directionPos * StickRadius;
-            //Debug.Log("너 어디갔냐 : " + Stick.position);
         }
         else
         {
             Stick.position = centerPos + directionPos * stickDistance;
-            //Debug.Log("너 어디갔냐 : " + Stick.position);
         }
     }
 
