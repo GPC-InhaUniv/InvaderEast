@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class StoreUIImage : MonoBehaviour {
 
-    InputManager inputManager;
+    
     public Sprite UnvailableItem;
     public Sprite AvailableItem;
     public Image ScrolledImage;
@@ -14,26 +14,19 @@ public class StoreUIImage : MonoBehaviour {
 
     private void ShowPlayerHaveGold()
     {
-        PlayerGold.text = inputManager.ReadPlayerGold().ToString();
+        PlayerGold.text = InputManager.Instance.ReadPlayerGold().ToString();
     }
     private void Start()
     {
-        inputManager = FindObjectOfType<InputManager>();
-        inputManager.DelegateGold += new ChangeGold(ChangeImage);
-        inputManager.DelegateGold += new ChangeGold(ShowPlayerHaveGold);
-        try
-        {
-            inputManager.DelegateGold();
-        }
-        catch
-        {
-            inputManager = FindObjectOfType<InputManager>();
-        }
+
+        InputManager.Instance.DelegateGold += new ChangeGold(ChangeImage);
+        InputManager.Instance.DelegateGold += new ChangeGold(ShowPlayerHaveGold);
+      
     }
     public void ChangeImage()
     {
         
-        if (inputManager.ReadPlayerGold() < SalePrice)
+        if (InputManager.Instance.ReadPlayerGold() < SalePrice)
         {
             ScrolledImage.sprite = UnvailableItem;
         }

@@ -5,18 +5,18 @@ using UnityEngine;
 public class StoreUI : MonoBehaviour {
 
     public Canvas Store;
-    InputManager inputManager;
+   
     // Use this for initialization
 
     private void Start()
     {
-       inputManager= FindObjectOfType<InputManager>();
+      
         Store = GameObject.FindGameObjectWithTag("StoreUI").GetComponent<Canvas>();
        
     }
    
     public void OnExitButton()
     {
-        inputManager.ChangeScene(SceneState.CharacterSelect);
+        InputManager.Instance.ChangeScene(SceneState.CharacterSelect);
     }
 }

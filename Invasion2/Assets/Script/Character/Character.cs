@@ -42,13 +42,15 @@ public class Character : MonoBehaviour
     protected new Rigidbody rigidbody;
     protected GameMediator gameMediator;
     protected bool attacking = false;
+    private Vector3 direction;
+    public float xMin, xMax, yMin, yMax;
+
 
     public bool Attacking
     {
         get { return attacking; }
         set { attacking = value; }
     }
-
     public int Damage
     {
         get { return damage; }
@@ -59,21 +61,28 @@ public class Character : MonoBehaviour
         get { return currentLife; }
         set { currentLife = value; }
     }
-
     public int MaxLife
     {
         get { return maxLife; }
         set { maxLife = value; }
     }
-
     private void Start()
     {
         gameMediator = GameObject.FindGameObjectWithTag("GameMediator").GetComponent<GameMediator>();
     }
-
-    public void Move(Vector3 direction)
+    private void FixedUpdate()
     {
         rigidbody.velocity = direction * moveSpeed;
+        rigidbody.position = new Vector3
+        (
+            Mathf.Clamp(rigidbody.position.x, xMin, xMax),
+            Mathf.Clamp(rigidbody.position.y, yMin, yMax),
+            0.0f
+        );
+    }
+    public void DirectionToMove(Vector3 direction)
+    {
+        this.direction = direction;
     }
 
     public void Move(Direction direction)

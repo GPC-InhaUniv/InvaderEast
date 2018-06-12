@@ -7,7 +7,7 @@ using UnityEngine.UI;
 /// </summary>
 public class MoveController : MonoBehaviour
 {
-    InputManager inputManager;
+
     //Player player;
     public RawImage pannelImage;
     [SerializeField]
@@ -20,10 +20,10 @@ public class MoveController : MonoBehaviour
 
     private void Start()
     {
-        inputManager = FindObjectOfType<InputManager>();
+
         pannelImage = GameObject.FindWithTag("StickPannel").GetComponent<RawImage>();
         pannelImage.enabled = false;
-       // player = FindObjectOfType<Player>();
+        // player = FindObjectOfType<Player>();
         Stick = GameObject.FindWithTag("JoyStick").GetComponent<RectTransform>();
         Stick.gameObject.SetActive(false);
         StickPannel = GameObject.FindWithTag("StickPannel").GetComponent<RectTransform>();
@@ -37,11 +37,10 @@ public class MoveController : MonoBehaviour
         centerPos = touchPos;
         StickPannel.position = centerPos;
 
-        if (inputManager)
-        {
-            inputManager.PlayerMove(Vector3.zero);
-            inputManager.PlayerAttack(true);
-        }
+
+        InputManager.Instance.PlayerMove(Vector3.zero);
+        InputManager.Instance.PlayerAttack(true);
+
         /*if (player)
         {
             player.Move(Vector3.zero);
@@ -50,7 +49,7 @@ public class MoveController : MonoBehaviour
         //Debug.Log("좌표 : " + centerPos);
         //Debug.Log("패널 좌표 : " + StickPannel.position);
     }
-  
+
 
     public void StickMove()
     {
@@ -63,10 +62,9 @@ public class MoveController : MonoBehaviour
             Debug.Log("드래그 좌표 : " + directionPos);
             player.Move(Vector3.zero);
         }*/
-        if(inputManager)
-        {
-            inputManager.PlayerMove(directionPos);
-        }
+        
+            InputManager.Instance.PlayerMove(directionPos);
+        
 
         float stickDistance = Vector3.Distance(dragPos, centerPos);
         if (stickDistance > StickRadius)
@@ -84,11 +82,10 @@ public class MoveController : MonoBehaviour
     public void StickMoveEnd()
     {
         directionPos = Vector3.zero;
-        if (inputManager)
-        {
-            inputManager.PlayerMove(directionPos);
-            inputManager.PlayerAttack(false);
-        }
+
+        InputManager.Instance.PlayerMove(directionPos);
+        InputManager.Instance.PlayerAttack(false);
+        
         Stick.position = centerPos;
         pannelImage.enabled = false;
         Stick.gameObject.SetActive(false);

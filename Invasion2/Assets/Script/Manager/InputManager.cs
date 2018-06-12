@@ -5,6 +5,7 @@ public delegate void ChangeGold();
 
 public class InputManager : Singleton<InputManager>
 {
+   
 
     GameMediator gameMediator;
     public ChangeGold DelegateGold;

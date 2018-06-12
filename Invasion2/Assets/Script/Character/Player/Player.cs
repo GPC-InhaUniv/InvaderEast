@@ -13,7 +13,7 @@ public class Player : Character
     float fireRate = 0.2f;
     float timeRate = 0.0f;
     bool fire = false;
-
+   
     private void Start()
     {
         gameMediator = GameObject.FindGameObjectWithTag("GameMediator").GetComponent<GameMediator>();
@@ -83,6 +83,13 @@ public class Player : Character
         if (SubWeapon is Guaidance)
         {
             subAttack = FindObjectOfType<Guaidance>();
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.tag == "Boundary")
+        {
+
         }
     }
 }

@@ -115,7 +115,7 @@ public class GameMediator : MonoBehaviour
 
     public void PlayerMove(Vector3 direction)
     {
-        player.Move(direction);
+        player.DirectionToMove(direction);
         
     }
 
