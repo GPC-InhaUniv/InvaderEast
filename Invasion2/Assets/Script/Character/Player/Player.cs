@@ -16,7 +16,8 @@ public class Player : Character
     bool fire = false;
     //Straight st;
     //Guaidance gu;
-
+    [SerializeField]
+    GameObject [] playerModel;
     private void Start()
     {
         gameMediator = GameObject.FindGameObjectWithTag("GameMediator").GetComponent<GameMediator>();
@@ -95,6 +96,31 @@ public class Player : Character
         if(other.tag == "Boundary")
         {
 
+        }
+    }
+
+    public void ChangePlayer(PlayerType type)
+    {
+        switch (type)
+        {
+            case PlayerType.Sin:
+                playerModel[0].SetActive(true);
+                playerModel[1].SetActive(false);
+                playerModel[2].SetActive(false);
+                break;
+            case PlayerType.Ho:
+                playerModel[0].SetActive(false);
+                playerModel[1].SetActive(true);
+                playerModel[2].SetActive(false);
+                break;
+            case PlayerType.Deung:
+                playerModel[0].SetActive(false);
+                playerModel[1].SetActive(false);
+                playerModel[2].SetActive(true);
+                break;
+            
+            default:
+                break;
         }
     }
 }

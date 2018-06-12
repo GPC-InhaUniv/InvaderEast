@@ -29,7 +29,6 @@ public class CharacterSelectSceneCtrl : MonoBehaviour
     IMainAttackable straight;
     private void Start()
     {
-       
         straight = FindObjectOfType<Straight>();
     }
     private void Update()
@@ -53,16 +52,19 @@ public class CharacterSelectSceneCtrl : MonoBehaviour
         {
             DescriptionImage.sprite = DescriptionImage_Red;
             InputManager.Instance.PlayerEquipMainWeapon(straight);
+            InputManager.Instance.PlayerChangeModel(PlayerType.Sin);
         }
         if (0.33f < scrollRect.horizontalNormalizedPosition
             && scrollRect.horizontalNormalizedPosition <= 0.67f)
         {
             DescriptionImage.sprite = DescriptionImage_Orange;
+            InputManager.Instance.PlayerChangeModel(PlayerType.Ho);
         }
         if (0.67f < scrollRect.horizontalNormalizedPosition
             && scrollRect.horizontalNormalizedPosition <= 1f)
         {
             DescriptionImage.sprite = DescriptionImage_Green;
+            InputManager.Instance.PlayerChangeModel(PlayerType.Deung);
         }
     }
 

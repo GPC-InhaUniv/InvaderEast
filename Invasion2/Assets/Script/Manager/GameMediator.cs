@@ -7,6 +7,8 @@ public class GameMediator : MonoBehaviour
     ItemManager itemMangager;
     SceneController sceneController;
     InputManager inputManagere;
+    StageManager stageManager;
+
     Character player;
     // Use this for initialization
 
@@ -18,6 +20,7 @@ public class GameMediator : MonoBehaviour
         itemMangager = ItemManager.Instance;
         sceneController = SceneController.Instance;
         inputManagere = InputManager.Instance;
+        stageManager = StageManager.Instance;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Character>();
     }
 
@@ -145,5 +148,16 @@ public class GameMediator : MonoBehaviour
     public void SpawnItem(ItemType type, Transform enemyPos)
     {
         itemMangager.SpawnItem(type,enemyPos);
+    }
+    public void SetFactory()
+    {
+        stageManager.SetFactory();
+
+    }
+
+    public void ChangePlayerModel(PlayerType type)
+    {
+        Player playerModel = player as Player;
+        playerModel.ChangePlayer(type);
     }
 }

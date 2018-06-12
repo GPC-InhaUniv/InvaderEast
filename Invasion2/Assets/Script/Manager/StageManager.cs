@@ -48,9 +48,14 @@ public class StageManager : Singleton<StageManager>
 
     private void Start()
     {
-        //gameMediator = GameObject.FindGameObjectWithTag("GameMediator").GetComponent<GameMediator>();
+        gameMediator = GameObject.FindGameObjectWithTag("GameMediator").GetComponent<GameMediator>();
+        
         CurrentStage = 0;
         stageCoroutineCtrl = new CoroutineCtrl(this, enemyPrefab);
+    }
+    public void SetFactory()
+    {
+        Factory = GameObject.FindGameObjectWithTag("GameController").GetComponent<EnemyFactory>();
     }
 
     public void Spawn(Enemy enemy)

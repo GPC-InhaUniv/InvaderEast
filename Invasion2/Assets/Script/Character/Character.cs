@@ -44,7 +44,7 @@ public class Character : MonoBehaviour
     protected bool attacking = false;
     private Vector3 direction;
     public float xMin, xMax, yMin, yMax;
-
+    public float tilt;
 
     public bool Attacking
     {
@@ -79,6 +79,7 @@ public class Character : MonoBehaviour
             Mathf.Clamp(rigidbody.position.y, yMin, yMax),
             0.0f
         );
+        rigidbody.rotation = Quaternion.Euler(0.0f, rigidbody.velocity.x * -tilt,0.0f );
     }
     public void DirectionToMove(Vector3 direction)
     {
