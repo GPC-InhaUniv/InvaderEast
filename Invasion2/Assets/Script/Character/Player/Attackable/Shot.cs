@@ -6,8 +6,7 @@ public class Shot : MonoBehaviour, IMainAttackable
 {
     public GameObject SpawnPosition;
     public GameObject BulletPrefab1;
-    public GameObject ShotSpawn;
-    public GameObject ShotEffect;
+   
 
     public void Start()
     {
@@ -42,14 +41,5 @@ public class Shot : MonoBehaviour, IMainAttackable
             SpawnPosition.transform.rotation);
         }
     }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.collider.tag == "Enemy")
-        {
-            Instantiate(ShotEffect, ShotSpawn.transform.position,
-            ShotSpawn.transform.rotation);
-        }
-    }
-
+    
 }
