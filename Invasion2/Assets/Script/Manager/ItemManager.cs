@@ -1,11 +1,21 @@
 ﻿using UnityEngine;
 
 /// <summary>
+/// 담당자 : 김정수
 /// Item의 데이터 처리
 /// 상점에서 구매 및 판매한  아이템과 골드의 처리는 이곳에서.
 /// 몬스터가 생성하는 아이템처리도 이곳에서 진행.
 /// </summary>
 
+public enum ItemType
+{
+    PowerItem,
+    LifeItem,
+    GoldItem,
+    ScoreItem,
+    MagnaticItem,
+    PowerRegenItem,
+}
 
 public class ItemManager : Singleton<ItemManager>
 {
@@ -16,8 +26,6 @@ public class ItemManager : Singleton<ItemManager>
     private int LifeItemCount;
     private bool MagnaticItem;
     private bool PowerRegenItem;
-
-    
     private GameObject powerItemPrefab;
     private GameObject lifeItemPrefab;
     private GameObject goldItemPrefab;

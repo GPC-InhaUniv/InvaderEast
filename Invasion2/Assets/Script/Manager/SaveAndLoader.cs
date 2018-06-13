@@ -2,26 +2,18 @@
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using System;
+
 /// <summary>
-///                  [안드로이드 External]
-///Application.persistentDataPath : /mnt/sdcard/Android/data/번들이름/files
-///파일 읽기 쓰기 가능
-///Application.dataPath : /data/app/번들이름-번호.apk
-///Application.streamingAssetsPath : jar:file:///data/app/번들이름.apk!/assets 
-///파일이 아닌 WWW로 읽기 가능
-///                  [안드로이드 Internal]
-///Application.persistentDataPath : /data/data/번들이름/files/
-///파일 읽기 쓰기 가능
-///Application.dataPath : /data/app/번들이름-번호.apk
-///Application.streamingAssetsPath : jar:file:///data/app/번들이름.apk!/assets
-///파일이 아닌 WWW로 읽기 가능
+/// 담당자 : 김정수
+/// 
+/// 아래 GameData 클래스를 이용해 데이터를 직렬화하여 저장 및 불러오기를 한다.
 /// </summary>
 
 public class SaveAndLoader : Singleton<SaveAndLoader>
 {
 
     [Serializable]
-    class GameData
+    private class GameData
     {
         public int Gold;
         public int MaxScore;
@@ -32,9 +24,7 @@ public class SaveAndLoader : Singleton<SaveAndLoader>
     private void Start()
     {
         gameData = new GameData();
-        // gameData = GameObject.FindGameObjectWithTag("Save").GetComponent<GameMainData>();
         gameData.filePath = Application.dataPath + "/GameData.bin";
-
     }
 
     public void SaveData()
@@ -63,14 +53,28 @@ public class SaveAndLoader : Singleton<SaveAndLoader>
         stream.Close();
     }
 
-    private void BinarySerialize(GameData Data,string filePath)
+    private void BinarySerialize(GameData Data, string filePath)
     {
         BinaryFormatter formatter = new BinaryFormatter();
         FileStream stream = new FileStream(filePath, FileMode.Create);
-        formatter.Serialize(stream, Data);
+        formatter.Serialize(stream, gameData);
         stream.Close();
     }
 
 
 
 }
+/// <summary>
+///                  [안드로이드 External]
+///Application.persistentDataPath : /mnt/sdcard/Android/data/번들이름/files
+///파일 읽기 쓰기 가능
+///Application.dataPath : /data/app/번들이름-번호.apk
+///Application.streamingAssetsPath : jar:file:///data/app/번들이름.apk!/assets 
+///파일이 아닌 WWW로 읽기 가능
+///                  [안드로이드 Internal]
+///Application.persistentDataPath : /data/data/번들이름/files/
+///파일 읽기 쓰기 가능
+///Application.dataPath : /data/app/번들이름-번호.apk
+///Application.streamingAssetsPath : jar:file:///data/app/번들이름.apk!/assets
+///파일이 아닌 WWW로 읽기 가능
+/// </summary>

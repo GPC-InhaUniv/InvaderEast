@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
-
+/// <summary>
+/// 담당자 : 김정수
+///
+///캡슐화 진행 필요 
+/// </summary>
 public class GameDataManager : Singleton<GameDataManager>{
 
    // GameMediator gameMediator;
     protected GameDataManager() { }
-
     public int Gold;
     public int MaxScore;
     public int CurrentScore;

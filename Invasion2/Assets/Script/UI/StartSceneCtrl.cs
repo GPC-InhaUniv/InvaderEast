@@ -32,6 +32,7 @@ public class StartSceneCtrl : MonoBehaviour
 
     public void OnClickGameStart()
     {
+
         SaveAndLoader.Instance.LoadData();
         //메디에이터에 다음 씬 넘기기 요청
         InputManager.Instance.ChangeScene(SceneState.CharacterSelect);
@@ -52,7 +53,7 @@ public class StartSceneCtrl : MonoBehaviour
 
     public void OnClickExit()
     {
-
+        
         //메디에이터에 게임 종료 요청
         //메디에이터에 다음 씬 넘기기 요청
         InputManager.Instance.ChangeScene(SceneState.End);

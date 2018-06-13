@@ -1,8 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
-
+/// <summary>
+/// 담당자 : 김정수
+/// 
+/// Store UI중 슬라이드 되어지는 이미지와 그에따른 아이템 구매 및 판매 처리
+/// StoreUI스크립트와 결합이 필요하다.
+/// </summary>
 public class StoreUICtrl : MonoBehaviour
 {
 
