@@ -2,6 +2,9 @@
 
 public class Straight : MonoBehaviour, IMainAttackable, ISubAttackable
 {
+    /// <summary>
+    /// 파워마다 공격 프리팹 변경
+    /// </summary>
     public Transform SpawnPosition;
     public GameObject BulletPrefab1;
     public GameObject BulletPrefab2;
