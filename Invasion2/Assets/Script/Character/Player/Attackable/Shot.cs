@@ -5,6 +5,7 @@ using UnityEngine;
 public class Shot : MonoBehaviour, IMainAttackable
 {
     /// <summary>
+    /// 작성자 : 이재환
     /// 파워마다 총알 탄창수 제한 미완성
     /// 재장전 코루틴 미완성
     /// </summary>

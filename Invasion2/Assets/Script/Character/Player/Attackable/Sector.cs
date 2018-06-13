@@ -3,6 +3,7 @@
 public class Sector : MonoBehaviour, IMainAttackable
 {
     /// <summary>
+    /// 작성자 : 이재환
     /// 파워마다 공격 프리팹 변경
     /// </summary>
     public GameObject SpawnPosition;

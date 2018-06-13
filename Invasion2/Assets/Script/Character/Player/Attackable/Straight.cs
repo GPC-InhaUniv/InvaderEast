@@ -3,6 +3,7 @@
 public class Straight : MonoBehaviour, IMainAttackable, ISubAttackable
 {
     /// <summary>
+    /// 작성자 : 박상원 , 이재환
     /// 파워마다 공격 프리팹 변경
     /// </summary>
     public Transform SpawnPosition;
@@ -23,7 +24,7 @@ public class Straight : MonoBehaviour, IMainAttackable, ISubAttackable
     public void Testbtn()
     {
         Attack(10);
-    }
+    } 
 
     public void Attack(int power)
     {
