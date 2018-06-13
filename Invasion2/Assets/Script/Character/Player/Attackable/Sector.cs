@@ -2,12 +2,15 @@
 
 public class Sector : MonoBehaviour, IMainAttackable
 {
+    /// <summary>
+    /// 파워마다 공격 프리팹 변경
+    /// </summary>
     public GameObject SpawnPosition;
     public GameObject BulletPrefab1;
     public GameObject BulletPrefab2;
     public GameObject BulletPrefab3;
     public GameObject BulletPrefab4;
-
+    
     void Start()
     {
 
