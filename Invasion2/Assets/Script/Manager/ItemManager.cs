@@ -1,13 +1,17 @@
 ﻿using UnityEngine;
 
-
+/// <summary>
+/// Item의 데이터 처리
+/// 상점에서 구매 및 판매한  아이템과 골드의 처리는 이곳에서.
+/// 몬스터가 생성하는 아이템처리도 이곳에서 진행.
+/// </summary>
 
 
 public class ItemManager : Singleton<ItemManager>
 {
 
     protected ItemManager() { }
-    public GameMediator gameMediator;
+    private GameMediator gameMediator;
     private int PowerItemCount;
     private int LifeItemCount;
     private bool MagnaticItem;
@@ -69,11 +73,8 @@ public class ItemManager : Singleton<ItemManager>
     {
         switch (item)
         {
-
             case ItemType.PowerItem:
-
                 PowerItemCount += 10;
-
                 gameMediator.ChangePlayerPower(10);
                 break;
             case ItemType.LifeItem:
@@ -130,8 +131,6 @@ public class ItemManager : Singleton<ItemManager>
             case ItemType.ScoreItem:
                  Instantiate(powerItemPrefab, enemyPos);
                 break;
-
         }
-
     }
 }

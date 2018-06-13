@@ -33,7 +33,7 @@ public class PoolManager : Singleton<PoolManager>
     {
         //EnemyPrefab = Resources.Load("EnemyPrefab") as GameObject; //아직 없다고 한다...ㅠ
         //EnemyBulletPrefab = Resources.Load("EnemyBulletPrefab") as GameObject; //얘도 아직 없다고 한다...............
-
+        gameMediator = GameObject.FindGameObjectWithTag("GameMediator").GetComponent<GameMediator>();
         PlayerBulletPrefab = new GameObject[8];
         PlayerBulletPrefab[0] = Resources.Load("Straight1") as GameObject;
         PlayerBulletPrefab[1] = Resources.Load("Straight2") as GameObject;

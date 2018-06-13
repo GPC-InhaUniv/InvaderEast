@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 public delegate void ChangeGold();
 
 public class InputManager : Singleton<InputManager>
@@ -52,7 +50,6 @@ public class InputManager : Singleton<InputManager>
         DelegateGold();
         gameMediator.BuyItem(item);
     }
-
     public void SellItem(ItemType item, int SalePrice)
     {
         gameMediator.ChangeGold(+SalePrice);
@@ -60,13 +57,14 @@ public class InputManager : Singleton<InputManager>
         gameMediator.SellItem(item);
     }
 
+    //플레이어의 무기 장착
     public void PlayerEquipMainWeapon(IMainAttackable MainWeapon)
     {
         gameMediator.PlayerEquipMainWeapon(MainWeapon);
     }
     public void PlayerEquipSubWeapon(ISubAttackable SubWeapon)
     {
-
+        gameMediator.PlayerEquipSubWeapon(SubWeapon);
     }
 
     public void PlayerChangeModel(PlayerType type)

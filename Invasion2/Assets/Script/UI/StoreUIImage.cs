@@ -1,10 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 public class StoreUIImage : MonoBehaviour {
 
-    
     public Sprite UnvailableItem;
     public Sprite AvailableItem;
     public Image ScrolledImage;
@@ -18,14 +15,12 @@ public class StoreUIImage : MonoBehaviour {
     }
     private void Start()
     {
-
         InputManager.Instance.DelegateGold += new ChangeGold(ChangeImage);
         InputManager.Instance.DelegateGold += new ChangeGold(ShowPlayerHaveGold);
-      
+        InputManager.Instance.DelegateGold();
     }
     public void ChangeImage()
     {
-        
         if (InputManager.Instance.ReadPlayerGold() < SalePrice)
         {
             ScrolledImage.sprite = UnvailableItem;

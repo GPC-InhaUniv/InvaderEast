@@ -17,7 +17,7 @@ public class Player : Character
     //Straight st;
     //Guaidance gu;
     [SerializeField]
-    GameObject [] playerModel;
+    private GameObject [] playerModel;
     private void Start()
     {
         gameMediator = GameObject.FindGameObjectWithTag("GameMediator").GetComponent<GameMediator>();

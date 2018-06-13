@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
-
+/// <summary>
+/// 각 싱글톤들의 중재자.
+/// SceneController는 SceneManager라는 예약어가 존재하기에...
+/// </summary>
 public class GameMediator : MonoBehaviour
 {
 
@@ -8,11 +11,12 @@ public class GameMediator : MonoBehaviour
     SceneController sceneController;
     InputManager inputManagere;
     StageManager stageManager;
-
+    PoolManager poolManager;
+    SaveAndLoader saveAndload;
     Character player;
     // Use this for initialization
 
-   
+
     void Start()
     {
         DontDestroyOnLoad(gameObject);
@@ -21,9 +25,13 @@ public class GameMediator : MonoBehaviour
         sceneController = SceneController.Instance;
         inputManagere = InputManager.Instance;
         stageManager = StageManager.Instance;
+        //세이브로더는 싱글톤만 생성
+        saveAndload = SaveAndLoader.Instance;
+       // poolManager = PoolManager.Instance;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Character>();
     }
-
+   
+    //게임 데이터와 플레이어의 데이터 읽기
     public int ReadPlayerGold()
     {
         return gameDataManager.Gold;
@@ -50,16 +58,7 @@ public class GameMediator : MonoBehaviour
     /// <param name="score"></param>
     public void ChangeScore(int score)
     {
-        if (score == 0)
-            gameDataManager.CurrentScore = 0;
-        else
-        {
-            gameDataManager.CurrentScore += score;
-            if (gameDataManager.MaxScore <= gameDataManager.CurrentScore)
-            {
-                gameDataManager.MaxScore = gameDataManager.CurrentScore;
-            }
-        }
+        gameDataManager.CurrentScore = score;
 
     }
     /// <summary>
@@ -70,7 +69,8 @@ public class GameMediator : MonoBehaviour
     {
         Debug.Log("골드 변경");
         gameDataManager.Gold += gold;
-       // SaveAndLoader.SaveData();
+        SaveAndLoader.Instance.SaveData();
+        
     }
     /// <summary>
     /// Item 종류 : PowerItem, LifeItem, GoldItem,ScoreItem,MagnaticItem, PowerRegenItem
@@ -91,37 +91,32 @@ public class GameMediator : MonoBehaviour
     {
         Debug.Log(item + "구입");
         itemMangager.BuyItem(item);
-      //  SaveAndLoader.SaveData();
     }
 
     public void SellItem(ItemType item)
     {
         Debug.Log(item + "판매");
         itemMangager.SellItem(item);
-      //  SaveAndLoader.SaveData();
     }
-    
+
     /// <summary>
     /// 캐릭터 파워,최대 체력 변경
     /// </summary>
     /// <param name="count"></param>
     public void ChangePlayerPower(int count)
     {
-       
         player.Damage += count;
     }
     public void ChangePlayerLife(int count)
     {
-      player.MaxLife += count;
+        player.MaxLife += count;
     }
-     
 
+    //InputManager에서 플레이어 이동 방향 받아오기
     public void PlayerMove(Vector3 direction)
     {
         player.DirectionToMove(direction);
-        
     }
-
     public void PlayerAttack(bool CheckedAttack)
     {
         player.Attacking = CheckedAttack;
@@ -131,14 +126,11 @@ public class GameMediator : MonoBehaviour
     {
         sceneController.ChangeScene(state);
     }
-
     public void PlayerEquipMainWeapon(IMainAttackable MainWeapon)
     {
-        
         Player playerWeapon = player as Player;
         playerWeapon.EquipMainAttack(MainWeapon);
     }
-
     public void PlayerEquipSubWeapon(ISubAttackable SubWeapon)
     {
         Player playerWeapon = player as Player;
@@ -147,12 +139,12 @@ public class GameMediator : MonoBehaviour
 
     public void SpawnItem(ItemType type, Transform enemyPos)
     {
-        itemMangager.SpawnItem(type,enemyPos);
+        itemMangager.SpawnItem(type, enemyPos);
     }
+    //팩토리는 스테이지 매니저가 생성된 이후의 씬에서 생성되기에 장착(?)해주는 메소드가 필요하다.
     public void SetFactory()
     {
         stageManager.SetFactory();
-
     }
 
     public void ChangePlayerModel(PlayerType type)
