@@ -24,6 +24,8 @@ public class Barrier : MonoBehaviour, ISubAttackable
 
     private void OnTriggerEnter(Collider collider)
     {
+        Debug.Log("충돌?");
+
         if (collider.tag == "EnemyBullet")
         {
             barrier.SetActive(false);
