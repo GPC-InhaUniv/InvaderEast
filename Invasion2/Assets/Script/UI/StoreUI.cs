@@ -1,20 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+﻿using UnityEngine;
+/// <summary>
+/// 담당자 : 김정수
+/// 상점에서 나가기 위한 임시 스크립트
+/// </summary>
 public class StoreUI : MonoBehaviour {
 
-    public Canvas Store;
-   
-    // Use this for initialization
-
-    private void Start()
-    {
-      
-        Store = GameObject.FindGameObjectWithTag("StoreUI").GetComponent<Canvas>();
-       
-    }
-   
     public void OnExitButton()
     {
         InputManager.Instance.ChangeScene(SceneState.CharacterSelect);

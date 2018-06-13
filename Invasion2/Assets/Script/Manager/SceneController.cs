@@ -1,6 +1,13 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
+/// <summary>
+/// 담당자 : 김정수
+/// 
+/// 전달받은 SceneState에따라 Scene 변경처리.
+/// SceneManager라는 이름을 사용하고 싶었으나 SceneManager는 예약어이기때문에 사용할 수 없다.
+/// </summary>
 public enum SceneState
 {
     Title,

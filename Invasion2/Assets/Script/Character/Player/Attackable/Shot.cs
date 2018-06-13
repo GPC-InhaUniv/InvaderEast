@@ -4,10 +4,18 @@ using UnityEngine;
 
 public class Shot : MonoBehaviour, IMainAttackable
 {
+    /// <summary>
+    /// 작성자 : 이재환
+    /// 파워마다 총알 탄창수 제한 미완성
+    /// 재장전 코루틴 미완성
+    /// </summary>
     public GameObject SpawnPosition;
     public GameObject BulletPrefab1;
-    public GameObject ShotSpawn;
-    public GameObject ShotEffect;
+
+    //private readonly int maxBulliet = 5;
+    //private bool isReload = false;
+    //private int currBullet = 2;
+    //private WaitForSeconds wsReload;
 
     public void Start()
     {
@@ -21,11 +29,14 @@ public class Shot : MonoBehaviour, IMainAttackable
 
     public void Attack(int power)
     {
+
         if (power <= 10)
         {
             Instantiate(BulletPrefab1, SpawnPosition.transform.position,
             SpawnPosition.transform.rotation);
+            //isReload = (--currBullet % maxBulliet == 0);
         }
+
         else if (power <= 20)
         {
             Instantiate(BulletPrefab1, SpawnPosition.transform.position,
@@ -42,14 +53,4 @@ public class Shot : MonoBehaviour, IMainAttackable
             SpawnPosition.transform.rotation);
         }
     }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.collider.tag == "Enemy")
-        {
-            Instantiate(ShotEffect, ShotSpawn.transform.position,
-            ShotSpawn.transform.rotation);
-        }
-    }
-
 }

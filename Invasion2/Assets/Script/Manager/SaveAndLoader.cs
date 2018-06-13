@@ -2,52 +2,79 @@
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using System;
+
 /// <summary>
-/// 게임 데이터 저장시 
+/// 담당자 : 김정수
+/// 
+/// 아래 GameData 클래스를 이용해 데이터를 직렬화하여 저장 및 불러오기를 한다.
 /// </summary>
-public class SaveAndLoader : MonoBehaviour
+
+public class SaveAndLoader : Singleton<SaveAndLoader>
 {
+
     [Serializable]
     private class GameData
     {
         public int Gold;
         public int MaxScore;
         public string filePath;
-        public GameData()
-        {
-            filePath = Application.dataPath + "/GameData.bin";
-        }
     }
-    private static GameData Data = new GameData();
-    public static void SaveData()
+    GameData gameData;
+
+    private void Start()
     {
-        Data.Gold = GameDataManager.Instance.Gold;
-        Data.MaxScore = GameDataManager.Instance.MaxScore;
-        Debug.Log("골드: " + Data.Gold);
-        Debug.Log("최대 스코어 : " + Data.MaxScore);
-        Debug.Log("데이터 세이브");
-        BinarySeriallize(Data);
-    }
-    public static void LoadData()
-    {
-        BinaryDeserialize();
-        Debug.Log("데이터 로드");
-        GameDataManager.Instance.Gold = Data.Gold;
-        GameDataManager.Instance.MaxScore = Data.MaxScore;
-        Debug.Log("소지 골드: " + Data.Gold);
-        Debug.Log("최대 스코어: " + Data.MaxScore);
-    }
-    private static void BinarySeriallize(GameData data)
-    {
-        BinaryFormatter formattere = new BinaryFormatter();
-        using (FileStream stream = new FileStream(data.filePath, FileMode.Create))
-            formattere.Serialize(stream, data);
-    }
-    private static void BinaryDeserialize()
-    {
-        BinaryFormatter formatter = new BinaryFormatter();
-        using (FileStream stream = new FileStream(Data.filePath, FileMode.Open))
-            Data = (GameData)formatter.Deserialize(stream);
+        gameData = new GameData();
+        gameData.filePath = Application.dataPath + "/GameData.bin";
     }
 
+    public void SaveData()
+    {
+        gameData.Gold = GameDataManager.Instance.Gold;
+        gameData.MaxScore = GameDataManager.Instance.MaxScore;
+        BinarySerialize(gameData, gameData.filePath);
+        Debug.Log("저장완료");
+    }
+
+    public void LoadData()
+    {
+        BinaryDeserialize(gameData.filePath);
+        Debug.Log("불러오기");
+        Debug.Log("골드 : " + gameData.Gold);
+        Debug.Log("최대 스코어 :" + gameData.MaxScore);
+        GameDataManager.Instance.Gold = gameData.Gold;
+        GameDataManager.Instance.MaxScore = gameData.MaxScore;
+    }
+
+    private void BinaryDeserialize(string filePath)
+    {
+        BinaryFormatter formatter = new BinaryFormatter();
+        FileStream stream = new FileStream(filePath, FileMode.Open);
+        gameData = (GameData)formatter.Deserialize(stream);
+        stream.Close();
+    }
+
+    private void BinarySerialize(GameData Data, string filePath)
+    {
+        BinaryFormatter formatter = new BinaryFormatter();
+        FileStream stream = new FileStream(filePath, FileMode.Create);
+        formatter.Serialize(stream, gameData);
+        stream.Close();
+    }
+
+
+
 }
+/// <summary>
+///                  [안드로이드 External]
+///Application.persistentDataPath : /mnt/sdcard/Android/data/번들이름/files
+///파일 읽기 쓰기 가능
+///Application.dataPath : /data/app/번들이름-번호.apk
+///Application.streamingAssetsPath : jar:file:///data/app/번들이름.apk!/assets 
+///파일이 아닌 WWW로 읽기 가능
+///                  [안드로이드 Internal]
+///Application.persistentDataPath : /data/data/번들이름/files/
+///파일 읽기 쓰기 가능
+///Application.dataPath : /data/app/번들이름-번호.apk
+///Application.streamingAssetsPath : jar:file:///data/app/번들이름.apk!/assets
+///파일이 아닌 WWW로 읽기 가능
+/// </summary>
