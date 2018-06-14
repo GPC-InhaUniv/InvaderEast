@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 담당자 : 최대원
+/// 전투 씬에서 적들의 등장 패턴을 정의하는 스크립트
+/// </summary>
 public class CoroutineCtrl
 {
     Enemy enemy;

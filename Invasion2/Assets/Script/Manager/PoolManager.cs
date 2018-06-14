@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
+/// 담당자 : 최대원
 /// 관리하는 Pool 리스트 : 
 /// EnemyQueue(적 객체), 
 /// EnemyBulletQueue(적의 총알 객체), 
-/// PlayerBulletQueue(플레이어의 타입 및 파워에 따른 총알 객체)
-/// //집에 가고 십다.............
+/// PlayerBulletQueue(플레이어의 타입 및 파워에 따른 총알 객체를 담은 큐의 배열)
+/// 플레이어의 추가 탄환(미사일) 큐는 아직 추가 안되어 있음
+/// 재환아!!!!!!!!!!!!!!!11
 /// </summary>
 public class PoolManager : Singleton<PoolManager>
 {
@@ -32,8 +34,9 @@ public class PoolManager : Singleton<PoolManager>
     void Start ()
     {
         //EnemyPrefab = Resources.Load("EnemyPrefab") as GameObject; //아직 없다고 한다...ㅠ
-        //EnemyBulletPrefab = Resources.Load("EnemyBulletPrefab") as GameObject; //얘도 아직 없다고 한다...............
+        //EnemyBulletPrefab = Resources.Load("EnemyBulletPrefab") as GameObject; //얘도 아직 없다고 한다........
         gameMediator = GameObject.FindGameObjectWithTag("GameMediator").GetComponent<GameMediator>();
+
         PlayerBulletPrefab = new GameObject[8];
         PlayerBulletPrefab[0] = Resources.Load("Straight1") as GameObject;
         PlayerBulletPrefab[1] = Resources.Load("Straight2") as GameObject;
@@ -47,6 +50,7 @@ public class PoolManager : Singleton<PoolManager>
 
         CreateQueue(EnemyQueue, EnemyQueueSize, EnemyPrefab);
         CreateQueue(EnemyBulletQueue, EnemyBulletQueueSize, EnemyBulletPrefab);
+
         PlayerBulletQueue = new Queue<GameObject>[8];
         for (int i = 0; i < PlayerBulletQueue.Length-1; i++)
         {
@@ -70,7 +74,7 @@ public class PoolManager : Singleton<PoolManager>
                 Debug.Log("Enqueue");
             }
         }
-        else Debug.Log("Prefab가 존재하지 않음! : " + prefab.ToString());
+        else Debug.Log("Prefab이 존재하지 않음! : " + prefab.ToString());
     }
 
     public GameObject GetEnemy()
@@ -110,7 +114,7 @@ public class PoolManager : Singleton<PoolManager>
     }
 
     /// <summary>
-    /// index값 정리해준다. 
+    /// index값 정리. 
     /// 0~3 = Sinship의 파워에 따른 공격, 
     /// 4~7 = Hoship의 파워에 따른 공격, 
     /// 8~12 = Deungship의 파워에 따른 공격(얘는 바뀔수 있음)
@@ -139,7 +143,7 @@ public class PoolManager : Singleton<PoolManager>
     }
 
     /// <summary>
-    /// index값 정리해준다. 
+    /// index값 정리.
     /// 0~3 = Sinship의 파워에 따른 공격, 
     /// 4~7 = Hoship의 파워에 따른 공격, 
     /// 8~12 = Deungship의 파워에 따른 공격(얘는 바뀔수 있음)
