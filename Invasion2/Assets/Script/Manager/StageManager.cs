@@ -17,7 +17,8 @@ public enum Difficult
 public delegate void CallBackEnemyDead();
 
 /// <summary>
-/// 중재자를 통해 스테이지 시작 요청 받으면 코루틴 시작, 
+/// 담당자 : 최대원
+/// 메디에이터를 통해 스테이지 시작 요청 받으면 코루틴 시작, 
 /// 코루틴 내부에서 스테이지에 맞게 적 생성, 
 /// List를 통해 에너미 관리
 /// </summary>
@@ -32,7 +33,6 @@ public class StageManager : Singleton<StageManager>
     [SerializeField]
     Enemy enemyPrefab;
 
-
     CoroutineCtrl stageCoroutineCtrl;
     GameMediator gameMediator;
     const int MaxStage = 3;
@@ -40,6 +40,9 @@ public class StageManager : Singleton<StageManager>
     Difficult difficult;
     int transformNumber;
     public CallBackEnemyDead callBackEnemyDead;
+
+    //스테이지 패턴 발생 간격
+    float callCoroutineTick = 5f;
 
     protected StageManager()
     {
@@ -53,6 +56,8 @@ public class StageManager : Singleton<StageManager>
         CurrentStage = 0;
         stageCoroutineCtrl = new CoroutineCtrl(this, enemyPrefab);
     }
+
+    //PoolManager 작업 이후 삭제
     public void SetFactory()
     {
         Factory = GameObject.FindGameObjectWithTag("GameController").GetComponent<EnemyFactory>();
@@ -73,6 +78,7 @@ public class StageManager : Singleton<StageManager>
     {
         foreach (Enemy item in EnemyList)
         {
+            //PoolManager 작성 이후 변경 요망
             Destroy(item.gameObject);
         }
         EnemyList.Clear();
@@ -82,6 +88,7 @@ public class StageManager : Singleton<StageManager>
     public void RemoveEnemy(Enemy enemy)
     { 
         EnemyList.Remove(enemy);
+        //PoolManager 작성 이후 변경 요망
         Destroy(enemy.gameObject);
     }
 
@@ -122,9 +129,6 @@ public class StageManager : Singleton<StageManager>
         Debug.Log("Get Difficulty : " + difficult);
         return difficult;
     }
-
-    //스테이지 패턴 발생 간격
-    float callCoroutineTick = 5f;
 
     //실질석인 스테이지 타임라인
     IEnumerator StageCoroutine(int stageLevel)

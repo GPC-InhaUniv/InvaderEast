@@ -4,7 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
+/// 담당자 : 최대원
 /// 캐릭터 선택 화면을 제어하는 스크립트
+/// 각각의 동작은 InputManager에게 전달된다.
 /// </summary>
 public class CharacterSelectSceneCtrl : MonoBehaviour
 {
@@ -24,13 +26,14 @@ public class CharacterSelectSceneCtrl : MonoBehaviour
     const int haveGoldMax = 999999;
     [SerializeField]
     Text goldText;
-   
 
     IMainAttackable straight;
+
     private void Start()
     {
         straight = FindObjectOfType<Straight>();
     }
+
     private void Update()
     {
         ChangeDescriptionImage();
