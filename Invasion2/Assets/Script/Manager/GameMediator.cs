@@ -8,6 +8,7 @@
 /// Mediator의 UML은 연관 관계로 되어있다. 하지만 아래 작성된 코드와 다른 Manager코드들간은 서로가 집약 관계에 놓여있다.
 /// 맙소사... UML을 잘못봤다
 /// 
+/// 
 /// </summary>
 public class GameMediator : MonoBehaviour
 {

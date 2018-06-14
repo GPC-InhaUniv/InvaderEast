@@ -1,6 +1,12 @@
 ﻿using System.Collections;
 using UnityEngine;
 
+/// <summary>
+/// 담당자 : 김정수
+/// 
+/// Pool 완성시 총알 생성 부 변경해야 함.
+/// </summary>
+
 public class Boss : Enemy
 {
     
