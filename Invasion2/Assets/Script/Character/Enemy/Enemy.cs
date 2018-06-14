@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 
+// 담당자 : 박상원
+
 /// <summary>
 /// 적의 전투기 타입
 /// </summary>
@@ -12,8 +14,14 @@ public enum EnemyType
 }
 
 /// <summary>
-/// Character를 상속받는다.
+/// -----------------------------------------
+/// 각각의 Enemy 패턴들이 아직 Enemy 스크립트의 
+/// Pattern() 메서드와 결합되지 않음
+/// -----------------------------------------
+/// Character를 상속받아
+/// 방향을 Move 메서드의 매개변수로 전달하여
 /// Move 메서드로 8방향 이동 가능
+/// -----------------------------------------
 /// </summary>
 public class Enemy : Character
 {
@@ -79,11 +87,6 @@ public class Enemy : Character
            StageManager.Instance.callBackEnemyDead -= new CallBackEnemyDead(Died);
            StageManager.Instance.RemoveEnemy(this);
         }
-    }
-  
-    public override void Attack()
-    {
-
     }
 
     public override void OnTriggerEnter(Collider other)

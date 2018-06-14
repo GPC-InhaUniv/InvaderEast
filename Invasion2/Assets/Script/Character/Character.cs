@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 
+// 담당자 : 박상원
+
 /// <summary>
 /// 플레이어 타입 선택
 /// </summary>
@@ -27,8 +29,9 @@ public enum Direction
 }
 
 /// <summary>
-/// 캐릭터 이동 공통부분 전반 담당
 /// Player와 Enemy에서 Character를 상속받아 사용
+/// 캐릭터 이동, 공격, 콜리더 접촉 여부 판정 등 공통적으로
+/// 사용되는 함수들을 만들어두었다.
 /// </summary>
 public class Character : MonoBehaviour
 {

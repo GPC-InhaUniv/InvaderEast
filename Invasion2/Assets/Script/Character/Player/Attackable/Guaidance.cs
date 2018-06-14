@@ -2,6 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 담당자 : 박상원 & 이재환
+/// ---------------------------------------
+/// 목표물을 추적하는 유도 미사일
+/// 현재는 타겟을 미리 지정해두고
+/// 추적하는 것만 가능하며 화면에 보이는
+/// Enemy 중 가장 가까운 Enemy를 추적하도록
+/// 구현할 예정에 있다.
+/// ---------------------------------------
+/// 테스트 중 정상작동을 확인하기 위해
+/// SerializeField 를 사용하여 인스펙터에
+/// 몇몇 필드가 보이도록 하였다.
+/// ---------------------------------------
+/// </summary>
 public class Guaidance : MonoBehaviour, ISubAttackable
 {
     new Rigidbody rigidbody;
