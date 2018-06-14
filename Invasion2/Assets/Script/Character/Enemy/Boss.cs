@@ -5,6 +5,11 @@ using UnityEngine;
 /// 담당자 : 김정수
 /// 
 /// Pool 완성시 총알 생성 부 변경해야 함.
+/// 패턴1: 플레이어를 향해 총알 발사
+/// 패턴2: 흩뿌리는 총알 발사
+/// 패턴3: 적 생성
+/// 패턴4: Savezone을 남겨두고 레이져 발사
+/// 패턴4는 방향이 반대인 패턴이 하나 더있어야한다.
 /// </summary>
 
 public class Boss : Enemy
@@ -22,13 +27,13 @@ public class Boss : Enemy
     private GameObject subShotPos;
     [SerializeField]
     private GameObject enemyEjectPos;
-    [SerializeField]
     private Transform player;
     [SerializeField]
     
-    public float MoveLength;
+    private float MoveLength;
+    [SerializeField]
     [Range(1, 2)]
-    public float SaveZone;
+    private float SaveZone;
 
     private bool firstCRrunning;
     private bool secondCRrunning;
