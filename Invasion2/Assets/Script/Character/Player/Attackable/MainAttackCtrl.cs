@@ -24,7 +24,7 @@ public class MainAttackCtrl : MonoBehaviour, IMainAttackable
 
     private void Start()
     {
-        maxmagazineCount = deungShootCount();
+     //   maxmagazineCount = deungShootCount();
     }
 
     void sinShipFirstAttack()
