@@ -5,7 +5,8 @@ using UnityEngine;
 public class EnemyShotTwoAtOnce : MonoBehaviour, IEnemyShotPattern
 {
     float AttackWaitTime;
-    
+
+    [SerializeField]
     GameObject bulletPrefab;
 
 
