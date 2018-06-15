@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-
 // 담당자 : 박상원
 
 /// <summary>
@@ -26,7 +25,10 @@ public enum EnemyType
 public class Enemy : Character
 {
     [SerializeField]
-    protected Direction direction;
+    protected new Direction direction;
+
+    [SerializeField]
+    private IEnemyShotPattern enemyPatten;
     public Direction EnemyDirection
     {
         get

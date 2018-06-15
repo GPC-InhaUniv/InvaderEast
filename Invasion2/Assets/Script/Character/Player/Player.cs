@@ -34,6 +34,18 @@ public class Player : Character
     //Guaidance gu;
     [SerializeField]
     private GameObject [] playerModel;
+
+    private void FixedUpdate()
+    {
+        rigidbody.velocity = direction * moveSpeed;
+        rigidbody.position = new Vector3
+        (
+            Mathf.Clamp(rigidbody.position.x, xMin, xMax),
+            Mathf.Clamp(rigidbody.position.y, yMin, yMax),
+            0.0f
+        );
+        rigidbody.rotation = Quaternion.Euler(0.0f, rigidbody.velocity.x * -tilt, 0.0f);
+    }
     private void Start()
     {
         gameMediator = GameObject.FindGameObjectWithTag("GameMediator").GetComponent<GameMediator>();
