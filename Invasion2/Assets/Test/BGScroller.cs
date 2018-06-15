@@ -45,10 +45,10 @@ public class BGScroller : MonoBehaviour
     void Update()
     {
         // swap background srptie and change position.
-        if (bgs[_indexToSwitch].transform.position.y <= -screenHeightHalf)
+        if (bgs[_indexToSwitch].transform.position.z <= -screenHeightHalf)
         {
             // change spriterender's position and change sprite randomly.
-            bgs[_indexToSwitch].transform.position = new Vector3(0f, screenHeightHalf, 0f);
+            bgs[_indexToSwitch].transform.position = new Vector3(0f, -10f,  screenHeightHalf);
             bgs[_indexToSwitch].sprite = bgSprites[Random.Range(0, bgSprites.Length)];
 
             _indexToSwitch = _indexToSwitch == 0 ? 1 : 0;
@@ -65,7 +65,7 @@ public class BGScroller : MonoBehaviour
         {
             clouds[ix].transform.Translate(new Vector3(0f, -_cloudSpeed[ix], 0f) * Time.deltaTime);
 
-            if (clouds[ix].transform.position.y <= -screenHeightHalf)
+            if (clouds[ix].transform.position.z <= -screenHeightHalf)
             {
                 CloudReset(ix);
             }
@@ -80,7 +80,7 @@ public class BGScroller : MonoBehaviour
 
         float randomSize = Random.Range(cloudSizeMin, cloudSizeMax);
         clouds[index].transform.localScale
-            = new Vector3(_cloudOriginalSize[index].x * randomSize, _cloudOriginalSize[index].y * randomSize, 1f);
+            = new Vector3(_cloudOriginalSize[index].x * randomSize,1f, _cloudOriginalSize[index].y * randomSize);
 
         _cloudSpeed[index] = Random.Range(cloudScrollSpeedMin, cloudScrollSpeedMax);
         clouds[index].sprite = cloudSprites[Random.Range(0, cloudSprites.Length)];

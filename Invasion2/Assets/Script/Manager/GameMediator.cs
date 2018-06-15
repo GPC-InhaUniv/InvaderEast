@@ -52,7 +52,7 @@ public class GameMediator : MonoBehaviour
     }
     public int ReadPlayerPower()
     {
-        return player.Damage;
+        return player.Power;
     }
     public int ReadPlayerLife()
     {
@@ -101,7 +101,7 @@ public class GameMediator : MonoBehaviour
     // 캐릭터 파워,최대 체력, 장비, 모델 변경
     public void ChangePlayerPower(int count)
     {
-        player.Damage += count;
+        player.Power += count;
     }
     public void ChangePlayerLife(int count)
     {
