@@ -15,6 +15,7 @@ public class EnemyShotStraight : MonoBehaviour, IEnemyShotPattern
     {
         AttackWaitTime = 1.0f;
         bulletPrefab = GameObject.FindGameObjectWithTag("EnemyBullet");
+        StartEnemyPattern();
     }
 
     IEnumerator ShootStraight()

@@ -15,6 +15,7 @@ public class EnemyShotFanwise : MonoBehaviour, IEnemyShotPattern
     {
         AttackWaitTime = 2.0f;
         bulletPrefab = GameObject.FindGameObjectWithTag("EnemyBullet");
+        StartEnemyPattern();
 	}
 
     IEnumerator ShootFanwise()

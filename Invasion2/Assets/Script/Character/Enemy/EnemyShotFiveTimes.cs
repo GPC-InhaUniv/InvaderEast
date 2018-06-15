@@ -16,6 +16,7 @@ public class EnemyShotFiveTimes : MonoBehaviour, IEnemyShotPattern
         AttackWaitTime = 2.0f;
         coolDown = 2.0f;
         bulletPrefab = GameObject.FindGameObjectWithTag("EnemyBullet");
+        StartEnemyPattern();
 	}
 
     IEnumerator ShootFiveTimes()
