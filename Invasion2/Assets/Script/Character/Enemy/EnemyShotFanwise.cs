@@ -6,6 +6,7 @@ public class EnemyShotFanwise : MonoBehaviour, IEnemyShotPattern
 {
     float AttackWaitTime;
 
+    [SerializeField]
     GameObject bulletPrefab;
 
 

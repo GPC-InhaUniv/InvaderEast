@@ -7,6 +7,7 @@ public class EnemyShotFiveTimes : MonoBehaviour, IEnemyShotPattern
     float AttackWaitTime;
     float coolDown;
 
+    [SerializeField]
     GameObject bulletPrefab;
 
 

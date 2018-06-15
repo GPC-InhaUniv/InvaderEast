@@ -28,7 +28,8 @@ public class Enemy : Character
     protected new Direction direction;
 
     [SerializeField]
-    private IEnemyShotPattern enemyPatten;
+    private EnemyType Type;
+    
     public Direction EnemyDirection
     {
         get
@@ -73,8 +74,35 @@ public class Enemy : Character
         rigidbody = GetComponent<Rigidbody>();
         gameMediator = GameObject.FindGameObjectWithTag("GameMediator").GetComponent<GameMediator>();
         StageManager.Instance.callBackEnemyDead += new CallBackEnemyDead(Died);
+     
+        ChangeType(EnemyType.Gyo);
     }
 
+    
+    private IEnemyShotPattern enemyPattern;
+    //타입 변경시마다 코루틴 종료
+    private void ChangeType(EnemyType type)
+    {
+        
+
+        switch (type)
+        {
+            case EnemyType.Gyo:
+                enemyPattern = new EnemyAttackTest();
+                EnemyAttackTest test = enemyPattern as EnemyAttackTest;
+                StartCoroutine(test.ShootStraight());
+                
+                break;
+            case EnemyType.Tong:
+                break;
+            case EnemyType.Bub:
+                break;
+            case EnemyType.Gyu:
+                break;
+            default:
+                break;
+        }
+    }
     private void FixedUpdate()
     {
         Move(direction);
@@ -98,6 +126,6 @@ public class Enemy : Character
 
     public void Pattern()
     {
-
+       
     }
 }

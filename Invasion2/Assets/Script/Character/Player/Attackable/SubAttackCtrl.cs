@@ -11,9 +11,7 @@ public class SubAttackCtrl : MonoBehaviour, ISubAttackable
     PlayerType playerType;
 
    
-    
-
-    
+        
 
     public void Attack(int power)
     {
