@@ -45,7 +45,7 @@ public class Character : MonoBehaviour
     protected new Rigidbody rigidbody;
     protected GameMediator gameMediator;
     protected bool attacking = false;
-    protected Vector3 direction;
+    protected Vector3 playerDirection;
     [SerializeField]
     protected float xMin, xMax, yMin, yMax;
     [SerializeField]
@@ -78,7 +78,7 @@ public class Character : MonoBehaviour
  
     public void DirectionToMove(Vector3 direction)
     {
-        this.direction = direction;
+        this.playerDirection = direction;
     }
 
     public void Move(Direction direction)
