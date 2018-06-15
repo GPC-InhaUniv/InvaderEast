@@ -38,8 +38,7 @@ public class Character : MonoBehaviour
     [SerializeField]
     protected float moveSpeed;
     [SerializeField]
-    protected int damage;
-    [SerializeField]
+    protected int power;
     protected int currentLife;
     protected int maxLife;
     protected Vector3 target;
@@ -57,10 +56,10 @@ public class Character : MonoBehaviour
         get { return attacking; }
         set { attacking = value; }
     }
-    public int Damage
+    public int Power
     {
-        get { return damage; }
-        set { damage = value; }
+        get { return power; }
+        set { power = value; }
     }
     public int CurrentLife
     {
