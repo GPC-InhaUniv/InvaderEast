@@ -2,15 +2,34 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SubAttackCtrl : MonoBehaviour {
+public class SubAttackCtrl : MonoBehaviour, ISubAttackable
+{
+    [SerializeField]
+    GameObject subSkill;
+    
+    [SerializeField]
+    PlayerType playerType;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+   
+    
+
+    
+
+    public void Attack(int power)
+    {
+        switch (playerType)
+        {
+            case PlayerType.Sin:
+
+                break;
+            case PlayerType.Ho:
+                break;
+
+            case PlayerType.Deung:
+                break;
+
+            default:
+                break;
+        }
+    }
 }

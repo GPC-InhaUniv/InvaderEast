@@ -7,7 +7,7 @@ using UnityEngine;
 // 적 캐릭터 총알 패턴입니다
 // Instantiate 부분을 따로 start 메서드에서 합칠 예정입니다
 
-public class EnemyAttackPattern : MonoBehaviour, IEnemyShotPattern
+public class EnemyAttackPattern : MonoBehaviour
 {
     [SerializeField]
     GameObject bulletPrefab;
