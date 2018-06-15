@@ -2,30 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyShotStraight : MonoBehaviour, IEnemyShotPattern
+
+public class EnemyShotStraight :  IEnemyShotPattern
 {
 
-    float AttackWaitTime;
+    float AttackWaitTime=1.0f;
 
-    GameObject bulletPrefab;
-
-
-
-    void start()
-    {
-        AttackWaitTime = 1.0f;
-        bulletPrefab = GameObject.FindGameObjectWithTag("EnemyBullet");
-        StartEnemyPattern();
-    }
 
     IEnumerator ShootStraight()
     {
-
-        GameObject gameObject;
-
         while(true)
         {
-            gameObject = Instantiate(bulletPrefab, transform.position, transform.rotation);
+          //  gameObject = Instantiate(bulletPrefab, transform.position, transform.rotation);
 
             yield return new WaitForSeconds(AttackWaitTime);
         }
@@ -34,6 +22,6 @@ public class EnemyShotStraight : MonoBehaviour, IEnemyShotPattern
 
     public void StartEnemyPattern()
     {
-        StartCoroutine(ShootStraight());
+       // StartCoroutine(ShootStraight());
     }
 }
