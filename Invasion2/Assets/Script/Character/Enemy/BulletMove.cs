@@ -21,8 +21,8 @@ public class BulletMove : MonoBehaviour {
         //transform.rotation = new Quaternion(0, 180.0f, 0, 0);
     }
 
-    void Update()
-    {
-        //transform.Translate(0, 0, speed * Time.deltaTime);
-    }
+    //void Update()
+    //{
+    //    //transform.Translate(0, 0, speed * Time.deltaTime);
+    //}
 }
