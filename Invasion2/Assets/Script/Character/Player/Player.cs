@@ -30,10 +30,31 @@ public class Player : Character
     float fireRate = 0.2f;
     float timeRate = 0.0f;
     bool fire = false;
-    Straight st;
-    Guaidance gu;
+    int magazine;
+    int maxMagazine;
+    //Straight st;
+    //Guaidance gu;
     [SerializeField]
     private GameObject [] playerModel;
+
+    
+    private void Start()
+    {
+        gameMediator = GameObject.FindGameObjectWithTag("GameMediator").GetComponent<GameMediator>();
+        DontDestroyOnLoad(gameObject);
+        rigidbody = GetComponent<Rigidbody>();
+        //st = FindObjectOfType<Straight>();
+        //gu = FindObjectOfType<Guaidance>();
+     
+    }
+
+    private void Update()
+    {
+        if (attacking)
+        {
+            Attack();
+        }
+    }
 
     private void FixedUpdate()
     {
@@ -45,23 +66,6 @@ public class Player : Character
             0.0f
         );
         rigidbody.rotation = Quaternion.Euler(0.0f, rigidbody.velocity.x * -tilt, 0.0f);
-    }
-    private void Start()
-    {
-        gameMediator = GameObject.FindGameObjectWithTag("GameMediator").GetComponent<GameMediator>();
-        DontDestroyOnLoad(gameObject);
-        rigidbody = GetComponent<Rigidbody>();
-        st = FindObjectOfType<Straight>();
-        gu = FindObjectOfType<Guaidance>();
-     
-    }
-
-    private void Update()
-    {
-        if (attacking)
-        {
-            Attack();
-        }
     }
 
     public override void Attack()
@@ -75,8 +79,8 @@ public class Player : Character
         }
         else if(timeRate>=fireRate)
         {
-            EquipMainAttack(st);
-            mainAttack.Attack(damage);
+            //EquipMainAttack(st);
+            mainAttack.Attack(power);
             timeRate = 0.0f;
             attackCount++;
         }
@@ -84,8 +88,8 @@ public class Player : Character
         
         if(attackCount==3)
         {
-            EquipSubAttack(gu);
-             subAttack.Attack(damage);
+            //EquipSubAttack(gu);
+            //subAttack.Attack(damage);
             attackCount = 0;
         }
     }
@@ -95,7 +99,7 @@ public class Player : Character
         if(other.tag=="Item")
         {
             Item itemType = other.GetComponent<Item>();
-            gameMediator.GetItem(itemType.ItemType);  
+            gameMediator.GetItem(itemType.ItemType);
         }
 
         if(other.tag=="EnemyBullet" || other.tag=="Enemy")
@@ -150,5 +154,10 @@ public class Player : Character
             default:
                 break;
         }
+    }
+
+    public void NumberOfBullet()
+    {
+        maxMagazine = 2;
     }
 }
