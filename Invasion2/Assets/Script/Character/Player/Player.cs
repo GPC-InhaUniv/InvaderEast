@@ -30,14 +30,14 @@ public class Player : Character
     float fireRate = 0.2f;
     float timeRate = 0.0f;
     bool fire = false;
-    //Straight st;
-    //Guaidance gu;
+    Straight st;
+    Guaidance gu;
     [SerializeField]
     private GameObject [] playerModel;
 
     private void FixedUpdate()
     {
-        rigidbody.velocity = direction * moveSpeed;
+        rigidbody.velocity = playerDirection * moveSpeed;
         rigidbody.position = new Vector3
         (
             Mathf.Clamp(rigidbody.position.x, xMin, xMax),
@@ -51,8 +51,8 @@ public class Player : Character
         gameMediator = GameObject.FindGameObjectWithTag("GameMediator").GetComponent<GameMediator>();
         DontDestroyOnLoad(gameObject);
         rigidbody = GetComponent<Rigidbody>();
-        //st = FindObjectOfType<Straight>();
-        //gu = FindObjectOfType<Guaidance>();
+        st = FindObjectOfType<Straight>();
+        gu = FindObjectOfType<Guaidance>();
      
     }
 
@@ -75,7 +75,7 @@ public class Player : Character
         }
         else if(timeRate>=fireRate)
         {
-            //EquipMainAttack(st);
+            EquipMainAttack(st);
             mainAttack.Attack(damage);
             timeRate = 0.0f;
             attackCount++;
@@ -84,8 +84,8 @@ public class Player : Character
         
         if(attackCount==3)
         {
-            //EquipSubAttack(gu);
-            // subAttack.Attack(damage);
+            EquipSubAttack(gu);
+             subAttack.Attack(damage);
             attackCount = 0;
         }
     }
