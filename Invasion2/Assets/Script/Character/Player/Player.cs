@@ -73,7 +73,7 @@ public class Player : Character
         if(attackCount==3)
         {
             //EquipSubAttack(gu);
-            subAttack.Attack(damage);
+            // subAttack.Attack(damage);
             attackCount = 0;
         }
     }

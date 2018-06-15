@@ -6,12 +6,17 @@ public class Straight : MonoBehaviour, IMainAttackable, ISubAttackable
     /// 작성자 : 박상원 , 이재환
     /// 파워마다 공격 프리팹 변경
     /// </summary>
+     
+    
+        //접근 제한자 수정.
     public Transform SpawnPosition;
     public GameObject BulletPrefab1;
     public GameObject BulletPrefab2;
     public GameObject BulletPrefab3;
     public GameObject BulletPrefab4;
 
+
+    //전략 패턴 X 수정 필요
     void Start()
     { 
         SpawnPosition = GameObject.FindWithTag("MainFirePos").GetComponent<Transform>();
@@ -26,6 +31,8 @@ public class Straight : MonoBehaviour, IMainAttackable, ISubAttackable
         Attack(10);
     } 
 
+    //power -> 공격 Type으로 변경
+    //프리팹 -> List
     public void Attack(int power)
     {
         if (power <= 10)
