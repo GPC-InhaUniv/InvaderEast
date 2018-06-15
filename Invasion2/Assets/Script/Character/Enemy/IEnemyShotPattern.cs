@@ -8,10 +8,11 @@ using UnityEngine;
 
 interface IEnemyShotPattern
 {
+    
     IEnumerator ShootStraight();
     IEnumerator ShootFiveTimes();
     IEnumerator ShootInductionBullet();
     IEnumerator ShootTwoinNumber();
     IEnumerator ShootFanwise();
-
+   
 }

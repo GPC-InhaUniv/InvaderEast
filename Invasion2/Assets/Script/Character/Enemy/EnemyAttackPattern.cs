@@ -39,8 +39,12 @@ public class EnemyAttackPattern : MonoBehaviour, IEnemyShotPattern
         StartCoroutine(ShootTwoinNumber());
 
     }
-        
 
+
+    class ShotStraights
+    {
+
+    }
 
 
 

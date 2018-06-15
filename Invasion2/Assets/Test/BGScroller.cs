@@ -48,7 +48,7 @@ public class BGScroller : MonoBehaviour
         if (bgs[_indexToSwitch].transform.position.y <= -screenHeightHalf)
         {
             // change spriterender's position and change sprite randomly.
-            bgs[_indexToSwitch].transform.position = new Vector3(0f, screenHeightHalf, 0f);
+            bgs[_indexToSwitch].transform.position = new Vector3(0f, screenHeightHalf, 10f);
             bgs[_indexToSwitch].sprite = bgSprites[Random.Range(0, bgSprites.Length)];
 
             _indexToSwitch = _indexToSwitch == 0 ? 1 : 0;
