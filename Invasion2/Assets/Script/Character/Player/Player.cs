@@ -89,7 +89,7 @@ public class Player : Character
         if(attackCount==3)
         {
             //EquipSubAttack(gu);
-            //subAttack.Attack(damage);
+            //subAttack.Attack(power);
             attackCount = 0;
         }
     }
@@ -159,5 +159,6 @@ public class Player : Character
     public void NumberOfBullet()
     {
         maxMagazine = 2;
+
     }
 }
