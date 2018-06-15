@@ -32,7 +32,6 @@ public class GameMediator : MonoBehaviour
         sceneController = SceneController.Instance;
         inputManagere = InputManager.Instance;
         stageManager = StageManager.Instance;
-        //세이브로더는 싱글톤만 생성
         saveAndload = SaveAndLoader.Instance;
        // poolManager = PoolManager.Instance;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Character>();

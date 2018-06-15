@@ -45,9 +45,11 @@ public class Character : MonoBehaviour
     protected new Rigidbody rigidbody;
     protected GameMediator gameMediator;
     protected bool attacking = false;
-    private Vector3 direction;
-    public float xMin, xMax, yMin, yMax;
-    public float tilt;
+    protected Vector3 playerDirection;
+    [SerializeField]
+    protected float xMin, xMax, yMin, yMax;
+    [SerializeField]
+    protected float tilt;
 
     public bool Attacking
     {
@@ -73,20 +75,10 @@ public class Character : MonoBehaviour
     {
         gameMediator = GameObject.FindGameObjectWithTag("GameMediator").GetComponent<GameMediator>();
     }
-    private void FixedUpdate()
-    {
-        rigidbody.velocity = direction * moveSpeed;
-        rigidbody.position = new Vector3
-        (
-            Mathf.Clamp(rigidbody.position.x, xMin, xMax),
-            Mathf.Clamp(rigidbody.position.y, yMin, yMax),
-            0.0f
-        );
-        rigidbody.rotation = Quaternion.Euler(0.0f, rigidbody.velocity.x * -tilt,0.0f );
-    }
+ 
     public void DirectionToMove(Vector3 direction)
     {
-        this.direction = direction;
+        this.playerDirection = direction;
     }
 
     public void Move(Direction direction)
