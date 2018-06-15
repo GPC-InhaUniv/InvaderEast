@@ -100,7 +100,7 @@ public class Guaidance : MonoBehaviour, ISubAttackable
             enemyDistance = Vector3.Distance(player.transform.position, enemyObject.transform.position);
             //Debug.Log("거리 : " + enemyDistance);
             //Debug.Log("너는 누구냐 : " + enemyObject);
-            if(enemyDistance<distance)
+            if(enemyDistance<=distance)
             {
                 target = enemyObject;
                 distance = enemyDistance;
