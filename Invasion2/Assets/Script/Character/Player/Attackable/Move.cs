@@ -1,5 +1,9 @@
 ﻿using UnityEngine;
 
+/// <summary>
+///
+/// </summary>
+
 public class Move : MonoBehaviour
 {
     public float speed;

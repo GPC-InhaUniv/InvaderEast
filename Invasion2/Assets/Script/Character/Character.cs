@@ -38,26 +38,28 @@ public class Character : MonoBehaviour
     [SerializeField]
     protected float moveSpeed;
     [SerializeField]
-    protected int damage;
+    protected int power;
     protected int currentLife;
     protected int maxLife;
     protected Vector3 target;
     protected new Rigidbody rigidbody;
     protected GameMediator gameMediator;
     protected bool attacking = false;
-    private Vector3 direction;
-    public float xMin, xMax, yMin, yMax;
-    public float tilt;
+    protected Vector3 playerDirection;
+    [SerializeField]
+    protected float xMin, xMax, yMin, yMax;
+    [SerializeField]
+    protected float tilt;
 
     public bool Attacking
     {
         get { return attacking; }
         set { attacking = value; }
     }
-    public int Damage
+    public int Power
     {
-        get { return damage; }
-        set { damage = value; }
+        get { return power; }
+        set { power = value; }
     }
     public int CurrentLife
     {
@@ -73,20 +75,10 @@ public class Character : MonoBehaviour
     {
         gameMediator = GameObject.FindGameObjectWithTag("GameMediator").GetComponent<GameMediator>();
     }
-    private void FixedUpdate()
-    {
-        rigidbody.velocity = direction * moveSpeed;
-        rigidbody.position = new Vector3
-        (
-            Mathf.Clamp(rigidbody.position.x, xMin, xMax),
-            Mathf.Clamp(rigidbody.position.y, yMin, yMax),
-            0.0f
-        );
-        rigidbody.rotation = Quaternion.Euler(0.0f, rigidbody.velocity.x * -tilt,0.0f );
-    }
+ 
     public void DirectionToMove(Vector3 direction)
     {
-        this.direction = direction;
+        this.playerDirection = direction;
     }
 
     public void Move(Direction direction)

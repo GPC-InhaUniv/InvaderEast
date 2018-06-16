@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-public delegate void ChangeGold();
+
 
 /// <summary>
 /// 담당자 : 김정수
@@ -8,6 +8,9 @@ public delegate void ChangeGold();
 /// 다른 Manager들의 연결을 끊고 오직 중재자와 대화하기때문에 간단하지만 많은 양의 메소드들이 필요하다.
 /// delegate를 통해 UI와 연결되는부분을 처리한다면 양을 줄일 수 있을것 같다.
 /// </summary>
+/// 
+
+public delegate void ChangeGold();
 public class InputManager : Singleton<InputManager>
 {
     private GameMediator gameMediator;

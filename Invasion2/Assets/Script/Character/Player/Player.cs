@@ -30,10 +30,14 @@ public class Player : Character
     float fireRate = 0.2f;
     float timeRate = 0.0f;
     bool fire = false;
+    int magazine;
+    int maxMagazine;
     //Straight st;
     //Guaidance gu;
     [SerializeField]
     private GameObject [] playerModel;
+
+    
     private void Start()
     {
         gameMediator = GameObject.FindGameObjectWithTag("GameMediator").GetComponent<GameMediator>();
@@ -52,6 +56,18 @@ public class Player : Character
         }
     }
 
+    private void FixedUpdate()
+    {
+        rigidbody.velocity = playerDirection * moveSpeed;
+        rigidbody.position = new Vector3
+        (
+            Mathf.Clamp(rigidbody.position.x, xMin, xMax),
+            Mathf.Clamp(rigidbody.position.y, yMin, yMax),
+            0.0f
+        );
+        rigidbody.rotation = Quaternion.Euler(0.0f, rigidbody.velocity.x * -tilt, 0.0f);
+    }
+
     public override void Attack()
     {
         //공격 관련 프리펩은 나중에 하나의
@@ -64,7 +80,7 @@ public class Player : Character
         else if(timeRate>=fireRate)
         {
             //EquipMainAttack(st);
-            mainAttack.Attack(damage);
+            //mainAttack.Attack(power);
             timeRate = 0.0f;
             attackCount++;
         }
@@ -73,7 +89,7 @@ public class Player : Character
         if(attackCount==3)
         {
             //EquipSubAttack(gu);
-            subAttack.Attack(damage);
+            //subAttack.Attack(power);
             attackCount = 0;
         }
     }
@@ -83,7 +99,7 @@ public class Player : Character
         if(other.tag=="Item")
         {
             Item itemType = other.GetComponent<Item>();
-            gameMediator.GetItem(itemType.ItemType);  
+            gameMediator.GetItem(itemType.ItemType);
         }
 
         if(other.tag=="EnemyBullet" || other.tag=="Enemy")
@@ -138,5 +154,11 @@ public class Player : Character
             default:
                 break;
         }
+    }
+
+    public void NumberOfBullet()
+    {
+        maxMagazine = 2;
+
     }
 }
