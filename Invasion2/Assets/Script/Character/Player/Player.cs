@@ -80,7 +80,7 @@ public class Player : Character
         else if(timeRate>=fireRate)
         {
             //EquipMainAttack(st);
-            mainAttack.Attack(power);
+            //mainAttack.Attack(power);
             timeRate = 0.0f;
             attackCount++;
         }
