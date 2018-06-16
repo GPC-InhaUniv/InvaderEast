@@ -13,13 +13,13 @@ public class SaveAndLoader : Singleton<SaveAndLoader>
 {
 
     [Serializable]
-    private class GameData
+   public  class GameData
     {
         public int Gold;
         public int MaxScore;
-        public string filePath;
+        public string filePath= Application.dataPath + "/GameData.bin";
     }
-    GameData gameData;
+    public  GameData gameData;
 
     private void Start()
     {
@@ -48,17 +48,28 @@ public class SaveAndLoader : Singleton<SaveAndLoader>
     private void BinaryDeserialize(string filePath)
     {
         BinaryFormatter formatter = new BinaryFormatter();
-        FileStream stream = new FileStream(filePath, FileMode.Open);
-        gameData = (GameData)formatter.Deserialize(stream);
-        stream.Close();
+        using (FileStream stream = new FileStream(filePath, FileMode.Open))
+        {
+            gameData = (GameData)formatter.Deserialize(stream);
+        }   
+
+        /*
+FileStream stream = new FileStream(filePath, FileMode.Open);
+gameData = (GameData)formatter.Deserialize(stream);
+stream.Close();*/
     }
 
     private void BinarySerialize(GameData Data, string filePath)
     {
         BinaryFormatter formatter = new BinaryFormatter();
-        FileStream stream = new FileStream(filePath, FileMode.Create);
+        using (FileStream stream = new FileStream(filePath, FileMode.Create))
+        {
+            formatter.Serialize(stream, gameData);
+        }
+        /*
+            FileStream stream = new FileStream(filePath, FileMode.Create);
         formatter.Serialize(stream, gameData);
-        stream.Close();
+        stream.Close();*/
     }
 
 
