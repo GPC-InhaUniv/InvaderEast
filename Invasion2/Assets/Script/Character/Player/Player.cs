@@ -31,6 +31,7 @@ public class Player : Character
     float timeRate = 0.0f;
     bool fire = false;
     int magazine;
+    [SerializeField]
     int maxMagazine;
     int magazineAddCount;
     //Straight st;
@@ -101,7 +102,7 @@ public class Player : Character
         {
             Item itemType = other.GetComponent<Item>();
             gameMediator.GetItem(itemType.ItemType);
-            NumberOfBullet(power);
+            NumberOfBullet();
         }
 
         if(other.tag=="EnemyBullet" || other.tag=="Enemy")
@@ -158,11 +159,10 @@ public class Player : Character
         }
     }
 
-    public void NumberOfBullet(int power)
+    public void NumberOfBullet()
     {
-        maxMagazine = 2;
         magazineAddCount++;
-        if(magazineAddCount==10)
+        if(magazineAddCount==10 && power<=30)
         {
             magazineAddCount = 0;
             maxMagazine++;

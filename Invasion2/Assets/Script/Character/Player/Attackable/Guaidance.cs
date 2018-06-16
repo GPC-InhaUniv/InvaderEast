@@ -63,7 +63,7 @@ public class Guaidance : MonoBehaviour, ISubAttackable
         Debug.Log("호밍 미사일 : " + homingMissile);
         Debug.Log("스폰 좌표 : " + rightSpawnPos);
         Debug.Log("스폰 좌표 : " + leftSpawnPos);
-        if (power == 40)
+        if (power == 30)
         {
             Instantiate(homingMissile, rightSpawnPos, Quaternion.identity);
             Instantiate(homingMissile, leftSpawnPos, Quaternion.identity);
