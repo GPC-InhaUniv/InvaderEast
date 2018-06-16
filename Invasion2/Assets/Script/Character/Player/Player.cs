@@ -119,13 +119,13 @@ public class Player : Character
             mainAttack = FindObjectOfType<Straight>();
         }
     }*/
-    public void EquipSubAttack(ISubAttackable SubWeapon)
+    /*public void EquipSubAttack(ISubAttackable SubWeapon)
     {
         if (SubWeapon is Guaidance)
         {
             subAttack = FindObjectOfType<Guaidance>();
         }
-    }
+    }*/
     private void OnTriggerExit(Collider other)
     {
         if(other.tag == "Boundary")

@@ -16,7 +16,7 @@ using UnityEngine;
 /// 몇몇 필드가 보이도록 하였다.
 /// ---------------------------------------
 /// </summary>
-public class Guaidance : MonoBehaviour, ISubAttackable
+public class Guaidance : MonoBehaviour
 {
     GameObject homingMissile;
     [SerializeField]

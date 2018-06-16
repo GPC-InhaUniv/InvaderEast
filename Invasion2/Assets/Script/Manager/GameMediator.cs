@@ -110,12 +110,12 @@ public class GameMediator : MonoBehaviour
     public void PlayerEquipMainWeapon(IMainAttackable MainWeapon)
     {
         Player playerWeapon = player as Player;
-        playerWeapon.EquipMainAttack(MainWeapon);
+        //playerWeapon.EquipMainAttack(MainWeapon);
     }
     public void PlayerEquipSubWeapon(ISubAttackable SubWeapon)
     {
         Player playerWeapon = player as Player;
-        playerWeapon.EquipSubAttack(SubWeapon);
+        //playerWeapon.EquipSubAttack(SubWeapon);
     }
     public void ChangePlayerModel(PlayerType type)
     {
