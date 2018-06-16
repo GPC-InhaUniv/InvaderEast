@@ -29,11 +29,6 @@ public class CharacterSelectSceneCtrl : MonoBehaviour
 
     IMainAttackable straight;
 
-    private void Start()
-    {
-        straight = FindObjectOfType<Straight>();
-    }
-
     private void Update()
     {
         ChangeDescriptionImage();
@@ -54,7 +49,7 @@ public class CharacterSelectSceneCtrl : MonoBehaviour
         if (scrollRect.horizontalNormalizedPosition <= 0.33f)
         {
             DescriptionImage.sprite = DescriptionImage_Red;
-            InputManager.Instance.PlayerEquipMainWeapon(straight);
+            //InputManager.Instance.PlayerEquipMainWeapon(straight);
             InputManager.Instance.PlayerChangeModel(PlayerType.Sin);
         }
         if (0.33f < scrollRect.horizontalNormalizedPosition

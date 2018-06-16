@@ -4,6 +4,6 @@
 
 public interface IMainAttackable
 {
-    void Attack(int power);
+    void Attack(int power, PlayerType playerType);
     
 }

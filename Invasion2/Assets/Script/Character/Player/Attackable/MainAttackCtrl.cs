@@ -10,37 +10,50 @@ using UnityEngine;
 public class MainAttackCtrl : MonoBehaviour, IMainAttackable
 {
     [SerializeField]
-    GameObject bullet;
-    [SerializeField]
-    PlayerType playerType;
+    GameObject bulletPrefab;
     [SerializeField]
     float xInterval = 0.22f;
     [SerializeField]
     float yInterval = -0.5f;
 
-    int magazineCount;
-    int maxmagazineCount;
-
     const float sectorDegree = 3f;
-    GameObject gameObject;
+
+    //test field
+    [SerializeField]
+    int magazineCount;
+    [SerializeField]
+    int maxmagazineCount;
+    [SerializeField]
+    int power;
+    [SerializeField]
+    GameObject SpreadPrefab;
 
     private void Start()
     {
+        //test code
+        maxmagazineCount = (int)(2 + Math.Truncate(power / 10f));
+        magazineCount = maxmagazineCount;
+    }
 
+    void deungShipAttack(int power)
+    {
+        GameObject bullet;
+        bullet = Instantiate(SpreadPrefab, transform.position, Quaternion.identity);
+        
     }
 
     void sinShipFirstAttack()
     {
         GameObject gameObject;
-        gameObject = Instantiate(bullet, transform.position, Quaternion.identity);
+        gameObject = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
     }
 
     void sinShipSecondAttack(float xPosition, float yPosition)
     {
         Vector3 positionR = new Vector3(xPosition, yPosition);
         Vector3 positionL = new Vector3(-xPosition, yPosition);
-        Instantiate(bullet, positionL, Quaternion.Euler(transform.rotation.x, transform.rotation.y, transform.rotation.z + 90f));
-        Instantiate(bullet, positionR, Quaternion.Euler(transform.rotation.x, transform.rotation.y, transform.rotation.z + 90f));
+        Instantiate(bulletPrefab, positionL, Quaternion.Euler(transform.rotation.x, transform.rotation.y, transform.rotation.z + 90f));
+        Instantiate(bulletPrefab, positionR, Quaternion.Euler(transform.rotation.x, transform.rotation.y, transform.rotation.z + 90f));
     }
 
     void sinShipThirdAttack()
@@ -67,17 +80,12 @@ public class MainAttackCtrl : MonoBehaviour, IMainAttackable
 
         for (int i = 0; i < count; i++)
         {
-            Instantiate(bullet, transform.position, Quaternion.Euler(transform.rotation.x, transform.rotation.y + angle, transform.rotation.z + 90f));
+            Instantiate(bulletPrefab, transform.position, Quaternion.Euler(transform.rotation.x, transform.rotation.y + angle, transform.rotation.z + 90f));
             angle -= sectorDegree;
         }
     }
     
-    void deungShipAttack(int power)
-    {
-
-    }
-
-    public void Attack(int power)
+    public void Attack(int power, PlayerType playerType)
     {
         switch (playerType)
         {

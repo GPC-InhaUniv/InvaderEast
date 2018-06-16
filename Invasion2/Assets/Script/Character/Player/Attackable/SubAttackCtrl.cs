@@ -2,18 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SubAttackCtrl : MonoBehaviour, ISubAttackable
+public class SubAttackCtrl : MonoBehaviour, IMainAttackable
 {
     [SerializeField]
     GameObject subSkill;
+  
     
-    [SerializeField]
-    PlayerType playerType;
 
-   
-        
 
-    public void Attack(int power)
+    public void Attack(int power, PlayerType playerType)
     {
         switch (playerType)
         {
