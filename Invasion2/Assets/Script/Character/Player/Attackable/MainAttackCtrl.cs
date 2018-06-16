@@ -3,10 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MainAttackCtrl : MonoBehaviour, IMainAttackable
-{/// <summary>
-/// move 스크립트 forward
+/// <summary>
+/// 
+/// 플레이어의 메인공격 함수
 /// </summary>
+public class MainAttackCtrl : MonoBehaviour, IMainAttackable
+{
     [SerializeField]
     GameObject bullet;
     [SerializeField]
@@ -24,12 +26,13 @@ public class MainAttackCtrl : MonoBehaviour, IMainAttackable
 
     private void Start()
     {
-        //maxmagazineCount = deungShootCount();
+
     }
 
     void sinShipFirstAttack()
     {
-        Instantiate(bullet, transform.position, Quaternion.Euler(transform.rotation.x, transform.rotation.y, transform.rotation.z + 90f));
+        GameObject gameObject;
+        gameObject = Instantiate(bullet, transform.position, Quaternion.identity);
     }
 
     void sinShipSecondAttack(float xPosition, float yPosition)
@@ -64,15 +67,11 @@ public class MainAttackCtrl : MonoBehaviour, IMainAttackable
 
         for (int i = 0; i < count; i++)
         {
+            Instantiate(bullet, transform.position, Quaternion.Euler(transform.rotation.x, transform.rotation.y + angle, transform.rotation.z + 90f));
             angle -= sectorDegree;
         }
     }
-
-    int deungShootCount(int power)
-    {
-        return (int)( Math.Truncate(power / 10f)+20);
-    }
-
+    
     void deungShipAttack(int power)
     {
 
