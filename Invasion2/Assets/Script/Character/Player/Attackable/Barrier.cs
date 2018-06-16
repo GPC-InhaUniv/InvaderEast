@@ -18,7 +18,7 @@ public class Barrier : MonoBehaviour, ISubAttackable
 
     }
 
-    public void Attack(int power)
+    public void Attack(int power, PlayerType playerType)
     {
 
     }
