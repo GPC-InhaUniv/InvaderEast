@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class EnemyShotInductionBullet : MonoBehaviour, IEnemyShotPattern
 {
+
     float AttackWaitTime;
     GameObject playerObject;
+    GameObject enemyObject;
 
+    [SerializeField]
     GameObject bulletPrefab;
 
 
@@ -15,7 +18,7 @@ public class EnemyShotInductionBullet : MonoBehaviour, IEnemyShotPattern
     {
         AttackWaitTime = 2.0f;
         playerObject = GameObject.FindGameObjectWithTag("Player");
-        bulletPrefab = GameObject.FindGameObjectWithTag("EnemyBullet");
+        enemyObject = GameObject.FindGameObjectWithTag("Enemy");
         StartEnemyPattern();
     }
 

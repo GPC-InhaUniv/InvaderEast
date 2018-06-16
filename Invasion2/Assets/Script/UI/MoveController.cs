@@ -40,9 +40,8 @@ public class MoveController : MonoBehaviour
     {
         pannelImage.enabled = true;
         Stick.gameObject.SetActive(true);
-        touchPos = Input.mousePosition;
-        centerPos = touchPos;
-        StickPannel.position = centerPos;
+        touchPos = new Vector3(Input.mousePosition.x,Input.mousePosition.y,0);
+        StickPannel.position = touchPos;
 
 
         InputManager.Instance.PlayerMove(Vector3.zero);
@@ -52,20 +51,22 @@ public class MoveController : MonoBehaviour
 
     public void StickMove()
     {
-        Vector3 dragPos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0.0f);
-        directionPos = (dragPos - centerPos).normalized;
+        Vector3 dragPos = new Vector3(Input.mousePosition.x, Input.mousePosition.y,0 );
+        directionPos = (dragPos - touchPos).normalized;
+        Debug.Log("방향 : " + directionPos);
+        Debug.Log("센터 좌표 : " + touchPos);
         
-            InputManager.Instance.PlayerMove(directionPos);
+            InputManager.Instance.PlayerMove(new Vector3(directionPos.x,0,directionPos.y));
         
 
-        float stickDistance = Vector3.Distance(dragPos, centerPos);
+        float stickDistance = Vector3.Distance(dragPos, touchPos);
         if (stickDistance > StickRadius)
         {
-            Stick.position = centerPos + directionPos * StickRadius;
+            Stick.position = touchPos + directionPos * StickRadius;
         }
         else
         {
-            Stick.position = centerPos + directionPos * stickDistance;
+            Stick.position = touchPos + directionPos * stickDistance;
         }
     }
 
@@ -76,7 +77,7 @@ public class MoveController : MonoBehaviour
         InputManager.Instance.PlayerMove(directionPos);
         InputManager.Instance.PlayerAttack(false);
         
-        Stick.position = centerPos;
+        Stick.position = touchPos;
         pannelImage.enabled = false;
         Stick.gameObject.SetActive(false);
     }
