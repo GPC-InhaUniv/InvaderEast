@@ -47,7 +47,7 @@ public class Character : MonoBehaviour
     protected bool attacking = false;
     protected Vector3 playerDirection;
     [SerializeField]
-    protected float xMin, xMax, yMin, yMax;
+    protected float xMin, xMax, zMin, zMax;
     [SerializeField]
     protected float tilt;
 
@@ -87,35 +87,35 @@ public class Character : MonoBehaviour
         {
 
             case Direction.UP:
-                target = new Vector3(0.0f, 1.0f, 0.0f);
+                target = Vector3.forward;
                 rigidbody.velocity = target * moveSpeed;
                 break;
             case Direction.DOWN:
-                target = new Vector3(0.0f, -1.0f, 0.0f);
+                target = Vector3.back;
                 rigidbody.velocity = target * moveSpeed;
                 break;
             case Direction.LEFT:
-                target = new Vector3(-1.0f, 0.0f, 0.0f);
+                target = Vector3.left;
                 rigidbody.velocity = target * moveSpeed;
                 break;
             case Direction.RIGHT:
-                target = new Vector3(1.0f, 0.0f, 0.0f);
+                target = Vector3.right;
                 rigidbody.velocity = target * moveSpeed;
                 break;
             case Direction.LEFTUP:
-                target = new Vector3(-1.0f, 1.0f, 0.0f);
+                target = new Vector3(-1.0f, 0.0f, 1.0f);
                 rigidbody.velocity = target * moveSpeed;
                 break;
             case Direction.RIGHTUP:
-                target = new Vector3(1.0f, 1.0f, 0.0f);
+                target = new Vector3(1.0f, 0.0f, 1.0f);
                 rigidbody.velocity = target * moveSpeed;
                 break;
             case Direction.LEFTDOWN:
-                target = new Vector3(-1.0f, -1.0f, 0.0f);
+                target = new Vector3(-1.0f, 0.0f, -1.0f);
                 rigidbody.velocity = target * moveSpeed;
                 break;
             case Direction.RIGHTDOWN:
-                target = new Vector3(1.0f, -1.0f, 0.0f);
+                target = new Vector3(1.0f, 0.0f, -1.0f);
                 rigidbody.velocity = target * moveSpeed;
                 break;
             case Direction.STOP:
