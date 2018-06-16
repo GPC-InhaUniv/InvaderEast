@@ -111,14 +111,14 @@ public class Player : Character
         }
     }
 
-    public void EquipMainAttack(IMainAttackable MainWeapon)
+    /*public void EquipMainAttack(IMainAttackable MainWeapon)
     {
 
         if (MainWeapon is Straight)
         {
             mainAttack = FindObjectOfType<Straight>();
         }
-    }
+    }*/
     public void EquipSubAttack(ISubAttackable SubWeapon)
     {
         if (SubWeapon is Guaidance)
