@@ -32,6 +32,7 @@ public class Player : Character
     bool fire = false;
     int magazine;
     int maxMagazine;
+    int magazineAddCount;
     //Straight st;
     //Guaidance gu;
     [SerializeField]
@@ -62,10 +63,10 @@ public class Player : Character
         rigidbody.position = new Vector3
         (
             Mathf.Clamp(rigidbody.position.x, xMin, xMax),
-            Mathf.Clamp(rigidbody.position.y, yMin, yMax),
-            0.0f
+            0.0f,
+            Mathf.Clamp(rigidbody.position.z, zMin, zMax)
         );
-        rigidbody.rotation = Quaternion.Euler(0.0f, rigidbody.velocity.x * -tilt, 0.0f);
+        rigidbody.rotation = Quaternion.Euler(0.0f,0.0f , rigidbody.velocity.x * -tilt);
     }
 
     public override void Attack()
@@ -100,6 +101,7 @@ public class Player : Character
         {
             Item itemType = other.GetComponent<Item>();
             gameMediator.GetItem(itemType.ItemType);
+            NumberOfBullet(power);
         }
 
         if(other.tag=="EnemyBullet" || other.tag=="Enemy")
@@ -156,9 +158,14 @@ public class Player : Character
         }
     }
 
-    public void NumberOfBullet()
+    public void NumberOfBullet(int power)
     {
         maxMagazine = 2;
-
+        magazineAddCount++;
+        if(magazineAddCount==10)
+        {
+            magazineAddCount = 0;
+            maxMagazine++;
+        }
     }
 }
