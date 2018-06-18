@@ -67,7 +67,7 @@ public class Player : Character
             0.0f,
             Mathf.Clamp(rigidbody.position.z, zMin, zMax)
         );
-        rigidbody.rotation = Quaternion.Euler(0.0f,0.0f , rigidbody.velocity.x * -tilt);
+        rigidbody.rotation = Quaternion.Euler(0, 0, rigidbody.velocity.x * -tilt);
     }
 
     public override void Attack()

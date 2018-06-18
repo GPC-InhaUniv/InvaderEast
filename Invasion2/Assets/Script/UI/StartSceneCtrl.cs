@@ -29,7 +29,17 @@ public class StartSceneCtrl : MonoBehaviour
 
     public void OnClickGameStart()
     {
-        SaveAndLoader.Instance.LoadData();
+        try
+        {
+            SaveAndLoader.Instance.LoadData();
+        }
+        catch
+        {
+            Debug.Log("저장되어있는 데이터가 없으므로 새 저장데이터를생성합니다.");
+            SaveAndLoader.Instance.SaveData();
+            SaveAndLoader.Instance.LoadData();
+        }
+
         //메디에이터에 다음 씬 넘기기 요청
         InputManager.Instance.ChangeScene(SceneState.CharacterSelect);
     }

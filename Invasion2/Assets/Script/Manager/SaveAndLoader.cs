@@ -24,7 +24,7 @@ public class SaveAndLoader : Singleton<SaveAndLoader>
     private void Start()
     {
         gameData = new GameData();
-        gameData.filePath = Application.dataPath + "/GameData.bin";
+        gameData.filePath = Application.persistentDataPath + "/GameData.bin";
     }
 
     public void SaveData()
@@ -37,6 +37,7 @@ public class SaveAndLoader : Singleton<SaveAndLoader>
 
     public void LoadData()
     {
+        Debug.Log(gameData.filePath);
         BinaryDeserialize(gameData.filePath);
         Debug.Log("불러오기");
         Debug.Log("골드 : " + gameData.Gold);

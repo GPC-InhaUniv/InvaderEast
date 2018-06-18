@@ -40,6 +40,7 @@ public class Boss : Enemy
     private bool thirdCRrunning;
     private bool fourthCRrunning;
     private bool fourthPatternFlag;
+    [SerializeField]
     float lifeRatio;
     private int shotCount;
     private int laserInterval;
@@ -54,7 +55,7 @@ public class Boss : Enemy
         giveScore = 1000;
         giveMaxGold = 100;
         StartCoroutine(BossPattern());
-
+       
         shotCount = 0;
         laserInterval = 0;
         laserShotPos.SetActive(false);
@@ -63,7 +64,7 @@ public class Boss : Enemy
 
     IEnumerator BossPattern()
     {
-        lifeRatio = (currentLife / maxLife) * 100;
+        lifeRatio = ((float)currentLife / (float)maxLife) * 100;
         if (!firstCRrunning && !fourthCRrunning)
             StartCoroutine(FirstPattern());
         if (lifeRatio < 80 && !secondCRrunning && !fourthCRrunning)
@@ -110,14 +111,14 @@ public class Boss : Enemy
     }
     IEnumerator SecondPattern()
     {
-        if (!firstCRrunning)
-            StartCoroutine(FirstPattern());
+       // if (!firstCRrunning)
+         //   StartCoroutine(FirstPattern());
         secondCRrunning = true;
         for (int i = 0; i < 12; i++)
         {
             if (i % 4 == 0)
                 continue;
-            Quaternion AngleOfFire = Quaternion.Euler(i * 15, -90, -90);
+            Quaternion AngleOfFire = Quaternion.Euler(0, (-i * 15)-90, 0);
             Instantiate(bullet, subShotPos.transform.position, subShotPos.transform.rotation = AngleOfFire);
 
             yield return new WaitForSeconds(0.1f);
@@ -127,7 +128,7 @@ public class Boss : Enemy
         yield return new WaitForSeconds(2.0f);
         laserInterval++;
         secondCRrunning = false;
-
+       
     }
 
     IEnumerator ThirdPattern()

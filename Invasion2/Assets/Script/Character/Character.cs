@@ -39,6 +39,7 @@ public class Character : MonoBehaviour
     protected float moveSpeed;
     [SerializeField]
     protected int power;
+    [SerializeField]
     protected int currentLife;
     protected int maxLife;
     protected Vector3 target;
