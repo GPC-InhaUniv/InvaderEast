@@ -41,24 +41,33 @@ public class PoolManager : Singleton<PoolManager>
     const int EnemyQueueSize = 30;
     const int EnemyBulletQueueSize = 100;
     const int PlayerBulletQueueSize = 100;
-    
-    void Start ()
+
+    void Start()
     {
         gameMediator = GameObject.FindGameObjectWithTag("GameMediator").GetComponent<GameMediator>();
-
+        EnemyBulletPrefab = Resources.Load("BossBullet") as GameObject;
         //---큐 생성
-        CreateQueue(EnemyQueue, EnemyQueueSize, EnemyPrefab);
-        CreateQueue(EnemyBulletQueue, EnemyBulletQueueSize, EnemyBulletPrefab);
-        CreateQueue(PlayerBulletQueue, PlayerBulletQueueSize, PlayerBulletPrefab);
-        CreateQueue(PlayerSpreadBulletQueue, PlayerBulletQueueSize/10, PlayerSpreadBulletPrefab);
-        CreateQueue(HomingMissileQueue, PlayerBulletQueueSize/10, HomingMissilePrefab);
-        CreateQueue(StraightMissileQueue, PlayerBulletQueueSize/10, StraightMissilePrefab);
+        //   CreateQueue(EnemyQueue, EnemyQueueSize, EnemyPrefab);
+        EnemyBulletQueue = CreateQueue(EnemyBulletQueue, EnemyBulletQueueSize, EnemyBulletPrefab);
+        PlayerBulletQueue = CreateQueue(PlayerBulletQueue, PlayerBulletQueueSize, PlayerBulletPrefab);
+        PlayerSpreadBulletQueue = CreateQueue(PlayerSpreadBulletQueue, PlayerBulletQueueSize / 10, PlayerSpreadBulletPrefab);
+        HomingMissileQueue = CreateQueue(HomingMissileQueue, PlayerBulletQueueSize / 10, HomingMissilePrefab);
+        StraightMissileQueue = CreateQueue(StraightMissileQueue, PlayerBulletQueueSize / 10, StraightMissilePrefab);
     }
 
-    void CreateQueue(Queue<GameObject> queue, int size, GameObject prefab)
+    public void SetQueue()
+    {
+        EnemyBulletQueue = CreateQueue(EnemyBulletQueue, EnemyBulletQueueSize, EnemyBulletPrefab);
+        PlayerBulletQueue = CreateQueue(PlayerBulletQueue, PlayerBulletQueueSize, PlayerBulletPrefab);
+        PlayerSpreadBulletQueue = CreateQueue(PlayerSpreadBulletQueue, PlayerBulletQueueSize / 10, PlayerSpreadBulletPrefab);
+        HomingMissileQueue = CreateQueue(HomingMissileQueue, PlayerBulletQueueSize / 10, HomingMissilePrefab);
+        StraightMissileQueue = CreateQueue(StraightMissileQueue, PlayerBulletQueueSize / 10, StraightMissilePrefab);
+    }
+
+    Queue<GameObject> CreateQueue(Queue<GameObject> queue, int size, GameObject prefab)
     {
         queue = new Queue<GameObject>();
-        if(prefab != null)
+        if (prefab != null)
         {
             for (int i = 0; i < size; i++)
             {
@@ -69,6 +78,8 @@ public class PoolManager : Singleton<PoolManager>
             }
         }
         else Debug.Log("Prefab이 존재하지 않음! : prefab is " + prefab.ToString());
+
+        return queue;
     }
 
     public GameObject GetEnemyObject()
@@ -91,6 +102,7 @@ public class PoolManager : Singleton<PoolManager>
 
     public GameObject GetEnemyBulletObject()
     {
+
         GameObject gameObject;
         gameObject = EnemyBulletQueue.Dequeue();
         gameObject.SetActive(true);
@@ -162,7 +174,7 @@ public class PoolManager : Singleton<PoolManager>
                 bullet = StraightMissileQueue.Dequeue();
                 bullet.SetActive(true);
                 break;
-                
+
             default:
                 bullet = null;
                 Debug.Log("Return null!");
@@ -196,4 +208,5 @@ public class PoolManager : Singleton<PoolManager>
                 break;
         }
     }
+
 }

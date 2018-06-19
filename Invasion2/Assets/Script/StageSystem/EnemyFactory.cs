@@ -7,11 +7,19 @@ using UnityEngine;
 /// 에너미를 생성하는 팩토리
 /// PoolManager와 연동해야 함
 /// </summary>
-public class EnemyFactory : MonoBehaviour
+public class EnemyFactory
 {
-    public Enemy CreateEnemy(Enemy EnemyPrefab, Transform transform)
+    GameMediator gameMediator;
+
+    public EnemyFactory(GameMediator gameMediator)
     {
-        //PoolManager 완성 이후 스크립트 변경 요망
-        return Instantiate(EnemyPrefab, transform);
+        this.gameMediator = gameMediator;
+    }
+
+    public GameObject CreateEnemy(EnemyType type, Vector3 position)
+    {
+        GameObject enemy = gameMediator.GetEnemyObject();
+        enemy.transform.Translate(position);
+        return enemy;
     }
 }

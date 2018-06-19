@@ -25,13 +25,13 @@ public delegate void CallBackEnemyDead();
 public class StageManager : Singleton<StageManager>
 {
     [SerializeField]
-    List<Enemy> EnemyList;
+    List<GameObject> EnemyList;
     [SerializeField]
     GameObject[] TransformList;
     [SerializeField]
     EnemyFactory Factory;
     [SerializeField]
-    Enemy enemyPrefab;
+    GameObject enemyPrefab;
 
     CoroutineCtrl stageCoroutineCtrl;
     GameMediator gameMediator;
@@ -55,20 +55,15 @@ public class StageManager : Singleton<StageManager>
         
         CurrentStage = 0;
         stageCoroutineCtrl = new CoroutineCtrl(this, enemyPrefab);
+        Factory = new EnemyFactory(gameMediator);
     }
 
-    //PoolManager 작업 이후 삭제
-    public void SetFactory()
-    {
-        Factory = GameObject.FindGameObjectWithTag("GameController").GetComponent<EnemyFactory>();
-    }
-
-    public void Spawn(Enemy enemy)
+    public void Spawn(GameObject enemy, EnemyType type)
     {
         if(enemy.tag == "Enemy")
         {
             transformNumber = Random.Range(0,TransformList.Length-1);
-            Enemy SpwanEnemy = Factory.CreateEnemy(enemy, TransformList[transformNumber].transform);
+            GameObject SpwanEnemy = Factory.CreateEnemy(type, TransformList[transformNumber].transform.position);
             EnemyList.Add(SpwanEnemy);
         }
         else Debug.Log("Spawn() 메서드의 tag 불일치!");
@@ -76,20 +71,18 @@ public class StageManager : Singleton<StageManager>
 
     public void RemoveAllEnemy()
     {
-        foreach (Enemy item in EnemyList)
+        foreach (GameObject item in EnemyList)
         {
-            //PoolManager 작성 이후 변경 요망
-            Destroy(item.gameObject);
+            gameMediator.PutEnemyObject(item.gameObject);
         }
         EnemyList.Clear();
         Debug.Log("RemoveAllEnemy 완료");
     }
 
-    public void RemoveEnemy(Enemy enemy)
+    public void RemoveEnemy(GameObject enemy)
     { 
         EnemyList.Remove(enemy);
-        //PoolManager 작성 이후 변경 요망
-        Destroy(enemy.gameObject);
+        gameMediator.PutEnemyObject(enemy);
     }
 
     public void NextStage()
