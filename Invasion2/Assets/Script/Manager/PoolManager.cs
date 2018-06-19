@@ -58,6 +58,10 @@ public class PoolManager : Singleton<PoolManager>
     public void SetQueue()
     {
         EnemyBulletQueue = CreateQueue(EnemyBulletQueue, EnemyBulletQueueSize, EnemyBulletPrefab);
+        PlayerBulletQueue = CreateQueue(PlayerBulletQueue, PlayerBulletQueueSize, PlayerBulletPrefab);
+        PlayerSpreadBulletQueue = CreateQueue(PlayerSpreadBulletQueue, PlayerBulletQueueSize / 10, PlayerSpreadBulletPrefab);
+        HomingMissileQueue = CreateQueue(HomingMissileQueue, PlayerBulletQueueSize / 10, HomingMissilePrefab);
+        StraightMissileQueue = CreateQueue(StraightMissileQueue, PlayerBulletQueueSize / 10, StraightMissilePrefab);
     }
 
     Queue<GameObject> CreateQueue(Queue<GameObject> queue, int size, GameObject prefab)
