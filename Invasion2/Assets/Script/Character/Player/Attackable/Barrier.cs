@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Barrier : MonoBehaviour, ISubAttackable
+public class Barrier : MonoBehaviour
 {
     /// <summary>
     /// 작성자 : 이재환

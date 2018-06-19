@@ -107,17 +107,8 @@ public class GameMediator : MonoBehaviour
     {
         player.MaxLife += count;
     }
-    public void PlayerEquipMainWeapon(IMainAttackable MainWeapon)
-    {
-        Player playerWeapon = player as Player;
-        //playerWeapon.EquipMainAttack(MainWeapon);
-    }
-    public void PlayerEquipSubWeapon(ISubAttackable SubWeapon)
-    {
-        Player playerWeapon = player as Player;
-        //playerWeapon.EquipSubAttack(SubWeapon);
-    }
-    public void ChangePlayerModel(PlayerType type)
+  
+    public void ChangePlayerType(PlayerType type)
     {
         Player playerModel = player as Player;
         playerModel.ChangePlayer(type);

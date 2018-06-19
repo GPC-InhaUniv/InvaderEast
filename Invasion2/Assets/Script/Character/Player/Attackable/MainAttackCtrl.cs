@@ -7,7 +7,7 @@ using UnityEngine;
 /// 
 /// 플레이어의 메인공격 함수
 /// </summary>
-public class MainAttackCtrl : MonoBehaviour, IMainAttackable
+public class MainAttackCtrl : MonoBehaviour
 {
     [SerializeField]
     GameObject bulletPrefab;
