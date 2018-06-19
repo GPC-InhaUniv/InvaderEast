@@ -25,8 +25,7 @@ public class Boss : Enemy
     private GameObject laserShotPos;
     [SerializeField]
     private GameObject subShotPos;
-    [SerializeField]
-    private GameObject enemyEjectPos;
+   
     private Transform player;
     [SerializeField]
     
@@ -95,9 +94,7 @@ public class Boss : Enemy
         if (shotCount < 5)
         {
             mainShotPos.transform.LookAt(player);
-            //  Instantiate(bullet, mainShotPos.transform.position, mainShotPos.transform.rotation);
             GameObject bullet = PoolManager.Instance.GetEnemyBulletObject();
-
             bullet.transform.position = mainShotPos.transform.position;
             bullet.transform.rotation = mainShotPos.transform.rotation;
             yield return new WaitForSeconds(0.2f);
@@ -116,8 +113,8 @@ public class Boss : Enemy
     }
     IEnumerator SecondPattern()
     {
-       // if (!firstCRrunning)
-         //   StartCoroutine(FirstPattern());
+        if (!firstCRrunning)
+            StartCoroutine(FirstPattern());
         secondCRrunning = true;
         for (int i = 0; i < 12; i++)
         {
@@ -139,9 +136,9 @@ public class Boss : Enemy
     IEnumerator ThirdPattern()
     {
         thirdCRrunning = true;
-        Vector3 setPos = new Vector3(1f, 0, 0);
-        Instantiate(enemy, enemyEjectPos.transform.position + setPos, enemyEjectPos.transform.rotation);
-        Instantiate(enemy, enemyEjectPos.transform.position - setPos, enemyEjectPos.transform.rotation);
+        StageManager.Instance.Spawn(enemy, EnemyType.Gyo);
+        StageManager.Instance.Spawn(enemy, EnemyType.Gyo);
+        StageManager.Instance.Spawn(enemy, EnemyType.Gyo);
         yield return new WaitForSeconds(2.0f);
         thirdCRrunning = false;
     }

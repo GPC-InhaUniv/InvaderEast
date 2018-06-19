@@ -33,7 +33,7 @@ public class GameMediator : MonoBehaviour
         inputManagere = InputManager.Instance;
         stageManager = StageManager.Instance;
         saveAndload = SaveAndLoader.Instance;
-        poolManager = PoolManager.Instance;
+        //poolManager = PoolManager.Instance;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Character>();
     }
    
@@ -112,6 +112,7 @@ public class GameMediator : MonoBehaviour
     {
         Player playerModel = player as Player;
         playerModel.ChangePlayer(type);
+        
     }
 
     //InputManager에서 플레이어 이동 방향 받아오기

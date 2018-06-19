@@ -9,7 +9,7 @@ public class EnemyShotFanwise : MonoBehaviour, IEnemyShotPattern
     [SerializeField]
     GameObject bulletPrefab;
 
-
+    //4번
 
 	// Use this for initialization
 	void Start ()

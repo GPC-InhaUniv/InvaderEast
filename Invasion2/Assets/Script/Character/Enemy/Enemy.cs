@@ -25,10 +25,10 @@ public enum EnemyType
 public class Enemy : Character
 {
     [SerializeField]
-    protected new Direction direction;
-
+    protected Direction direction;
     [SerializeField]
-    private EnemyType Type;
+    private GameObject shotPos;
+
     
     public Direction EnemyDirection
     {
@@ -75,29 +75,32 @@ public class Enemy : Character
         gameMediator = GameObject.FindGameObjectWithTag("GameMediator").GetComponent<GameMediator>();
         StageManager.Instance.callBackEnemyDead += new CallBackEnemyDead(Died);
      
-        ChangeType(EnemyType.Gyo);
+        ChangeType(enemyType);
     }
 
     
-    private IEnemyShotPattern enemyPattern;
+    private EnemyAttackPattern enemyPattern;
     //타입 변경시마다 코루틴 종료
     private void ChangeType(EnemyType type)
     {
-        
-
+    
         switch (type)
         {
             case EnemyType.Gyo:
-                enemyPattern = new EnemyAttackTest();
-                EnemyAttackTest test = enemyPattern as EnemyAttackTest;
-                StartCoroutine(test.ShootStraight());
-                
+                enemyPattern = new EnemyAttackPattern();
+                StartCoroutine(enemyPattern.EnemyPattern1(shotPos.transform));
                 break;
             case EnemyType.Tong:
+                enemyPattern = new EnemyAttackPattern();
+                StartCoroutine(enemyPattern.EnemyPattern2(shotPos.transform));
                 break;
             case EnemyType.Bub:
+                enemyPattern = new EnemyAttackPattern();
+                StartCoroutine(enemyPattern.EnemyPattern3(shotPos.transform));
                 break;
             case EnemyType.Gyu:
+                enemyPattern = new EnemyAttackPattern();
+                StartCoroutine(enemyPattern.EnemyPattern4(shotPos.transform));
                 break;
             default:
                 break;

@@ -10,7 +10,7 @@ public class EnemyShotFiveTimes : MonoBehaviour, IEnemyShotPattern
     [SerializeField]
     GameObject bulletPrefab;
 
-
+    //2번패턴
 
 	void Start ()
     {

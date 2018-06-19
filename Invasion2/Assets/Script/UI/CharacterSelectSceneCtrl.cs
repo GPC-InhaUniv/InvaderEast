@@ -49,19 +49,19 @@ public class CharacterSelectSceneCtrl : MonoBehaviour
         if (scrollRect.horizontalNormalizedPosition <= 0.33f)
         {
             DescriptionImage.sprite = DescriptionImage_Red;
-            InputManager.Instance.PlayerChangeModel(PlayerType.Sin);
+            InputManager.Instance.PlayerChange(PlayerType.Sin);
         }
         if (0.33f < scrollRect.horizontalNormalizedPosition
             && scrollRect.horizontalNormalizedPosition <= 0.67f)
         {
             DescriptionImage.sprite = DescriptionImage_Orange;
-            InputManager.Instance.PlayerChangeModel(PlayerType.Ho);
+            InputManager.Instance.PlayerChange(PlayerType.Ho);
         }
         if (0.67f < scrollRect.horizontalNormalizedPosition
             && scrollRect.horizontalNormalizedPosition <= 1f)
         {
             DescriptionImage.sprite = DescriptionImage_Green;
-            InputManager.Instance.PlayerChangeModel(PlayerType.Deung);
+            InputManager.Instance.PlayerChange(PlayerType.Deung);
         }
     }
 

@@ -29,7 +29,7 @@ public class InputManager : Singleton<InputManager>
         gameMediator.PlayerAttack(CheckedAttack);
     }
    
-    public void PlayerChangeModel(PlayerType type)
+    public void PlayerChange(PlayerType type)
     {
         gameMediator.ChangePlayerType(type);
     }

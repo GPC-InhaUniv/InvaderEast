@@ -12,7 +12,7 @@ public class EnemyShotInductionBullet : MonoBehaviour, IEnemyShotPattern
     [SerializeField]
     GameObject bulletPrefab;
 
-
+    //3번
 
     void Start ()
     {

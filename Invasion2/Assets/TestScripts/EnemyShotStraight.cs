@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//1번
 
 public class EnemyShotStraight :  IEnemyShotPattern
 {
