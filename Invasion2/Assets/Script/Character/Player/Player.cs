@@ -24,15 +24,17 @@
 
 public class Player : Character
 {
-    IMainAttackable mainAttack;
-    ISubAttackable subAttack;
+    [SerializeField]
+    PlayerType playerType;
     int attackCount;
     float fireRate = 0.2f;
     float timeRate = 0.0f;
+    float reloadAmmo = 2.0f;
+    float reloadTime = 0.0f;
     bool fire = false;
     int magazine;
     [SerializeField]
-    int maxMagazine;
+    int maxMagazine = 2;
     int magazineAddCount;
     //Straight st;
     //Guaidance gu;
@@ -45,6 +47,7 @@ public class Player : Character
         gameMediator = GameObject.FindGameObjectWithTag("GameMediator").GetComponent<GameMediator>();
         DontDestroyOnLoad(gameObject);
         rigidbody = GetComponent<Rigidbody>();
+        magazine = maxMagazine;
         //st = FindObjectOfType<Straight>();
         //gu = FindObjectOfType<Guaidance>();
      
@@ -82,16 +85,21 @@ public class Player : Character
         else if(timeRate>=fireRate)
         {
             //EquipMainAttack(st);
-            //mainAttack.Attack(power);
+            //mainAttackCtrl.Attack(power,playerType);
+            if(playerType==PlayerType.Deung)
+            {
+                Debug.Log("플레이어 타입 확인 : " + playerType);
+                AmmoSpendOrReload();
+            }
             timeRate = 0.0f;
             attackCount++;
         }
-            
-        
+
         if(attackCount==3)
         {
             //EquipSubAttack(gu);
-            //subAttack.Attack(power);
+            //subAttack.Attack(power,playerType);
+            Debug.Log("보조 무장 작동 확인");
             attackCount = 0;
         }
     }
@@ -102,7 +110,7 @@ public class Player : Character
         {
             Item itemType = other.GetComponent<Item>();
             gameMediator.GetItem(itemType.ItemType);
-            NumberOfBullet();
+            AddAmmo();
         }
 
         if(other.tag=="EnemyBullet" || other.tag=="Enemy")
@@ -116,7 +124,7 @@ public class Player : Character
 
         if (MainWeapon is Straight)
         {
-            mainAttack = FindObjectOfType<Straight>();
+            mainAttackCtrl = FindObjectOfType<Straight>();
         }
     }*/
     /*public void EquipSubAttack(ISubAttackable SubWeapon)
@@ -142,16 +150,19 @@ public class Player : Character
                 playerModel[0].SetActive(true);
                 playerModel[1].SetActive(false);
                 playerModel[2].SetActive(false);
+                playerType = type;
                 break;
             case PlayerType.Ho:
                 playerModel[0].SetActive(false);
                 playerModel[1].SetActive(true);
                 playerModel[2].SetActive(false);
+                playerType = type;
                 break;
             case PlayerType.Deung:
                 playerModel[0].SetActive(false);
                 playerModel[1].SetActive(false);
                 playerModel[2].SetActive(true);
+                playerType = type;
                 break;
             
             default:
@@ -159,13 +170,43 @@ public class Player : Character
         }
     }
 
-    public void NumberOfBullet()
+    public void AddAmmo()
     {
-        magazineAddCount++;
+        if(maxMagazine<5)
+        {
+            magazineAddCount++;
+        }
         if(magazineAddCount==10 && power<=30)
         {
             magazineAddCount = 0;
             maxMagazine++;
+        }
+        else if(power==30)
+        {
+            return;
+        }
+    }
+
+    public void AmmoSpendOrReload()
+    {
+        if(magazine>0)
+        {
+            --magazine;
+            Debug.Log("남은 잔탄 수 확인 : " + magazine);
+            attackCount++;
+        }
+        else if(reloadTime<=reloadAmmo)
+        {
+            reloadTime += Time.deltaTime;
+            Debug.Log("재장전 대기 시간 확인 : " + reloadTime);
+            return;
+        }
+        else if(reloadTime>=reloadAmmo)
+        {
+            Debug.Log("재장전 대기 시간 종료");
+            magazine = maxMagazine;
+            Debug.Log("재장전 장탄 수 확인 : " + magazine);
+            reloadTime = 0.0f;
         }
     }
 }

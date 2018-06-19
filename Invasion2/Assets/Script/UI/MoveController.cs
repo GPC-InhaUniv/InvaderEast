@@ -40,7 +40,7 @@ public class MoveController : MonoBehaviour
     {
         pannelImage.enabled = true;
         Stick.gameObject.SetActive(true);
-        touchPos = new Vector3(Input.mousePosition.x,Input.mousePosition.y,0);
+        touchPos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);
         StickPannel.position = touchPos;
 
 
@@ -51,13 +51,12 @@ public class MoveController : MonoBehaviour
 
     public void StickMove()
     {
-        Vector3 dragPos = new Vector3(Input.mousePosition.x, Input.mousePosition.y,0 );
+        Vector3 dragPos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);
         directionPos = (dragPos - touchPos).normalized;
-        Debug.Log("방향 : " + directionPos);
-        Debug.Log("센터 좌표 : " + touchPos);
-        
-            InputManager.Instance.PlayerMove(new Vector3(directionPos.x,0,directionPos.y));
-        
+
+
+        InputManager.Instance.PlayerMove(new Vector3(directionPos.x, 0, directionPos.y));
+
 
         float stickDistance = Vector3.Distance(dragPos, touchPos);
         if (stickDistance > StickRadius)
@@ -76,7 +75,7 @@ public class MoveController : MonoBehaviour
 
         InputManager.Instance.PlayerMove(directionPos);
         InputManager.Instance.PlayerAttack(false);
-        
+
         Stick.position = touchPos;
         pannelImage.enabled = false;
         Stick.gameObject.SetActive(false);

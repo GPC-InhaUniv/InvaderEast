@@ -115,7 +115,7 @@ public class Enemy : Character
         if (transform.position.y < -7f)
         {
            StageManager.Instance.callBackEnemyDead -= new CallBackEnemyDead(Died);
-           StageManager.Instance.RemoveEnemy(this);
+           StageManager.Instance.RemoveEnemy(this.gameObject);
         }
     }
 

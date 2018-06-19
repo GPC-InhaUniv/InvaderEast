@@ -14,9 +14,10 @@ public class GameController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         gameMediator = GameObject.FindGameObjectWithTag("GameMediator").GetComponent<GameMediator>();
-        gameMediator.SetFactory();
         player = GameObject.FindGameObjectWithTag("Player");
-        player.transform.localScale = new Vector3(3, 3, 3);
+
+        PoolManager.Instance.SetQueue();
+       
 	}
 	
 	

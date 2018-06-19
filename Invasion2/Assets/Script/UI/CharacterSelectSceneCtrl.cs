@@ -27,7 +27,7 @@ public class CharacterSelectSceneCtrl : MonoBehaviour
     [SerializeField]
     Text goldText;
 
-    IMainAttackable straight;
+   
 
     private void Update()
     {
@@ -49,7 +49,6 @@ public class CharacterSelectSceneCtrl : MonoBehaviour
         if (scrollRect.horizontalNormalizedPosition <= 0.33f)
         {
             DescriptionImage.sprite = DescriptionImage_Red;
-            //InputManager.Instance.PlayerEquipMainWeapon(straight);
             InputManager.Instance.PlayerChangeModel(PlayerType.Sin);
         }
         if (0.33f < scrollRect.horizontalNormalizedPosition

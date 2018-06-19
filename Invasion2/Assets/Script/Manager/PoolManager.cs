@@ -8,8 +8,9 @@ using UnityEngine;
 /// EnemyQueue(적 객체), 
 /// EnemyBulletQueue(적의 총알 객체), 
 /// PlayerBulletQueue(플레이어의 타입 및 파워에 따른 총알 객체를 담은 큐의 배열)
-/// 플레이어의 추가 탄환(미사일) 큐는 아직 추가 안되어 있음
-/// 재환아!!!!!!!!!!!!!!!11
+/// PlayerSpreadBulletPrefab(등 쉽의 탄환)
+/// HomingMissileQueue(유도 미사일)
+/// 
 /// </summary>
 public class PoolManager : Singleton<PoolManager>
 {
@@ -18,53 +19,55 @@ public class PoolManager : Singleton<PoolManager>
 
     Queue<GameObject> EnemyQueue;
     Queue<GameObject> EnemyBulletQueue;
-    Queue<GameObject>[] PlayerBulletQueue;
+    Queue<GameObject> PlayerBulletQueue;
+    Queue<GameObject> PlayerSpreadBulletQueue;
+    Queue<GameObject> HomingMissileQueue;
+    Queue<GameObject> StraightMissileQueue;
+
 
     [SerializeField]
     GameObject EnemyPrefab;
     [SerializeField]
     GameObject EnemyBulletPrefab;
     [SerializeField]
-    GameObject[] PlayerBulletPrefab;
+    GameObject PlayerBulletPrefab;
+    [SerializeField]
+    GameObject PlayerSpreadBulletPrefab;
+    [SerializeField]
+    GameObject HomingMissilePrefab;
+    [SerializeField]
+    GameObject StraightMissilePrefab;
 
     const int EnemyQueueSize = 30;
     const int EnemyBulletQueueSize = 100;
-    const int PlayerBulletQueueSize = 20;
-    
-    void Start ()
+    const int PlayerBulletQueueSize = 100;
+
+    void Start()
     {
-        //EnemyPrefab = Resources.Load("EnemyPrefab") as GameObject; //아직 없다고 한다...ㅠ
-        //EnemyBulletPrefab = Resources.Load("EnemyBulletPrefab") as GameObject; //얘도 아직 없다고 한다........
         gameMediator = GameObject.FindGameObjectWithTag("GameMediator").GetComponent<GameMediator>();
-
-        PlayerBulletPrefab = new GameObject[8];
-        PlayerBulletPrefab[0] = Resources.Load("Straight1") as GameObject;
-        PlayerBulletPrefab[1] = Resources.Load("Straight2") as GameObject;
-        PlayerBulletPrefab[2] = Resources.Load("Straight3") as GameObject;
-        PlayerBulletPrefab[3] = Resources.Load("Straight4") as GameObject;
-
-        PlayerBulletPrefab[4] = Resources.Load("Sector1") as GameObject;
-        PlayerBulletPrefab[5] = Resources.Load("Sector2") as GameObject;
-        PlayerBulletPrefab[6] = Resources.Load("Sector3") as GameObject;
-        PlayerBulletPrefab[7] = Resources.Load("Sector4") as GameObject;
-
-        CreateQueue(EnemyQueue, EnemyQueueSize, EnemyPrefab);
-        CreateQueue(EnemyBulletQueue, EnemyBulletQueueSize, EnemyBulletPrefab);
-
-        PlayerBulletQueue = new Queue<GameObject>[8];
-        for (int i = 0; i < PlayerBulletQueue.Length-1; i++)
-        {
-            if(PlayerBulletPrefab[i] != null)
-            {
-                CreateQueue(PlayerBulletQueue[i], PlayerBulletQueueSize, PlayerBulletPrefab[i]);
-            }
-        }
+        EnemyBulletPrefab = Resources.Load("BossBullet") as GameObject;
+        //---큐 생성
+        //   CreateQueue(EnemyQueue, EnemyQueueSize, EnemyPrefab);
+        EnemyBulletQueue = CreateQueue(EnemyBulletQueue, EnemyBulletQueueSize, EnemyBulletPrefab);
+        PlayerBulletQueue = CreateQueue(PlayerBulletQueue, PlayerBulletQueueSize, PlayerBulletPrefab);
+        PlayerSpreadBulletQueue = CreateQueue(PlayerSpreadBulletQueue, PlayerBulletQueueSize / 10, PlayerSpreadBulletPrefab);
+        HomingMissileQueue = CreateQueue(HomingMissileQueue, PlayerBulletQueueSize / 10, HomingMissilePrefab);
+        StraightMissileQueue = CreateQueue(StraightMissileQueue, PlayerBulletQueueSize / 10, StraightMissilePrefab);
     }
 
-    void CreateQueue(Queue<GameObject> queue, int size, GameObject prefab)
+    public void SetQueue()
+    {
+        EnemyBulletQueue = CreateQueue(EnemyBulletQueue, EnemyBulletQueueSize, EnemyBulletPrefab);
+        PlayerBulletQueue = CreateQueue(PlayerBulletQueue, PlayerBulletQueueSize, PlayerBulletPrefab);
+        PlayerSpreadBulletQueue = CreateQueue(PlayerSpreadBulletQueue, PlayerBulletQueueSize / 10, PlayerSpreadBulletPrefab);
+        HomingMissileQueue = CreateQueue(HomingMissileQueue, PlayerBulletQueueSize / 10, HomingMissilePrefab);
+        StraightMissileQueue = CreateQueue(StraightMissileQueue, PlayerBulletQueueSize / 10, StraightMissilePrefab);
+    }
+
+    Queue<GameObject> CreateQueue(Queue<GameObject> queue, int size, GameObject prefab)
     {
         queue = new Queue<GameObject>();
-        if(prefab != null)
+        if (prefab != null)
         {
             for (int i = 0; i < size; i++)
             {
@@ -74,10 +77,12 @@ public class PoolManager : Singleton<PoolManager>
                 Debug.Log("Enqueue");
             }
         }
-        else Debug.Log("Prefab이 존재하지 않음! : " + prefab.ToString());
+        else Debug.Log("Prefab이 존재하지 않음! : prefab is " + prefab.ToString());
+
+        return queue;
     }
 
-    public GameObject GetEnemy()
+    public GameObject GetEnemyObject()
     {
         GameObject gameObject;
         gameObject = EnemyQueue.Dequeue();
@@ -97,6 +102,7 @@ public class PoolManager : Singleton<PoolManager>
 
     public GameObject GetEnemyBulletObject()
     {
+
         GameObject gameObject;
         gameObject = EnemyBulletQueue.Dequeue();
         gameObject.SetActive(true);
@@ -113,61 +119,94 @@ public class PoolManager : Singleton<PoolManager>
         else Debug.Log("EnemyBulletQueue : UnderFlow Error");
     }
 
-    /// <summary>
-    /// index값 정리. 
-    /// 0~3 = Sinship의 파워에 따른 공격, 
-    /// 4~7 = Hoship의 파워에 따른 공격, 
-    /// 8~12 = Deungship의 파워에 따른 공격(얘는 바뀔수 있음)
-    /// </summary>
-    /// <param name="index"></param>
-    /// <returns></returns>
-    public GameObject GetPlayerBulletObject(int index)
+    public GameObject GetPlayerBulletObject()
     {
-        if(index < 0)
+        GameObject gameObject;
+        gameObject = PlayerBulletQueue.Dequeue();
+        gameObject.SetActive(true);
+        return gameObject;
+    }
+
+    public void PutPlayerBulletObject(GameObject gameObject)
+    {
+        if (PlayerBulletQueue.Count > 0)
         {
-            Debug.Log("index는 음수가 아닙니다.");
-            return null;
+            PlayerBulletQueue.Enqueue(gameObject);
+            gameObject.SetActive(false);
         }
-        else if(index > PlayerBulletQueue.Length)
+        else Debug.Log("PlayerBulletQueue : UnderFlow Error");
+    }
+
+    public GameObject GetPlayerSpreadBulletObject()
+    {
+        GameObject gameObject;
+        gameObject = PlayerSpreadBulletQueue.Dequeue();
+        gameObject.SetActive(true);
+        return gameObject;
+    }
+
+    public void PutPlayerSpreadBulletObject(GameObject gameObject)
+    {
+        if (PlayerSpreadBulletQueue.Count > 0)
         {
-            Debug.Log("index가 Queue의 크기보다 큽니다.");
-            return null;
+            PlayerSpreadBulletQueue.Enqueue(gameObject);
+            gameObject.SetActive(false);
         }
-        else
+        else Debug.Log("PlayerSpreadBulletQueue : UnderFlow Error");
+    }
+
+    public GameObject GetPlayerMissileObject(PlayerType type)
+    {
+        GameObject bullet;
+        switch (type)
         {
-            GameObject gameObject;
-            gameObject = PlayerBulletQueue[index].Dequeue();
-            gameObject.SetActive(true);
-            return gameObject;
+            case PlayerType.Deung:
+                bullet = null;
+                Debug.Log("Return null!");
+                break;
+
+            case PlayerType.Sin:
+                bullet = HomingMissileQueue.Dequeue();
+                bullet.SetActive(true);
+                break;
+
+            case PlayerType.Ho:
+                bullet = StraightMissileQueue.Dequeue();
+                bullet.SetActive(true);
+                break;
+
+            default:
+                bullet = null;
+                Debug.Log("Return null!");
+                break;
+        }
+        return bullet;
+
+    }
+
+    public void PutPlayerMissileObject(GameObject gameObject, PlayerType type)
+    {
+        switch (type)
+        {
+            case PlayerType.Deung:
+                break;
+            case PlayerType.Sin:
+                if (HomingMissileQueue.Count > 0)
+                {
+                    HomingMissileQueue.Enqueue(gameObject);
+                    gameObject.SetActive(false);
+                }
+                break;
+            case PlayerType.Ho:
+                if (StraightMissileQueue.Count > 0)
+                {
+                    StraightMissileQueue.Enqueue(gameObject);
+                    gameObject.SetActive(false);
+                }
+                break;
+            default:
+                break;
         }
     }
 
-    /// <summary>
-    /// index값 정리.
-    /// 0~3 = Sinship의 파워에 따른 공격, 
-    /// 4~7 = Hoship의 파워에 따른 공격, 
-    /// 8~12 = Deungship의 파워에 따른 공격(얘는 바뀔수 있음)
-    /// </summary>
-    /// <param name="gameObject"></param>
-    /// <param name="index"></param>
-    public void PutPlayerBulletObject(GameObject gameObject, int index)
-    {
-        if (index < 0)
-        {
-            Debug.Log("index는 음수가 아닙니다.");
-        }
-        else if (index > PlayerBulletQueue.Length)
-        {
-            Debug.Log("index가 Queue의 크기보다 큽니다.");
-        }
-        else
-        {
-            if (PlayerBulletQueue[index].Count > 0)
-            {
-                PlayerBulletQueue[index].Enqueue(gameObject);
-                gameObject.SetActive(false);
-            }
-            else Debug.Log("PlayerBulletQueue[" + index + "] : UnderFlow Error");
-        }
-    }
 }

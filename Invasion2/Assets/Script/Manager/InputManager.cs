@@ -28,19 +28,10 @@ public class InputManager : Singleton<InputManager>
     {
         gameMediator.PlayerAttack(CheckedAttack);
     }
-    //플레이어의 무기 장착
-    public void PlayerEquipMainWeapon(IMainAttackable MainWeapon)
-    {
-        gameMediator.PlayerEquipMainWeapon(MainWeapon);
-    }
-    public void PlayerEquipSubWeapon(ISubAttackable SubWeapon)
-    {
-        gameMediator.PlayerEquipSubWeapon(SubWeapon);
-    }
-
+   
     public void PlayerChangeModel(PlayerType type)
     {
-        gameMediator.ChangePlayerModel(type);
+        gameMediator.ChangePlayerType(type);
     }
 
     //플레이어 정보(파워 및 라이프)
