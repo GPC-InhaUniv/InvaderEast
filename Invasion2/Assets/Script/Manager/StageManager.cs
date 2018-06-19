@@ -32,6 +32,8 @@ public class StageManager : Singleton<StageManager>
     EnemyFactory Factory;
     [SerializeField]
     GameObject enemyPrefab;
+    [SerializeField]
+    BoxCollider Boundary;
 
     CoroutineCtrl stageCoroutineCtrl;
     GameMediator gameMediator;
@@ -56,6 +58,13 @@ public class StageManager : Singleton<StageManager>
         CurrentStage = 0;
         stageCoroutineCtrl = new CoroutineCtrl(this, enemyPrefab);
         Factory = new EnemyFactory(gameMediator);
+    }
+
+    public void SetStage()
+    {
+        Debug.Log("SetStage");
+        TransformList = GameObject.FindGameObjectsWithTag("EnemySpawnPoint");
+        Boundary = GameObject.FindGameObjectWithTag("Boundary").GetComponent<BoxCollider>();
     }
 
     public void Spawn(GameObject enemy, EnemyType type)

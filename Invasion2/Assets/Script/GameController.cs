@@ -16,9 +16,10 @@ public class GameController : MonoBehaviour {
         gameMediator = GameObject.FindGameObjectWithTag("GameMediator").GetComponent<GameMediator>();
         player = GameObject.FindGameObjectWithTag("Player");
 
-        PoolManager.Instance.SetQueue();
-       
-	}
+        //PoolManager.Instance.SetQueue();
+        StageManager.Instance.SetStage();
+
+    }
 	
 	
 }
