@@ -16,7 +16,7 @@ public class GameController : MonoBehaviour {
         gameMediator = GameObject.FindGameObjectWithTag("GameMediator").GetComponent<GameMediator>();
         gameMediator.SetFactory();
         player = GameObject.FindGameObjectWithTag("Player");
-        player.transform.localScale = new Vector3(3, 3, 3);
+       
 	}
 	
 	
