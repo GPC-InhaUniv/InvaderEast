@@ -6,12 +6,8 @@ using UnityEngine;
 
 // 적 캐릭터 총알 패턴입니다
 
-public class EnemyAttackPattern : MonoBehaviour
+public class EnemyAttackPattern
 {
-    void Start()
-    {
-        StartCoroutine(EnemyPattern1());
-    }
 
     public IEnumerator EnemyPattern1() // 하나씩 발사하는 패턴
     {
