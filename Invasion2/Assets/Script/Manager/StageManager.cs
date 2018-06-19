@@ -31,7 +31,7 @@ public class StageManager : Singleton<StageManager>
     [SerializeField]
     EnemyFactory Factory;
     [SerializeField]
-    Enemy enemyPrefab;
+    GameObject enemyPrefab;
 
     CoroutineCtrl stageCoroutineCtrl;
     GameMediator gameMediator;

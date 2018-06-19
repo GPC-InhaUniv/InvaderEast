@@ -14,7 +14,6 @@ public class GameController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         gameMediator = GameObject.FindGameObjectWithTag("GameMediator").GetComponent<GameMediator>();
-        gameMediator.SetFactory();
         player = GameObject.FindGameObjectWithTag("Player");
        
 	}
