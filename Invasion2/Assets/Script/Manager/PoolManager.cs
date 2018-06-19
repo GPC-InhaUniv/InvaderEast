@@ -71,7 +71,6 @@ public class PoolManager : Singleton<PoolManager>
                 GameObject gameObject = Instantiate(prefab);
                 queue.Enqueue(gameObject);
                 gameObject.SetActive(false);
-                Debug.Log("Enqueue");
             }
         }
         else Debug.Log("Prefab이 존재하지 않음! : prefab is " + prefab.ToString());

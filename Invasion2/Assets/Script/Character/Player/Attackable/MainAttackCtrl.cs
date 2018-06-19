@@ -27,6 +27,9 @@ public class MainAttackCtrl : MonoBehaviour
     int power;
     [SerializeField]
     GameObject SpreadPrefab;
+    [SerializeField]
+    PlayerType playerType;
+
 
     private void Start()
     {
@@ -85,7 +88,7 @@ public class MainAttackCtrl : MonoBehaviour
         }
     }
     
-    public void Attack(int power, PlayerType playerType)
+    public void Attack(int power)
     {
         switch (playerType)
         {

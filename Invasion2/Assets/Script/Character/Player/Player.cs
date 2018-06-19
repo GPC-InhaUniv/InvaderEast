@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using System.Collections;
+using System;
 
 /// <summary>
 /// 담당자 : 박상원
@@ -29,28 +31,26 @@ public class Player : Character
     int attackCount;
     float fireRate = 0.2f;
     float timeRate = 0.0f;
-    float reloadAmmo = 2.0f;
+    float reloadAmmo = 0.5f;
     float reloadTime = 0.0f;
+    bool EmptyAmmo = true;
     bool fire = false;
+    [SerializeField]
     int magazine;
     [SerializeField]
     int maxMagazine = 2;
     int magazineAddCount;
-    //Straight st;
-    //Guaidance gu;
     [SerializeField]
-    private GameObject [] playerModel;
+    private GameObject[] playerModel;
 
-    
+
     private void Start()
     {
         gameMediator = GameObject.FindGameObjectWithTag("GameMediator").GetComponent<GameMediator>();
         DontDestroyOnLoad(gameObject);
         rigidbody = GetComponent<Rigidbody>();
         magazine = maxMagazine;
-        //st = FindObjectOfType<Straight>();
-        //gu = FindObjectOfType<Guaidance>();
-     
+
     }
 
     private void Update()
@@ -77,43 +77,41 @@ public class Player : Character
     {
         //공격 관련 프리펩은 나중에 하나의
         //오브젝트에 모아놓기로 결정
-        if(timeRate<fireRate)
+        if (timeRate < fireRate)
         {
             timeRate += Time.deltaTime;
             return;
         }
-        else if(timeRate>=fireRate)
+        else if (timeRate >= fireRate)
         {
-            //EquipMainAttack(st);
             //mainAttackCtrl.Attack(power,playerType);
-            if(playerType==PlayerType.Deung)
+            if (playerType == PlayerType.Deung)
             {
-                Debug.Log("플레이어 타입 확인 : " + playerType);
-                AmmoSpendOrReload();
+                AmmoSpend();
             }
             timeRate = 0.0f;
             attackCount++;
         }
 
-        if(attackCount==3)
+        if (attackCount == 3)
         {
-            //EquipSubAttack(gu);
             //subAttack.Attack(power,playerType);
-            Debug.Log("보조 무장 작동 확인");
+            //Debug.Log("보조 무장 작동 확인");
             attackCount = 0;
         }
     }
 
     public override void OnTriggerEnter(Collider other)
     {
-        if(other.tag=="Item")
+        if (other.tag == "Item")
         {
+            Debug.Log("아이템 획득 : " + other);
             Item itemType = other.GetComponent<Item>();
             gameMediator.GetItem(itemType.ItemType);
             AddAmmo();
         }
 
-        if(other.tag=="EnemyBullet" || other.tag=="Enemy")
+        if (other.tag == "EnemyBullet" || other.tag == "Enemy")
         {
 
         }
@@ -136,7 +134,7 @@ public class Player : Character
     }*/
     private void OnTriggerExit(Collider other)
     {
-        if(other.tag == "Boundary")
+        if (other.tag == "Boundary")
         {
 
         }
@@ -164,7 +162,7 @@ public class Player : Character
                 playerModel[2].SetActive(true);
                 playerType = type;
                 break;
-            
+
             default:
                 break;
         }
@@ -172,41 +170,39 @@ public class Player : Character
 
     public void AddAmmo()
     {
-        if(maxMagazine<5)
+        if (maxMagazine < 5)
         {
-            magazineAddCount++;
+            maxMagazine = (int)(maxMagazine + Math.Truncate(power / 10f));
         }
-        if(magazineAddCount==10 && power<=30)
-        {
-            magazineAddCount = 0;
-            maxMagazine++;
-        }
-        else if(power==30)
+        else
         {
             return;
         }
     }
 
-    public void AmmoSpendOrReload()
+    public void AmmoSpend()
     {
-        if(magazine>0)
+        if (magazine > 0)
         {
             --magazine;
-            Debug.Log("남은 잔탄 수 확인 : " + magazine);
+            //Debug.Log("남은 잔탄 수 확인 : " + magazine);
             attackCount++;
         }
-        else if(reloadTime<=reloadAmmo)
+        else if (EmptyAmmo && magazine==0)
         {
-            reloadTime += Time.deltaTime;
-            Debug.Log("재장전 대기 시간 확인 : " + reloadTime);
-            return;
+            StartCoroutine(AmmoReload());
         }
-        else if(reloadTime>=reloadAmmo)
-        {
-            Debug.Log("재장전 대기 시간 종료");
-            magazine = maxMagazine;
-            Debug.Log("재장전 장탄 수 확인 : " + magazine);
-            reloadTime = 0.0f;
-        }
+    }
+
+    IEnumerator AmmoReload()
+    {
+        EmptyAmmo = false;
+        yield return new WaitForSeconds(5.0f);
+
+        //Debug.Log("재장전 대기 시간 종료");
+        magazine = maxMagazine;
+        //Debug.Log("재장전 장탄 수 확인 : " + magazine);
+        EmptyAmmo = true;
+        StopCoroutine(AmmoReload());
     }
 }
