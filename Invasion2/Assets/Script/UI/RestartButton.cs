@@ -14,9 +14,7 @@ public class RestartButton : MonoBehaviour
 
     public void OnClickRestartButton()
     {
-        if(Input.GetMouseButtonDown(0))
-        {
+            Debug.Log("재시작 버튼 클릭");
             SceneManager.LoadScene("MainGame");
-        }
     }
 }

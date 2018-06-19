@@ -13,9 +13,7 @@ public class ReturnTitleButton : MonoBehaviour
 
     public void OnClickReturnTitle()
     {
-        if(Input.GetMouseButtonDown(0))
-        {
+            Debug.Log("타이틀 화면 클릭");
             SceneManager.LoadScene("Title");
-        }
     }
 }
