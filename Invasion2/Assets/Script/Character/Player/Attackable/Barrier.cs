@@ -13,11 +13,7 @@ public class Barrier : MonoBehaviour
     [SerializeField]
     const float CoolTime = 3.0f;
 
-    void Start()
-    {
-
-    }
-
+   
     public void Attack(int power, PlayerType playerType)
     {
 

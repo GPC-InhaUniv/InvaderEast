@@ -33,7 +33,7 @@ public class GameMediator : MonoBehaviour
         inputManagere = InputManager.Instance;
         stageManager = StageManager.Instance;
         saveAndload = SaveAndLoader.Instance;
-        poolManager = PoolManager.Instance;
+       // poolManager = PoolManager.Instance;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Character>();
     }
    
