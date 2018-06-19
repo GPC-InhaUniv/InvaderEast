@@ -27,7 +27,7 @@ public class CharacterSelectSceneCtrl : MonoBehaviour
     [SerializeField]
     Text goldText;
 
-    IMainAttackable straight;
+    IMainAttackabl straight;
 
     private void Update()
     {
