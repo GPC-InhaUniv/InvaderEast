@@ -42,10 +42,6 @@ public class PoolManager : Singleton<PoolManager>
     const int EnemyBulletQueueSize = 100;
     const int PlayerBulletQueueSize = 100;
     
-    /// <summary>
-    /// 각종 프리펍 로드
-    /// 주석 된 부분 값만 바꿔주면 바로 쓸수 있음
-    /// </summary>
     void Start ()
     {
         gameMediator = GameObject.FindGameObjectWithTag("GameMediator").GetComponent<GameMediator>();
