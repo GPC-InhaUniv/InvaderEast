@@ -24,6 +24,7 @@
 
 public class Player : Character
 {
+    [SerializeField]
     PlayerType playerType;
     int attackCount;
     float fireRate = 0.2f;
@@ -87,6 +88,7 @@ public class Player : Character
             //mainAttackCtrl.Attack(power,playerType);
             if(playerType==PlayerType.Deung)
             {
+                Debug.Log("플레이어 타입 확인 : " + playerType);
                 AmmoSpendOrReload();
             }
             timeRate = 0.0f;
@@ -97,6 +99,7 @@ public class Player : Character
         {
             //EquipSubAttack(gu);
             //subAttack.Attack(power,playerType);
+            Debug.Log("보조 무장 작동 확인");
             attackCount = 0;
         }
     }
@@ -147,11 +150,13 @@ public class Player : Character
                 playerModel[0].SetActive(true);
                 playerModel[1].SetActive(false);
                 playerModel[2].SetActive(false);
+                playerType = type;
                 break;
             case PlayerType.Ho:
                 playerModel[0].SetActive(false);
                 playerModel[1].SetActive(true);
                 playerModel[2].SetActive(false);
+                playerType = type;
                 break;
             case PlayerType.Deung:
                 playerModel[0].SetActive(false);
@@ -187,16 +192,20 @@ public class Player : Character
         if(magazine>0)
         {
             --magazine;
+            Debug.Log("남은 잔탄 수 확인 : " + magazine);
             attackCount++;
-            return;
         }
-
-        if(reloadTime<reloadAmmo)
+        else if(reloadTime<=reloadAmmo)
         {
             reloadTime += Time.deltaTime;
+            Debug.Log("재장전 대기 시간 확인 : " + reloadTime);
+            return;
         }
-        else if(reloadTime>reloadAmmo)
+        else if(reloadTime>=reloadAmmo)
         {
+            Debug.Log("재장전 대기 시간 종료");
+            magazine = maxMagazine;
+            Debug.Log("재장전 장탄 수 확인 : " + magazine);
             reloadTime = 0.0f;
         }
     }
