@@ -16,6 +16,7 @@ public class BattleUICtrl : MonoBehaviour
     
     private bool isPaused;
 
+
 void Start()
     {
        // ChangeLife();

@@ -32,7 +32,7 @@ public class Boss : Enemy
     
     private float MoveLength;
     [SerializeField]
-    [Range(1, 2)]
+    [Range(1, 3)]
     private float SaveZone;
 
     private bool firstCRrunning;
@@ -47,6 +47,7 @@ public class Boss : Enemy
     // Use this for initialization
     void Start()
     {
+       
         gameMediator = GameObject.FindGameObjectWithTag("GameMediator").GetComponent<GameMediator>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         rigidbody = GetComponent<Rigidbody>();
@@ -94,7 +95,11 @@ public class Boss : Enemy
         if (shotCount < 5)
         {
             mainShotPos.transform.LookAt(player);
-            Instantiate(bullet, mainShotPos.transform.position, mainShotPos.transform.rotation);
+            //  Instantiate(bullet, mainShotPos.transform.position, mainShotPos.transform.rotation);
+            GameObject bullet = PoolManager.Instance.GetEnemyBulletObject();
+
+            bullet.transform.position = mainShotPos.transform.position;
+            bullet.transform.rotation = mainShotPos.transform.rotation;
             yield return new WaitForSeconds(0.2f);
             shotCount++;
             StartCoroutine(FirstPattern());
