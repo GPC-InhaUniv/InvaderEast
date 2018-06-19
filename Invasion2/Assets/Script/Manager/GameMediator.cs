@@ -33,7 +33,7 @@ public class GameMediator : MonoBehaviour
         inputManagere = InputManager.Instance;
         stageManager = StageManager.Instance;
         saveAndload = SaveAndLoader.Instance;
-       // poolManager = PoolManager.Instance;
+        poolManager = PoolManager.Instance;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Character>();
     }
    
@@ -143,11 +143,55 @@ public class GameMediator : MonoBehaviour
     {
         itemMangager.SpawnItem(type, enemyPos);
     }
-    //팩토리는 스테이지 매니저가 생성된 이후의 씬에서 생성되기에 장착(?)해주는 메소드가 필요하다.
-    public void SetFactory()
+    
+    //pool manager 관련 메서드
+    public GameObject GetEnemyObject()
     {
-        stageManager.SetFactory();
+        return PoolManager.Instance.GetEnemyObject();
     }
 
-   
+    public void PutEnemyObject(GameObject gameObject)
+    {
+        PoolManager.Instance.PutEnemyObject(gameObject);
+    }
+
+    public GameObject GetEnemyBullet()
+    {
+        return PoolManager.Instance.GetEnemyBulletObject();
+    }
+
+    public void PutEnemyBullet(GameObject gameObject)
+    {
+        PoolManager.Instance.PutEnemyBulletObject(gameObject);
+    }
+
+    public GameObject GetPlayerBullet()
+    {
+        return PoolManager.Instance.GetPlayerBulletObject();
+    }
+
+    public void PutPlayerBullet(GameObject gameObject)
+    {
+        PoolManager.Instance.PutPlayerBulletObject(gameObject);
+    }
+
+    public GameObject GetPlayerSpreadBullet()
+    {
+        return PoolManager.Instance.GetPlayerSpreadBulletObject();
+    }
+
+    public void PutPlayerSpreadBullet(GameObject gameObject)
+    {
+        PoolManager.Instance.PutPlayerSpreadBulletObject(gameObject);
+    }
+
+    public GameObject GetPlayerMissile(PlayerType type)
+    {
+        return PoolManager.Instance.GetPlayerMissileObject(type);
+    }
+
+    public void PutPlayerMissile(GameObject gameObject, PlayerType type)
+    {
+        PoolManager.Instance.PutPlayerMissileObject(gameObject, type);
+    }
 }
