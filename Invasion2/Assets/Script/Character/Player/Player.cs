@@ -84,13 +84,14 @@ public class Player : Character
         else if(timeRate>=fireRate)
         {
             //EquipMainAttack(st);
-            //mainAttack.Attack(power,playerType);
-            
+            //mainAttackCtrl.Attack(power,playerType);
+            if(playerType==PlayerType.Deung)
+            {
+                AmmoSpendOrReload();
+            }
             timeRate = 0.0f;
             attackCount++;
         }
-
-        AmmoSpendOrReload();
 
         if(attackCount==3)
         {
@@ -120,7 +121,7 @@ public class Player : Character
 
         if (MainWeapon is Straight)
         {
-            mainAttack = FindObjectOfType<Straight>();
+            mainAttackCtrl = FindObjectOfType<Straight>();
         }
     }*/
     /*public void EquipSubAttack(ISubAttackable SubWeapon)
@@ -156,6 +157,7 @@ public class Player : Character
                 playerModel[0].SetActive(false);
                 playerModel[1].SetActive(false);
                 playerModel[2].SetActive(true);
+                playerType = type;
                 break;
             
             default:
@@ -173,6 +175,10 @@ public class Player : Character
         {
             magazineAddCount = 0;
             maxMagazine++;
+        }
+        else if(power==30)
+        {
+            return;
         }
     }
 
