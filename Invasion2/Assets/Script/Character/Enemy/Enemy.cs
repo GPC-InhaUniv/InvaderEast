@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 // 담당자 : 박상원
 
 /// <summary>
@@ -6,7 +7,7 @@
 /// </summary>
 public enum EnemyType
 {
-    Gyo,
+    Gyo = 1,
     Tong,
     Bub,
     Gyu
@@ -29,7 +30,7 @@ public class Enemy : Character
     [SerializeField]
     private GameObject shotPos;
 
-    
+
     public Direction EnemyDirection
     {
         get
@@ -41,66 +42,62 @@ public class Enemy : Character
             direction = value;
         }
     }
-
+    [SerializeField]
     protected EnemyType enemyType;
-    public EnemyType TypeEnemy
-    {
-        get
-        {
-            return enemyType;
-        }
-    }
-
     protected int giveScore;
-    public int GiveScore
-    {
-        get
-        {
-            return giveScore;
-        }
-    }
-
     protected int giveMaxGold;
-    public int GiveMaxGold
-    {
-        get
-        {
-            return giveMaxGold;
-        }
-    }
+    EnemyAttackPattern enemyPattern;
 
+    private void OnEnable()
+    {
+       SetEnemyInfo();
+       StartCoroutine(TimeDelay());
+    }
+    IEnumerator TimeDelay()
+    {
+        yield return new WaitForSeconds(1f);
+        if (gameObject.activeSelf == true)
+        ChangeType(enemyType);
+    }
+    
     private void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
-        gameMediator = GameObject.FindGameObjectWithTag("GameMediator").GetComponent<GameMediator>();
-        StageManager.Instance.callBackEnemyDead += new CallBackEnemyDead(Died);
-     
+        enemyPattern = gameObject.GetComponent<EnemyAttackPattern>();
         ChangeType(enemyType);
     }
 
-    
-    private EnemyAttackPattern enemyPattern;
+    private void SetEnemyInfo()
+    {
+       
+        enemyType = (EnemyType)Random.Range(1, 5);
+        giveMaxGold = Random.Range(1, 10);
+        direction = (Direction)Random.Range(1, 5);
+    }
+
+   
     //타입 변경시마다 코루틴 종료
     private void ChangeType(EnemyType type)
     {
-    
+        
         switch (type)
         {
             case EnemyType.Gyo:
-                enemyPattern = new EnemyAttackPattern();
-                StartCoroutine(enemyPattern.EnemyPattern1(shotPos.transform));
+                giveScore = 100;
+        
+                StartCoroutine(enemyPattern.EnemyPattern1());
                 break;
             case EnemyType.Tong:
-                enemyPattern = new EnemyAttackPattern();
-                StartCoroutine(enemyPattern.EnemyPattern2(shotPos.transform));
+                giveScore = 150;
+                StartCoroutine(enemyPattern.EnemyPattern2());
                 break;
             case EnemyType.Bub:
-                enemyPattern = new EnemyAttackPattern();
-                StartCoroutine(enemyPattern.EnemyPattern3(shotPos.transform));
+                giveScore = 200;
+               StartCoroutine(enemyPattern.EnemyPattern3());
                 break;
             case EnemyType.Gyu:
-                enemyPattern = new EnemyAttackPattern();
-                StartCoroutine(enemyPattern.EnemyPattern4(shotPos.transform));
+                giveScore = 250;
+                StartCoroutine(enemyPattern.EnemyPattern4());
                 break;
             default:
                 break;
@@ -113,22 +110,26 @@ public class Enemy : Character
 
     public void Died()
     {
+        gameObject.SetActive(false);
+    }
 
-        gameMediator.SpawnItem(ItemType.PowerItem, this.transform);
-        if (transform.position.y < -7f)
+    private void OnDisable()
+    {
+        StopAllCoroutines();
+       // StageManager.Instance.RemoveEnemy(gameObject);
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Boundary")
         {
-           StageManager.Instance.callBackEnemyDead -= new CallBackEnemyDead(Died);
-           StageManager.Instance.RemoveEnemy(this.gameObject);
+            Died();
         }
     }
-
     public override void OnTriggerEnter(Collider other)
     {
-        
-    }
-
-    public void Pattern()
-    {
-       
+        if (other.tag == ("PlayerBullet"))
+        {
+            Died();
+        }
     }
 }

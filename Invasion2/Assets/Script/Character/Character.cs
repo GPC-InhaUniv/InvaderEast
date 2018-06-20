@@ -18,14 +18,17 @@ public enum PlayerType
 public enum Direction
 {
     STOP,
-    UP,
-    DOWN,
-    LEFT,
-    RIGHT,
+    
+    LEFT =1,
+    LEFTDOWN=2,
+    DOWN=3,
+    RIGHTDOWN=4,
+    RIGHT=5,
     LEFTUP,
     RIGHTUP,
-    LEFTDOWN,
-    RIGHTDOWN,
+    UP,
+
+
 }
 
 /// <summary>

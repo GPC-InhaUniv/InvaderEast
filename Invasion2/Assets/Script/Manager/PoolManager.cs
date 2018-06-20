@@ -45,20 +45,23 @@ public class PoolManager : Singleton<PoolManager>
     void Start()
     {
         gameMediator = GameObject.FindGameObjectWithTag("GameMediator").GetComponent<GameMediator>();
-        EnemyBulletPrefab = Resources.Load("BossBullet") as GameObject;
+        EnemyPrefab = Resources.Load("Enemy") as GameObject;
+        EnemyBulletPrefab = Resources.Load("EnemyBullet") as GameObject;
         //---큐 생성
         //   
-       
+
+        EnemyQueue = CreateQueue(EnemyQueue, EnemyQueueSize, EnemyPrefab);
+        EnemyBulletQueue = CreateQueue(EnemyBulletQueue, EnemyBulletQueueSize, EnemyBulletPrefab);
     }
 
     public void SetQueue()
     {
-       EnemyQueue=CreateQueue(EnemyQueue, EnemyQueueSize, EnemyPrefab);
+        EnemyQueue = CreateQueue(EnemyQueue, EnemyQueueSize, EnemyPrefab);
         EnemyBulletQueue = CreateQueue(EnemyBulletQueue, EnemyBulletQueueSize, EnemyBulletPrefab);
-       PlayerBulletQueue = CreateQueue(PlayerBulletQueue, PlayerBulletQueueSize, PlayerBulletPrefab);
-        PlayerSpreadBulletQueue = CreateQueue(PlayerSpreadBulletQueue, PlayerBulletQueueSize / 10, PlayerSpreadBulletPrefab);
-       HomingMissileQueue = CreateQueue(HomingMissileQueue, PlayerBulletQueueSize / 10, HomingMissilePrefab);
-       StraightMissileQueue = CreateQueue(StraightMissileQueue, PlayerBulletQueueSize / 10, StraightMissilePrefab);
+        //  PlayerBulletQueue = CreateQueue(PlayerBulletQueue, PlayerBulletQueueSize, PlayerBulletPrefab);
+        //  PlayerSpreadBulletQueue = CreateQueue(PlayerSpreadBulletQueue, PlayerBulletQueueSize / 10, PlayerSpreadBulletPrefab);
+        //  HomingMissileQueue = CreateQueue(HomingMissileQueue, PlayerBulletQueueSize / 10, HomingMissilePrefab);
+        //  StraightMissileQueue = CreateQueue(StraightMissileQueue, PlayerBulletQueueSize / 10, StraightMissilePrefab);
     }
 
     Queue<GameObject> CreateQueue(Queue<GameObject> queue, int size, GameObject prefab)
@@ -98,39 +101,47 @@ public class PoolManager : Singleton<PoolManager>
 
     public GameObject GetEnemyBulletObject()
     {
+        if (EnemyBulletQueue.Count > 0)
+        {
+            GameObject gameObject;
+            gameObject = EnemyBulletQueue.Dequeue();
+            gameObject.SetActive(true);
+            return gameObject;
+        }
 
-        GameObject gameObject;
-        gameObject = EnemyBulletQueue.Dequeue();
-        gameObject.SetActive(true);
-        return gameObject;
+        else Debug.Log("EnemyBulletQueue : UnderFlow Error");
+        return null;
+       
     }
 
     public void PutEnemyBulletObject(GameObject gameObject)
     {
-        if (EnemyBulletQueue.Count > 0)
-        {
-            EnemyBulletQueue.Enqueue(gameObject);
-            gameObject.SetActive(false);
-        }
-        else Debug.Log("EnemyBulletQueue : UnderFlow Error");
+
+        EnemyBulletQueue.Enqueue(gameObject);
+        gameObject.SetActive(false);
+
+
     }
 
     public GameObject GetPlayerBulletObject()
     {
-        GameObject gameObject;
-        gameObject = PlayerBulletQueue.Dequeue();
-        gameObject.SetActive(true);
-        return gameObject;
+        if (PlayerBulletQueue.Count > 0)
+        {
+            GameObject gameObject;
+            gameObject = PlayerBulletQueue.Dequeue();
+            gameObject.SetActive(true);
+            return gameObject;
+        }
+        else Debug.Log("PlayerBulletQueue : UnderFlow Error");
+        return null;
     }
 
     public void PutPlayerBulletObject(GameObject gameObject)
     {
-        if (PlayerBulletQueue.Count > 0)
-        {
-            PlayerBulletQueue.Enqueue(gameObject);
-            gameObject.SetActive(false);
-        }
-        else Debug.Log("PlayerBulletQueue : UnderFlow Error");
+
+        PlayerBulletQueue.Enqueue(gameObject);
+        gameObject.SetActive(false);
+
     }
 
     public GameObject GetPlayerSpreadBulletObject()
