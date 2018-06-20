@@ -16,7 +16,7 @@ public class EnemyFactory
         this.gameMediator = gameMediator;
     }
 
-    public GameObject CreateEnemy(EnemyType type, Vector3 position)
+    public GameObject CreateEnemy(Vector3 position)
     {
         GameObject enemy = gameMediator.GetEnemyObject();
         enemy.transform.Translate(position);

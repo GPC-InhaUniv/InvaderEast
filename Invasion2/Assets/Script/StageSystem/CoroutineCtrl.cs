@@ -10,29 +10,11 @@ public class CoroutineCtrl
 {
     GameObject enemy;
     StageManager stageManager;
-    int randomType;
 
     public CoroutineCtrl(StageManager stageManager, GameObject enemy)
     {
         this.stageManager = stageManager;
         this.enemy = enemy;
-    }
-
-    EnemyType RandomType()
-    {
-        randomType = Random.Range(0, 3);
-        switch (randomType)
-        {
-            case 0:
-                return EnemyType.Gyo;
-            case 1:
-                return EnemyType.Tong;
-            case 2:
-                return EnemyType.Bub;
-            case 3:
-            default:
-                return EnemyType.Gyu;
-        }
     }
 
     //패턴 1 필드값
@@ -45,7 +27,7 @@ public class CoroutineCtrl
         Debug.Log("등장패턴 1 시작");
         for (int i = 0; i < pattern1EnemyCount; i++)
         {
-            stageManager.Spawn(enemy, RandomType());
+            stageManager.Spawn(enemy);
             yield return new WaitForSeconds(pattern1EnemySpawnTick);
         }
         Debug.Log("등장패턴 1 종료");
@@ -66,7 +48,7 @@ public class CoroutineCtrl
         {
             for (int j = 0; j < pattern2EnemyCount; j++)
             {
-                stageManager.Spawn(enemy, RandomType());
+                stageManager.Spawn(enemy);
                 yield return new WaitForSeconds(pattern2EnemySpawnTick);
             }
             yield return new WaitForSeconds(pattern2RepeatTick);
@@ -85,8 +67,8 @@ public class CoroutineCtrl
         Debug.Log("등장패턴 3 시작");
         for (int i = 0; i < pattern3EnemyCount; i++)
         {
-            stageManager.Spawn(enemy, RandomType());
-            stageManager.Spawn(enemy, RandomType());
+            stageManager.Spawn(enemy);
+            stageManager.Spawn(enemy);
             yield return new WaitForSeconds(pattern3EnemySpawnTick);
         }
         Debug.Log("등장패턴 3 종료");
@@ -103,10 +85,10 @@ public class CoroutineCtrl
         Debug.Log("등장패턴 4 시작");
         for (int i = 0; i < pattern4EnemyCount; i++)
         {
-            stageManager.Spawn(enemy, RandomType());
+            stageManager.Spawn(enemy);
             yield return new WaitForSeconds(pattern4EnemySpawnTick);
-            stageManager.Spawn(enemy, RandomType());
-            stageManager.Spawn(enemy, RandomType());
+            stageManager.Spawn(enemy);
+            stageManager.Spawn(enemy);
             yield return new WaitForSeconds(pattern4EnemySpawnTick);
         }
         Debug.Log("등장패턴 4 종료");

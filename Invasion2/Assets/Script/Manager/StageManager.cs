@@ -67,12 +67,12 @@ public class StageManager : Singleton<StageManager>
         Boundary = GameObject.FindGameObjectWithTag("Boundary").GetComponent<BoxCollider>();
     }
 
-    public void Spawn(GameObject enemy, EnemyType type)
+    public void Spawn(GameObject enemy)
     {
         if(enemy.tag == "Enemy")
         {
             transformNumber = Random.Range(0,TransformList.Length-1);
-            GameObject SpwanEnemy = Factory.CreateEnemy(type, TransformList[transformNumber].transform.position);
+            GameObject SpwanEnemy = Factory.CreateEnemy(TransformList[transformNumber].transform.position);
             EnemyList.Add(SpwanEnemy);
         }
         else Debug.Log("Spawn() 메서드의 tag 불일치!");
