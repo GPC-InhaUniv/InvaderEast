@@ -8,18 +8,12 @@ using UnityEngine;
 public class EnemyAttackPattern : MonoBehaviour
 {
     GameObject bullet;
-<<<<<<< HEAD
-    Transform shotPos;
-
-    // 하나씩 발사하는 패턴
-    public IEnumerator EnemyPattern1(Transform transform) 
-=======
 
     [SerializeField]
     GameObject shotPos;
 
     public IEnumerator EnemyPattern1() // 하나씩 발사하는 패턴
->>>>>>> 1f2640dcf9e6661a75f2d79c196c1c73ce4f3f9c
+
     {
       
         float attackWaitTime = 1.0f;
@@ -33,12 +27,11 @@ public class EnemyAttackPattern : MonoBehaviour
         }
     }
 
-<<<<<<< HEAD
+
     // 5발 연속으로 발사하는 패턴
-    public IEnumerator EnemyPattern2(Transform transform)
-=======
-    public IEnumerator EnemyPattern2() // 5발 연속으로 발사하는 패턴
->>>>>>> 1f2640dcf9e6661a75f2d79c196c1c73ce4f3f9c
+
+    public IEnumerator EnemyPattern2() 
+
     {
       
 
@@ -61,17 +54,12 @@ public class EnemyAttackPattern : MonoBehaviour
 
     }
 
-<<<<<<< HEAD
+
     // 캐릭터 위치로 발사하는 패턴
-    public IEnumerator EnemyPattern3(Transform transform)
-    { 
-        shotPos = transform;
-=======
-    public IEnumerator EnemyPattern3() // 캐릭터 위치로 발사하는 패턴
+
+    public IEnumerator EnemyPattern3()
     {
         
-
->>>>>>> 1f2640dcf9e6661a75f2d79c196c1c73ce4f3f9c
         float attackWaitTime = 1.0f;
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         while (true)
@@ -87,12 +75,10 @@ public class EnemyAttackPattern : MonoBehaviour
 
     }
 
-<<<<<<< HEAD
+
     // 부채꼴로 퍼지게 발사하는 패턴
-    public IEnumerator EnemyPattern4(Transform transform)
-=======
-    public IEnumerator EnemyPattern4() // 부채꼴로 퍼지게 발사하는 패턴
->>>>>>> 1f2640dcf9e6661a75f2d79c196c1c73ce4f3f9c
+
+    public IEnumerator EnemyPattern4()
     {
         float attackWaitTime = 2.0f;
 
