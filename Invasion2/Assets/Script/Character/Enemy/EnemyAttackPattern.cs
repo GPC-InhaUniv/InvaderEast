@@ -11,7 +11,9 @@ public class EnemyAttackPattern
     
     GameObject bullet;
     Transform shotPos;
-    public IEnumerator EnemyPattern1(Transform transform) // 하나씩 발사하는 패턴
+
+    // 하나씩 발사하는 패턴
+    public IEnumerator EnemyPattern1(Transform transform) 
     {
         shotPos = transform;
         float attackWaitTime = 1.0f;
@@ -25,7 +27,8 @@ public class EnemyAttackPattern
         }
     }
 
-    public IEnumerator EnemyPattern2(Transform transform) // 5발 연속으로 발사하는 패턴
+    // 5발 연속으로 발사하는 패턴
+    public IEnumerator EnemyPattern2(Transform transform)
     {
         shotPos = transform;
         float attackWaitTime = 0.5f;
@@ -47,8 +50,9 @@ public class EnemyAttackPattern
 
     }
 
-    public IEnumerator EnemyPattern3(Transform transform) // 캐릭터 위치로 발사하는 패턴
-    {
+    // 캐릭터 위치로 발사하는 패턴
+    public IEnumerator EnemyPattern3(Transform transform)
+    { 
         shotPos = transform;
         float attackWaitTime = 1.0f;
         GameObject player = GameObject.FindGameObjectWithTag("Player");
@@ -65,7 +69,8 @@ public class EnemyAttackPattern
 
     }
 
-    public IEnumerator EnemyPattern4(Transform transform) // 부채꼴로 퍼지게 발사하는 패턴
+    // 부채꼴로 퍼지게 발사하는 패턴
+    public IEnumerator EnemyPattern4(Transform transform)
     {
         shotPos = transform;
         float attackWaitTime = 2.0f;
@@ -75,7 +80,6 @@ public class EnemyAttackPattern
         float startAngle = 150.0f;
         float gapAngle = 15.0f;
 
-        //GameObject tempObject;
 
         while (true)
         {
@@ -85,8 +89,6 @@ public class EnemyAttackPattern
                 bullet = PoolManager.Instance.GetEnemyBulletObject();
                 bullet.transform.position = shotPos.transform.position;
                 bullet.transform.rotation = quaternion;
-                //Debug.Log("패턴 4, 발사");
-                //tempObject.transform.rotation = quaternion;
             }
 
             yield return new WaitForSeconds(attackWaitTime);
