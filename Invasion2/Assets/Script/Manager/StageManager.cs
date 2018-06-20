@@ -14,7 +14,7 @@ public enum Difficult
 /// <summary>
 /// 에너미 삭제를 위한 델리게이트
 /// </summary>
-public delegate void CallBackEnemyDead();
+
 
 /// <summary>
 /// 담당자 : 최대원
@@ -41,7 +41,7 @@ public class StageManager : Singleton<StageManager>
     int CurrentStage;
     Difficult difficult;
     int transformNumber;
-    public CallBackEnemyDead callBackEnemyDead;
+    
 
     //스테이지 패턴 발생 간격
     float callCoroutineTick = 5f;
@@ -112,13 +112,6 @@ public class StageManager : Singleton<StageManager>
         }
     }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.tag == "Enemy")
-        {
-            callBackEnemyDead();
-        }
-    }
 
     public void SetDifficulty(Difficult difficult)
     {
