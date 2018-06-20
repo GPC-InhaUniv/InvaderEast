@@ -14,7 +14,7 @@ public class MainAttackCtrl : MonoBehaviour
     [SerializeField]
     float xInterval = 0.22f;
     [SerializeField]
-    float yInterval = -0.5f;
+    float yInterval = -0.5f;    
 
     const float sectorDegree = 3f;
 
@@ -34,24 +34,24 @@ public class MainAttackCtrl : MonoBehaviour
     private void Start()
     {
         //test code
-        maxmagazineCount = (int)(2 + Math.Truncate(power / 10f));
-        magazineCount = maxmagazineCount;
+        //maxmagazineCount = (int)(2 + Math.Truncate(power / 10f));
+        //magazineCount = maxmagazineCount;
     }
 
-    void deungShipAttack(int power)
+    void DeungShipAttack()
     {
         GameObject bullet;
         bullet = Instantiate(SpreadPrefab, transform.position, Quaternion.identity);
         
     }
 
-    void sinShipFirstAttack()
+    void SinShipFirstAttack()
     {
         GameObject gameObject;
         gameObject = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
     }
 
-    void sinShipSecondAttack(float xPosition, float yPosition)
+    void SinShipSecondAttack(float xPosition, float yPosition)
     {
         Vector3 positionR = new Vector3(xPosition, yPosition);
         Vector3 positionL = new Vector3(-xPosition, yPosition);
@@ -59,32 +59,33 @@ public class MainAttackCtrl : MonoBehaviour
         Instantiate(bulletPrefab, positionR, Quaternion.Euler(transform.rotation.x, transform.rotation.y, transform.rotation.z + 90f));
     }
 
-    void sinShipThirdAttack()
+    void SinShipThirdAttack()
     {
-        sinShipFirstAttack();
-        sinShipSecondAttack(xInterval, yInterval);
+        SinShipFirstAttack();
+        SinShipSecondAttack(xInterval, yInterval);
     }
 
-    void sinShipFourthAttack()
+    void SinShipFourthAttack()
     {
-        sinShipThirdAttack();
-        sinShipSecondAttack(xInterval * 2, yInterval * 2);
+        SinShipThirdAttack();
+        SinShipSecondAttack(xInterval * 2, yInterval * 2);
     }
-
-    int hoShootCount(int power)
+    
+    int HoShootCount(int power)
     {
         return (int)(2 * (1 + Math.Truncate(power / 10f)) + 1);
     }
 
-    void hoShipAttack(int power)
+    void HoShipAttack(int power)
     {
-        int count = hoShootCount(power);
+        int count = HoShootCount(power);
         float angle = (float)Math.Truncate(count / 2f) * sectorDegree;
 
-        for (int i = 0; i < count; i++)
+        for (int i = 0; i < count; i++) 
         {
             Instantiate(bulletPrefab, transform.position, Quaternion.Euler(transform.rotation.x, transform.rotation.y + angle, transform.rotation.z + 90f));
-            angle -= sectorDegree;
+            // 반시계 반향으로  발사각을 돌려주는 코드
+            angle -= sectorDegree; 
         }
     }
     
@@ -95,28 +96,28 @@ public class MainAttackCtrl : MonoBehaviour
             case PlayerType.Sin:
                 if (power < 10f)
                 {
-                    sinShipFirstAttack();
+                    SinShipFirstAttack();
                 }
                 else if (power < 20f)
                 {
-                    sinShipSecondAttack(xInterval, 0f);
+                    SinShipSecondAttack(xInterval, 0f);
                 }
                 else if (power < 30f)
                 {
-                    sinShipThirdAttack();
+                    SinShipThirdAttack();
                 }
                 else if (power == 30f)
                 {
-                    sinShipFourthAttack();
+                    SinShipFourthAttack();
                 }
                 break;
 
             case PlayerType.Ho:
-                hoShipAttack(power);
+                HoShipAttack(power);
                 break;
 
             case PlayerType.Deung:
-                deungShipAttack(power);
+                DeungShipAttack();
                 break;
 
             default:

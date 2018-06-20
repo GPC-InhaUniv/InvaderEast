@@ -60,9 +60,9 @@ public class Guaidance : MonoBehaviour
         rightSpawnPos = player.transform.position + new Vector3(0.5f, 0.0f, 0.0f);
         leftSpawnPos = player.transform.position + new Vector3(-0.5f, 0.0f, 0.0f);
 
-        Debug.Log("호밍 미사일 : " + homingMissile);
-        Debug.Log("스폰 좌표 : " + rightSpawnPos);
-        Debug.Log("스폰 좌표 : " + leftSpawnPos);
+        //Debug.Log("호밍 미사일 : " + homingMissile);
+        //Debug.Log("스폰 좌표 : " + rightSpawnPos);
+        //Debug.Log("스폰 좌표 : " + leftSpawnPos);
         if (power == 30)
         {
             Instantiate(homingMissile, rightSpawnPos, Quaternion.identity);

@@ -28,11 +28,13 @@ public class Player : Character
 {
     [SerializeField]
     PlayerType playerType;
+    [SerializeField]
     int attackCount;
     float fireRate = 0.2f;
     float timeRate = 0.0f;
     float reloadAmmo = 0.5f;
     float reloadTime = 0.0f;
+    float coolTime = 3.0f;
     bool EmptyAmmo = true;
     bool fire = false;
     [SerializeField]
@@ -42,6 +44,10 @@ public class Player : Character
     int magazineAddCount;
     [SerializeField]
     private GameObject[] playerModel;
+    [SerializeField]
+    SpriteRenderer barrier;
+    SphereCollider myCollider;
+    SubAttackCtrl subAttackCtrl;
 
 
     private void Start()
@@ -49,6 +55,16 @@ public class Player : Character
         gameMediator = GameObject.FindGameObjectWithTag("GameMediator").GetComponent<GameMediator>();
         DontDestroyOnLoad(gameObject);
         rigidbody = GetComponent<Rigidbody>();
+        subAttackCtrl = FindObjectOfType<SubAttackCtrl>();
+        myCollider = gameObject.GetComponent<SphereCollider>();
+        myCollider.enabled = false;
+        if (playerType == PlayerType.Deung)
+        {
+            Debug.Log("왜 쏴지냐? : " + playerType);
+            myCollider.enabled = true;
+            subAttackCtrl.Attack(power);
+            barrier = GameObject.FindWithTag("Barrier").GetComponent<SpriteRenderer>();
+        }
         magazine = maxMagazine;
 
     }
@@ -77,9 +93,10 @@ public class Player : Character
     {
         //공격 관련 프리펩은 나중에 하나의
         //오브젝트에 모아놓기로 결정
-        if (timeRate < fireRate)
+        if (timeRate <= fireRate)
         {
             timeRate += Time.deltaTime;
+            Debug.Log("메인 공격 쿨타임 : " + timeRate);
             return;
         }
         else if (timeRate >= fireRate)
@@ -93,7 +110,7 @@ public class Player : Character
             attackCount++;
         }
 
-        if (attackCount == 3)
+        if (attackCount == 3 && playerType!=PlayerType.Deung)
         {
             //subAttack.Attack(power,playerType);
             //Debug.Log("보조 무장 작동 확인");
@@ -113,8 +130,14 @@ public class Player : Character
 
         if (other.tag == "EnemyBullet" || other.tag == "Enemy")
         {
-
-        }
+            if(playerType==PlayerType.Deung)
+            {
+                Debug.Log("이게 왜 등쉽인데? : " + playerType);
+                myCollider.enabled = false;
+                barrier.enabled = false;
+                StartCoroutine(RegenBarrier());
+            }
+        }       
     }
 
     /*public void EquipMainAttack(IMainAttackable MainWeapon)
@@ -204,5 +227,13 @@ public class Player : Character
         //Debug.Log("재장전 장탄 수 확인 : " + magazine);
         EmptyAmmo = true;
         StopCoroutine(AmmoReload());
+    }
+
+    public IEnumerator RegenBarrier()
+    {
+        yield return new WaitForSeconds(coolTime);
+        myCollider.enabled = true;
+        barrier.enabled = true;
+        StopCoroutine(RegenBarrier());
     }
 }
