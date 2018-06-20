@@ -136,9 +136,9 @@ public class Boss : Enemy
     IEnumerator ThirdPattern()
     {
         thirdCRrunning = true;
-        StageManager.Instance.Spawn(enemy, EnemyType.Gyo);
-        StageManager.Instance.Spawn(enemy, EnemyType.Gyo);
-        StageManager.Instance.Spawn(enemy, EnemyType.Gyo);
+        StageManager.Instance.Spawn(enemy);
+        StageManager.Instance.Spawn(enemy);
+        StageManager.Instance.Spawn(enemy);
         yield return new WaitForSeconds(2.0f);
         thirdCRrunning = false;
     }
