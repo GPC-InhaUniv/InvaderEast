@@ -25,8 +25,5 @@ public class MenuUICtrl : MonoBehaviour
     public void OnClickResumeButton()
     {
         Time.timeScale = 1;
-    }
-
-
-    
+    }    
 }

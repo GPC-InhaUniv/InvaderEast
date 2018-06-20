@@ -62,6 +62,7 @@ public class EnemyAttackPattern : MonoBehaviour
         
         float attackWaitTime = 1.0f;
         GameObject player = GameObject.FindGameObjectWithTag("Player");
+
         while (true)
         {
             shotPos.transform.LookAt(player.transform);
