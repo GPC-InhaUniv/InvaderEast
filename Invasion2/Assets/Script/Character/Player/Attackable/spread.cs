@@ -18,7 +18,6 @@ public class spread : MonoBehaviour
     public IEnumerator bulletSpread()
     {
         yield return new WaitForSeconds(0.5f);
-        GameObject bullet;
         angle = maxAngle / spreadCount;
         for (int i = 0; i < spreadCount; i++)
         {

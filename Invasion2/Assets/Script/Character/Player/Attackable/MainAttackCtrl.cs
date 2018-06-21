@@ -39,7 +39,7 @@ public class MainAttackCtrl
 
     void DeungShipAttack()
     {
-        playerBullet = PoolManager.Instance.GetPlayerBulletObject();
+        playerBullet = PoolManager.Instance.GetPlayerSpreadBulletObject();
         playerBullet.transform.position = transform.position;
         playerBullet.transform.rotation = Quaternion.identity;
 
