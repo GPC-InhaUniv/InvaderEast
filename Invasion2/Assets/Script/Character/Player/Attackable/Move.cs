@@ -18,18 +18,18 @@ public class Move : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
 
-        if (tag == "PlayerBullet")
+        if (tag == "PlayerBullet" && other.tag != "Boundary")
         {
             PoolManager.Instance.PutPlayerBulletObject(gameObject);
         }
 
-        else if (tag != "Enemy")
+        if(tag == "EnemyBullet" && other.tag != "Boundary")
         {
             PoolManager.Instance.PutEnemyBulletObject(gameObject);
         }
 
     }
-    /*
+    
     private void OnTriggerExit(Collider other)
     {
         if(other.tag == "Boundary")
@@ -39,10 +39,10 @@ public class Move : MonoBehaviour
                 PoolManager.Instance.PutPlayerBulletObject(gameObject);
             }
 
-            else
+            if (tag == "EnemyBullet")
             {
                 PoolManager.Instance.PutEnemyBulletObject(gameObject);
             }
         }
-    }*/
+    }
 }

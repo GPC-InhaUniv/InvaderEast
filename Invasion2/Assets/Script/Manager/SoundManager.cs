@@ -6,10 +6,13 @@ using UnityEngine;
 
 public class SoundManager : Singleton<SoundManager>
 {
+    const int effectSoundIndex = 9;
+
     AudioSource audioSource;
 
-    [SerializeField]
     AudioClip[] effectSound;
+
+    AudioClip backgroundSound;
     
 
     SoundManager()
@@ -19,7 +22,7 @@ public class SoundManager : Singleton<SoundManager>
     {
         audioSource = GetComponent<AudioSource>();
 
-        effectSound = new AudioClip[9];
+        effectSound = new AudioClip[effectSoundIndex];
 
         effectSound[0] = Resources.Load("Sound/BossDead") as AudioClip;
         effectSound[1] = Resources.Load("Sound/EnemyAttack") as AudioClip;
@@ -31,63 +34,62 @@ public class SoundManager : Singleton<SoundManager>
         effectSound[7] = Resources.Load("Sound/PlayerMove") as AudioClip;
         effectSound[8] = Resources.Load("Sound/UseItem") as AudioClip;
 
+        backgroundSound = Resources.Load("Sound/BackgroundSound") as AudioClip;
+
+    }
+
+    public void PlayBackgroundSound()
+    {
+        audioSource.loop = true;
+        audioSource.PlayOneShot(backgroundSound, 0.5f);
     }
 
     public void PlayEffectSound(string soundName)
     {
         if(soundName == "BossDead")
         {
-            audioSource.clip = effectSound[0];
-            audioSource.Play();
+            audioSource.PlayOneShot(effectSound[0], 0.5f);
 
         }
 
         else if(soundName == "EnemyAttack")
         {
-            audioSource.clip = effectSound[1];
-            audioSource.Play();
+            audioSource.PlayOneShot(effectSound[1], 0.5f);
         }
 
         else if(soundName == "EnemyDead")
         {
-            audioSource.clip = effectSound[2];
-            audioSource.Play();
+            audioSource.PlayOneShot(effectSound[2], 0.5f);
         }
 
         else if(soundName == "GetItem")
         {
-            audioSource.clip = effectSound[3];
-            audioSource.Play();
+            audioSource.PlayOneShot(effectSound[3], 0.5f);
         }
 
         else if(soundName == "PlayerAttack")
         {
-            audioSource.clip = effectSound[4];
-            audioSource.Play();
+            audioSource.PlayOneShot(effectSound[4], 0.5f);
         }
 
         else if(soundName == "PlayerDead")
         {
-            audioSource.clip = effectSound[5];
-            audioSource.Play();
+            audioSource.PlayOneShot(effectSound[5], 0.5f);
         }
 
         else if(soundName == "PlayerHit")
         {
-            audioSource.clip = effectSound[6];
-            audioSource.Play();
+            audioSource.PlayOneShot(effectSound[6], 0.5f);
         }
 
         else if (soundName == "PlayerMove")
         {
-            audioSource.clip = effectSound[7];
-            audioSource.Play();
+            audioSource.PlayOneShot(effectSound[7], 0.5f);
         }
 
         else if(soundName == "UseItem")
         {
-            audioSource.clip = effectSound[8];
-            audioSource.Play();
+            audioSource.PlayOneShot(effectSound[8], 0.5f);
         }
     }
 }

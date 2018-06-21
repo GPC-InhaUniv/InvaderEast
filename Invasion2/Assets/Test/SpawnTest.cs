@@ -7,6 +7,9 @@ public class SpawnTest : MonoBehaviour {
     public GameObject Enemy;
 	public void Spawn()
     {
-        Instantiate(Enemy);
+        StageManager.Instance.SetStage();
+        StageManager.Instance.NextStage();
+        //StageManager.Instance.test();
+        
     }
 }
