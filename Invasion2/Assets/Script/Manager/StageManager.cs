@@ -54,28 +54,33 @@ public class StageManager : Singleton<StageManager>
     private void Start()
     {
         gameMediator = GameObject.FindGameObjectWithTag("GameMediator").GetComponent<GameMediator>();
-        
+        enemyPrefab = Resources.Load("Enemy") as GameObject;
+        EnemyList = new List<GameObject>();
         CurrentStage = 0;
         stageCoroutineCtrl = new CoroutineCtrl(this, enemyPrefab);
-        Factory = new EnemyFactory(gameMediator);
+        //  Factory = new EnemyFactory(gameMediator);
+        Factory = new EnemyFactory();
+       
+      
     }
 
     public void SetStage()
     {
         Debug.Log("SetStage");
         TransformList = GameObject.FindGameObjectsWithTag("EnemySpawnPoint");
-        Boundary = GameObject.FindGameObjectWithTag("Boundary").GetComponent<BoxCollider>();
+    //    Boundary = GameObject.FindGameObjectWithTag("Boundary").GetComponent<BoxCollider>();
     }
 
     public void Spawn(GameObject enemy)
     {
-        if(enemy.tag == "Enemy")
+     //   if(enemy.tag == "Enemy")
         {
             transformNumber = Random.Range(0,TransformList.Length-1);
-            GameObject SpwanEnemy = Factory.CreateEnemy(TransformList[transformNumber].transform.position);
-            EnemyList.Add(SpwanEnemy);
+            GameObject SpawnEnemy = Factory.CreateEnemy();
+            SpawnEnemy.transform.position = TransformList[transformNumber].transform.position;
+            EnemyList.Add(SpawnEnemy);
         }
-        else Debug.Log("Spawn() 메서드의 tag 불일치!");
+   //     else Debug.Log("Spawn() 메서드의 tag 불일치!");
     }
 
     public void RemoveAllEnemy()
@@ -129,7 +134,7 @@ public class StageManager : Singleton<StageManager>
     IEnumerator StageCoroutine(int stageLevel)
     {
         Debug.Log("스테이지 " + stageLevel + " 시작");
-
+        yield return new WaitForSeconds(callCoroutineTick);
         StartCoroutine(stageCoroutineCtrl.StagePattern1());
         yield return new WaitForSeconds(callCoroutineTick);
 
@@ -144,4 +149,10 @@ public class StageManager : Singleton<StageManager>
 
         yield break;
     }
+
+    public void test()
+    {
+        StartCoroutine(stageCoroutineCtrl.StagePattern1());
+    }
+   
 } 
