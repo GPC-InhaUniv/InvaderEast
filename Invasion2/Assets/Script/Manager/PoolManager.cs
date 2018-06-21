@@ -23,8 +23,7 @@ public class PoolManager : Singleton<PoolManager>
     Queue<GameObject> PlayerSpreadBulletQueue;
     Queue<GameObject> HomingMissileQueue;
     Queue<GameObject> StraightMissileQueue;
-
-
+    
     [SerializeField]
     GameObject EnemyPrefab;
     [SerializeField]
@@ -47,21 +46,21 @@ public class PoolManager : Singleton<PoolManager>
         gameMediator = GameObject.FindGameObjectWithTag("GameMediator").GetComponent<GameMediator>();
         EnemyPrefab = Resources.Load("Enemy") as GameObject;
         EnemyBulletPrefab = Resources.Load("EnemyBullet") as GameObject;
-        //---큐 생성
-        //   
-
-        EnemyQueue = CreateQueue(EnemyQueue, EnemyQueueSize, EnemyPrefab);
-        EnemyBulletQueue = CreateQueue(EnemyBulletQueue, EnemyBulletQueueSize, EnemyBulletPrefab);
+        PlayerBulletPrefab = Resources.Load("PlayerBullet") as GameObject;
+        HomingMissilePrefab = Resources.Load("HomingMissile") as GameObject;
+        StraightMissilePrefab = Resources.Load("StraightMissile") as GameObject;
+        PlayerSpreadBulletPrefab = Resources.Load("SpreadBullet") as GameObject;
+        SetQueue();
     }
 
     public void SetQueue()
     {
         EnemyQueue = CreateQueue(EnemyQueue, EnemyQueueSize, EnemyPrefab);
         EnemyBulletQueue = CreateQueue(EnemyBulletQueue, EnemyBulletQueueSize, EnemyBulletPrefab);
-        //  PlayerBulletQueue = CreateQueue(PlayerBulletQueue, PlayerBulletQueueSize, PlayerBulletPrefab);
-        //  PlayerSpreadBulletQueue = CreateQueue(PlayerSpreadBulletQueue, PlayerBulletQueueSize / 10, PlayerSpreadBulletPrefab);
-        //  HomingMissileQueue = CreateQueue(HomingMissileQueue, PlayerBulletQueueSize / 10, HomingMissilePrefab);
-        //  StraightMissileQueue = CreateQueue(StraightMissileQueue, PlayerBulletQueueSize / 10, StraightMissilePrefab);
+        PlayerBulletQueue = CreateQueue(PlayerBulletQueue, PlayerBulletQueueSize, PlayerBulletPrefab);
+        PlayerSpreadBulletQueue = CreateQueue(PlayerSpreadBulletQueue, PlayerBulletQueueSize / 10, PlayerSpreadBulletPrefab);
+        HomingMissileQueue = CreateQueue(HomingMissileQueue, PlayerBulletQueueSize / 10, HomingMissilePrefab);
+        StraightMissileQueue = CreateQueue(StraightMissileQueue, PlayerBulletQueueSize / 10, StraightMissilePrefab);
     }
 
     Queue<GameObject> CreateQueue(Queue<GameObject> queue, int size, GameObject prefab)
@@ -83,20 +82,24 @@ public class PoolManager : Singleton<PoolManager>
 
     public GameObject GetEnemyObject()
     {
-        GameObject gameObject;
-        gameObject = EnemyQueue.Dequeue();
-        gameObject.SetActive(true);
-        return gameObject;
+        if (EnemyQueue.Count > 0)
+        {
+            GameObject gameObject;
+            gameObject = EnemyQueue.Dequeue();
+            gameObject.SetActive(true);
+            return gameObject;
+        }
+        else
+        {
+            Debug.Log("EnemyQueue is Underflow exception");
+            return null;
+        }    
     }
 
     public void PutEnemyObject(GameObject gameObject)
     {
-        if (EnemyQueue.Count > 0)
-        {
-            EnemyQueue.Enqueue(gameObject);
-            gameObject.SetActive(false);
-        }
-        else Debug.Log("EnemyQueue : UnderFlow Error");
+        EnemyQueue.Enqueue(gameObject);
+        gameObject.SetActive(false);
     }
 
     public GameObject GetEnemyBulletObject()
@@ -111,16 +114,12 @@ public class PoolManager : Singleton<PoolManager>
 
         else Debug.Log("EnemyBulletQueue : UnderFlow Error");
         return null;
-       
     }
 
     public void PutEnemyBulletObject(GameObject gameObject)
     {
-
         EnemyBulletQueue.Enqueue(gameObject);
         gameObject.SetActive(false);
-
-
     }
 
     public GameObject GetPlayerBulletObject()
@@ -138,7 +137,6 @@ public class PoolManager : Singleton<PoolManager>
 
     public void PutPlayerBulletObject(GameObject gameObject)
     {
-
         PlayerBulletQueue.Enqueue(gameObject);
         gameObject.SetActive(false);
 
@@ -146,20 +144,21 @@ public class PoolManager : Singleton<PoolManager>
 
     public GameObject GetPlayerSpreadBulletObject()
     {
-        GameObject gameObject;
-        gameObject = PlayerSpreadBulletQueue.Dequeue();
-        gameObject.SetActive(true);
-        return gameObject;
+        if (PlayerSpreadBulletQueue.Count > 0)
+        {
+            GameObject gameObject;
+            gameObject = PlayerSpreadBulletQueue.Dequeue();
+            gameObject.SetActive(true);
+            return gameObject;
+        }
+        else Debug.Log("PlayerSpreadBulletQueue : UnderFlow Error");
+        return null;
     }
 
     public void PutPlayerSpreadBulletObject(GameObject gameObject)
     {
-        if (PlayerSpreadBulletQueue.Count > 0)
-        {
-            PlayerSpreadBulletQueue.Enqueue(gameObject);
-            gameObject.SetActive(false);
-        }
-        else Debug.Log("PlayerSpreadBulletQueue : UnderFlow Error");
+        PlayerSpreadBulletQueue.Enqueue(gameObject);
+        gameObject.SetActive(false);
     }
 
     public GameObject GetPlayerMissileObject(PlayerType type)
@@ -168,8 +167,6 @@ public class PoolManager : Singleton<PoolManager>
         switch (type)
         {
             case PlayerType.Deung:
-                bullet = null;
-                Debug.Log("Return null!");
                 break;
 
             case PlayerType.Sin:

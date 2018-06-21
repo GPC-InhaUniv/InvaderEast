@@ -11,12 +11,14 @@ public class MainAttackCtrl : MonoBehaviour
 {
     [SerializeField]
     GameObject bulletPrefab;
-    [SerializeField]
-    float xInterval = 0.22f;
-    [SerializeField]
-    float yInterval = -0.5f;    
+
+    const float xInterval = 0.22f;
+
+    const float yInterval = -0.5f;
 
     const float sectorDegree = 3f;
+
+    GameObject playerBullet;
 
     //test field
     [SerializeField]
@@ -24,39 +26,35 @@ public class MainAttackCtrl : MonoBehaviour
     [SerializeField]
     int maxmagazineCount;
     [SerializeField]
-    int power;
-    [SerializeField]
     GameObject SpreadPrefab;
+
     [SerializeField]
-    PlayerType playerType;
-
-
-    private void Start()
-    {
-        //test code
-        //maxmagazineCount = (int)(2 + Math.Truncate(power / 10f));
-        //magazineCount = maxmagazineCount;
-    }
-
+    GameObject shotPosition;
+    public PlayerType playerType;
     void DeungShipAttack()
     {
-        GameObject bullet;
-        bullet = Instantiate(SpreadPrefab, transform.position, Quaternion.identity);
-        
+        playerBullet = PoolManager.Instance.GetPlayerSpreadBulletObject();
+        playerBullet.transform.position = shotPosition.transform.position;
+       // playerBullet.transform.rotation = Quaternion.identity;
     }
-
     void SinShipFirstAttack()
     {
-        GameObject gameObject;
-        gameObject = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+        playerBullet = PoolManager.Instance.GetPlayerBulletObject();
+        playerBullet.transform.position = shotPosition.transform.position;
+       // playerBullet.transform.rotation = Quaternion.identity;
     }
-
     void SinShipSecondAttack(float xPosition, float yPosition)
     {
-        Vector3 positionR = new Vector3(xPosition, yPosition);
-        Vector3 positionL = new Vector3(-xPosition, yPosition);
-        Instantiate(bulletPrefab, positionL, Quaternion.Euler(transform.rotation.x, transform.rotation.y, transform.rotation.z + 90f));
-        Instantiate(bulletPrefab, positionR, Quaternion.Euler(transform.rotation.x, transform.rotation.y, transform.rotation.z + 90f));
+        Vector3 positionR = new Vector3(xPosition,0, yPosition);
+        Vector3 positionL = new Vector3(-xPosition,0, yPosition);
+
+        playerBullet = PoolManager.Instance.GetPlayerBulletObject();
+        playerBullet.transform.position = shotPosition.transform.position + positionL;
+        //   playerBullet.transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, transform.rotation.z + 90f);
+
+        playerBullet = PoolManager.Instance.GetPlayerBulletObject();
+        playerBullet.transform.position = shotPosition.transform.position + positionR;
+        //  playerBullet.transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, transform.rotation.z + 90f);
     }
 
     void SinShipThirdAttack()
@@ -67,10 +65,10 @@ public class MainAttackCtrl : MonoBehaviour
 
     void SinShipFourthAttack()
     {
-        SinShipThirdAttack();
+        SinShipSecondAttack(xInterval, yInterval);
         SinShipSecondAttack(xInterval * 2, yInterval * 2);
     }
-    
+
     int HoShootCount(int power)
     {
         return (int)(2 * (1 + Math.Truncate(power / 10f)) + 1);
@@ -81,16 +79,19 @@ public class MainAttackCtrl : MonoBehaviour
         int count = HoShootCount(power);
         float angle = (float)Math.Truncate(count / 2f) * sectorDegree;
 
-        for (int i = 0; i < count; i++) 
+        for (int i = 0; i < count; i++)
         {
-            Instantiate(bulletPrefab, transform.position, Quaternion.Euler(transform.rotation.x, transform.rotation.y + angle, transform.rotation.z + 90f));
+            playerBullet = PoolManager.Instance.GetPlayerBulletObject();
+            playerBullet.transform.position = shotPosition.transform.position;
+            playerBullet.transform.rotation = Quaternion.Euler(shotPosition.transform.rotation.x, shotPosition.transform.rotation.y + angle, shotPosition.transform.rotation.z );
             // 반시계 반향으로  발사각을 돌려주는 코드
-            angle -= sectorDegree; 
+            angle -= sectorDegree;
         }
     }
-    
+
     public void Attack(int power)
     {
+        Debug.Log(power);
         switch (playerType)
         {
             case PlayerType.Sin:

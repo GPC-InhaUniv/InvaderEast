@@ -8,20 +8,16 @@ public class SubAttackCtrl : MonoBehaviour
     [SerializeField]
     GameObject straightMissile;
     [SerializeField]
-    GameObject guaidanceMissile;
+    GameObject homingMissile;
     [SerializeField]
     GameObject barrier;
-    [SerializeField]
-    PlayerType playerType;
+   
+    public PlayerType playerType;
     [SerializeField]
     const float CoolTime = 3.0f;
 
-    void Start()
-    {
 
-    }
-
-    void GuaidanceMissile()
+    void HomingMissile()
     {
         Vector3 rightSpawnPos = transform.position + new Vector3(0.5f, 0.0f, 0.0f);
         Vector3 leftSpawnPos = transform.position + new Vector3(-0.5f, 0.0f, 0.0f);
@@ -29,8 +25,15 @@ public class SubAttackCtrl : MonoBehaviour
         //Debug.Log("호밍 미사일 : " + homingMissile);
         //Debug.Log("스폰 좌표 : " + rightSpawnPos);
         //Debug.Log("스폰 좌표 : " + leftSpawnPos);
-        Instantiate(guaidanceMissile, rightSpawnPos, Quaternion.identity);
-        Instantiate(guaidanceMissile, leftSpawnPos, Quaternion.identity);
+        
+        homingMissile = PoolManager.Instance.GetPlayerBulletObject();
+        homingMissile.transform.position = rightSpawnPos;
+      //  homingMissile.transform.rotation = Quaternion.identity;
+
+        homingMissile = PoolManager.Instance.GetPlayerBulletObject();
+        homingMissile.transform.position = leftSpawnPos;
+    //    homingMissile.transform.rotation = Quaternion.identity;
+
     }
 
     void StraightMissile()
@@ -38,11 +41,16 @@ public class SubAttackCtrl : MonoBehaviour
         Vector3 rightSpawnPos = transform.position + new Vector3(0.5f, 0.0f, 0.0f);
         Vector3 leftSpawnPos = transform.position + new Vector3(-0.5f, 0.0f, 0.0f);
 
-        //Debug.Log("호밍 미사일 : " + homingMissile);
         //Debug.Log("스폰 좌표 : " + rightSpawnPos);
         //Debug.Log("스폰 좌표 : " + leftSpawnPos);
-        Instantiate(straightMissile, rightSpawnPos, Quaternion.identity);
-        Instantiate(straightMissile, leftSpawnPos, Quaternion.identity);
+
+        straightMissile = PoolManager.Instance.GetPlayerMissileObject(PlayerType.Sin);
+        straightMissile.transform.position = rightSpawnPos;
+       // straightMissile.transform.rotation = Quaternion.identity;
+
+        straightMissile = PoolManager.Instance.GetPlayerMissileObject(PlayerType.Sin);
+        straightMissile.transform.position = leftSpawnPos;
+      //  straightMissile.transform.rotation = Quaternion.identity;
     }
 
     void Barrier()
@@ -52,14 +60,14 @@ public class SubAttackCtrl : MonoBehaviour
 
     public void Attack(int power)
     {
-        
-        switch(playerType)
+
+        switch (playerType)
         {
             case PlayerType.Sin:
                 StraightMissile();
                 break;
             case PlayerType.Ho:
-                GuaidanceMissile();
+                HomingMissile();
                 break;
             case PlayerType.Deung:
                 Barrier();

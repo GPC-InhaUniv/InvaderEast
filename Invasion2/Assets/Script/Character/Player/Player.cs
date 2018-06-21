@@ -49,6 +49,7 @@ public class Player : Character
     SphereCollider myCollider;
     SubAttackCtrl subAttackCtrl;
 
+    MainAttackCtrl mainAttackCtrl;
 
     private void Start()
     {
@@ -60,13 +61,14 @@ public class Player : Character
         myCollider.enabled = false;
         if (playerType == PlayerType.Deung)
         {
-            Debug.Log("왜 쏴지냐? : " + playerType);
             myCollider.enabled = true;
             subAttackCtrl.Attack(power);
             barrier = GameObject.FindWithTag("Barrier").GetComponent<SpriteRenderer>();
         }
         magazine = maxMagazine;
-
+        mainAttackCtrl = gameObject.GetComponentInChildren<MainAttackCtrl>();
+        
+      
     }
 
     private void Update()
@@ -96,12 +98,12 @@ public class Player : Character
         if (timeRate <= fireRate)
         {
             timeRate += Time.deltaTime;
-            Debug.Log("메인 공격 쿨타임 : " + timeRate);
             return;
         }
         else if (timeRate >= fireRate)
         {
-            //mainAttackCtrl.Attack(power,playerType);
+           
+            mainAttackCtrl.Attack(power);
             if (playerType == PlayerType.Deung)
             {
                 AmmoSpend();
@@ -112,7 +114,7 @@ public class Player : Character
 
         if (attackCount == 3 && playerType!=PlayerType.Deung)
         {
-            //subAttack.Attack(power,playerType);
+           // subAttackCtrl.Attack(power);
             //Debug.Log("보조 무장 작동 확인");
             attackCount = 0;
         }
@@ -132,36 +134,13 @@ public class Player : Character
         {
             if(playerType==PlayerType.Deung)
             {
-                Debug.Log("이게 왜 등쉽인데? : " + playerType);
                 myCollider.enabled = false;
                 barrier.enabled = false;
                 StartCoroutine(RegenBarrier());
             }
         }       
     }
-
-    /*public void EquipMainAttack(IMainAttackable MainWeapon)
-    {
-
-        if (MainWeapon is Straight)
-        {
-            mainAttackCtrl = FindObjectOfType<Straight>();
-        }
-    }*/
-    /*public void EquipSubAttack(ISubAttackable SubWeapon)
-    {
-        if (SubWeapon is Guaidance)
-        {
-            subAttack = FindObjectOfType<Guaidance>();
-        }
-    }*/
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.tag == "Boundary")
-        {
-
-        }
-    }
+ 
 
     public void ChangePlayer(PlayerType type)
     {
@@ -189,6 +168,8 @@ public class Player : Character
             default:
                 break;
         }
+        mainAttackCtrl.playerType = playerType;
+        subAttackCtrl.playerType = playerType;
     }
 
     public void AddAmmo()

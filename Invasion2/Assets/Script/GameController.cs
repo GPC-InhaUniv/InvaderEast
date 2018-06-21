@@ -11,13 +11,20 @@ public class GameController : MonoBehaviour {
 
     GameMediator gameMediator;
     GameObject player;
-	// Use this for initialization
-	void Start () {
+    PoolManager poolnstance;
+    // Use this for initialization
+    private void Awake()
+    {
+        poolnstance = PoolManager.Instance;
+        StageManager.Instance.SetStage();
+    }
+    void Start () {
         gameMediator = GameObject.FindGameObjectWithTag("GameMediator").GetComponent<GameMediator>();
         player = GameObject.FindGameObjectWithTag("Player");
 
         //PoolManager.Instance.SetQueue();
-        StageManager.Instance.SetStage();
+        
+       StageManager.Instance.NextStage();
 
     }
 	

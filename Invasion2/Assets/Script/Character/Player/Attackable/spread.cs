@@ -8,7 +8,8 @@ public class spread : MonoBehaviour
     const int maxAngle = 360;
     int angle;
     [SerializeField]
-    GameObject bulletPrefab;
+    GameObject playerBullet;
+
     private void Start()
     {
         StartCoroutine(bulletSpread());
@@ -17,11 +18,13 @@ public class spread : MonoBehaviour
     public IEnumerator bulletSpread()
     {
         yield return new WaitForSeconds(0.5f);
-        GameObject bullet;
         angle = maxAngle / spreadCount;
         for (int i = 0; i < spreadCount; i++)
         {
-            bullet = Instantiate(bulletPrefab, transform.position, Quaternion.Euler(0f, angle * i, 0f));
+            playerBullet = PoolManager.Instance.GetPlayerBulletObject();
+            playerBullet.transform.position = transform.position;
+            playerBullet.transform.rotation = Quaternion.Euler(0f, angle * i, 0f);
+
         }
     }
 }

@@ -18,7 +18,7 @@ public class GameMediator : MonoBehaviour
     SceneController sceneController;
     InputManager inputManagere;
     StageManager stageManager;
-    PoolManager poolManager;
+
     SaveAndLoader saveAndload;
     Character player;
     // Use this for initialization
@@ -33,7 +33,7 @@ public class GameMediator : MonoBehaviour
         inputManagere = InputManager.Instance;
         stageManager = StageManager.Instance;
         saveAndload = SaveAndLoader.Instance;
-        //poolManager = PoolManager.Instance;
+      
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Character>();
     }
    

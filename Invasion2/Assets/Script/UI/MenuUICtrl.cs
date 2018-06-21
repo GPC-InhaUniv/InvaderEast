@@ -1,29 +1,28 @@
-
-﻿using System.Collections;
-using System.Collections.Generic;
-﻿
-
 using UnityEngine;
-
+using UnityEngine.UI;
 public class MenuUICtrl : MonoBehaviour
 {
-    public void OnClickPauseButton()
-    {
-        Time.timeScale = 0;
-    }
+    [SerializeField]
+    GameObject MenuPanel;
 
     public void OnClickRestartButton()
     {
-        InputManager.Instance.ChangeScene(SceneState.Battle);
+        Time.timeScale = 1;
+        //InputManager.Instance.ChangeScene(SceneState.Battle);
+        MenuPanel.SetActive(false);
+        StageManager.Instance.restart();
+        StageManager.Instance.NextStage();
     }
 
     public void OnClickReturnToTitleButton()
     {
-        InputManager.Instance.ChangeScene(SceneState.Title);
+        Time.timeScale = 1;
+        InputManager.Instance.ChangeScene(SceneState.CharacterSelect);
     }
 
     public void OnClickResumeButton()
     {
         Time.timeScale = 1;
+        MenuPanel.SetActive(false);
     }    
 }

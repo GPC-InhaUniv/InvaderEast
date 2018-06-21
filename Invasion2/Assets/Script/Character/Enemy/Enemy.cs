@@ -64,7 +64,8 @@ public class Enemy : Character
     {
         rigidbody = GetComponent<Rigidbody>();
         enemyPattern = gameObject.GetComponent<EnemyAttackPattern>();
-        ChangeType(enemyType);
+        // ChangeType(enemyType);
+        StageManager.Instance.restart += new Restart(Died);
     }
 
     private void SetEnemyInfo()
@@ -72,7 +73,7 @@ public class Enemy : Character
        
         enemyType = (EnemyType)Random.Range(1, 5);
         giveMaxGold = Random.Range(1, 10);
-        direction = (Direction)Random.Range(1, 5);
+        direction = (Direction)Random.Range(1, 6);
     }
 
    
@@ -110,7 +111,7 @@ public class Enemy : Character
 
     public void Died()
     {
-        gameObject.SetActive(false);
+        StageManager.Instance.RemoveEnemy(gameObject);
     }
 
     private void OnDisable()

@@ -13,23 +13,37 @@ public class Move : MonoBehaviour
     {
         rigidbody = GetComponent<Rigidbody>();
         rigidbody.velocity = transform.forward * speed;
+        StageManager.Instance.restart += new Restart(ReturnPool);
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void ReturnPool()
     {
-
         if (tag == "PlayerBullet")
         {
             PoolManager.Instance.PutPlayerBulletObject(gameObject);
         }
 
-        else if (tag != "Enemy")
+        if (tag == "EnemyBullet")
+        {
+            PoolManager.Instance.PutEnemyBulletObject(gameObject);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+
+        if (tag == "PlayerBullet" && other.tag != "Boundary")
+        {
+            PoolManager.Instance.PutPlayerBulletObject(gameObject);
+        }
+
+        if(tag == "EnemyBullet" && other.tag != "Boundary")
         {
             PoolManager.Instance.PutEnemyBulletObject(gameObject);
         }
 
     }
-    /*
+    
     private void OnTriggerExit(Collider other)
     {
         if(other.tag == "Boundary")
@@ -39,10 +53,10 @@ public class Move : MonoBehaviour
                 PoolManager.Instance.PutPlayerBulletObject(gameObject);
             }
 
-            else
+            if (tag == "EnemyBullet")
             {
                 PoolManager.Instance.PutEnemyBulletObject(gameObject);
             }
         }
-    }*/
+    }
 }

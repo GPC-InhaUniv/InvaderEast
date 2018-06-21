@@ -15,7 +15,8 @@ public class BattleUICtrl : MonoBehaviour
     public Image [] characters;
     
     private bool isPaused;
-
+    [SerializeField]
+    GameObject MenuPanel;
 
 void Start()
     {
@@ -37,9 +38,10 @@ void Start()
     }
     public void OnPauseClick()
     {
-       
-        isPaused = !isPaused;
-        Time.timeScale = (isPaused) ? 0.0f : 1.0f;
+
+        Time.timeScale = 0;
+
+        MenuPanel.SetActive(true);
        
     }
     //void ChangeCharacters()
