@@ -167,8 +167,7 @@ public class PoolManager : Singleton<PoolManager>
         switch (type)
         {
             case PlayerType.Deung:
-                bullet = null;
-                Debug.Log("Return null!");
+                bullet = PlayerSpreadBulletQueue.Dequeue();
                 break;
 
             case PlayerType.Sin:
