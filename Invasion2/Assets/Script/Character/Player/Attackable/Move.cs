@@ -13,6 +13,20 @@ public class Move : MonoBehaviour
     {
         rigidbody = GetComponent<Rigidbody>();
         rigidbody.velocity = transform.forward * speed;
+        StageManager.Instance.restart += new Restart(ReturnPool);
+    }
+
+    public void ReturnPool()
+    {
+        if (tag == "PlayerBullet")
+        {
+            PoolManager.Instance.PutPlayerBulletObject(gameObject);
+        }
+
+        if (tag == "EnemyBullet")
+        {
+            PoolManager.Instance.PutEnemyBulletObject(gameObject);
+        }
     }
 
     private void OnTriggerEnter(Collider other)

@@ -12,9 +12,9 @@ public enum Difficult
     Hard,
 }
 /// <summary>
-/// 에너미 삭제를 위한 델리게이트
+/// 재시작을 위한 델리게이트
 /// </summary>
-
+public delegate void Restart();
 
 /// <summary>
 /// 담당자 : 최대원
@@ -22,6 +22,7 @@ public enum Difficult
 /// 코루틴 내부에서 스테이지에 맞게 적 생성, 
 /// List를 통해 에너미 관리
 /// </summary>
+
 public class StageManager : Singleton<StageManager>
 {
     [SerializeField]
@@ -35,12 +36,14 @@ public class StageManager : Singleton<StageManager>
     [SerializeField]
     BoxCollider Boundary;
 
+    public Restart restart;
     CoroutineCtrl stageCoroutineCtrl;
     GameMediator gameMediator;
     const int MaxStage = 3;
     int CurrentStage;
     Difficult difficult;
     int transformNumber;
+    
     
 
     //스테이지 패턴 발생 간격
@@ -60,7 +63,7 @@ public class StageManager : Singleton<StageManager>
         stageCoroutineCtrl = new CoroutineCtrl(this, enemyPrefab);
         //  Factory = new EnemyFactory(gameMediator);
         Factory = new EnemyFactory();
-       
+        restart += new Restart(SetRestart);
       
     }
 
@@ -101,20 +104,22 @@ public class StageManager : Singleton<StageManager>
 
     public void NextStage()
     {
-        if (CurrentStage == 0)
-        {
-            StartCoroutine(StageCoroutine(CurrentStage));
-            CurrentStage++;
-        }
-        else if (CurrentStage <= MaxStage)
-        {
-            StopCoroutine(StageCoroutine(CurrentStage));
-            StartCoroutine(StageCoroutine(CurrentStage++));
-        }
-        else
-        {
-            Debug.Log("다음 스테이지 없음");
-        }
+        
+            if (CurrentStage == 0)
+            {
+                StartCoroutine(StageCoroutine(CurrentStage));
+                CurrentStage++;
+            }
+            else if (CurrentStage <= MaxStage)
+            {
+                StopCoroutine(StageCoroutine(CurrentStage));
+                StartCoroutine(StageCoroutine(CurrentStage++));
+            }
+            else
+            {
+                Debug.Log("다음 스테이지 없음");
+            }
+        
     }
 
 
@@ -130,9 +135,11 @@ public class StageManager : Singleton<StageManager>
         return difficult;
     }
 
+
     //실질석인 스테이지 타임라인
     IEnumerator StageCoroutine(int stageLevel)
     {
+       
         Debug.Log("스테이지 " + stageLevel + " 시작");
         yield return new WaitForSeconds(callCoroutineTick);
         StartCoroutine(stageCoroutineCtrl.StagePattern1());
@@ -147,12 +154,18 @@ public class StageManager : Singleton<StageManager>
         StartCoroutine(stageCoroutineCtrl.StagePattern4());
         yield return new WaitForSeconds(callCoroutineTick);
 
+        
         yield break;
     }
 
-    public void test()
+    public void SetRestart()
     {
-        StartCoroutine(stageCoroutineCtrl.StagePattern1());
+        CurrentStage = 0;
+        StopAllCoroutines();
+        StopCoroutine(stageCoroutineCtrl.StagePattern1());
+        StopCoroutine(stageCoroutineCtrl.StagePattern2());
+        StopCoroutine(stageCoroutineCtrl.StagePattern3());
+        StopCoroutine(stageCoroutineCtrl.StagePattern4());
     }
    
 } 

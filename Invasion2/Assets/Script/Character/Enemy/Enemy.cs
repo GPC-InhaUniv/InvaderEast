@@ -64,7 +64,8 @@ public class Enemy : Character
     {
         rigidbody = GetComponent<Rigidbody>();
         enemyPattern = gameObject.GetComponent<EnemyAttackPattern>();
-       // ChangeType(enemyType);
+        // ChangeType(enemyType);
+        StageManager.Instance.restart += new Restart(Died);
     }
 
     private void SetEnemyInfo()
@@ -110,7 +111,7 @@ public class Enemy : Character
 
     public void Died()
     {
-        PoolManager.Instance.PutEnemyObject(gameObject);
+        StageManager.Instance.RemoveEnemy(gameObject);
     }
 
     private void OnDisable()
