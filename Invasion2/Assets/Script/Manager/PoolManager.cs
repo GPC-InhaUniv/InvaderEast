@@ -167,7 +167,6 @@ public class PoolManager : Singleton<PoolManager>
         switch (type)
         {
             case PlayerType.Deung:
-                bullet = PlayerSpreadBulletQueue.Dequeue();
                 break;
 
             case PlayerType.Sin:
