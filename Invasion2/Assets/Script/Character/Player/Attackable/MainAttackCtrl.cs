@@ -7,14 +7,14 @@ using UnityEngine;
 /// 
 /// 플레이어의 메인공격 함수
 /// </summary>
-public class MainAttackCtrl
+public class MainAttackCtrl : MonoBehaviour
 {
     [SerializeField]
     GameObject bulletPrefab;
-    [SerializeField]
-    float xInterval = 0.22f;
-    [SerializeField]
-    float yInterval = -0.5f;
+
+    const float xInterval = 0.22f;
+
+    const float yInterval = -0.5f;
 
     const float sectorDegree = 3f;
 
@@ -28,42 +28,33 @@ public class MainAttackCtrl
     [SerializeField]
     GameObject SpreadPrefab;
 
-    Transform transform;
+    [SerializeField]
+    GameObject shotPosition;
     public PlayerType playerType;
-    
-    public MainAttackCtrl(Transform transform, PlayerType playerType)
-    {
-        this.transform = transform;
-        this.playerType = playerType;
-    }
-
     void DeungShipAttack()
     {
         playerBullet = PoolManager.Instance.GetPlayerSpreadBulletObject();
-        playerBullet.transform.position = transform.position;
-        playerBullet.transform.rotation = Quaternion.identity;
-
+        playerBullet.transform.position = shotPosition.transform.position;
+       // playerBullet.transform.rotation = Quaternion.identity;
     }
-
     void SinShipFirstAttack()
     {
         playerBullet = PoolManager.Instance.GetPlayerBulletObject();
-        playerBullet.transform.position = transform.position;
-        playerBullet.transform.rotation = Quaternion.identity;
+        playerBullet.transform.position = shotPosition.transform.position;
+       // playerBullet.transform.rotation = Quaternion.identity;
     }
-
     void SinShipSecondAttack(float xPosition, float yPosition)
     {
-        Vector3 positionR = new Vector3(xPosition, yPosition);
-        Vector3 positionL = new Vector3(-xPosition, yPosition);
+        Vector3 positionR = new Vector3(xPosition,0, yPosition);
+        Vector3 positionL = new Vector3(-xPosition,0, yPosition);
 
         playerBullet = PoolManager.Instance.GetPlayerBulletObject();
-        playerBullet.transform.position = positionL;
-        playerBullet.transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, transform.rotation.z + 90f);
+        playerBullet.transform.position = shotPosition.transform.position + positionL;
+        //   playerBullet.transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, transform.rotation.z + 90f);
 
         playerBullet = PoolManager.Instance.GetPlayerBulletObject();
-        playerBullet.transform.position = positionR;
-        playerBullet.transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, transform.rotation.z + 90f);
+        playerBullet.transform.position = shotPosition.transform.position + positionR;
+        //  playerBullet.transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, transform.rotation.z + 90f);
     }
 
     void SinShipThirdAttack()
@@ -74,7 +65,7 @@ public class MainAttackCtrl
 
     void SinShipFourthAttack()
     {
-        SinShipThirdAttack();
+        SinShipSecondAttack(xInterval, yInterval);
         SinShipSecondAttack(xInterval * 2, yInterval * 2);
     }
 
@@ -91,8 +82,8 @@ public class MainAttackCtrl
         for (int i = 0; i < count; i++)
         {
             playerBullet = PoolManager.Instance.GetPlayerBulletObject();
-            playerBullet.transform.position = transform.position;
-            playerBullet.transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y + angle, transform.rotation.z + 90f);
+            playerBullet.transform.position = shotPosition.transform.position;
+            playerBullet.transform.rotation = Quaternion.Euler(shotPosition.transform.rotation.x, shotPosition.transform.rotation.y + angle, shotPosition.transform.rotation.z );
             // 반시계 반향으로  발사각을 돌려주는 코드
             angle -= sectorDegree;
         }
@@ -100,6 +91,7 @@ public class MainAttackCtrl
 
     public void Attack(int power)
     {
+        Debug.Log(power);
         switch (playerType)
         {
             case PlayerType.Sin:

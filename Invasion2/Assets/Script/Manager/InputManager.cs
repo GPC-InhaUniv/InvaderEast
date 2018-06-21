@@ -77,9 +77,4 @@ public class InputManager : Singleton<InputManager>
         gameMediator.ChangeScene(state);
     }
 
-
-
-
-
-
 }
