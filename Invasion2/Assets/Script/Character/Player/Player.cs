@@ -62,8 +62,8 @@ public class Player : Character
         {
             Debug.Log("왜 쏴지냐? : " + playerType);
             myCollider.enabled = true;
-            subAttackCtrl.Attack(power);
-            barrier = GameObject.FindWithTag("Barrier").GetComponent<SpriteRenderer>();
+          //  subAttackCtrl.Attack(power);
+         //   barrier = GameObject.FindWithTag("Barrier").GetComponent<SpriteRenderer>();
         }
         magazine = maxMagazine;
 
@@ -96,7 +96,7 @@ public class Player : Character
         if (timeRate <= fireRate)
         {
             timeRate += Time.deltaTime;
-            Debug.Log("메인 공격 쿨타임 : " + timeRate);
+         //   Debug.Log("메인 공격 쿨타임 : " + timeRate);
             return;
         }
         else if (timeRate >= fireRate)
@@ -134,7 +134,7 @@ public class Player : Character
             {
                 Debug.Log("이게 왜 등쉽인데? : " + playerType);
                 myCollider.enabled = false;
-                barrier.enabled = false;
+           //     barrier.enabled = false;
                 StartCoroutine(RegenBarrier());
             }
         }       

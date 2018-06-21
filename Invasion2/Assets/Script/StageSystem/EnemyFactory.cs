@@ -11,15 +11,15 @@ public class EnemyFactory
 {
     GameMediator gameMediator;
 
-    public EnemyFactory(GameMediator gameMediator)
+    /*public EnemyFactory(GameMediator gameMediator)
     {
         this.gameMediator = gameMediator;
-    }
+    }*/
 
-    public GameObject CreateEnemy(Vector3 position)
+    public GameObject CreateEnemy()
     {
-        GameObject enemy = gameMediator.GetEnemyObject();
-        enemy.transform.Translate(position);
+        GameObject enemy = PoolManager.Instance.GetEnemyObject();
+        
         return enemy;
     }
 }

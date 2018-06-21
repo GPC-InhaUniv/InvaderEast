@@ -41,7 +41,7 @@ public class PoolManager : Singleton<PoolManager>
     const int EnemyQueueSize = 30;
     const int EnemyBulletQueueSize = 100;
     const int PlayerBulletQueueSize = 100;
-
+   
     void Start()
     {
         gameMediator = GameObject.FindGameObjectWithTag("GameMediator").GetComponent<GameMediator>();
@@ -84,19 +84,24 @@ public class PoolManager : Singleton<PoolManager>
     public GameObject GetEnemyObject()
     {
         GameObject gameObject;
-        gameObject = EnemyQueue.Dequeue();
-        gameObject.SetActive(true);
-        return gameObject;
+        if (EnemyQueue.Count > 0)
+        {
+            
+            gameObject = EnemyQueue.Dequeue();
+            gameObject.SetActive(true);
+            return gameObject;
+        }
+        else Debug.Log("EnemyQueue : UnderFlow Error");
+        return null;
+
     }
 
     public void PutEnemyObject(GameObject gameObject)
     {
-        if (EnemyQueue.Count > 0)
-        {
+       
             EnemyQueue.Enqueue(gameObject);
             gameObject.SetActive(false);
-        }
-        else Debug.Log("EnemyQueue : UnderFlow Error");
+      
     }
 
     public GameObject GetEnemyBulletObject()
