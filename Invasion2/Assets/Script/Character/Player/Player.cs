@@ -69,7 +69,7 @@ public class Player : Character
         magazine = maxMagazine;
 
         mainAttackCtrl = new MainAttackCtrl(transform, playerType);
-        power = 11;
+        power = 30;
     }
 
     private void Update()
@@ -104,7 +104,6 @@ public class Player : Character
         else if (timeRate >= fireRate)
         {
             mainAttackCtrl.Attack(power);
-            Debug.Log("발사");
             if (playerType == PlayerType.Deung)
             {
                 AmmoSpend();
