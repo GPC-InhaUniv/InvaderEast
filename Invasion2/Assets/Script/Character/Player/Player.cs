@@ -49,6 +49,7 @@ public class Player : Character
     SphereCollider myCollider;
     SubAttackCtrl subAttackCtrl;
 
+    MainAttackCtrl mainAttackCtrl;
 
     private void Start()
     {
@@ -62,11 +63,13 @@ public class Player : Character
         {
             Debug.Log("왜 쏴지냐? : " + playerType);
             myCollider.enabled = true;
-          //  subAttackCtrl.Attack(power);
-         //   barrier = GameObject.FindWithTag("Barrier").GetComponent<SpriteRenderer>();
+            subAttackCtrl.Attack(power);
+            barrier = GameObject.FindWithTag("Barrier").GetComponent<SpriteRenderer>();
         }
         magazine = maxMagazine;
 
+        mainAttackCtrl = new MainAttackCtrl(transform, playerType);
+        power = 30;
     }
 
     private void Update()
@@ -96,12 +99,11 @@ public class Player : Character
         if (timeRate <= fireRate)
         {
             timeRate += Time.deltaTime;
-         //   Debug.Log("메인 공격 쿨타임 : " + timeRate);
             return;
         }
         else if (timeRate >= fireRate)
         {
-            //mainAttackCtrl.Attack(power,playerType);
+            mainAttackCtrl.Attack(power);
             if (playerType == PlayerType.Deung)
             {
                 AmmoSpend();
@@ -134,7 +136,7 @@ public class Player : Character
             {
                 Debug.Log("이게 왜 등쉽인데? : " + playerType);
                 myCollider.enabled = false;
-           //     barrier.enabled = false;
+                barrier.enabled = false;
                 StartCoroutine(RegenBarrier());
             }
         }       
@@ -189,6 +191,7 @@ public class Player : Character
             default:
                 break;
         }
+        mainAttackCtrl.playerType = playerType;
     }
 
     public void AddAmmo()

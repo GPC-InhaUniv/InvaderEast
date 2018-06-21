@@ -40,7 +40,6 @@ public class Character : MonoBehaviour
 {
     [SerializeField]
     protected float moveSpeed;
-    [SerializeField]
     protected int power;
     [SerializeField]
     protected int currentLife;
