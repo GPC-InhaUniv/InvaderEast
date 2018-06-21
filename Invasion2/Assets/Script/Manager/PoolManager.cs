@@ -49,19 +49,20 @@ public class PoolManager : Singleton<PoolManager>
         gameMediator = GameObject.FindGameObjectWithTag("GameMediator").GetComponent<GameMediator>();
         EnemyPrefab = Resources.Load("Enemy") as GameObject;
         EnemyBulletPrefab = Resources.Load("EnemyBullet") as GameObject;
-        HomingMissilePrefab = Resources.Load("HomingMissile") as GameObject;
-        StraightMissilePrefab = Resources.Load("StraightMissile") as GameObject;
-        SpreadBulletPrefab = Resources.Load("SpreadBullet") as GameObject;
+       // HomingMissilePrefab = Resources.Load("HomingMissile") as GameObject;
+      //  StraightMissilePrefab = Resources.Load("StraightMissile") as GameObject;
+       // SpreadBulletPrefab = Resources.Load("SpreadBullet") as GameObject;
+        SetQueue();
     }
 
     public void SetQueue()
     {
         EnemyQueue = CreateQueue(EnemyQueue, EnemyQueueSize, EnemyPrefab);
         EnemyBulletQueue = CreateQueue(EnemyBulletQueue, EnemyBulletQueueSize, EnemyBulletPrefab);
-        PlayerBulletQueue = CreateQueue(PlayerBulletQueue, PlayerBulletQueueSize, PlayerBulletPrefab);
-        PlayerSpreadBulletQueue = CreateQueue(PlayerSpreadBulletQueue, PlayerBulletQueueSize / 10, PlayerSpreadBulletPrefab);
-        HomingMissileQueue = CreateQueue(HomingMissileQueue, PlayerBulletQueueSize / 10, HomingMissilePrefab);
-        StraightMissileQueue = CreateQueue(StraightMissileQueue, PlayerBulletQueueSize / 10, StraightMissilePrefab);
+      //  PlayerBulletQueue = CreateQueue(PlayerBulletQueue, PlayerBulletQueueSize, PlayerBulletPrefab);
+      //  PlayerSpreadBulletQueue = CreateQueue(PlayerSpreadBulletQueue, PlayerBulletQueueSize / 10, PlayerSpreadBulletPrefab);
+      //  HomingMissileQueue = CreateQueue(HomingMissileQueue, PlayerBulletQueueSize / 10, HomingMissilePrefab);
+      //  StraightMissileQueue = CreateQueue(StraightMissileQueue, PlayerBulletQueueSize / 10, StraightMissilePrefab);
     }
 
     Queue<GameObject> CreateQueue(Queue<GameObject> queue, int size, GameObject prefab)
