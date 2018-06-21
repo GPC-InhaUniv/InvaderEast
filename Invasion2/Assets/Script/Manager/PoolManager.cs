@@ -23,8 +23,7 @@ public class PoolManager : Singleton<PoolManager>
     Queue<GameObject> PlayerSpreadBulletQueue;
     Queue<GameObject> HomingMissileQueue;
     Queue<GameObject> StraightMissileQueue;
-    Queue<GameObject> SpreadBulletQueue;
-
+    
     [SerializeField]
     GameObject EnemyPrefab;
     [SerializeField]
@@ -37,8 +36,6 @@ public class PoolManager : Singleton<PoolManager>
     GameObject HomingMissilePrefab;
     [SerializeField]
     GameObject StraightMissilePrefab;
-    [SerializeField]
-    GameObject SpreadBulletPrefab;
 
     const int EnemyQueueSize = 30;
     const int EnemyBulletQueueSize = 100;
@@ -49,9 +46,11 @@ public class PoolManager : Singleton<PoolManager>
         gameMediator = GameObject.FindGameObjectWithTag("GameMediator").GetComponent<GameMediator>();
         EnemyPrefab = Resources.Load("Enemy") as GameObject;
         EnemyBulletPrefab = Resources.Load("EnemyBullet") as GameObject;
+        PlayerBulletPrefab = Resources.Load("PlayerBullet") as GameObject;
         HomingMissilePrefab = Resources.Load("HomingMissile") as GameObject;
         StraightMissilePrefab = Resources.Load("StraightMissile") as GameObject;
-        SpreadBulletPrefab = Resources.Load("SpreadBullet") as GameObject;
+        PlayerSpreadBulletPrefab = Resources.Load("SpreadBullet") as GameObject;
+        SetQueue();
     }
 
     public void SetQueue()

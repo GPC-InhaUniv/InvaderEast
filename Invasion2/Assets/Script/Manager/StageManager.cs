@@ -64,7 +64,7 @@ public class StageManager : Singleton<StageManager>
     {
         Debug.Log("SetStage");
         TransformList = GameObject.FindGameObjectsWithTag("EnemySpawnPoint");
-        Boundary = GameObject.FindGameObjectWithTag("Boundary").GetComponent<BoxCollider>();
+        //Boundary = GameObject.FindGameObjectWithTag("Boundary").GetComponent<BoxCollider>();
     }
 
     public void Spawn(GameObject enemy)

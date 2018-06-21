@@ -49,6 +49,7 @@ public class Player : Character
     SphereCollider myCollider;
     SubAttackCtrl subAttackCtrl;
 
+    MainAttackCtrl mainAttackCtrl;
 
     private void Start()
     {
@@ -67,6 +68,8 @@ public class Player : Character
         }
         magazine = maxMagazine;
 
+        mainAttackCtrl = new MainAttackCtrl(transform, playerType);
+        power = 11;
     }
 
     private void Update()
@@ -96,12 +99,12 @@ public class Player : Character
         if (timeRate <= fireRate)
         {
             timeRate += Time.deltaTime;
-            Debug.Log("메인 공격 쿨타임 : " + timeRate);
             return;
         }
         else if (timeRate >= fireRate)
         {
-            //mainAttackCtrl.Attack(power,playerType);
+            mainAttackCtrl.Attack(power);
+            Debug.Log("발사");
             if (playerType == PlayerType.Deung)
             {
                 AmmoSpend();
@@ -189,6 +192,7 @@ public class Player : Character
             default:
                 break;
         }
+        mainAttackCtrl.playerType = playerType;
     }
 
     public void AddAmmo()
