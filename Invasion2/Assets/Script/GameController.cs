@@ -24,7 +24,7 @@ public class GameController : MonoBehaviour {
 
         //PoolManager.Instance.SetQueue();
         
-        StageManager.Instance.NextStage();
+        //StageManager.Instance.NextStage();
 
     }
 	
