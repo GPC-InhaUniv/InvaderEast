@@ -28,6 +28,8 @@ public class Player : Character
 {
     [SerializeField]
     PlayerType playerType;
+
+
     [SerializeField]
     int attackCount;
     [SerializeField]
@@ -45,12 +47,15 @@ public class Player : Character
     int magazineAddCount;
     [SerializeField]
     private GameObject[] playerModel;
+
+
     [SerializeField]
     SpriteRenderer barrier;
     SphereCollider myCollider;
     SubAttackCtrl subAttackCtrl;
-
     MainAttackCtrl mainAttackCtrl;
+    GuaidanceMove homingMove;
+
 
     private void Start()
     {
