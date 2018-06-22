@@ -50,7 +50,7 @@ public class Player : Character
 
 
     [SerializeField]
-    SpriteRenderer barrier;
+    GameObject barrier;
     SphereCollider myCollider;
     SubAttackCtrl subAttackCtrl;
     MainAttackCtrl mainAttackCtrl;
@@ -69,7 +69,7 @@ public class Player : Character
         {
             myCollider.enabled = true;
             subAttackCtrl.Attack(power);
-            barrier = GameObject.FindWithTag("Barrier").GetComponent<SpriteRenderer>();
+            barrier = GameObject.FindWithTag("Barrier").GetComponent<GameObject>();
         }
         magazine = maxMagazine;
         mainAttackCtrl = gameObject.GetComponentInChildren<MainAttackCtrl>();
