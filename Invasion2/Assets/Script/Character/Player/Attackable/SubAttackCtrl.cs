@@ -12,20 +12,13 @@ public class SubAttackCtrl : MonoBehaviour
     [SerializeField]
     GameObject barrier;
     GuaidanceMove homingMove;
-   
+
 
     public PlayerType playerType;
 
 
     [SerializeField]
     const float CoolTime = 3.0f;
-
-
-    private void Start()
-    {
-        homingMove = gameObject.GetComponentInChildren<GuaidanceMove>();
-    //    homingMove.playerType = playerType;
-    }
 
 
     void HomingMissile()
@@ -36,14 +29,14 @@ public class SubAttackCtrl : MonoBehaviour
         //Debug.Log("호밍 미사일 : " + homingMissile);
         //Debug.Log("스폰 좌표 : " + rightSpawnPos);
         //Debug.Log("스폰 좌표 : " + leftSpawnPos);
-        
-        homingMissile = PoolManager.Instance.GetPlayerBulletObject();
-        homingMissile.transform.position = rightSpawnPos;
-      //  homingMissile.transform.rotation = Quaternion.identity;
 
-        homingMissile = PoolManager.Instance.GetPlayerBulletObject();
+        homingMissile = PoolManager.Instance.GetPlayerMissileObject(PlayerType.Sin);
+        homingMissile.transform.position = rightSpawnPos;
+        //  homingMissile.transform.rotation = Quaternion.identity;
+
+        homingMissile = PoolManager.Instance.GetPlayerMissileObject(PlayerType.Sin);
         homingMissile.transform.position = leftSpawnPos;
-    //    homingMissile.transform.rotation = Quaternion.identity;
+        //    homingMissile.transform.rotation = Quaternion.identity;
 
     }
 
@@ -55,13 +48,13 @@ public class SubAttackCtrl : MonoBehaviour
         //Debug.Log("스폰 좌표 : " + rightSpawnPos);
         //Debug.Log("스폰 좌표 : " + leftSpawnPos);
 
-        straightMissile = PoolManager.Instance.GetPlayerMissileObject(PlayerType.Sin);
+        straightMissile = PoolManager.Instance.GetPlayerMissileObject(PlayerType.Ho);
         straightMissile.transform.position = rightSpawnPos;
-       // straightMissile.transform.rotation = Quaternion.identity;
+        // straightMissile.transform.rotation = Quaternion.identity;
 
-        straightMissile = PoolManager.Instance.GetPlayerMissileObject(PlayerType.Sin);
+        straightMissile = PoolManager.Instance.GetPlayerMissileObject(PlayerType.Ho);
         straightMissile.transform.position = leftSpawnPos;
-      //  straightMissile.transform.rotation = Quaternion.identity;
+        //  straightMissile.transform.rotation = Quaternion.identity;
     }
 
     void Barrier()
