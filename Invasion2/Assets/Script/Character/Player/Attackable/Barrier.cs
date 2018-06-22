@@ -12,14 +12,23 @@ public class Barrier : MonoBehaviour
     const float CoolTime = 3.0f;
 
     Collider barrierCollider;
+
+    [SerializeField]
     GameObject barrierImage;
+
+    private void Start()
+    {
+        barrierCollider = GetComponent<Collider>();
+    }
     private void OnEnable()
-    {  
+    {
+        barrierImage.SetActive(true);
     }
     private void OnTriggerEnter(Collider collider)
     {
         StartCoroutine(ShieldRecharge());
-        barrierCollider.enabled = false; 
+        barrierCollider.enabled = false;
+        barrierImage.SetActive(false);
     }
 
     public IEnumerator ShieldRecharge()
@@ -28,11 +37,11 @@ public class Barrier : MonoBehaviour
         yield return new WaitForSeconds(CoolTime);
         Debug.Log("실드 생성");
         barrierCollider.enabled = true;
-
+        barrierImage.SetActive(true);
     }
 
     private void OnDisable()
     {
-        
+        barrierImage.SetActive(false);
     }
 }
