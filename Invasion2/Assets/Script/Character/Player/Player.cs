@@ -30,6 +30,7 @@ public class Player : Character
     PlayerType playerType;
     [SerializeField]
     int attackCount;
+    [SerializeField]
     float fireRate = 0.2f;
     float timeRate = 0.0f;
     float reloadAmmo = 0.5f;
