@@ -131,7 +131,7 @@ public class Enemy : Character
     }
     public override void OnTriggerEnter(Collider other)
     {
-        if (other.tag == ("PlayerBullet"))
+        if (other.tag == ("PlayerBullet") || other.tag==("HomingMissile"))
         {
             gameMediator.SpawnItem(gameObject);
             Died();

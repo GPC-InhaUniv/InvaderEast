@@ -63,10 +63,10 @@ public class SubAttackCtrl : MonoBehaviour
         switch (playerType)
         {
             case PlayerType.Sin:
-                StraightMissile();
+                HomingMissile();
                 break;
             case PlayerType.Ho:
-                HomingMissile();
+                StraightMissile();
                 break;
             default:
                 break;
