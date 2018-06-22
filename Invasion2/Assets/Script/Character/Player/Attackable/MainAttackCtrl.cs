@@ -91,7 +91,6 @@ public class MainAttackCtrl : MonoBehaviour
 
     public void Attack(int power)
     {
-        Debug.Log(power);
         switch (playerType)
         {
             case PlayerType.Sin:

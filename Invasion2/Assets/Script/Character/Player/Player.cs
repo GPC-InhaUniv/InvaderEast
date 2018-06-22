@@ -28,8 +28,11 @@ public class Player : Character
 {
     [SerializeField]
     PlayerType playerType;
+
+
     [SerializeField]
     int attackCount;
+    [SerializeField]
     float fireRate = 0.2f;
     float timeRate = 0.0f;
     float reloadAmmo = 0.5f;
@@ -44,12 +47,15 @@ public class Player : Character
     int magazineAddCount;
     [SerializeField]
     private GameObject[] playerModel;
+
+
     [SerializeField]
     SpriteRenderer barrier;
     SphereCollider myCollider;
     SubAttackCtrl subAttackCtrl;
-
     MainAttackCtrl mainAttackCtrl;
+    GuaidanceMove homingMove;
+
 
     private void Start()
     {
