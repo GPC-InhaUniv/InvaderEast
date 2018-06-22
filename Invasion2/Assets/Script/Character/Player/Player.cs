@@ -119,7 +119,7 @@ public class Player : Character
 
         if (attackCount == 3 && playerType!=PlayerType.Deung)
         {
-            //subAttackCtrl.Attack(power);
+            subAttackCtrl.Attack(power);
             //Debug.Log("보조 무장 작동 확인");
             attackCount = 0;
         }
@@ -183,7 +183,6 @@ public class Player : Character
         {
             --magazine;
             //Debug.Log("남은 잔탄 수 확인 : " + magazine);
-            attackCount++;
         }
         else if (EmptyAmmo && magazine==0)
         {
