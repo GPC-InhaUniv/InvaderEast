@@ -35,7 +35,6 @@ public class MainAttackCtrl : MonoBehaviour
     {
         playerBullet = PoolManager.Instance.GetPlayerSpreadBulletObject();
         playerBullet.transform.position = shotPosition.transform.position;
-       // playerBullet.transform.rotation = Quaternion.identity;
     }
     void SinShipFirstAttack()
     {

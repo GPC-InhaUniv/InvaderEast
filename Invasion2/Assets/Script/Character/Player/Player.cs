@@ -58,7 +58,7 @@ public class Player : Character
 
     [SerializeField]
     GameObject barrier;
-   
+
     SubAttackCtrl subAttackCtrl;
     MainAttackCtrl mainAttackCtrl;
     GuaidanceMove homingMove;
@@ -73,7 +73,7 @@ public class Player : Character
         barrier.SetActive(false);
         magazine = maxMagazine;
         mainAttackCtrl = gameObject.GetComponentInChildren<MainAttackCtrl>();
-          
+
     }
 
     private void Update()
@@ -107,17 +107,27 @@ public class Player : Character
         }
         else if (timeRate >= fireRate)
         {
-           
-            mainAttackCtrl.Attack(power);
+
+
             if (playerType == PlayerType.Deung)
             {
-                AmmoSpend();
+                if (magazine > 0)
+                {
+                    mainAttackCtrl.Attack(power);
+                   
+                }
+                
+                    AmmoSpend();
+            }
+            else
+            {
+                mainAttackCtrl.Attack(power);
             }
             timeRate = 0.0f;
             attackCount++;
         }
 
-        if (attackCount == 3 && playerType!=PlayerType.Deung)
+        if (attackCount == 3 && playerType != PlayerType.Deung)
         {
             subAttackCtrl.Attack(power);
             //Debug.Log("보조 무장 작동 확인");
@@ -127,10 +137,10 @@ public class Player : Character
 
     public override void OnTriggerEnter(Collider other)
     {
-      
-              
+
+
     }
- 
+
 
     public void ChangePlayer(PlayerType type)
     {
@@ -184,8 +194,9 @@ public class Player : Character
             --magazine;
             //Debug.Log("남은 잔탄 수 확인 : " + magazine);
         }
-        else if (EmptyAmmo && magazine==0)
+        else if (EmptyAmmo && magazine == 0)
         {
+            Debug.Log("탄 없음");
             StartCoroutine(AmmoReload());
         }
     }
@@ -193,7 +204,7 @@ public class Player : Character
     IEnumerator AmmoReload()
     {
         EmptyAmmo = false;
-        yield return new WaitForSeconds(5.0f);
+        yield return new WaitForSeconds(2.0f);
 
         //Debug.Log("재장전 대기 시간 종료");
         magazine = maxMagazine;
@@ -202,5 +213,5 @@ public class Player : Character
         StopCoroutine(AmmoReload());
     }
 
-  
+
 }
