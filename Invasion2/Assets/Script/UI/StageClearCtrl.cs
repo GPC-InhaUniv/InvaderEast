@@ -11,8 +11,7 @@ public class StageClearCtrl : MonoBehaviour {
 
     [SerializeField]
     Text scoreText;
-    [SerializeField]
-    int addScore = 7;
+    const int addScore = 7;
 
     int currentScore;
     int maxScore;
