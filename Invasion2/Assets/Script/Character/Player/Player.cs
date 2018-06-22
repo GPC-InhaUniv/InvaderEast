@@ -68,17 +68,14 @@ public class Player : Character
         DontDestroyOnLoad(gameObject);
         rigidbody = GetComponent<Rigidbody>();
         subAttackCtrl = FindObjectOfType<SubAttackCtrl>();
-       
+        barrier.SetActive(false);
         if (playerType == PlayerType.Deung)
         {
-            //myCollider.enabled = true;
-            //subAttackCtrl.Attack(power);
-            barrier = GameObject.FindWithTag("Barrier").GetComponent<GameObject>();
+            barrier.SetActive(true);
         }
         magazine = maxMagazine;
         mainAttackCtrl = gameObject.GetComponentInChildren<MainAttackCtrl>();
-        
-  
+          
     }
 
     private void Update()
