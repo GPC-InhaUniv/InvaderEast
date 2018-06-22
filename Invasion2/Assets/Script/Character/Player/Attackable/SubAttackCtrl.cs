@@ -9,8 +9,7 @@ public class SubAttackCtrl : MonoBehaviour
     GameObject straightMissile;
     [SerializeField]
     GameObject homingMissile;
-    [SerializeField]
-    GameObject barrier;
+  
     GuaidanceMove homingMove;
 
 
@@ -57,11 +56,7 @@ public class SubAttackCtrl : MonoBehaviour
         //  straightMissile.transform.rotation = Quaternion.identity;
     }
 
-    void Barrier()
-    {
-        Instantiate(barrier, transform.position, transform.rotation);
-    }
-
+ 
     public void Attack(int power)
     {
 

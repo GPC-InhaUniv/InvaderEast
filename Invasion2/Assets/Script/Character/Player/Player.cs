@@ -51,7 +51,9 @@ public class Player : Character
 
     [SerializeField]
     private GameObject[] playerModel;
-    const float CoolTime = 3.0f;
+
+    [SerializeField]
+    float CoolTime = 3.0f;
 
 
     [SerializeField]
@@ -69,10 +71,6 @@ public class Player : Character
         rigidbody = GetComponent<Rigidbody>();
         subAttackCtrl = FindObjectOfType<SubAttackCtrl>();
         barrier.SetActive(false);
-        if (playerType == PlayerType.Deung)
-        {
-            barrier.SetActive(true);
-        }
         magazine = maxMagazine;
         mainAttackCtrl = gameObject.GetComponentInChildren<MainAttackCtrl>();
           
@@ -143,18 +141,21 @@ public class Player : Character
                 playerModel[1].SetActive(false);
                 playerModel[2].SetActive(false);
                 playerType = type;
+                barrier.SetActive(false);
                 break;
             case PlayerType.Ho:
                 playerModel[0].SetActive(false);
                 playerModel[1].SetActive(true);
                 playerModel[2].SetActive(false);
                 playerType = type;
+                barrier.SetActive(false);
                 break;
             case PlayerType.Deung:
                 playerModel[0].SetActive(false);
                 playerModel[1].SetActive(false);
                 playerModel[2].SetActive(true);
                 playerType = type;
+                barrier.SetActive(true);
                 break;
 
             default:
@@ -201,10 +202,5 @@ public class Player : Character
         StopCoroutine(AmmoReload());
     }
 
-    public IEnumerator ShieldRecharge()
-    {
-        yield return new WaitForSeconds(CoolTime);
-        barrier.SetActive(true);
-        
-    }
+  
 }
