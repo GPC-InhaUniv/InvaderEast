@@ -1,36 +1,47 @@
 ﻿using UnityEngine;
 using System.Collections;
+/// <summary>
+/// 작성자 : 이재환
+/// 적 공격을 맞으면 배리어 비활성화
+/// 배리어의 쿨타임 시간 (코루틴)
+/// </summary>
 
 public class Barrier : MonoBehaviour
 {
-    /// <summary>
-    /// 작성자 : 이재환
-    /// 적 공격을 맞으면 배리어 비활성화
-    /// 배리어의 쿨타임 시간 (코루틴)
-    /// </summary>
-
-
-    Player player;
-
-    [SerializeField]
-    GameObject barrier;
-
     [SerializeField]
     const float CoolTime = 3.0f;
 
+    Collider barrierCollider;
 
+    [SerializeField]
+    GameObject barrierImage;
+
+    private void Start()
+    {
+        barrierCollider = GetComponent<Collider>();
+    }
+    private void OnEnable()
+    {
+        barrierImage.SetActive(true);
+    }
     private void OnTriggerEnter(Collider collider)
     {
-        if (collider.tag == "EnemyBullet")
-        {
-            barrier.SetActive(false);
-            Debug.Log("충돌?");
-        }
-
+        StartCoroutine(ShieldRecharge());
+        barrierCollider.enabled = false;
+        barrierImage.SetActive(false);
     }
-    IEnumerator ShieldRecharge()
+
+    public IEnumerator ShieldRecharge()
     {
+        Debug.Log("실드 재생성중");
         yield return new WaitForSeconds(CoolTime);
-        barrier.SetActive(true);
+        Debug.Log("실드 생성");
+        barrierCollider.enabled = true;
+        barrierImage.SetActive(true);
+    }
+
+    private void OnDisable()
+    {
+        barrierImage.SetActive(false);
     }
 }
