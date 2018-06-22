@@ -197,8 +197,6 @@ public class PoolManager : Singleton<PoolManager>
     {
         switch (type)
         {
-            case PlayerType.Deung:
-                break;
             case PlayerType.Sin:
                 if (HomingMissileQueue.Count > 0)
                 {

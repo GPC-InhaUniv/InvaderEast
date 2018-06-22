@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class GuaidanceMove : MonoBehaviour
 {
-    public PlayerType playerType;
-
-
+    [SerializeField]
+    SubAttackCtrl subAttackCtrl;
     [SerializeField]
     GameObject[] enemys;
-    [SerializeField]
-    GameObject enemy;
+    Quaternion chaingTarget;
     Vector3 rightSpawnPos;
     Vector3 leftSpawnPos;
     [SerializeField]
@@ -34,6 +32,8 @@ public class GuaidanceMove : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
         enemys = GameObject.FindGameObjectsWithTag("Enemy");
         FindTaget();
+        StageManager.Instance.restart += new Restart(ReturnPool);
+        subAttackCtrl = FindObjectOfType<SubAttackCtrl>();
     }
 
     private void FixedUpdate()
@@ -43,15 +43,15 @@ public class GuaidanceMove : MonoBehaviour
 
     void HomingMove()
     {
-        if (target)
+        if (target!=null)
         {
             chasing = target.transform.position - rigidbody.transform.position;
+            chaingTarget = Quaternion.LookRotation(chasing);
         }
         else
         {
             LostTarget();
         }
-        Quaternion chaingTarget = Quaternion.LookRotation(chasing);
         Quaternion SmoothRotate = Quaternion.Slerp(rigidbody.transform.rotation, chaingTarget, rotateSpeed * Time.deltaTime);
         rigidbody.transform.rotation = SmoothRotate;
         rigidbody.transform.Translate(new Vector3(0, 0, 1) * moveSpeed * Time.deltaTime);
@@ -84,7 +84,28 @@ public class GuaidanceMove : MonoBehaviour
     {
         if(tag=="HomingMissile" && other.tag!="Boundary")
         {
-            PoolManager.Instance.PutPlayerMissileObject(gameObject, playerType);
+            target = null;
+            PoolManager.Instance.PutPlayerMissileObject(gameObject, subAttackCtrl.playerType);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Boundary")
+        {
+            if (tag == "HomingMissile")
+            {
+                target = null;
+                PoolManager.Instance.PutPlayerMissileObject(gameObject, subAttackCtrl.playerType);
+            }
+        }
+    }
+
+    public void ReturnPool()
+    {
+        if (tag == "HomingMissile")
+        {
+            PoolManager.Instance.PutPlayerMissileObject(gameObject, subAttackCtrl.playerType);
         }
     }
 }
