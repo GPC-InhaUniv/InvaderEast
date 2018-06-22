@@ -123,22 +123,12 @@ public class ItemManager : Singleton<ItemManager>
         }
     }
 
-    public void SpawnItem(ItemType item,Transform enemyPos)
+    public void SpawnItem(GameObject enemyPos)
     {
-        switch (item)
-        {
-            case ItemType.PowerItem:
-                 Instantiate(powerItemPrefab,enemyPos);
-                break;
-            case ItemType.LifeItem:
-                Instantiate(powerItemPrefab, enemyPos);
-                break;
-            case ItemType.GoldItem:
-                Instantiate(powerItemPrefab, enemyPos);
-                break;
-            case ItemType.ScoreItem:
-                 Instantiate(powerItemPrefab, enemyPos);
-                break;
-        }
+        GameObject itemObject;
+        itemObject = PoolManager.Instance.GetItemObject();
+        itemObject.transform.position = enemyPos.transform.position;
+
+
     }
 }
