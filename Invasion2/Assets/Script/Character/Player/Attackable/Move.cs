@@ -6,7 +6,9 @@
 
 public class Move : MonoBehaviour
 {
-    public float speed;
+    [SerializeField]
+    float speed;
+
     Rigidbody rigidbody;
 
     void Start()

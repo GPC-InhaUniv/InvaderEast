@@ -6,10 +6,11 @@
 /// Gold와 Score 아이템은 생성시에 1 ~ 몬스터가 줄수 있는 최대 값사이의 랜덤값이 넣어진다.
 /// </summary>
 
-public class Item : MonoBehaviour {
-    public ItemType ItemType;
-    public int Gold;
-    public int Score;
+public class Item : MonoBehaviour
+{
+    ItemType itemType;
+    int gold;
+    int score;
 
     private void OnEnable()
     {
@@ -18,18 +19,44 @@ public class Item : MonoBehaviour {
 
     private void SetItemInfo()
     {
-        ItemType = (ItemType)Random.Range(1, 4);
-        Gold = Random.Range(1, 10);
-        Score = Random.Range(10, 50);
+        itemType = (ItemType)Random.Range(0, 4);
+        if (itemType >= (ItemType)2)
+        {
+            switch (itemType)
+            {
+                case ItemType.GoldItem:
+                    gold = Random.Range(1, 10);
+                    break;
+                case ItemType.ScoreItem:
+                    score = Random.Range(10, 50);
+                    break;
+            }
+        }    
     }
 
     
     private void OnTriggerEnter(Collider other)
     {
-        gameObject.SetActive(false);
+       
+        switch (itemType)
+        {
+            case ItemType.GoldItem:
+                ItemManager.Instance.GetItem(itemType, gold);
+                
+                break;
+            case ItemType.ScoreItem:
+                ItemManager.Instance.GetItem(itemType, score);
+                
+                break;
+            default:
+                ItemManager.Instance.GetItem(itemType);
+                break;
+        }
+        PoolManager.Instance.PutItemObject(gameObject);
+
     }
     private void OnDisable()
     {
-        PoolManager.Instance.PutItemObject(gameObject);
+       
     }
 }

@@ -66,6 +66,7 @@ public class Enemy : Character
         enemyPattern = gameObject.GetComponent<EnemyAttackPattern>();
         // ChangeType(enemyType);
         StageManager.Instance.restart += new Restart(Died);
+        gameMediator = GameObject.FindGameObjectWithTag("GameMediator").GetComponent<GameMediator>();
     }
 
     private void SetEnemyInfo()
@@ -111,6 +112,7 @@ public class Enemy : Character
 
     public void Died()
     {
+        gameMediator.SpawnItem(gameObject);
         StageManager.Instance.RemoveEnemy(gameObject);
     }
 

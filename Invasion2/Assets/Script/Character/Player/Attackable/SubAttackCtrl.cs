@@ -24,7 +24,7 @@ public class SubAttackCtrl : MonoBehaviour
     private void Start()
     {
         homingMove = gameObject.GetComponentInChildren<GuaidanceMove>();
-        homingMove.playerType = playerType;
+    //    homingMove.playerType = playerType;
     }
 
 
