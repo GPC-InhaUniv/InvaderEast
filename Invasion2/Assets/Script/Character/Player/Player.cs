@@ -54,7 +54,6 @@ public class Player : Character
     SphereCollider myCollider;
     SubAttackCtrl subAttackCtrl;
     MainAttackCtrl mainAttackCtrl;
-    GuaidanceMove homingMove;
 
 
     private void Start()
@@ -74,7 +73,7 @@ public class Player : Character
         magazine = maxMagazine;
         mainAttackCtrl = gameObject.GetComponentInChildren<MainAttackCtrl>();
         
-      
+
     }
 
     private void Update()
@@ -120,7 +119,7 @@ public class Player : Character
 
         if (attackCount == 3 && playerType!=PlayerType.Deung)
         {
-           // subAttackCtrl.Attack(power);
+           subAttackCtrl.Attack(power);
             //Debug.Log("보조 무장 작동 확인");
             attackCount = 0;
         }
