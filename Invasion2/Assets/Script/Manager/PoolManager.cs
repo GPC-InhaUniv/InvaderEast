@@ -166,10 +166,7 @@ public class PoolManager : Singleton<PoolManager>
         GameObject bullet;
         switch (type)
         {
-            case PlayerType.Deung:
-                break;
-
-            case PlayerType.Sin:
+          case PlayerType.Sin:
                 bullet = HomingMissileQueue.Dequeue();
                 bullet.SetActive(true);
                 break;
