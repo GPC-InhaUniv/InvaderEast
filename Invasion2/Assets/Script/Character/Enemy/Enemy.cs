@@ -112,8 +112,8 @@ public class Enemy : Character
 
     public void Died()
     {
-        gameMediator.SpawnItem(gameObject);
         StageManager.Instance.RemoveEnemy(gameObject);
+        PoolManager.Instance.PutEnemyObject(gameObject);
     }
 
     private void OnDisable()
@@ -125,6 +125,7 @@ public class Enemy : Character
     {
         if (other.tag == "Boundary")
         {
+            Debug.Log("나감");
             Died();
         }
     }
@@ -132,6 +133,7 @@ public class Enemy : Character
     {
         if (other.tag == ("PlayerBullet"))
         {
+            gameMediator.SpawnItem(gameObject);
             Died();
         }
     }

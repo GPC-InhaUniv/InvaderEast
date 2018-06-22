@@ -12,11 +12,22 @@ public class Item : MonoBehaviour
     int gold;
     int score;
 
+    [SerializeField]
+    float speed;
+
+    Rigidbody rigidbody;
+
+
     private void OnEnable()
     {
         SetItemInfo();
     }
 
+    private void Start()
+    {
+        rigidbody = GetComponent<Rigidbody>();
+        rigidbody.velocity = transform.forward * -speed;
+    }
     private void SetItemInfo()
     {
         itemType = (ItemType)Random.Range(0, 4);
@@ -37,23 +48,32 @@ public class Item : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-       
-        switch (itemType)
+        if (other.tag != "Boundary")
         {
-            case ItemType.GoldItem:
-                ItemManager.Instance.GetItem(itemType, gold);
-                
-                break;
-            case ItemType.ScoreItem:
-                ItemManager.Instance.GetItem(itemType, score);
-                
-                break;
-            default:
-                ItemManager.Instance.GetItem(itemType);
-                break;
-        }
-        PoolManager.Instance.PutItemObject(gameObject);
+            switch (itemType)
+            {
+                case ItemType.GoldItem:
+                    ItemManager.Instance.GetItem(itemType, gold);
 
+                    break;
+                case ItemType.ScoreItem:
+                    ItemManager.Instance.GetItem(itemType, score);
+
+                    break;
+                default:
+                    ItemManager.Instance.GetItem(itemType);
+                    break;
+            }
+            PoolManager.Instance.PutItemObject(gameObject);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.tag == "Boundary")
+        {
+            PoolManager.Instance.PutItemObject(gameObject);
+        }
     }
     private void OnDisable()
     {

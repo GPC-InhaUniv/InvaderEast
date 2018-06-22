@@ -132,13 +132,7 @@ public class Player : Character
 
     public override void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Item")
-        {
-            Debug.Log("아이템 획득 : " + other);
-            Item itemType = other.GetComponent<Item>();
-            gameMediator.GetItem(itemType.ItemType);
-            AddAmmo();
-        }
+      
               
     }
  
