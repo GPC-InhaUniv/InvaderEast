@@ -10,4 +10,26 @@ public class Item : MonoBehaviour {
     public ItemType ItemType;
     public int Gold;
     public int Score;
+
+    private void OnEnable()
+    {
+        SetItemInfo();
+    }
+
+    private void SetItemInfo()
+    {
+        ItemType = (ItemType)Random.Range(1, 4);
+        Gold = Random.Range(1, 10);
+        Score = Random.Range(10, 50);
+    }
+
+    
+    private void OnTriggerEnter(Collider other)
+    {
+        gameObject.SetActive(false);
+    }
+    private void OnDisable()
+    {
+        PoolManager.Instance.PutItemObject(gameObject);
+    }
 }

@@ -23,7 +23,8 @@ public class PoolManager : Singleton<PoolManager>
     Queue<GameObject> PlayerSpreadBulletQueue;
     Queue<GameObject> HomingMissileQueue;
     Queue<GameObject> StraightMissileQueue;
-    
+    Queue<GameObject> ItemQueue;
+
     [SerializeField]
     GameObject EnemyPrefab;
     [SerializeField]
@@ -36,10 +37,14 @@ public class PoolManager : Singleton<PoolManager>
     GameObject HomingMissilePrefab;
     [SerializeField]
     GameObject StraightMissilePrefab;
+    [SerializeField]
+    GameObject itemPrefab;
 
     const int EnemyQueueSize = 30;
-    const int EnemyBulletQueueSize = 100;
-    const int PlayerBulletQueueSize = 100;
+    const int EnemyBulletQueueSize = 200;
+    const int PlayerBulletQueueSize = 200;
+
+
 
     void Start()
     {
@@ -50,6 +55,7 @@ public class PoolManager : Singleton<PoolManager>
         HomingMissilePrefab = Resources.Load("HomingMissile") as GameObject;
         StraightMissilePrefab = Resources.Load("StraightMissile") as GameObject;
         PlayerSpreadBulletPrefab = Resources.Load("SpreadBullet") as GameObject;
+        itemPrefab = Resources.Load("Item") as GameObject;
         SetQueue();
     }
 
@@ -61,6 +67,7 @@ public class PoolManager : Singleton<PoolManager>
         PlayerSpreadBulletQueue = CreateQueue(PlayerSpreadBulletQueue, PlayerBulletQueueSize / 10, PlayerSpreadBulletPrefab);
         HomingMissileQueue = CreateQueue(HomingMissileQueue, PlayerBulletQueueSize / 10, HomingMissilePrefab);
         StraightMissileQueue = CreateQueue(StraightMissileQueue, PlayerBulletQueueSize / 10, StraightMissilePrefab);
+        ItemQueue = CreateQueue(ItemQueue, EnemyQueueSize, itemPrefab);
     }
 
     Queue<GameObject> CreateQueue(Queue<GameObject> queue, int size, GameObject prefab)
@@ -208,6 +215,28 @@ public class PoolManager : Singleton<PoolManager>
             default:
                 break;
         }
+    }
+
+    public GameObject GetItemObject()
+    {
+        if (EnemyQueue.Count > 0)
+        {
+            GameObject gameObject;
+            gameObject = ItemQueue.Dequeue();
+            gameObject.SetActive(true);
+            return gameObject;
+        }
+        else
+        {
+            Debug.Log("ItemQueue is Underflow exception");
+            return null;
+        }
+    }
+
+    public void PutItemObject(GameObject gameObject)
+    {
+        ItemQueue.Enqueue(gameObject);
+        gameObject.SetActive(false);
     }
 
 }

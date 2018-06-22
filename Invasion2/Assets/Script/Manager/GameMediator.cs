@@ -131,9 +131,9 @@ public class GameMediator : MonoBehaviour
         sceneController.ChangeScene(state);
     }
     
-    public void SpawnItem(ItemType type, Transform enemyPos)
+    public void SpawnItem(ItemType type, GameObject enemyPos)
     {
-        itemMangager.SpawnItem(type, enemyPos);
+        itemMangager.SpawnItem(enemyPos);
     }
     
     //pool manager 관련 메서드
