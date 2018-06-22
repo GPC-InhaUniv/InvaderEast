@@ -101,7 +101,7 @@ public class GameMediator : MonoBehaviour
     // 캐릭터 파워,최대 체력, 장비, 모델 변경
     public void ChangePlayerPower(int count)
     {
-        player.Power += count;
+        player.Power = count;
     }
     public void ChangePlayerLife(int count)
     {
@@ -131,7 +131,7 @@ public class GameMediator : MonoBehaviour
         sceneController.ChangeScene(state);
     }
     
-    public void SpawnItem(ItemType type, GameObject enemyPos)
+    public void SpawnItem(GameObject enemyPos)
     {
         itemMangager.SpawnItem(enemyPos);
     }

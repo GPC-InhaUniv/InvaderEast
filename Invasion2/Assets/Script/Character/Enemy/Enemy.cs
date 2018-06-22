@@ -66,6 +66,7 @@ public class Enemy : Character
         enemyPattern = gameObject.GetComponent<EnemyAttackPattern>();
         // ChangeType(enemyType);
         StageManager.Instance.restart += new Restart(Died);
+        gameMediator = GameObject.FindGameObjectWithTag("GameMediator").GetComponent<GameMediator>();
     }
 
     private void SetEnemyInfo()
@@ -112,6 +113,7 @@ public class Enemy : Character
     public void Died()
     {
         StageManager.Instance.RemoveEnemy(gameObject);
+        PoolManager.Instance.PutEnemyObject(gameObject);
     }
 
     private void OnDisable()
@@ -123,6 +125,7 @@ public class Enemy : Character
     {
         if (other.tag == "Boundary")
         {
+            Debug.Log("나감");
             Died();
         }
     }
@@ -130,6 +133,7 @@ public class Enemy : Character
     {
         if (other.tag == ("PlayerBullet"))
         {
+            gameMediator.SpawnItem(gameObject);
             Died();
         }
     }
