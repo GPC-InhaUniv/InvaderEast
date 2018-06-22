@@ -42,8 +42,8 @@ public class PoolManager : Singleton<PoolManager>
 
     const int EnemyQueueSize = 30;
     const int EnemyBulletQueueSize = 200;
-    const int PlayerBulletQueueSize = 200;
-
+    const int PlayerBulletQueueSize = 30;
+    const int PlayerSpreadBulletQueueSize = 4;
 
 
     void Start()
@@ -65,7 +65,7 @@ public class PoolManager : Singleton<PoolManager>
         EnemyQueue = CreateQueue( EnemyQueue, EnemyQueueSize, EnemyPrefab);
         EnemyBulletQueue = CreateQueue( EnemyBulletQueue, EnemyBulletQueueSize, EnemyBulletPrefab);
         PlayerBulletQueue = CreateQueue(PlayerBulletQueue, PlayerBulletQueueSize, PlayerBulletPrefab);
-        PlayerSpreadBulletQueue = CreateQueue(PlayerSpreadBulletQueue, PlayerBulletQueueSize / 10, PlayerSpreadBulletPrefab);
+        PlayerSpreadBulletQueue = CreateQueue(PlayerSpreadBulletQueue, PlayerSpreadBulletQueueSize, PlayerSpreadBulletPrefab);
         HomingMissileQueue = CreateQueue(HomingMissileQueue, PlayerBulletQueueSize / 10, HomingMissilePrefab);
         StraightMissileQueue = CreateQueue(StraightMissileQueue, PlayerBulletQueueSize / 10, StraightMissilePrefab);
        
@@ -137,6 +137,7 @@ public class PoolManager : Singleton<PoolManager>
             GameObject gameObject;
             gameObject = PlayerBulletQueue.Dequeue();
             gameObject.SetActive(true);
+            
             return gameObject;
         }
         else Debug.Log("PlayerBulletQueue : UnderFlow Error");
@@ -145,7 +146,10 @@ public class PoolManager : Singleton<PoolManager>
 
     public void PutPlayerBulletObject(GameObject gameObject)
     {
+        gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
+        gameObject.transform.position = new Vector3(0, 0, 0);
         PlayerBulletQueue.Enqueue(gameObject);
+        
         gameObject.SetActive(false);
 
     }
@@ -156,6 +160,7 @@ public class PoolManager : Singleton<PoolManager>
         {
             GameObject gameObject;
             gameObject = PlayerSpreadBulletQueue.Dequeue();
+            gameObject.transform.rotation = Quaternion.identity;
             gameObject.SetActive(true);
             return gameObject;
         }
@@ -165,6 +170,7 @@ public class PoolManager : Singleton<PoolManager>
 
     public void PutPlayerSpreadBulletObject(GameObject gameObject)
     {
+        
         PlayerSpreadBulletQueue.Enqueue(gameObject);
         gameObject.SetActive(false);
     }

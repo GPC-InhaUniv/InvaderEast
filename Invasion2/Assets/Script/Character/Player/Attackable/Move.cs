@@ -11,17 +11,37 @@ public class Move : MonoBehaviour
 
     Rigidbody rigidbody;
 
-    void Start()
+    Transform thisTransform;
+    private void Awake()
     {
         rigidbody = GetComponent<Rigidbody>();
+        thisTransform = gameObject.transform;
+
+    }
+
+    private void OnEnable()
+    {
+        
+       
+    }
+
+    private void FixedUpdate()
+    {
         rigidbody.velocity = transform.forward * speed;
+    }
+
+    void Start()
+    {
         StageManager.Instance.restart += new Restart(ReturnPool);
+        transform.position = thisTransform.transform.position;
+        transform.rotation = thisTransform.transform.rotation;
     }
 
     public void ReturnPool()
     {
         if (tag == "PlayerBullet")
         {
+            
             PoolManager.Instance.PutPlayerBulletObject(gameObject);
         }
 
@@ -60,5 +80,11 @@ public class Move : MonoBehaviour
                 PoolManager.Instance.PutEnemyBulletObject(gameObject);
             }
         }
+    }
+
+    private void OnDisable()
+    {
+        transform.position = new Vector3(0, 0, 0);
+        transform.rotation = Quaternion.identity;
     }
 }

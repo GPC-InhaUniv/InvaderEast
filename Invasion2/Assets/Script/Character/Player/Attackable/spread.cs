@@ -5,44 +5,46 @@ using UnityEngine;
 public class spread : MonoBehaviour
 {
     const int spreadCount = 10;
-    const int maxAngle = 360;
+    const int maxAngle = 300;
     int angle;
-    [SerializeField]
-    GameObject playerBullet;
+   
+    
 
+    [SerializeField]
+    GameObject shotPosition;
     private void Start()
     {
-        //StartCoroutine(bulletSpread());
-
-        Invoke("bulletSpread", 0.5f);
+     
     }
 
-    public void bulletSpread()
+    private void OnEnable()
     {
-        Debug.Log("불림");
-        PoolManager.Instance.PutPlayerSpreadBulletObject(gameObject);
-        angle = maxAngle / spreadCount;
-        for (int i = 0; i < spreadCount; i++)
-        {
-            playerBullet = PoolManager.Instance.GetPlayerBulletObject();
-            playerBullet.transform.position = transform.position;
-            playerBullet.transform.rotation = Quaternion.Euler(0f, angle * i, 0f);
-            
-
-        }
-        
+        StartCoroutine(bulletSpread());
+       
     }
-    /*
+ 
+ 
+    
     public IEnumerator bulletSpread()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
         angle = maxAngle / spreadCount;
+       
         for (int i = 0; i < spreadCount; i++)
         {
+            GameObject playerBullet;
             playerBullet = PoolManager.Instance.GetPlayerBulletObject();
-            playerBullet.transform.position = transform.position;
-            playerBullet.transform.rotation = Quaternion.Euler(0f, angle * i, 0f);
+            shotPosition.transform.rotation = Quaternion.Euler(0f, angle * i, 0f);
+            playerBullet.transform.position = shotPosition.transform.position;
+            playerBullet.transform.rotation = shotPosition.transform.rotation;
+           // Debug.Log(angle * i);
+            //playerBullet.transform.rotation = Quaternion.Euler(0f, 10 * i, 0f);
+
         }
         PoolManager.Instance.PutPlayerSpreadBulletObject(gameObject);
-    }*/
+    }
+    private void OnDisable()
+    {
+
+    }
 }
