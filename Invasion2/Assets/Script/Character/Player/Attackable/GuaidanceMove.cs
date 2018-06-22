@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class GuaidanceMove : MonoBehaviour
 {
+    public PlayerType playerType;
+
+
     [SerializeField]
     GameObject[] enemys;
     [SerializeField]
@@ -14,7 +17,9 @@ public class GuaidanceMove : MonoBehaviour
     GameObject target;
     Vector3 chasing;
 
+
     new Rigidbody rigidbody;
+
 
     float angle;
     float enemyDistance;
@@ -22,6 +27,7 @@ public class GuaidanceMove : MonoBehaviour
     float minDistance;
     float rotateSpeed = 45.0f;
     float moveSpeed = 10.0f;
+
 
     void Start()
     {
@@ -72,5 +78,13 @@ public class GuaidanceMove : MonoBehaviour
             }
         }
         return target;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(tag=="HomingMissile" && other.tag!="Boundary")
+        {
+            PoolManager.Instance.PutPlayerMissileObject(gameObject, playerType);
+        }
     }
 }

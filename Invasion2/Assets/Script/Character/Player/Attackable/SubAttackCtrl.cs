@@ -11,10 +11,21 @@ public class SubAttackCtrl : MonoBehaviour
     GameObject homingMissile;
     [SerializeField]
     GameObject barrier;
+    GuaidanceMove homingMove;
    
+
     public PlayerType playerType;
+
+
     [SerializeField]
     const float CoolTime = 3.0f;
+
+
+    private void Start()
+    {
+        homingMove = gameObject.GetComponentInChildren<GuaidanceMove>();
+        homingMove.playerType = playerType;
+    }
 
 
     void HomingMissile()
@@ -68,9 +79,6 @@ public class SubAttackCtrl : MonoBehaviour
                 break;
             case PlayerType.Ho:
                 HomingMissile();
-                break;
-            case PlayerType.Deung:
-                Barrier();
                 break;
             default:
                 break;
