@@ -32,6 +32,7 @@ public class Player : Character
 
     [SerializeField]
     int attackCount;
+
     [SerializeField]
     float fireRate = 0.2f;
     float timeRate = 0.0f;
@@ -40,18 +41,22 @@ public class Player : Character
     float coolTime = 3.0f;
     bool EmptyAmmo = true;
     bool fire = false;
+
     [SerializeField]
     int magazine;
+
     [SerializeField]
     int maxMagazine = 2;
     int magazineAddCount;
+
     [SerializeField]
     private GameObject[] playerModel;
+    const float CoolTime = 3.0f;
 
 
     [SerializeField]
     GameObject barrier;
-    SphereCollider myCollider;
+   
     SubAttackCtrl subAttackCtrl;
     MainAttackCtrl mainAttackCtrl;
     GuaidanceMove homingMove;
@@ -63,18 +68,17 @@ public class Player : Character
         DontDestroyOnLoad(gameObject);
         rigidbody = GetComponent<Rigidbody>();
         subAttackCtrl = FindObjectOfType<SubAttackCtrl>();
-        myCollider = gameObject.GetComponent<SphereCollider>();
-        myCollider.enabled = false;
+       
         if (playerType == PlayerType.Deung)
         {
-            myCollider.enabled = true;
-            subAttackCtrl.Attack(power);
+            //myCollider.enabled = true;
+            //subAttackCtrl.Attack(power);
             barrier = GameObject.FindWithTag("Barrier").GetComponent<GameObject>();
         }
         magazine = maxMagazine;
         mainAttackCtrl = gameObject.GetComponentInChildren<MainAttackCtrl>();
         
-      
+  
     }
 
     private void Update()
@@ -120,7 +124,7 @@ public class Player : Character
 
         if (attackCount == 3 && playerType!=PlayerType.Deung)
         {
-           // subAttackCtrl.Attack(power);
+            //subAttackCtrl.Attack(power);
             //Debug.Log("보조 무장 작동 확인");
             attackCount = 0;
         }
@@ -135,16 +139,7 @@ public class Player : Character
             gameMediator.GetItem(itemType.ItemType);
             AddAmmo();
         }
-
-        if (other.tag == "EnemyBullet" || other.tag == "Enemy")
-        {
-            if(playerType==PlayerType.Deung)
-            {
-                myCollider.enabled = false;
-                barrier.enabled = false;
-                StartCoroutine(RegenBarrier());
-            }
-        }       
+              
     }
  
 
@@ -216,11 +211,10 @@ public class Player : Character
         StopCoroutine(AmmoReload());
     }
 
-    public IEnumerator RegenBarrier()
+    public IEnumerator ShieldRecharge()
     {
-        yield return new WaitForSeconds(coolTime);
-        myCollider.enabled = true;
-        barrier.enabled = true;
-        StopCoroutine(RegenBarrier());
+        yield return new WaitForSeconds(CoolTime);
+        barrier.SetActive(true);
+        
     }
 }
