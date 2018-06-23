@@ -7,7 +7,8 @@
 /// Ex) 플레이어 시작 위치, 스테이지 시작, 배경관리 등
 /// </summary>
 
-public class GameController : MonoBehaviour {
+public class GameController : MonoBehaviour
+{
 
     GameMediator gameMediator;
     GameObject player;
@@ -16,18 +17,19 @@ public class GameController : MonoBehaviour {
     private void Awake()
     {
         poolnstance = PoolManager.Instance;
-      //  PoolManager.Instance.SetQueue();
+        //  PoolManager.Instance.SetQueue();
         StageManager.Instance.SetStage();
     }
-    void Start () {
+    void Start()
+    {
         gameMediator = GameObject.FindGameObjectWithTag("GameMediator").GetComponent<GameMediator>();
         player = GameObject.FindGameObjectWithTag("Player");
 
-      //  PoolManager.Instance.SetQueue();
-        
-//StageManager.Instance.NextStage();
+        //  PoolManager.Instance.SetQueue();
+
+        StageManager.Instance.NextStage();
 
     }
-	
-	
+
+
 }
