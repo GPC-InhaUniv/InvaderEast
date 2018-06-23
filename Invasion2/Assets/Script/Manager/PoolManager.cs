@@ -42,8 +42,8 @@ public class PoolManager : Singleton<PoolManager>
 
     const int EnemyQueueSize = 30;
     const int EnemyBulletQueueSize = 200;
-    const int PlayerBulletQueueSize = 30;
-    const int PlayerSpreadBulletQueueSize = 4;
+    const int PlayerBulletQueueSize = 200;
+    const int PlayerSpreadBulletQueueSize = 10;
 
 
     void Start()
