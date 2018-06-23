@@ -97,10 +97,13 @@ public class GameMediator : MonoBehaviour
         itemMangager.SellItem(item);
     }
 
-    
+
     // 캐릭터 파워,최대 체력, 장비, 모델 변경
+    public delegate void ChangePower();
+    public ChangePower changePower;
     public void ChangePlayerPower(int count)
     {
+
         player.Power = count;
     }
     public void ChangePlayerLife(int count)

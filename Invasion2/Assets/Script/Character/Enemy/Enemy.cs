@@ -50,43 +50,45 @@ public class Enemy : Character
 
     private void OnEnable()
     {
-       SetEnemyInfo();
-       StartCoroutine(TimeDelay());
+        SetEnemyInfo();
+        StartCoroutine(TimeDelay());
     }
     IEnumerator TimeDelay()
     {
         yield return new WaitForSeconds(1f);
         if (gameObject.activeSelf == true)
-        ChangeType(enemyType);
+            ChangeType(enemyType);
     }
-    
+
     private void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
         enemyPattern = gameObject.GetComponent<EnemyAttackPattern>();
         // ChangeType(enemyType);
+        maxLife = 5;
         StageManager.Instance.restart += new Restart(Died);
         gameMediator = GameObject.FindGameObjectWithTag("GameMediator").GetComponent<GameMediator>();
+        SetEnemyInfo();
     }
 
     private void SetEnemyInfo()
     {
-       
+        currentLife = maxLife;
         enemyType = (EnemyType)Random.Range(1, 5);
         giveMaxGold = Random.Range(1, 10);
         direction = (Direction)Random.Range(1, 6);
     }
 
-   
+
     //타입 변경시마다 코루틴 종료
     private void ChangeType(EnemyType type)
     {
-        
+
         switch (type)
         {
             case EnemyType.Gyo:
                 giveScore = 100;
-        
+
                 StartCoroutine(enemyPattern.EnemyPattern1());
                 break;
             case EnemyType.Tong:
@@ -95,7 +97,7 @@ public class Enemy : Character
                 break;
             case EnemyType.Bub:
                 giveScore = 200;
-               StartCoroutine(enemyPattern.EnemyPattern3());
+                StartCoroutine(enemyPattern.EnemyPattern3());
                 break;
             case EnemyType.Gyu:
                 giveScore = 250;
@@ -119,7 +121,7 @@ public class Enemy : Character
     private void OnDisable()
     {
         StopAllCoroutines();
-       // StageManager.Instance.RemoveEnemy(gameObject);
+        // StageManager.Instance.RemoveEnemy(gameObject);
     }
     private void OnTriggerExit(Collider other)
     {
@@ -131,7 +133,21 @@ public class Enemy : Character
     }
     public override void OnTriggerEnter(Collider other)
     {
-        if (other.tag == ("PlayerBullet") || other.tag==("HomingMissile"))
+        if (other.tag == ("PlayerBullet"))
+        {
+            currentLife--;
+            if (currentLife <= 0)
+            {
+                gameMediator.SpawnItem(gameObject);
+                Died();
+            }
+        }
+        if (other.tag == ("HomingMissile"))
+        {
+            gameMediator.SpawnItem(gameObject);
+            Died();
+        }
+        if(other.tag == ("StraightMissile"))
         {
             gameMediator.SpawnItem(gameObject);
             Died();
