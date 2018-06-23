@@ -25,12 +25,13 @@ public class GuaidanceMove : MonoBehaviour
     float minDistance;
     [SerializeField, Range(0,180)]
     float rotateSpeed;
+    [SerializeField, Range(0,50)]
     float moveSpeed = 10.0f;
 
     private void OnEnable()
     {
         enemys = GameObject.FindGameObjectsWithTag("Enemy");
-        if(enemys.Length>0)
+        if (enemys.Length>0)
         {
             FindTarget();
         }
@@ -44,7 +45,6 @@ public class GuaidanceMove : MonoBehaviour
         {
             FindTarget();
         }
-        Debug.Log("적이 있는가" + enemys);
         StageManager.Instance.restart += new Restart(ReturnPool);
         subAttackCtrl = FindObjectOfType<SubAttackCtrl>();
     }
@@ -109,10 +109,8 @@ public class GuaidanceMove : MonoBehaviour
     {
         if (tag == "HomingMissile" && other.tag != "Boundary")
         {
-            target = null;
             rigidbody.transform.rotation = Quaternion.Euler(0, 0, 0);
             PoolManager.Instance.PutPlayerMissileObject(gameObject, subAttackCtrl.playerType);
-            Debug.Log("파괴된 미사일 수거 작동");
         }
     }
 
@@ -122,10 +120,8 @@ public class GuaidanceMove : MonoBehaviour
         {
             if (tag == "HomingMissile")
             {
-                target = null;
                 rigidbody.transform.rotation = Quaternion.Euler(0, 0, 0);
                 PoolManager.Instance.PutPlayerMissileObject(gameObject, subAttackCtrl.playerType);
-                Debug.Log("시점 밖 미사일 수거 작동");
             }
         }
     }
