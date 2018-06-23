@@ -26,17 +26,18 @@ using System;
 
 public class Player : Character
 {
-    PlayerType playerType;
     [SerializeField]
-    int attackMaxCount;
+    PlayerType playerType;
+
+
+    [SerializeField]
     int attackCount;
 
     [SerializeField]
     float fireRate = 0.2f;
     float timeRate = 0.0f;
     float reloadAmmo = 0.5f;
-    [SerializeField]
-    float reloadTime = 2.0f;
+    float reloadTime = 0.0f;
     float coolTime = 3.0f;
     bool EmptyAmmo = true;
     bool fire = false;
@@ -47,8 +48,6 @@ public class Player : Character
     [SerializeField]
     int maxMagazine = 2;
     int magazineAddCount;
-
-   
 
     [SerializeField]
     private GameObject[] playerModel;
@@ -108,6 +107,7 @@ public class Player : Character
         }
         else if (timeRate >= fireRate)
         {
+            
             if (playerType == PlayerType.Deung)
             {
                 if (magazine > 0)
@@ -116,7 +116,7 @@ public class Player : Character
                    
                 }
                 
-                    AmmoSpend();
+                 AmmoSpend();
             }
             else
             {
@@ -126,7 +126,7 @@ public class Player : Character
             attackCount++;
         }
 
-        if (attackCount == attackMaxCount && playerType != PlayerType.Deung)
+        if (attackCount == 3 && playerType != PlayerType.Deung)
         {
             subAttackCtrl.Attack(power);
             //Debug.Log("보조 무장 작동 확인");
@@ -136,10 +136,7 @@ public class Player : Character
 
     public override void OnTriggerEnter(Collider other)
     {
-        if(other.tag != "Item")
-        {
-            currentLife--;
-        }
+
 
     }
 
@@ -206,7 +203,8 @@ public class Player : Character
     IEnumerator AmmoReload()
     {
         EmptyAmmo = false;
-        yield return new WaitForSeconds(reloadTime);
+        yield return new WaitForSeconds(2.0f);
+
         //Debug.Log("재장전 대기 시간 종료");
         magazine = maxMagazine;
         //Debug.Log("재장전 장탄 수 확인 : " + magazine);

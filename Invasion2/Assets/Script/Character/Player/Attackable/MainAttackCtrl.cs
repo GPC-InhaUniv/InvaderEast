@@ -23,14 +23,18 @@ public class MainAttackCtrl : MonoBehaviour
     //test field
     [SerializeField]
     int magazineCount;
+
     [SerializeField]
     int maxmagazineCount;
+
     [SerializeField]
     GameObject SpreadPrefab;
 
     [SerializeField]
     GameObject shotPosition;
+
     public PlayerType playerType;
+
     void DeungShipAttack()
     {
         playerBullet = PoolManager.Instance.GetPlayerSpreadBulletObject();
