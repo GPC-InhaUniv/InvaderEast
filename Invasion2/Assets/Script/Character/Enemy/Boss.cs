@@ -47,7 +47,7 @@ public class Boss : Enemy
     void Start()
     {
        
-        gameMediator = GameObject.FindGameObjectWithTag("GameMediator").GetComponent<GameMediator>();
+        
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         rigidbody = GetComponent<Rigidbody>();
         maxLife = 1000;

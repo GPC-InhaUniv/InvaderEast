@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class spread : MonoBehaviour
 {
-    const int spreadCount = 10;
-    const int maxAngle = 360;
+    const int spreadCount = 24;
+    const int maxAngle = 120;
     int angle;
 
 
@@ -28,7 +28,7 @@ public class spread : MonoBehaviour
         yield return new WaitForSeconds(1f);
         angle = maxAngle / spreadCount;
 
-        for (int i = 0; i < spreadCount; i++)
+        for (int i = -spreadCount / 2; i < spreadCount/2; i++)
         {
             GameObject playerBullet;
             playerBullet = PoolManager.Instance.GetPlayerBulletObject();

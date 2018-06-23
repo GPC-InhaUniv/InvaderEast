@@ -20,11 +20,6 @@ public enum SceneState
 public class SceneController : Singleton<SceneController> {
 
     protected SceneController() { }
-    GameMediator gameMediator;
-    private void Start()
-    {
-        gameMediator = GameObject.FindGameObjectWithTag("GameMediator").GetComponent<GameMediator>();
-    }
     public void ChangeScene(SceneState state)
     {
         switch (state)

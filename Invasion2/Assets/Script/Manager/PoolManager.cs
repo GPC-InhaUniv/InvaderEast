@@ -15,7 +15,7 @@ using UnityEngine;
 public class PoolManager : Singleton<PoolManager>
 {
     protected PoolManager() { }
-    GameMediator gameMediator;
+    
 
     Queue<GameObject> EnemyQueue;
     Queue<GameObject> EnemyBulletQueue;
@@ -48,7 +48,7 @@ public class PoolManager : Singleton<PoolManager>
 
     void Start()
     {
-        gameMediator = GameObject.FindGameObjectWithTag("GameMediator").GetComponent<GameMediator>();
+       
         EnemyPrefab = Resources.Load("Enemy") as GameObject;
         EnemyBulletPrefab = Resources.Load("EnemyBullet") as GameObject;
         PlayerBulletPrefab = Resources.Load("PlayerBullet") as GameObject;

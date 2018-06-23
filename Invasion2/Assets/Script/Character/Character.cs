@@ -47,7 +47,6 @@ public abstract class Character : MonoBehaviour
     protected int maxLife;
     protected Vector3 target;
     protected new Rigidbody rigidbody;
-    protected GameMediator gameMediator;
     protected bool attacking = false;
     protected Vector3 playerDirection;
     [SerializeField]

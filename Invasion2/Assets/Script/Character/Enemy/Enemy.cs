@@ -67,7 +67,7 @@ public class Enemy : Character
         // ChangeType(enemyType);
         maxLife = 5;
         StageManager.Instance.restart += new Restart(Died);
-        gameMediator = GameObject.FindGameObjectWithTag("GameMediator").GetComponent<GameMediator>();
+        
         SetEnemyInfo();
     }
 
@@ -138,18 +138,18 @@ public class Enemy : Character
             currentLife--;
             if (currentLife <= 0)
             {
-                gameMediator.SpawnItem(gameObject);
+                GameMediator.Instance.SpawnItem(gameObject);
                 Died();
             }
         }
         if (other.tag == ("HomingMissile"))
         {
-            gameMediator.SpawnItem(gameObject);
+            GameMediator.Instance.SpawnItem(gameObject);
             Died();
         }
         if(other.tag == ("StraightMissile"))
         {
-            gameMediator.SpawnItem(gameObject);
+            GameMediator.Instance.SpawnItem(gameObject);
             Died();
         }
     }

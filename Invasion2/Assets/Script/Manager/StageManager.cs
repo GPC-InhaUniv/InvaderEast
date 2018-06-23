@@ -38,7 +38,7 @@ public class StageManager : Singleton<StageManager>
 
     public Restart restart;
     CoroutineCtrl stageCoroutineCtrl;
-    GameMediator gameMediator;
+    
     const int MaxStage = 3;
     int CurrentStage;
     Difficult difficult;
@@ -56,7 +56,7 @@ public class StageManager : Singleton<StageManager>
 
     private void Start()
     {
-        gameMediator = GameObject.FindGameObjectWithTag("GameMediator").GetComponent<GameMediator>();
+        
         enemyPrefab = Resources.Load("Enemy") as GameObject;
         EnemyList = new List<GameObject>();
         CurrentStage = 0;
@@ -90,7 +90,7 @@ public class StageManager : Singleton<StageManager>
     {
         foreach (GameObject item in EnemyList)
         {
-            gameMediator.PutEnemyObject(item.gameObject);
+            GameMediator.Instance.PutEnemyObject(item.gameObject);
         }
         EnemyList.Clear();
         Debug.Log("RemoveAllEnemy 완료");
@@ -99,7 +99,7 @@ public class StageManager : Singleton<StageManager>
     public void RemoveEnemy(GameObject enemy)
     { 
         EnemyList.Remove(enemy);
-        gameMediator.PutEnemyObject(enemy);
+        GameMediator.Instance.PutEnemyObject(enemy);
     }
 
     public void NextStage()
