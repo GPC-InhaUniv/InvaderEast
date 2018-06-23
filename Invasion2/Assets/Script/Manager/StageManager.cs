@@ -142,6 +142,7 @@ public class StageManager : Singleton<StageManager>
        
         Debug.Log("스테이지 " + stageLevel + " 시작");
         yield return new WaitForSeconds(callCoroutineTick);
+
         StartCoroutine(stageCoroutineCtrl.StagePattern1());
         yield return new WaitForSeconds(callCoroutineTick);
 
@@ -154,7 +155,23 @@ public class StageManager : Singleton<StageManager>
         StartCoroutine(stageCoroutineCtrl.StagePattern4());
         yield return new WaitForSeconds(callCoroutineTick);
 
-        
+        StartCoroutine(stageCoroutineCtrl.StagePattern1());
+        yield return new WaitForSeconds(callCoroutineTick);
+
+        StartCoroutine(stageCoroutineCtrl.StagePattern4());
+        yield return new WaitForSeconds(callCoroutineTick);
+
+        StartCoroutine(stageCoroutineCtrl.StagePattern2());
+        yield return new WaitForSeconds(callCoroutineTick * 3);
+
+        StartCoroutine(stageCoroutineCtrl.StagePattern1());
+        StartCoroutine(stageCoroutineCtrl.StagePattern1());
+        yield return new WaitForSeconds(callCoroutineTick);
+
+        StartCoroutine(stageCoroutineCtrl.StagePattern2());
+        StartCoroutine(stageCoroutineCtrl.StagePattern3());
+        yield return new WaitForSeconds(callCoroutineTick);
+
         yield break;
     }
 

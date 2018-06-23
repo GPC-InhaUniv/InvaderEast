@@ -147,6 +147,11 @@ public class Enemy : Character
             gameMediator.SpawnItem(gameObject);
             Died();
         }
+        if(other.tag == ("StraightMissile"))
+        {
+            gameMediator.SpawnItem(gameObject);
+            Died();
+        }
     }
     public override void Attack() { }
 
