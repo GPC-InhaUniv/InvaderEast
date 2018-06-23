@@ -107,8 +107,7 @@ public class Player : Character
         }
         else if (timeRate >= fireRate)
         {
-
-
+            
             if (playerType == PlayerType.Deung)
             {
                 if (magazine > 0)
@@ -117,7 +116,7 @@ public class Player : Character
                    
                 }
                 
-                    AmmoSpend();
+                 AmmoSpend();
             }
             else
             {
