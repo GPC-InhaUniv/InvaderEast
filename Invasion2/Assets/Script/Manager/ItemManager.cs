@@ -21,7 +21,7 @@ public class ItemManager : Singleton<ItemManager>
 {
 
     protected ItemManager() { }
-    private GameMediator gameMediator;
+   
     private int PowerItemCount;
     private int LifeItemCount;
     private bool MagnaticItem;
@@ -33,7 +33,7 @@ public class ItemManager : Singleton<ItemManager>
 
     private void Start()
     {
-        gameMediator = GameObject.FindGameObjectWithTag("GameMediator").GetComponent<GameMediator>();
+        
         PowerItemCount = 0;
         LifeItemCount = 0;
         MagnaticItem = false;
@@ -51,11 +51,11 @@ public class ItemManager : Singleton<ItemManager>
         {
             case ItemType.PowerItem:
                 PowerItemCount += 3;
-                gameMediator.ChangePlayerPower(PowerItemCount);
+                GameMediator.Instance.ChangePlayerPower(PowerItemCount);
                 break;
             case ItemType.LifeItem:
                 LifeItemCount += 1;
-                gameMediator.ChangePlayerLife(LifeItemCount);
+                GameMediator.Instance.ChangePlayerLife(LifeItemCount);
                 break;
 
             default:
@@ -67,10 +67,10 @@ public class ItemManager : Singleton<ItemManager>
         switch (item)
         {
             case ItemType.GoldItem:
-                gameMediator.ChangeGold(count);
+                GameMediator.Instance.ChangeGold(count);
                 break;
             case ItemType.ScoreItem:
-                gameMediator.ChangeScore(count);
+                GameMediator.Instance.ChangeScore(count);
                 break;
             default:
                 break;
@@ -83,11 +83,11 @@ public class ItemManager : Singleton<ItemManager>
         {
             case ItemType.PowerItem:
                 PowerItemCount += 10;
-                gameMediator.ChangePlayerPower(10);
+                GameMediator.Instance.ChangePlayerPower(10);
                 break;
             case ItemType.LifeItem:
                 LifeItemCount += 10;
-                gameMediator.ChangePlayerLife(10);
+                GameMediator.Instance.ChangePlayerLife(10);
                 break;
             case ItemType.MagnaticItem:
                 MagnaticItem = true;
@@ -106,11 +106,11 @@ public class ItemManager : Singleton<ItemManager>
         {
             case ItemType.PowerItem:
                 PowerItemCount -= 10;
-                gameMediator.ChangePlayerPower(-10);
+                GameMediator.Instance.ChangePlayerPower(-10);
                 break;
             case ItemType.LifeItem:
                 LifeItemCount -= 10;
-                gameMediator.ChangePlayerLife(-10);
+                GameMediator.Instance.ChangePlayerLife(-10);
                 break;
             case ItemType.MagnaticItem:
                 MagnaticItem = false;

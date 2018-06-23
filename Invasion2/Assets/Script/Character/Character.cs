@@ -36,7 +36,7 @@ public enum Direction
 /// 캐릭터 이동, 공격, 콜리더 접촉 여부 판정 등 공통적으로
 /// 사용되는 함수들을 만들어두었다.
 /// </summary>
-public class Character : MonoBehaviour
+public abstract class Character : MonoBehaviour
 {
     [SerializeField]
     protected float moveSpeed;
@@ -75,21 +75,16 @@ public class Character : MonoBehaviour
         get { return maxLife; }
         set { maxLife = value; }
     }
-    private void Start()
-    {
-        gameMediator = GameObject.FindGameObjectWithTag("GameMediator").GetComponent<GameMediator>();
-    }
- 
+
     public void DirectionToMove(Vector3 direction)
     {
-        this.playerDirection = direction;
+       playerDirection = direction;
     }
 
     public void Move(Direction direction)
     {
         switch (direction)
         {
-
             case Direction.UP:
                 target = Vector3.forward;
                 rigidbody.velocity = target * moveSpeed;
@@ -130,12 +125,8 @@ public class Character : MonoBehaviour
         }
     }
 
-    public virtual void Attack()
-    {
+    public abstract void Attack();
 
-    }
-    public virtual void OnTriggerEnter(Collider other)
-    {
-
-    }
+    public abstract void OnTriggerEnter(Collider other);
+    
 }

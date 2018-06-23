@@ -10,7 +10,7 @@
 /// 
 /// 
 /// </summary>
-public class GameMediator : MonoBehaviour
+public class GameMediator : Singleton<GameMediator>
 {
 
     GameDataManager gameDataManager;
@@ -103,12 +103,17 @@ public class GameMediator : MonoBehaviour
     public ChangePower changePower;
     public void ChangePlayerPower(int count)
     {
-
+        
         player.Power = count;
+        changePower();
     }
+    public delegate void ChangeLife();
+    public ChangeLife changeLife;
     public void ChangePlayerLife(int count)
     {
+       
         player.MaxLife += count;
+        changeLife();
     }
   
     public void ChangePlayerType(PlayerType type)

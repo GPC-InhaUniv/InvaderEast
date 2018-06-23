@@ -148,4 +148,6 @@ public class Enemy : Character
             Died();
         }
     }
+    public override void Attack() { }
+
 }

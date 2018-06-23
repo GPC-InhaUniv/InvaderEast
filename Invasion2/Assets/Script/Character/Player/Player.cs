@@ -31,6 +31,7 @@ public class Player : Character
 
 
     [SerializeField]
+    int attackMaxCount;
     int attackCount;
 
     [SerializeField]
@@ -81,6 +82,8 @@ public class Player : Character
         if (attacking)
         {
             Attack();
+            if (power >= 30)
+                power = 30;
         }
     }
 
@@ -126,7 +129,7 @@ public class Player : Character
             attackCount++;
         }
 
-        if (attackCount == 3 && playerType != PlayerType.Deung)
+        if (attackCount == attackMaxCount && playerType != PlayerType.Deung)
         {
             subAttackCtrl.Attack(power);
             //Debug.Log("보조 무장 작동 확인");
@@ -136,7 +139,10 @@ public class Player : Character
 
     public override void OnTriggerEnter(Collider other)
     {
-
+        if(other.tag !="Item")
+        {
+            currentLife--;
+        }
 
     }
 
