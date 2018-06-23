@@ -50,7 +50,7 @@ public class ItemManager : Singleton<ItemManager>
         switch (item)
         {
             case ItemType.PowerItem:
-                PowerItemCount += 1;
+                PowerItemCount += 3;
                 gameMediator.ChangePlayerPower(PowerItemCount);
                 break;
             case ItemType.LifeItem:

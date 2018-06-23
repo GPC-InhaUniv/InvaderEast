@@ -5,7 +5,7 @@ using UnityEngine;
 public class spread : MonoBehaviour
 {
     const int spreadCount = 10;
-    const int maxAngle = 300;
+    const int maxAngle = 360;
     int angle;
    
     
