@@ -17,6 +17,8 @@ public class Item : MonoBehaviour
 
     Rigidbody rigidbody;
 
+    [SerializeField]
+    GameObject[] itemModel;
 
     private void OnEnable()
     {
@@ -27,6 +29,13 @@ public class Item : MonoBehaviour
     {
         rigidbody = GetComponent<Rigidbody>();
         rigidbody.velocity = transform.forward * -speed;
+        StageManager.Instance.restart += new Restart(ReturnPool);
+
+    }
+
+    public void ReturnPool()
+    {
+        PoolManager.Instance.PutItemObject(gameObject);
     }
     private void SetItemInfo()
     {
