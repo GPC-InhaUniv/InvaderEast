@@ -26,11 +26,6 @@ public class ItemManager : Singleton<ItemManager>
     private int LifeItemCount;
     private bool MagnaticItem;
     private bool PowerRegenItem;
-    private GameObject powerItemPrefab;
-    private GameObject lifeItemPrefab;
-    private GameObject goldItemPrefab;
-    private GameObject scoreItemPrefab;
-
     private void Start()
     {
         
@@ -38,11 +33,6 @@ public class ItemManager : Singleton<ItemManager>
         LifeItemCount = 0;
         MagnaticItem = false;
         PowerRegenItem = false;
-
-        powerItemPrefab = Resources.Load("PowerItem") as GameObject;
-        lifeItemPrefab = Resources.Load("LifeItem") as GameObject;
-        goldItemPrefab = Resources.Load("GoldItem") as GameObject;
-        scoreItemPrefab = Resources.Load("ScoreItem") as GameObject;
     }
 
     public void GetItem(ItemType item)

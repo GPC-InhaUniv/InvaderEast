@@ -17,6 +17,8 @@ public class MenuUICtrl : MonoBehaviour
     public void OnClickReturnToTitleButton()
     {
         Time.timeScale = 1;
+        PoolManager.Instance.ClearQueue();
+        StageManager.Instance.SetRestart();
         InputManager.Instance.ChangeScene(SceneState.CharacterSelect);
     }
 

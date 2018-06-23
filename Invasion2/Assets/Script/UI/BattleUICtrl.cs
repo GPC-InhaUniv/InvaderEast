@@ -22,6 +22,7 @@ void Start()
     {
         ChangeLife();
         ChangePowerGauge();
+        GameMediator.Instance.CheckedChangeScore += new GameMediator.CheckChangeScore(ChangeScore);
         GameMediator.Instance.changePower += new GameMediator.ChangePower(ChangePowerGauge);
         GameMediator.Instance.changeLife += new GameMediator.ChangeLife(ChangeLife);
     }
@@ -37,7 +38,7 @@ void Start()
     }
     void ChangeScore()
     {
-        score.text = GameMediator.Instance.ReadPlayerMaxScore().ToString();
+        score.text = GameMediator.Instance.ReadCurrentScore().ToString();
     }
     public void OnPauseClick()
     {
@@ -47,8 +48,10 @@ void Start()
         MenuPanel.SetActive(true);
        
     }
-    //void ChangeCharacters()
-    //{
-    //    PlayerType.Sin.
-    //}
+    private void OnDestroy()
+    {
+        GameMediator.Instance.CheckedChangeScore -= new GameMediator.CheckChangeScore(ChangeScore);
+        GameMediator.Instance.changePower -= new GameMediator.ChangePower(ChangePowerGauge);
+        GameMediator.Instance.changeLife -= new GameMediator.ChangeLife(ChangeLife);
+    }
 }

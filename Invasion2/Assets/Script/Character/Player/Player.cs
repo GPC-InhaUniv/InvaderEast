@@ -29,26 +29,16 @@ public class Player : Character
     [SerializeField]
     PlayerType playerType;
 
-
     [SerializeField]
     int attackMaxCount;
     int attackCount;
 
     float fireRate;
     float timeRate = 0.0f;
-    float reloadAmmo = 0.5f;
-    float reloadTime = 0.0f;
-    float coolTime = 3.0f;
-    bool EmptyAmmo = true;
-    bool fire = false;
 
 
     [SerializeField]
     private GameObject[] playerModel;
-
-    [SerializeField]
-    float CoolTime = 3.0f;
-
 
     [SerializeField]
     GameObject barrier;
@@ -199,5 +189,10 @@ public class Player : Character
        
     }
    
+    public void EndGame()
+    {
+        power = 0;
+        currentLife = maxLife;
+    }
 
 }

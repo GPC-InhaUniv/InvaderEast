@@ -67,7 +67,6 @@ public class Enemy : Character
         // ChangeType(enemyType);
         maxLife = 5;
         StageManager.Instance.restart += new Restart(Died);
-        
         SetEnemyInfo();
     }
 
@@ -127,7 +126,6 @@ public class Enemy : Character
     {
         if (other.tag == "Boundary")
         {
-            Debug.Log("나감");
             Died();
         }
     }
@@ -138,21 +136,28 @@ public class Enemy : Character
             currentLife--;
             if (currentLife <= 0)
             {
+                GameMediator.Instance.ChangeScore(giveScore);
                 GameMediator.Instance.SpawnItem(gameObject);
                 Died();
             }
         }
         if (other.tag == ("HomingMissile"))
         {
+            GameMediator.Instance.ChangeScore(giveScore);
             GameMediator.Instance.SpawnItem(gameObject);
             Died();
         }
         if(other.tag == ("StraightMissile"))
         {
+            GameMediator.Instance.ChangeScore(giveScore);
             GameMediator.Instance.SpawnItem(gameObject);
             Died();
         }
     }
     public override void Attack() { }
 
+    private void OnDestroy()
+    {
+        StageManager.Instance.restart -= new Restart(Died);
+    }
 }

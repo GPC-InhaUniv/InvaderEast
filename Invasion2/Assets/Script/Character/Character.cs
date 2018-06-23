@@ -44,6 +44,7 @@ public abstract class Character : MonoBehaviour
     protected int power;
     [SerializeField]
     protected int currentLife;
+    [SerializeField]
     protected int maxLife;
     protected Vector3 target;
     protected new Rigidbody rigidbody;

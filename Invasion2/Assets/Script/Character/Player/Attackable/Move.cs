@@ -87,4 +87,9 @@ public class Move : MonoBehaviour
         transform.position = new Vector3(0, 0, 0);
         transform.rotation = Quaternion.identity;
     }
+
+    private void OnDestroy()
+    {
+        StageManager.Instance.restart -= new Restart(ReturnPool);
+    }
 }

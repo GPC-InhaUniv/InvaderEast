@@ -16,6 +16,7 @@ public class StageClearCtrl : MonoBehaviour {
     int currentScore;
     int maxScore;
 
+    
     public void OnClickReturnToTitle()
     {
         Time.timeScale = 1;
@@ -32,6 +33,7 @@ public class StageClearCtrl : MonoBehaviour {
 
     private void OnEnable()
     {
+        Time.timeScale = 0;
         maxScore = InputManager.Instance.ReadCurrentScore();
     }
 

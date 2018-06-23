@@ -88,4 +88,9 @@ public class Item : MonoBehaviour
     {
        
     }
+
+    private void OnDestroy()
+    {
+        StageManager.Instance.restart -= new Restart(ReturnPool);
+    }
 }

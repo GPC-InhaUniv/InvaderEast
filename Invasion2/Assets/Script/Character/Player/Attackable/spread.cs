@@ -15,7 +15,7 @@ public class spread : MonoBehaviour
 
     private void Start()
     {
-
+        StageManager.Instance.restart += new Restart(ReturnPool);
     }
 
     private void OnEnable()
@@ -41,8 +41,18 @@ public class spread : MonoBehaviour
         }
         PoolManager.Instance.PutPlayerSpreadBulletObject(gameObject);
     }
+
+    public void ReturnPool()
+    {
+        PoolManager.Instance.PutPlayerSpreadBulletObject(gameObject);
+    }
     private void OnDisable()
     {
 
+    }
+
+    private void OnDestroy()
+    {
+        StageManager.Instance.restart -= new Restart(ReturnPool);
     }
 }

@@ -2,41 +2,34 @@
 /// <summary>
 /// 담당자 : 김정수
 /// 각 싱글톤들의 중재자.
-/// SceneController는 SceneManager라는 예약어가 존재하기 때문에 Controller로 작성됨.
-/// 이부분을 작성하면서 Mediator의 단점인 한 클래스가 너무 많은 것을 알게된다는 것을 직접 깨닫게 되었다.
-/// Manager부분들을 이벤트처리 한다면 좀더 단순화 되지 않을까 생각중이나 시간이 얼마나 남을지 모르겠음.
-/// Mediator의 UML은 연관 관계로 되어있다. 하지만 아래 작성된 코드와 다른 Manager코드들간은 서로가 집약 관계에 놓여있다.
-/// 맙소사... UML을 잘못봤다
-/// 
-/// 
 /// </summary>
 public class GameMediator : Singleton<GameMediator>
 {
 
     GameDataManager gameDataManager;
-    ItemManager itemMangager;
+    ItemManager itemManager;
     SceneController sceneController;
     InputManager inputManagere;
     StageManager stageManager;
-
-    SaveAndLoader saveAndload;
     Character player;
     // Use this for initialization
+    SaveAndLoader saveAndLoader;
 
-
-    void Start()
+    private void Awake()
     {
-        DontDestroyOnLoad(gameObject);
         gameDataManager = GameDataManager.Instance;
-        itemMangager = ItemManager.Instance;
+        itemManager = ItemManager.Instance;
         sceneController = SceneController.Instance;
         inputManagere = InputManager.Instance;
         stageManager = StageManager.Instance;
-        saveAndload = SaveAndLoader.Instance;
-      
+        saveAndLoader = SaveAndLoader.Instance;
+        DontDestroyOnLoad(gameObject);
+    }
+    void Start()
+    {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Character>();
     }
-   
+
     //게임 데이터와 플레이어의 데이터 읽기
     public int ReadPlayerGold()
     {
@@ -59,42 +52,45 @@ public class GameMediator : Singleton<GameMediator>
         return player.CurrentLife;
     }
     // 게임 오버시 score 값 0 입력
+    public delegate void CheckChangeScore();
+    public CheckChangeScore CheckedChangeScore;
     public void ChangeScore(int score)
-    {
-        gameDataManager.CurrentScore = score;
-
+    {  
+        gameDataManager.ChangeScore(score);
+        CheckedChangeScore();
     }
-   
+
     // 골드는 변경과 동시에 저장
-       public void ChangeGold(int gold)
+    public void ChangeGold(int gold)
     {
         Debug.Log("골드 변경");
-        gameDataManager.Gold += gold;
+        gameDataManager.ChangeGold(gold);
         SaveAndLoader.Instance.SaveData();
-        
-    }
 
+    }
+    public void GameOver()
+    {
+        GameDataManager.Instance.EndGame();
+    }
     // Item 종류 : PowerItem, LifeItem, GoldItem,ScoreItem,MagnaticItem, PowerRegenItem
     // count : 골드, 스코어 아이템의 골드량 및 스코어양
     public void GetItem(ItemType item, int count)
     {
-        itemMangager.GetItem(item, count);
+        ItemManager.Instance.GetItem(item, count);
     }
     public void GetItem(ItemType item)
     {
-        itemMangager.GetItem(item);
+        ItemManager.Instance.GetItem(item);
     }
 
     public void BuyItem(ItemType item)
     {
-        Debug.Log(item + "구입");
-        itemMangager.BuyItem(item);
+        ItemManager.Instance.BuyItem(item);
     }
 
     public void SellItem(ItemType item)
     {
-        Debug.Log(item + "판매");
-        itemMangager.SellItem(item);
+        ItemManager.Instance.SellItem(item);
     }
 
 
@@ -103,7 +99,6 @@ public class GameMediator : Singleton<GameMediator>
     public ChangePower changePower;
     public void ChangePlayerPower(int count)
     {
-        
         player.Power = count;
         changePower();
     }
@@ -111,16 +106,14 @@ public class GameMediator : Singleton<GameMediator>
     public ChangeLife changeLife;
     public void ChangePlayerLife(int count)
     {
-       
         player.MaxLife += count;
         changeLife();
     }
-  
+
     public void ChangePlayerType(PlayerType type)
     {
         Player playerModel = player as Player;
         playerModel.ChangePlayer(type);
-        
     }
 
     //InputManager에서 플레이어 이동 방향 받아오기
@@ -133,17 +126,16 @@ public class GameMediator : Singleton<GameMediator>
         player.Attacking = CheckedAttack;
     }
 
-    
     public void ChangeScene(SceneState state)
     {
-        sceneController.ChangeScene(state);
+        SceneController.Instance.ChangeScene(state);
     }
-    
+
     public void SpawnItem(GameObject enemyPos)
     {
-        itemMangager.SpawnItem(enemyPos);
+        ItemManager.Instance.SpawnItem(enemyPos);
     }
-    
+
     //pool manager 관련 메서드
     public GameObject GetEnemyObject()
     {
