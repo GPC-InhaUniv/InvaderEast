@@ -19,24 +19,25 @@ public class StageClearCtrl : MonoBehaviour {
     {
         GameMediator.Instance.GameOver();
         Time.timeScale = 1;
-        GameMediator.Instance.ChangeScene(SceneState.Title);
+        GameMediator.Instance.ChangeScene(SceneState.CharacterSelect);
        
     }
 
     public void OnClickRestart()
     {
         GameMediator.Instance.GameOver();
-        Time.timeScale = 1;
-        gameObject.SetActive(false);
-        StageManager.Instance.restart();
+        if (StageManager.Instance.restart != null)
+            StageManager.Instance.restart();
         StageManager.Instance.NextStage();
+        gameObject.SetActive(false);
+        Time.timeScale = 1;
     }
 
     private void OnEnable()
     {
         Time.timeScale = 0;
         getScoreText.text = GameMediator.Instance.ReadCurrentScore().ToString();
-        maxScoreText.text = GameMediator.Instance.ReadCurrentScore().ToString();
+        maxScoreText.text = GameMediator.Instance.ReadPlayerMaxScore().ToString();
     }
 
 }

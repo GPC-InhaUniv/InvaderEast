@@ -31,8 +31,7 @@ public class GameController : MonoBehaviour
         
         if(GameMediator.Instance.ReadPlayerLife() <=0)
         {
-            Time.timeScale = 0;
-            GameMediator.Instance.GameOver();
+            Time.timeScale = 0; 
             GameOverPanel.SetActive(true);
         }
     }

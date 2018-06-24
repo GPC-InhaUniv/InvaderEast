@@ -59,6 +59,10 @@ public class GameMediator : Singleton<GameMediator>
     {
         GameDataManager.Instance.EndGame();
         player.CurrentLife = player.MaxLife;
+        if (changeLife != null)
+            changeLife();
+        if (changePower != null)
+            changePower();
     }
     // Item 종류 : PowerItem, LifeItem, GoldItem,ScoreItem,MagnaticItem, PowerRegenItem
     // count : 골드, 스코어 아이템의 골드량 및 스코어양
