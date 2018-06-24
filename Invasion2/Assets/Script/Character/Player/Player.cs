@@ -105,13 +105,10 @@ public class Player : Character
         }
         else if (timeRate >= fireRate)
         {
-
             if (playerType == PlayerType.Deung)
             {
-
                 GameMediator.Instance.PlaySound(SoundType.PlayerAttack);
                 mainAttackCtrl.Attack(power);
-
             }
             else
             {
@@ -125,7 +122,6 @@ public class Player : Character
         if (attackCount == attackMaxCount && playerType != PlayerType.Deung)
         {
             subAttackCtrl.Attack(power);
-            //Debug.Log("보조 무장 작동 확인");
             attackCount = 0;
         }
     }
@@ -136,7 +132,11 @@ public class Player : Character
         {
             GameMediator.Instance.PlaySound(SoundType.PlayerHit);
             currentLife--;
+            power -= 5;
+            if (power < 0)
+                power = 0;
             GameMediator.Instance.changeLife();
+            GameMediator.Instance.changePower();
             invincible = true;
         }
 

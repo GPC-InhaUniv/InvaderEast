@@ -23,6 +23,7 @@ public class Item : MonoBehaviour
     private void OnEnable()
     {
         SetItemInfo();
+        ChangeItemImage(itemType);
     }
 
     private void Start()
@@ -54,12 +55,46 @@ public class Item : MonoBehaviour
         }    
     }
 
+    private void ChangeItemImage(ItemType itemType)
+    {
+        switch (itemType)
+        {
+            case ItemType.PowerItem:
+                itemModel[0].SetActive(true);
+                itemModel[1].SetActive(false);
+                itemModel[2].SetActive(false);
+                itemModel[3].SetActive(false);
+                break;
+            case ItemType.LifeItem:
+
+                itemModel[0].SetActive(false);
+                itemModel[1].SetActive(false);
+                itemModel[2].SetActive(true);
+                itemModel[3].SetActive(false);
+                break;
+            case ItemType.GoldItem:
+                itemModel[0].SetActive(false);
+                itemModel[1].SetActive(false);
+                itemModel[2].SetActive(false);
+                itemModel[3].SetActive(true);
+                break;
+            case ItemType.ScoreItem:
+                itemModel[0].SetActive(false);
+                itemModel[1].SetActive(true);
+                itemModel[2].SetActive(false);
+                itemModel[3].SetActive(false);
+                break;
+            default:
+                break;
+        }
+    }
+
     
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag != "Boundary")
         {
-            GameMediator.Instance.PlaySound(SoundType.GetItem);
+            GameMediator.Instance.PlaySound(SoundType.UseItem);
             switch (itemType)
             {
                 case ItemType.GoldItem:
@@ -90,6 +125,7 @@ public class Item : MonoBehaviour
        
     }
 
+    
     private void OnDestroy()
     {
         StageManager.Instance.restart -= new Restart(ReturnPool);

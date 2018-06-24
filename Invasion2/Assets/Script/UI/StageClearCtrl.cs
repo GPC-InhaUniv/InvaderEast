@@ -10,13 +10,10 @@ using UnityEngine.UI;
 public class StageClearCtrl : MonoBehaviour {
 
     [SerializeField]
-    Text scoreText;
+    Text getScoreText;
+    [SerializeField]
+    Text maxScoreText;
     const int addScore = 7;
-
-    int currentScore;
-    int maxScore;
-
-    
 
     public void OnClickReturnToTitle()
     {
@@ -38,8 +35,8 @@ public class StageClearCtrl : MonoBehaviour {
     private void OnEnable()
     {
         Time.timeScale = 0;
-        scoreText.text = GameMediator.Instance.ReadCurrentScore().ToString();
-        maxScore = GameMediator.Instance.ReadCurrentScore();
+        getScoreText.text = GameMediator.Instance.ReadCurrentScore().ToString();
+        maxScoreText.text = GameMediator.Instance.ReadCurrentScore().ToString();
     }
 
 }

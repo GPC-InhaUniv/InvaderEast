@@ -87,7 +87,7 @@ public class GameMediator : Singleton<GameMediator>
     public ChangePower changePower;
     public void ChangePlayerPower(int count)
     {
-        player.Power = count;
+        player.Power += count;
         if(changePower !=null)
         changePower();
     }
@@ -95,7 +95,8 @@ public class GameMediator : Singleton<GameMediator>
     public ChangeLife changeLife;
     public void ChangePlayerLife(int count)
     {
-        player.MaxLife += count;
+        if(player.CurrentLife<player.MaxLife)
+        player.CurrentLife += count;
         if(changeLife !=null)
         changeLife();
     }

@@ -84,8 +84,6 @@ public class Move : MonoBehaviour
 
     private void OnDisable()
     {
-        transform.position = new Vector3(0, 0, 0);
-        transform.rotation = Quaternion.identity;
     }
 
     private void OnDestroy()

@@ -11,8 +11,6 @@ public class GameController : MonoBehaviour
 {
 
     [SerializeField]
-    GameObject ClearPanel;
-    [SerializeField]
     GameObject GameOverPanel;
     // Use this for initialization
     private void Awake()
