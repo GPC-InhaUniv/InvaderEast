@@ -13,21 +13,10 @@ public class StartSceneCtrl : MonoBehaviour
     [SerializeField]
     GameObject HelpPanel;
     [SerializeField]
-    GameObject RankPanel;
-    [SerializeField]
-    GameMediator gameMediatorPrefab;
-    [SerializeField]
     GameDataManager gameDataManager;
 
     private void Awake()
     {
-        if (GameObject.FindGameObjectWithTag("GameMediator") == null)
-        {
-            gameMediatorPrefab = Instantiate(gameMediatorPrefab);
-            Debug.Log("gameMediator 생성 성공");
-        }
-        else Debug.Log("gameMediator가 이미 존재함");
-
         gameDataManager = GameDataManager.Instance;
     }
 
@@ -52,29 +41,20 @@ public class StartSceneCtrl : MonoBehaviour
     public void OnClickHelp()
     {
         HelpPanel.SetActive(true);
-        RankPanel.SetActive(false);
     }
 
     public void OnClickRank()
     {
-        RankPanel.SetActive(true);
         HelpPanel.SetActive(false);
     }
 
     public void OnClickExit()
     {
-        //메디에이터에 게임 종료 요청
-        //메디에이터에 다음 씬 넘기기 요청
         GameMediator.Instance.ChangeScene(SceneState.End);
     }
 
     public void OnClickByCloseHelpPanel()
     {
         HelpPanel.SetActive(false);
-    }
-
-    public void OnClickByCloseRankPanel()
-    {
-        RankPanel.SetActive(false);
     }
 }

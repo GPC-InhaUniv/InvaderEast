@@ -68,23 +68,20 @@ public class SoundManager : Singleton<SoundManager>
                 audioSource.PlayOneShot(effectSound[1], 0.5f);
                 break;
             case SoundType.EnemyDead:
-                audioSource.volume = 1f;
-                audioSource.PlayOneShot(effectSound[2], 0.5f);
+               
+                audioSource.PlayOneShot(effectSound[2], 1f);
                 break;
             case SoundType.GetItem:
-                audioSource.volume = 0.5f;
                 audioSource.PlayOneShot(effectSound[3], 0.5f);
                 break;
             case SoundType.PlayerAttack:
-                audioSource.volume = 0.5f;
                 audioSource.PlayOneShot(effectSound[4], 0.5f);
                 break;
             case SoundType.PlayerDead:
                 audioSource.PlayOneShot(effectSound[5], 0.5f);
                 break;
             case SoundType.PlayerHit:
-                audioSource.volume = 2f;
-                audioSource.PlayOneShot(effectSound[6], 0.5f);
+                audioSource.PlayOneShot(effectSound[6], 1f);
                 break;
             case SoundType.PlayerMove:
                 audioSource.PlayOneShot(effectSound[7], 0.5f);

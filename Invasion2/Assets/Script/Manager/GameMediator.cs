@@ -43,22 +43,30 @@ public class GameMediator : Singleton<GameMediator>
     public void ChangeScore(int score)
     {
         GameDataManager.Instance.ChangeScore(score);
-        if(CheckedChangeScore!=null)
-        CheckedChangeScore();
+        if (CheckedChangeScore != null)
+            CheckedChangeScore();
     }
-
-    // 골드는 변경과 동시에 저장
+    public delegate void CheckChangeGold();
+    public CheckChangeGold CheckedChangeGold;
 
     public void ChangeGold(int gold)
     {
         GameDataManager.Instance.ChangeGold(gold);
-        SaveAndLoader.Instance.SaveData();
-
+        if (CheckedChangeGold != null)
+            CheckedChangeGold();
     }
     public void GameOver()
     {
         GameDataManager.Instance.EndGame();
         player.CurrentLife = player.MaxLife;
+        ItemManager.Instance.EndGame();
+        SaveAndLoader.Instance.SaveData();
+        if (changeLife != null)
+            changeLife();
+        if (changePower != null)
+            changePower();
+        if (CheckedChangeGold != null)
+            CheckedChangeGold();
     }
     // Item 종류 : PowerItem, LifeItem, GoldItem,ScoreItem,MagnaticItem, PowerRegenItem
     // count : 골드, 스코어 아이템의 골드량 및 스코어양
@@ -87,17 +95,18 @@ public class GameMediator : Singleton<GameMediator>
     public ChangePower changePower;
     public void ChangePlayerPower(int count)
     {
-        player.Power = count;
-        if(changePower !=null)
-        changePower();
+        player.Power += count;
+        if (changePower != null)
+            changePower();
     }
     public delegate void ChangeLife();
     public ChangeLife changeLife;
     public void ChangePlayerLife(int count)
     {
-        player.MaxLife += count;
-        if(changeLife !=null)
-        changeLife();
+        if (player.CurrentLife < player.MaxLife)
+            player.CurrentLife += count;
+        if (changeLife != null)
+            changeLife();
     }
 
     public void ChangePlayerType(PlayerType type)

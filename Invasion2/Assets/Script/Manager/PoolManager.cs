@@ -7,15 +7,15 @@ using UnityEngine;
 /// 관리하는 Pool 리스트 : 
 /// EnemyQueue(적 객체), 
 /// EnemyBulletQueue(적의 총알 객체), 
-/// PlayerBulletQueue(플레이어의 타입 및 파워에 따른 총알 객체를 담은 큐의 배열)
-/// PlayerSpreadBulletPrefab(등 쉽의 탄환)
-/// HomingMissileQueue(유도 미사일)
-/// 
+/// PlayerBulletQueue(플레이어 총알),
+/// PlayerSpreadBulletPrefab(등 쉽의 탄환),
+/// HomingMissileQueue(유도 미사일),
+/// StraightMissileQueue (직선 미사일),
+/// ItemQueue (아이템들이 들어 있는 컬렉션),
 /// </summary>
 public class PoolManager : Singleton<PoolManager>
 {
     protected PoolManager() { }
-
 
     Queue<GameObject> EnemyQueue;
     Queue<GameObject> EnemyBulletQueue;
@@ -44,6 +44,7 @@ public class PoolManager : Singleton<PoolManager>
     const int EnemyBulletQueueSize = 200;
     const int PlayerBulletQueueSize = 200;
     const int PlayerSpreadBulletQueueSize = 10;
+
     private void Awake()
     {
         EnemyPrefab = Resources.Load("Enemy") as GameObject;
@@ -64,7 +65,6 @@ public class PoolManager : Singleton<PoolManager>
         PlayerSpreadBulletQueue = CreateQueue(PlayerSpreadBulletQueue, PlayerSpreadBulletQueueSize, PlayerSpreadBulletPrefab);
         HomingMissileQueue = CreateQueue(HomingMissileQueue, PlayerBulletQueueSize / 10, HomingMissilePrefab);
         StraightMissileQueue = CreateQueue(StraightMissileQueue, PlayerBulletQueueSize / 10, StraightMissilePrefab);
-
     }
 
     Queue<GameObject> CreateQueue(Queue<GameObject> queue, int size, GameObject prefab)
@@ -83,6 +83,7 @@ public class PoolManager : Singleton<PoolManager>
 
         return queue;
     }
+
     public void ClearQueue()
     {
         EnemyQueue.Clear();
@@ -93,6 +94,7 @@ public class PoolManager : Singleton<PoolManager>
         StraightMissileQueue.Clear();
         ItemQueue.Clear();
     }
+
     public GameObject GetEnemyObject()
     {
         if (EnemyQueue.Count > 0)
@@ -124,7 +126,6 @@ public class PoolManager : Singleton<PoolManager>
             gameObject.SetActive(true);
             return gameObject;
         }
-
         else Debug.Log("EnemyBulletQueue : UnderFlow Error");
         return null;
     }
@@ -154,9 +155,7 @@ public class PoolManager : Singleton<PoolManager>
         gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
         gameObject.transform.position = new Vector3(0, 0, 0);
         PlayerBulletQueue.Enqueue(gameObject);
-
         gameObject.SetActive(false);
-
     }
 
     public GameObject GetPlayerSpreadBulletObject()
@@ -201,7 +200,6 @@ public class PoolManager : Singleton<PoolManager>
                 break;
         }
         return bullet;
-
     }
 
     public void PutPlayerMissileObject(GameObject gameObject, PlayerType type)
@@ -248,5 +246,4 @@ public class PoolManager : Singleton<PoolManager>
         ItemQueue.Enqueue(gameObject);
         gameObject.SetActive(false);
     }
-
 }

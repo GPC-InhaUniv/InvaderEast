@@ -10,36 +10,34 @@ using UnityEngine.UI;
 public class StageClearCtrl : MonoBehaviour {
 
     [SerializeField]
-    Text scoreText;
+    Text getScoreText;
+    [SerializeField]
+    Text maxScoreText;
     const int addScore = 7;
-
-    int currentScore;
-    int maxScore;
-
-    
 
     public void OnClickReturnToTitle()
     {
         GameMediator.Instance.GameOver();
         Time.timeScale = 1;
-        GameMediator.Instance.ChangeScene(SceneState.Title);
+        GameMediator.Instance.ChangeScene(SceneState.CharacterSelect);
        
     }
 
     public void OnClickRestart()
     {
         GameMediator.Instance.GameOver();
-        Time.timeScale = 1;
-        gameObject.SetActive(false);
-        StageManager.Instance.restart();
+        if (StageManager.Instance.restart != null)
+            StageManager.Instance.restart();
         StageManager.Instance.NextStage();
+        gameObject.SetActive(false);
+        Time.timeScale = 1;
     }
 
     private void OnEnable()
     {
         Time.timeScale = 0;
-        scoreText.text = GameMediator.Instance.ReadCurrentScore().ToString();
-        maxScore = GameMediator.Instance.ReadCurrentScore();
+        getScoreText.text = GameMediator.Instance.ReadCurrentScore().ToString();
+        maxScoreText.text = GameMediator.Instance.ReadPlayerMaxScore().ToString();
     }
 
 }
