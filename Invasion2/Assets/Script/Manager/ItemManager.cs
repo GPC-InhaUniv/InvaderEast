@@ -80,7 +80,8 @@ public class ItemManager : Singleton<ItemManager>
                 GameMediator.Instance.ChangePlayerPower(10);
                 break;
             case ItemType.LifeItem:
-                GameMediator.Instance.ChangePlayerLife(10);
+                increseLife += 1;
+                GameMediator.Instance.ChangePlayerLife(increseLife);
                 break;
             case ItemType.MagnaticItem:
                 magnaticItem = true;
@@ -103,7 +104,7 @@ public class ItemManager : Singleton<ItemManager>
                 GameMediator.Instance.ChangePlayerPower(-10);
                 break;
             case ItemType.LifeItem:
-
+                increseLife -= 1;
                 GameMediator.Instance.ChangePlayerLife(-10);
                 break;
             case ItemType.MagnaticItem:
@@ -123,7 +124,11 @@ public class ItemManager : Singleton<ItemManager>
         GameObject itemObject;
         itemObject = PoolManager.Instance.GetItemObject();
         itemObject.transform.position = enemyPos.transform.position;
+    }
 
-
+    public void EndGame()
+    {
+        increseLife = 1;
+        incresePower = 2;
     }
 }
