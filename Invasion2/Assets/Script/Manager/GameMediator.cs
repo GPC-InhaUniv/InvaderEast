@@ -5,22 +5,9 @@
 /// </summary>
 public class GameMediator : Singleton<GameMediator>
 {
-
-    GameDataManager gameDataManager;
-    ItemManager itemManager;
-    SceneController sceneController;
-    StageManager stageManager;
     Character player;
-    // Use this for initialization
-    SaveAndLoader saveAndLoader;
-
     private void Awake()
     {
-        gameDataManager = GameDataManager.Instance;
-        itemManager = ItemManager.Instance;
-        sceneController = SceneController.Instance;
-        stageManager = StageManager.Instance;
-        saveAndLoader = SaveAndLoader.Instance;
         DontDestroyOnLoad(gameObject);
     }
     void Start()
@@ -31,15 +18,15 @@ public class GameMediator : Singleton<GameMediator>
     //게임 데이터와 플레이어의 데이터 읽기
     public int ReadPlayerGold()
     {
-        return gameDataManager.Gold;
+        return GameDataManager.Instance.Gold;
     }
     public int ReadPlayerMaxScore()
     {
-        return gameDataManager.MaxScore;
+        return GameDataManager.Instance.MaxScore;
     }
     public int ReadCurrentScore()
     {
-        return gameDataManager.CurrentScore;
+        return GameDataManager.Instance.CurrentScore;
     }
     public int ReadPlayerPower()
     {
@@ -53,20 +40,18 @@ public class GameMediator : Singleton<GameMediator>
     public delegate void CheckChangeScore();
     public CheckChangeScore CheckedChangeScore;
     public void ChangeScore(int score)
-    {  
-        gameDataManager.ChangeScore(score);
+    {
+        GameDataManager.Instance.ChangeScore(score);
         CheckedChangeScore();
     }
 
     // 골드는 변경과 동시에 저장
-    public delegate void CheckChangeGold();
-    public CheckChangeGold CheckedChangeGold;
+
     public void ChangeGold(int gold)
     {
         Debug.Log("골드 변경");
-        gameDataManager.ChangeGold(gold);
+        GameDataManager.Instance.ChangeGold(gold);
         SaveAndLoader.Instance.SaveData();
-        CheckedChangeGold();
 
     }
     public void GameOver()

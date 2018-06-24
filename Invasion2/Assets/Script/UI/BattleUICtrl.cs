@@ -9,12 +9,11 @@ public class BattleUICtrl : MonoBehaviour
 /// 이미지를 가져와서 lifetext 옆에 구현 하고 싶습니다!! 
 /// </summary>
     
+        //public -> private 변경할 것.
     public Text lifeText;
     public Image powerGauge;
     public Text score;
     public Image [] characters;
-    
-    private bool isPaused;
     [SerializeField]
     GameObject MenuPanel;
 
@@ -25,20 +24,22 @@ void Start()
         GameMediator.Instance.CheckedChangeScore += new GameMediator.CheckChangeScore(ChangeScore);
         GameMediator.Instance.changePower += new GameMediator.ChangePower(ChangePowerGauge);
         GameMediator.Instance.changeLife += new GameMediator.ChangeLife(ChangeLife);
+        
     }
 
     void ChangeLife()
     {
-        Debug.Log("체력 바 변경");
         lifeText.text = "LIFE X " + GameMediator.Instance.ReadPlayerLife().ToString();
     }
     void ChangePowerGauge()
     {
-        powerGauge.fillAmount = GameMediator.Instance.ReadPlayerPower() * 0.01f;
+      
+        powerGauge.fillAmount = GameMediator.Instance.ReadPlayerPower() * 0.033f;
     }
     void ChangeScore()
     {
-        score.text = GameMediator.Instance.ReadCurrentScore().ToString();
+      
+        score.text = "SCORE : " + GameMediator.Instance.ReadCurrentScore().ToString();
     }
     public void OnPauseClick()
     {

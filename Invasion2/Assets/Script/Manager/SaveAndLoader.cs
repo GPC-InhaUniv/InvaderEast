@@ -20,8 +20,8 @@ public class SaveAndLoader : Singleton<SaveAndLoader>
         public string filePath= Application.dataPath + "/GameData.bin";
     }
     public  GameData gameData;
-
-    private void Start()
+    
+    private void Awake()
     {
         gameData = new GameData();
         gameData.filePath = Application.persistentDataPath + "/GameData.bin";
@@ -29,8 +29,8 @@ public class SaveAndLoader : Singleton<SaveAndLoader>
 
     public void SaveData()
     {
-        gameData.Gold = GameDataManager.Instance.Gold;
-        gameData.MaxScore = GameDataManager.Instance.MaxScore;
+        gameData.Gold = GameMediator.Instance.ReadPlayerGold();
+        gameData.MaxScore = GameMediator.Instance.ReadPlayerMaxScore();
         BinarySerialize(gameData, gameData.filePath);
         Debug.Log("저장완료");
     }

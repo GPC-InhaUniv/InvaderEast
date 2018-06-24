@@ -16,6 +16,8 @@ public class StartSceneCtrl : MonoBehaviour
     GameObject RankPanel;
     [SerializeField]
     GameMediator gameMediatorPrefab;
+    [SerializeField]
+    GameDataManager gameDataManager;
 
     private void Awake()
     {
@@ -25,6 +27,8 @@ public class StartSceneCtrl : MonoBehaviour
             Debug.Log("gameMediator 생성 성공");
         }
         else Debug.Log("gameMediator가 이미 존재함");
+
+        gameDataManager = GameDataManager.Instance;
     }
 
     public void OnClickGameStart()
@@ -36,6 +40,7 @@ public class StartSceneCtrl : MonoBehaviour
         catch
         {
             Debug.Log("저장되어있는 데이터가 없으므로 새 저장데이터를생성합니다.");
+            GameDataManager.Instance.ChangeGold(100);
             SaveAndLoader.Instance.SaveData();
             SaveAndLoader.Instance.LoadData();
         }
