@@ -42,8 +42,9 @@ public class SaveAndLoader : Singleton<SaveAndLoader>
         Debug.Log("불러오기");
         Debug.Log("골드 : " + gameData.Gold);
         Debug.Log("최대 스코어 :" + gameData.MaxScore);
-        GameDataManager.Instance.Gold = gameData.Gold;
-        GameDataManager.Instance.MaxScore = gameData.MaxScore;
+        GameDataManager.Instance.ChangeGold(gameData.Gold);
+        GameDataManager.Instance.ChangeScore(gameData.MaxScore);
+        GameDataManager.Instance.EndGame();
     }
 
     private void BinaryDeserialize(string filePath)

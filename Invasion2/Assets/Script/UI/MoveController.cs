@@ -44,8 +44,8 @@ public class MoveController : MonoBehaviour
         StickPannel.position = touchPos;
 
 
-        InputManager.Instance.PlayerMove(Vector3.zero);
-        InputManager.Instance.PlayerAttack(true);
+        GameMediator.Instance.PlayerMove(Vector3.zero);
+        GameMediator.Instance.PlayerAttack(true);
     }
 
 
@@ -55,7 +55,7 @@ public class MoveController : MonoBehaviour
         directionPos = (dragPos - touchPos).normalized;
 
 
-        InputManager.Instance.PlayerMove(new Vector3(directionPos.x, 0, directionPos.y));
+        GameMediator.Instance.PlayerMove(new Vector3(directionPos.x, 0, directionPos.y));
 
 
         float stickDistance = Vector3.Distance(dragPos, touchPos);
@@ -73,8 +73,8 @@ public class MoveController : MonoBehaviour
     {
         directionPos = Vector3.zero;
 
-        InputManager.Instance.PlayerMove(directionPos);
-        InputManager.Instance.PlayerAttack(false);
+        GameMediator.Instance.PlayerMove(directionPos);
+        GameMediator.Instance.PlayerAttack(false);
 
         Stick.position = touchPos;
         pannelImage.enabled = false;

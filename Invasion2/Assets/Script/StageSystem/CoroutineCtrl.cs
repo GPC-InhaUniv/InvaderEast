@@ -18,8 +18,8 @@ public class CoroutineCtrl
     }
 
     //패턴 1 필드값
-    const int pattern1EnemyCount = 5;
-    const float pattern1EnemySpawnTick = 0.3f;
+    const int pattern1EnemyCount = 7;
+    const float pattern1EnemySpawnTick = 0.7f;
 
     //등장 패턴 1
     public IEnumerator StagePattern1()
@@ -36,7 +36,7 @@ public class CoroutineCtrl
 
     //패턴 2 필드값
     const int pattern2EnemyCount = 5;
-    const float pattern2EnemySpawnTick = 0.15f;
+    const float pattern2EnemySpawnTick = 0.3f;
     const int pattern2RepeatCount = 3;
     const float pattern2RepeatTick = 2f;
 
@@ -59,7 +59,7 @@ public class CoroutineCtrl
 
     //패턴 3 필드값
     const int pattern3EnemyCount = 16;
-    const float pattern3EnemySpawnTick = 0.6f;
+    const float pattern3EnemySpawnTick = 0.9f;
 
     //등장 패턴 3
     public IEnumerator StagePattern3()
@@ -77,7 +77,7 @@ public class CoroutineCtrl
 
     //패턴 4 필드값
     const int pattern4EnemyCount = 22;
-    const float pattern4EnemySpawnTick = 0.6f;
+    const float pattern4EnemySpawnTick = 0.9f;
 
     //등장 패턴 4
     public IEnumerator StagePattern4()
@@ -86,7 +86,7 @@ public class CoroutineCtrl
         for (int i = 0; i < pattern4EnemyCount; i++)
         {
             stageManager.Spawn(enemy);
-            yield return new WaitForSeconds(pattern4EnemySpawnTick);
+            yield return new WaitForSeconds(pattern4EnemySpawnTick/2);
             stageManager.Spawn(enemy);
             stageManager.Spawn(enemy);
             yield return new WaitForSeconds(pattern4EnemySpawnTick);

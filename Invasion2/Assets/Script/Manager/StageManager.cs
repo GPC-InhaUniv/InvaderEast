@@ -38,7 +38,7 @@ public class StageManager : Singleton<StageManager>
 
     public Restart restart;
     CoroutineCtrl stageCoroutineCtrl;
-    GameMediator gameMediator;
+    
     const int MaxStage = 3;
     int CurrentStage;
     Difficult difficult;
@@ -56,7 +56,7 @@ public class StageManager : Singleton<StageManager>
 
     private void Start()
     {
-        gameMediator = GameObject.FindGameObjectWithTag("GameMediator").GetComponent<GameMediator>();
+        
         enemyPrefab = Resources.Load("Enemy") as GameObject;
         EnemyList = new List<GameObject>();
         CurrentStage = 0;
@@ -90,7 +90,7 @@ public class StageManager : Singleton<StageManager>
     {
         foreach (GameObject item in EnemyList)
         {
-            gameMediator.PutEnemyObject(item.gameObject);
+            GameMediator.Instance.PutEnemyObject(item.gameObject);
         }
         EnemyList.Clear();
         Debug.Log("RemoveAllEnemy 완료");
@@ -99,7 +99,7 @@ public class StageManager : Singleton<StageManager>
     public void RemoveEnemy(GameObject enemy)
     { 
         EnemyList.Remove(enemy);
-        gameMediator.PutEnemyObject(enemy);
+        GameMediator.Instance.PutEnemyObject(enemy);
     }
 
     public void NextStage()
@@ -142,6 +142,7 @@ public class StageManager : Singleton<StageManager>
        
         Debug.Log("스테이지 " + stageLevel + " 시작");
         yield return new WaitForSeconds(callCoroutineTick);
+
         StartCoroutine(stageCoroutineCtrl.StagePattern1());
         yield return new WaitForSeconds(callCoroutineTick);
 
@@ -154,7 +155,23 @@ public class StageManager : Singleton<StageManager>
         StartCoroutine(stageCoroutineCtrl.StagePattern4());
         yield return new WaitForSeconds(callCoroutineTick);
 
-        
+        StartCoroutine(stageCoroutineCtrl.StagePattern1());
+        yield return new WaitForSeconds(callCoroutineTick);
+
+        StartCoroutine(stageCoroutineCtrl.StagePattern4());
+        yield return new WaitForSeconds(callCoroutineTick);
+
+        StartCoroutine(stageCoroutineCtrl.StagePattern2());
+        yield return new WaitForSeconds(callCoroutineTick * 3);
+
+        StartCoroutine(stageCoroutineCtrl.StagePattern1());
+        StartCoroutine(stageCoroutineCtrl.StagePattern1());
+        yield return new WaitForSeconds(callCoroutineTick);
+
+        StartCoroutine(stageCoroutineCtrl.StagePattern2());
+        StartCoroutine(stageCoroutineCtrl.StagePattern3());
+        yield return new WaitForSeconds(callCoroutineTick);
+
         yield break;
     }
 

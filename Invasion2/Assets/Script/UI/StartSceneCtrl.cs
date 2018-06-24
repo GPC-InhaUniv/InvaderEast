@@ -41,7 +41,7 @@ public class StartSceneCtrl : MonoBehaviour
         }
 
         //메디에이터에 다음 씬 넘기기 요청
-        InputManager.Instance.ChangeScene(SceneState.CharacterSelect);
+        GameMediator.Instance.ChangeScene(SceneState.CharacterSelect);
     }
 
     public void OnClickHelp()
@@ -60,7 +60,7 @@ public class StartSceneCtrl : MonoBehaviour
     {
         //메디에이터에 게임 종료 요청
         //메디에이터에 다음 씬 넘기기 요청
-        InputManager.Instance.ChangeScene(SceneState.End);
+        GameMediator.Instance.ChangeScene(SceneState.End);
     }
 
     public void OnClickByCloseHelpPanel()

@@ -7,6 +7,6 @@ public class StoreUI : MonoBehaviour {
 
     public void OnExitButton()
     {
-        InputManager.Instance.ChangeScene(SceneState.CharacterSelect);
+        GameMediator.Instance.ChangeScene(SceneState.CharacterSelect);
     }
 }

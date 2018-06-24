@@ -23,20 +23,27 @@ public class GuaidanceMove : MonoBehaviour
     float enemyDistance;
     float distance;
     float minDistance;
-    float rotateSpeed = 45.0f;
+    [SerializeField, Range(0,180)]
+    float rotateSpeed;
+    [SerializeField, Range(0,50)]
     float moveSpeed = 10.0f;
 
+    private void OnEnable()
+    {
+        enemys = GameObject.FindGameObjectsWithTag("Enemy");
+        if (enemys.Length>0)
+        {
+            FindTarget();
+        }
+    }
 
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
         enemys = GameObject.FindGameObjectsWithTag("Enemy");
-        if(enemys.Length > 0)
+        if (enemys.Length > 0)
         {
-            if (enemys[0].activeInHierarchy)
-            {
-                FindTaget();
-            }
+            FindTarget();
         }
         StageManager.Instance.restart += new Restart(ReturnPool);
         subAttackCtrl = FindObjectOfType<SubAttackCtrl>();
@@ -49,11 +56,13 @@ public class GuaidanceMove : MonoBehaviour
 
     void HomingMove()
     {
-        if (target == null)
+        if (enemys.Length == 0)
         {
             LostTarget();
+            return;
         }
-        else if (target.activeSelf == true)
+
+        if (target.activeSelf == true)
         {
             chasing = target.transform.position - rigidbody.transform.position;
             chaingTarget = Quaternion.LookRotation(chasing);
@@ -63,7 +72,6 @@ public class GuaidanceMove : MonoBehaviour
         }
         else if (target.activeSelf == false)
         {
-            target = null;
             LostTarget();
         }
 
@@ -72,18 +80,19 @@ public class GuaidanceMove : MonoBehaviour
     void LostTarget()
     {
         //rigidbody.velocity = transform.forward * moveSpeed;
-        rigidbody.transform.rotation = rigidbody.transform.rotation;
         rigidbody.transform.Translate(new Vector3(0, 0, 1) * moveSpeed * Time.deltaTime);
     }
 
-    GameObject FindTaget()
+    GameObject FindTarget()
     {
         distance = Vector3.Distance(transform.position, enemys[0].transform.position);
+        //Debug.Log("비교할 Enemy 위치 : " + distance);
 
         //Debug.Log("거리 : " + distance);
         foreach (GameObject enemyObject in enemys)
         {
             enemyDistance = Vector3.Distance(transform.position, enemyObject.transform.position);
+            //Debug.Log("비교후 거리 : " + enemyDistance);
             //Debug.Log("거리 : " + enemyDistance);
             //Debug.Log("너는 누구냐 : " + enemyObject);
             if (enemyDistance <= distance)
@@ -100,8 +109,8 @@ public class GuaidanceMove : MonoBehaviour
     {
         if (tag == "HomingMissile" && other.tag != "Boundary")
         {
+            rigidbody.transform.rotation = Quaternion.Euler(0, 0, 0);
             PoolManager.Instance.PutPlayerMissileObject(gameObject, subAttackCtrl.playerType);
-            Debug.Log("니가 누구냐 : " + subAttackCtrl.playerType);
         }
     }
 
@@ -111,8 +120,8 @@ public class GuaidanceMove : MonoBehaviour
         {
             if (tag == "HomingMissile")
             {
+                rigidbody.transform.rotation = Quaternion.Euler(0, 0, 0);
                 PoolManager.Instance.PutPlayerMissileObject(gameObject, subAttackCtrl.playerType);
-                Debug.Log("왜 널인가 : " + gameObject + "그것이 알고싶다 : " + subAttackCtrl.playerType);
             }
         }
     }
@@ -123,5 +132,10 @@ public class GuaidanceMove : MonoBehaviour
         {
             PoolManager.Instance.PutPlayerMissileObject(gameObject, subAttackCtrl.playerType);
         }
+    }
+
+    private void OnDisable()
+    {
+        
     }
 }

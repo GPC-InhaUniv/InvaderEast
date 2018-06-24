@@ -33,7 +33,7 @@ public class CharacterSelectSceneCtrl : MonoBehaviour
     {
         ChangeDescriptionImage();
         ChangeHorizontalNormalizedPosition();
-        haveGold = InputManager.Instance.ReadPlayerGold();
+        haveGold = GameMediator.Instance.ReadPlayerGold();
         if (haveGold > haveGoldMax)
         {
             goldText.text = haveGoldMax.ToString("N0") + "+";
@@ -49,19 +49,19 @@ public class CharacterSelectSceneCtrl : MonoBehaviour
         if (scrollRect.horizontalNormalizedPosition <= 0.33f)
         {
             DescriptionImage.sprite = DescriptionImage_Red;
-            InputManager.Instance.PlayerChange(PlayerType.Sin);
+            GameMediator.Instance.ChangePlayerType(PlayerType.Sin);
         }
         if (0.33f < scrollRect.horizontalNormalizedPosition
             && scrollRect.horizontalNormalizedPosition <= 0.67f)
         {
             DescriptionImage.sprite = DescriptionImage_Orange;
-            InputManager.Instance.PlayerChange(PlayerType.Ho);
+            GameMediator.Instance.ChangePlayerType(PlayerType.Ho);
         }
         if (0.67f < scrollRect.horizontalNormalizedPosition
             && scrollRect.horizontalNormalizedPosition <= 1f)
         {
             DescriptionImage.sprite = DescriptionImage_Green;
-            InputManager.Instance.PlayerChange(PlayerType.Deung);
+            GameMediator.Instance.ChangePlayerType(PlayerType.Deung);
         }
     }
 
@@ -89,11 +89,11 @@ public class CharacterSelectSceneCtrl : MonoBehaviour
 
     public void OnClickStoreButton()
     {
-        InputManager.Instance.ChangeScene(SceneState.Store);
+        GameMediator.Instance.ChangeScene(SceneState.Store);
     }
 
     public void OnClickBattleStartButton()
     {
-        InputManager.Instance.ChangeScene(SceneState.Battle);
+        GameMediator.Instance.ChangeScene(SceneState.Battle);
     }
 }

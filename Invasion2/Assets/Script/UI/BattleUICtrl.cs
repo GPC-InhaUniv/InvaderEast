@@ -20,21 +20,25 @@ public class BattleUICtrl : MonoBehaviour
 
 void Start()
     {
-       // ChangeLife();
+        ChangeLife();
         ChangePowerGauge();
+        GameMediator.Instance.CheckedChangeScore += new GameMediator.CheckChangeScore(ChangeScore);
+        GameMediator.Instance.changePower += new GameMediator.ChangePower(ChangePowerGauge);
+        GameMediator.Instance.changeLife += new GameMediator.ChangeLife(ChangeLife);
     }
 
     void ChangeLife()
     {
-        lifeText.text = InputManager.Instance.ReadPlayerLife().ToString();
+        Debug.Log("체력 바 변경");
+        lifeText.text = "LIFE X " + GameMediator.Instance.ReadPlayerLife().ToString();
     }
     void ChangePowerGauge()
     {
-        powerGauge.fillAmount =  InputManager.Instance.ReadPlayerPower() * 0.01f;
+        powerGauge.fillAmount = GameMediator.Instance.ReadPlayerPower() * 0.01f;
     }
     void ChangeScore()
     {
-        score.text = InputManager.Instance.ReadPlayerMaxScore().ToString();
+        score.text = GameMediator.Instance.ReadCurrentScore().ToString();
     }
     public void OnPauseClick()
     {
@@ -44,8 +48,10 @@ void Start()
         MenuPanel.SetActive(true);
        
     }
-    //void ChangeCharacters()
-    //{
-    //    PlayerType.Sin.
-    //}
+    private void OnDestroy()
+    {
+        GameMediator.Instance.CheckedChangeScore -= new GameMediator.CheckChangeScore(ChangeScore);
+        GameMediator.Instance.changePower -= new GameMediator.ChangePower(ChangePowerGauge);
+        GameMediator.Instance.changeLife -= new GameMediator.ChangeLife(ChangeLife);
+    }
 }

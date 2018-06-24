@@ -10,12 +10,10 @@ public class SubAttackCtrl : MonoBehaviour
 
     [SerializeField]
     GameObject homingMissile;
-  
+
     GuaidanceMove homingMove;
 
-
     public PlayerType playerType;
-
 
     [SerializeField]
     const float CoolTime = 3.0f;
@@ -56,8 +54,7 @@ public class SubAttackCtrl : MonoBehaviour
         straightMissile.transform.position = leftSpawnPos;
         //  straightMissile.transform.rotation = Quaternion.identity;
     }
-
- 
+    
     public void Attack(int power)
     {
 

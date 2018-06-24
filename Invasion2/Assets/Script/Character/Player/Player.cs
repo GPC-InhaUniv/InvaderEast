@@ -29,32 +29,16 @@ public class Player : Character
     [SerializeField]
     PlayerType playerType;
 
-
     [SerializeField]
+    int attackMaxCount;
     int attackCount;
 
-    [SerializeField]
-    float fireRate = 0.2f;
+    float fireRate;
     float timeRate = 0.0f;
-    float reloadAmmo = 0.5f;
-    float reloadTime = 0.0f;
-    float coolTime = 3.0f;
-    bool EmptyAmmo = true;
-    bool fire = false;
 
-    [SerializeField]
-    int magazine;
-
-    [SerializeField]
-    int maxMagazine = 2;
-    int magazineAddCount;
 
     [SerializeField]
     private GameObject[] playerModel;
-
-    [SerializeField]
-    float CoolTime = 3.0f;
-
 
     [SerializeField]
     GameObject barrier;
@@ -63,16 +47,19 @@ public class Player : Character
     MainAttackCtrl mainAttackCtrl;
     GuaidanceMove homingMove;
 
-
+    [SerializeField]
+    float invincibleTime = 3f;
+    bool invincible;
+    float countTime;
     private void Start()
     {
-        gameMediator = GameObject.FindGameObjectWithTag("GameMediator").GetComponent<GameMediator>();
+       
         DontDestroyOnLoad(gameObject);
         rigidbody = GetComponent<Rigidbody>();
         subAttackCtrl = FindObjectOfType<SubAttackCtrl>();
         barrier.SetActive(false);
-        magazine = maxMagazine;
         mainAttackCtrl = gameObject.GetComponentInChildren<MainAttackCtrl>();
+        GameMediator.Instance.changePower += new GameMediator.ChangePower(ChangeDeungShipFireRate);
 
     }
 
@@ -81,6 +68,17 @@ public class Player : Character
         if (attacking)
         {
             Attack();
+            if (power >= 30)
+                power = 30;
+        }
+        if(invincible)
+        {
+            countTime += Time.deltaTime;
+            if (countTime >= invincibleTime)
+            {
+                invincible = false;
+                countTime = 0;
+            }
         }
     }
 
@@ -107,17 +105,10 @@ public class Player : Character
         }
         else if (timeRate >= fireRate)
         {
-
-
+            
             if (playerType == PlayerType.Deung)
             {
-                if (magazine > 0)
-                {
                     mainAttackCtrl.Attack(power);
-                   
-                }
-                
-                    AmmoSpend();
             }
             else
             {
@@ -127,7 +118,7 @@ public class Player : Character
             attackCount++;
         }
 
-        if (attackCount == 3 && playerType != PlayerType.Deung)
+        if (attackCount == attackMaxCount && playerType != PlayerType.Deung)
         {
             subAttackCtrl.Attack(power);
             //Debug.Log("보조 무장 작동 확인");
@@ -137,7 +128,13 @@ public class Player : Character
 
     public override void OnTriggerEnter(Collider other)
     {
+        if(other.tag !="Item" && !invincible)
+        {
 
+            currentLife--;
+            GameMediator.Instance.changeLife();
+            invincible = true;
+        }
 
     }
 
@@ -152,6 +149,7 @@ public class Player : Character
                 playerModel[2].SetActive(false);
                 playerType = type;
                 barrier.SetActive(false);
+                fireRate = 0.05f;
                 break;
             case PlayerType.Ho:
                 playerModel[0].SetActive(false);
@@ -159,6 +157,7 @@ public class Player : Character
                 playerModel[2].SetActive(false);
                 playerType = type;
                 barrier.SetActive(false);
+                fireRate = 0.1f;
                 break;
             case PlayerType.Deung:
                 playerModel[0].SetActive(false);
@@ -166,6 +165,7 @@ public class Player : Character
                 playerModel[2].SetActive(true);
                 playerType = type;
                 barrier.SetActive(true);
+                fireRate = 0.5f;
                 break;
 
             default:
@@ -175,43 +175,24 @@ public class Player : Character
         subAttackCtrl.playerType = playerType;
     }
 
-    public void AddAmmo()
+    public void ChangeDeungShipFireRate()
     {
-        if (maxMagazine < 5)
+       if(playerType == PlayerType.Deung)
         {
-            maxMagazine = (int)(maxMagazine + Math.Truncate(power / 10f));
+            if (power >= 10)
+                fireRate = 0.4f;
+            if (power >= 20)
+                fireRate = 0.35f;
+            if (power >= 30)
+                fireRate = 0.3f;
         }
-        else
-        {
-            return;
-        }
+       
     }
-
-    public void AmmoSpend()
+   
+    public void EndGame()
     {
-        if (magazine > 0)
-        {
-            --magazine;
-            //Debug.Log("남은 잔탄 수 확인 : " + magazine);
-        }
-        else if (EmptyAmmo && magazine == 0)
-        {
-            Debug.Log("탄 없음");
-            StartCoroutine(AmmoReload());
-        }
+        power = 0;
+        currentLife = maxLife;
     }
-
-    IEnumerator AmmoReload()
-    {
-        EmptyAmmo = false;
-        yield return new WaitForSeconds(2.0f);
-
-        //Debug.Log("재장전 대기 시간 종료");
-        magazine = maxMagazine;
-        //Debug.Log("재장전 장탄 수 확인 : " + magazine);
-        EmptyAmmo = true;
-        StopCoroutine(AmmoReload());
-    }
-
 
 }

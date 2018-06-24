@@ -28,19 +28,20 @@ public class StoreUICtrl : MonoBehaviour
     private void Start()
     {
         ScrollPanel = gameObject.GetComponentInChildren<ScrollRect>();
-        PlayerGold.text = InputManager.Instance.ReadPlayerGold().ToString();
-        InputManager.Instance.DelegateGold += new ChangeGold(ChangeImage);
-        InputManager.Instance.DelegateGold += new ChangeGold(ShowPlayerHaveGold);
-        InputManager.Instance.DelegateGold();
+        PlayerGold.text = GameMediator.Instance.ReadPlayerGold().ToString();
+        GameMediator.Instance.CheckedChangeGold += new GameMediator.CheckChangeGold(ShowPlayerHaveGold);
+        GameMediator.Instance.CheckedChangeGold += new GameMediator.CheckChangeGold(ChangeImage);
+        ShowPlayerHaveGold();
+        ChangeImage();
     }
 
     private void ShowPlayerHaveGold()
     {
-        PlayerGold.text = InputManager.Instance.ReadPlayerGold().ToString();
+        PlayerGold.text = GameMediator.Instance.ReadPlayerGold().ToString();
     }
     private void ChangeImage()
     {
-        if (InputManager.Instance.ReadPlayerGold() < SalePrice)
+        if (GameMediator.Instance.ReadPlayerGold() < SalePrice)
         {
             ScrolledImage.sprite = UnvailableItem;
         }
@@ -55,18 +56,20 @@ public class StoreUICtrl : MonoBehaviour
         if (ScrollPanel.horizontalNormalizedPosition > 0.8)
         {
             ScrollPanel.horizontalNormalizedPosition = 1;
-            if (InputManager.Instance.ReadPlayerGold() >= SalePrice && !purchase)
+            if (GameMediator.Instance.ReadPlayerGold() >= SalePrice && !purchase)
             {
                 Debug.Log("Power Item 구입");
                 purchase = true;
-                InputManager.Instance.BuyItem(ItemType.PowerItem, SalePrice);
+                GameMediator.Instance.ChangeGold(-SalePrice);
+                GameMediator.Instance.BuyItem(ItemType.PowerItem);
             }
         }
         else if (ScrollPanel.horizontalNormalizedPosition < 0.8 && purchase)
         {
             Debug.Log("Power Item 판매");
             purchase = false;
-            InputManager.Instance.SellItem(ItemType.PowerItem, SalePrice);
+            GameMediator.Instance.ChangeGold(SalePrice);
+            GameMediator.Instance.SellItem(ItemType.PowerItem);
         }
     }
     public void OnTradeLifeItem()
@@ -74,11 +77,13 @@ public class StoreUICtrl : MonoBehaviour
         if (ScrollPanel.horizontalNormalizedPosition > 0.8)
         {
             ScrollPanel.horizontalNormalizedPosition = 1;
-            if (InputManager.Instance.ReadPlayerGold() >= SalePrice && !purchase)
+            if (GameMediator.Instance.ReadPlayerGold() >= SalePrice && !purchase)
             {
                 Debug.Log("LifeItem 구입!");
                 purchase = true;
-                InputManager.Instance.BuyItem(ItemType.LifeItem, SalePrice);
+                GameMediator.Instance.ChangeGold(-SalePrice);
+                GameMediator.Instance.BuyItem(ItemType.LifeItem);
+
             }
 
         }
@@ -86,7 +91,8 @@ public class StoreUICtrl : MonoBehaviour
         {
             Debug.Log("LifeItem 판매");
             purchase = false;
-            InputManager.Instance.SellItem(ItemType.LifeItem, SalePrice);
+            GameMediator.Instance.ChangeGold(SalePrice);
+            GameMediator.Instance.SellItem(ItemType.LifeItem);
         }
     }
     public void OnTradePowerRegenItem()
@@ -94,18 +100,20 @@ public class StoreUICtrl : MonoBehaviour
         if (ScrollPanel.horizontalNormalizedPosition > 0.8)
         {
             ScrollPanel.horizontalNormalizedPosition = 1;
-            if (InputManager.Instance.ReadPlayerGold() >= SalePrice && !purchase)
+            if (GameMediator.Instance.ReadPlayerGold() >= SalePrice && !purchase)
             {
                 Debug.Log("PowerRegenItem 구입!");
                 purchase = true;
-                InputManager.Instance.BuyItem(ItemType.PowerRegenItem, SalePrice);
+                GameMediator.Instance.ChangeGold(-SalePrice);
+                GameMediator.Instance.BuyItem(ItemType.PowerRegenItem);
             }
         }
         else if (ScrollPanel.horizontalNormalizedPosition < 0.8 && purchase)
         {
             Debug.Log("PowerRegenItem 판매");
             purchase = false;
-            InputManager.Instance.SellItem(ItemType.PowerRegenItem, SalePrice);
+            GameMediator.Instance.ChangeGold(SalePrice);
+            GameMediator.Instance.SellItem(ItemType.PowerRegenItem);
         }
 
     }
@@ -117,18 +125,26 @@ public class StoreUICtrl : MonoBehaviour
         {
             ScrollPanel.horizontalNormalizedPosition = 1;
 
-            if (InputManager.Instance.ReadPlayerGold() >= SalePrice && !purchase)
+            if (GameMediator.Instance.ReadPlayerGold() >= SalePrice && !purchase)
             {
                 Debug.Log("MagnaticItem 구입!");
                 purchase = true;
-                InputManager.Instance.BuyItem(ItemType.MagnaticItem, SalePrice);
+                GameMediator.Instance.ChangeGold(-SalePrice);
+                GameMediator.Instance.BuyItem(ItemType.MagnaticItem);
             }
         }
         else if (ScrollPanel.horizontalNormalizedPosition < 0.8 && purchase)
         {
             Debug.Log("MagnaticItem 판매");
             purchase = false;
-            InputManager.Instance.SellItem(ItemType.MagnaticItem, SalePrice);
+            GameMediator.Instance.ChangeGold(SalePrice);
+            GameMediator.Instance.SellItem(ItemType.MagnaticItem); ;
         }
+    }
+
+    private void OnDestroy()
+    {
+        GameMediator.Instance.CheckedChangeGold -= new GameMediator.CheckChangeGold(ShowPlayerHaveGold);
+        GameMediator.Instance.CheckedChangeGold -= new GameMediator.CheckChangeGold(ChangeImage);
     }
 }

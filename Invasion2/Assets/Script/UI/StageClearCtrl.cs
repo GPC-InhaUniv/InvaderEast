@@ -16,10 +16,11 @@ public class StageClearCtrl : MonoBehaviour {
     int currentScore;
     int maxScore;
 
+    
     public void OnClickReturnToTitle()
     {
         Time.timeScale = 1;
-        InputManager.Instance.ChangeScene(SceneState.Title);
+        GameMediator.Instance.ChangeScene(SceneState.Title);
     }
 
     public void OnClickRestart()
@@ -32,7 +33,8 @@ public class StageClearCtrl : MonoBehaviour {
 
     private void OnEnable()
     {
-        maxScore = InputManager.Instance.ReadCurrentScore();
+        Time.timeScale = 0;
+        maxScore = GameMediator.Instance.ReadCurrentScore();
     }
 
     private void Update()
