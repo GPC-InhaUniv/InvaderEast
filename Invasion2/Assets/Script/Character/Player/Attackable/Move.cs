@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 
 /// <summary>
-///
+/// 담당자 : 이재환
+/// 
 /// </summary>
 
 public class Move : MonoBehaviour
@@ -10,20 +11,14 @@ public class Move : MonoBehaviour
     float speed;
 
     Rigidbody rigidbody;
-
     Transform thisTransform;
+
     private void Awake()
     {
         rigidbody = GetComponent<Rigidbody>();
         thisTransform = gameObject.transform;
-
     }
 
-    private void OnEnable()
-    {
-        
-       
-    }
 
     private void FixedUpdate()
     {
@@ -41,7 +36,6 @@ public class Move : MonoBehaviour
     {
         if (tag == "PlayerBullet")
         {
-            
             PoolManager.Instance.PutPlayerBulletObject(gameObject);
         }
 
@@ -59,16 +53,16 @@ public class Move : MonoBehaviour
             PoolManager.Instance.PutPlayerBulletObject(gameObject);
         }
 
-        if(tag == "EnemyBullet" && other.tag != "Boundary")
+        if (tag == "EnemyBullet" && other.tag != "Boundary")
         {
             PoolManager.Instance.PutEnemyBulletObject(gameObject);
         }
 
     }
-    
+
     private void OnTriggerExit(Collider other)
     {
-        if(other.tag == "Boundary")
+        if (other.tag == "Boundary")
         {
             if (tag == "PlayerBullet")
             {
