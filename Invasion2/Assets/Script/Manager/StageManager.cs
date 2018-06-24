@@ -38,13 +38,11 @@ public class StageManager : Singleton<StageManager>
 
     public Restart restart;
     CoroutineCtrl stageCoroutineCtrl;
-    
+
     const int MaxStage = 3;
     int CurrentStage;
     Difficult difficult;
     int transformNumber;
-    
-    
 
     //스테이지 패턴 발생 간격
     float callCoroutineTick = 5f;
@@ -61,7 +59,6 @@ public class StageManager : Singleton<StageManager>
         EnemyList = new List<GameObject>();
         CurrentStage = 0;
         stageCoroutineCtrl = new CoroutineCtrl(this, enemyPrefab);
-        //  Factory = new EnemyFactory(gameMediator);
         Factory = new EnemyFactory();
         restart += new Restart(SetRestart);
       
