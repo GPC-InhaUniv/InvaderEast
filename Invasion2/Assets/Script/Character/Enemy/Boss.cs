@@ -46,8 +46,6 @@ public class Boss : Enemy
     // Use this for initialization
     void Start()
     {
-       
-        
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         rigidbody = GetComponent<Rigidbody>();
         maxLife = 1000;
@@ -97,6 +95,7 @@ public class Boss : Enemy
             GameObject bullet = PoolManager.Instance.GetEnemyBulletObject();
             bullet.transform.position = mainShotPos.transform.position;
             bullet.transform.rotation = mainShotPos.transform.rotation;
+            GameMediator.Instance.PlaySound(SoundType.EnemyAttack);
             yield return new WaitForSeconds(0.2f);
             shotCount++;
             StartCoroutine(FirstPattern());
@@ -121,8 +120,10 @@ public class Boss : Enemy
             if (i % 4 == 0)
                 continue;
             Quaternion AngleOfFire = Quaternion.Euler(0, (-i * 15)-90, 0);
-            Instantiate(bullet, subShotPos.transform.position, subShotPos.transform.rotation = AngleOfFire);
-
+            GameObject bullet = PoolManager.Instance.GetEnemyBulletObject();
+            bullet.transform.position = mainShotPos.transform.position;
+            bullet.transform.rotation = mainShotPos.transform.rotation;
+            GameMediator.Instance.PlaySound(SoundType.EnemyAttack);
             yield return new WaitForSeconds(0.1f);
 
         }

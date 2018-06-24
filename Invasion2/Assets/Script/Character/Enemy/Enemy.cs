@@ -136,6 +136,7 @@ public class Enemy : Character
             currentLife--;
             if (currentLife <= 0)
             {
+                GameMediator.Instance.PlaySound(SoundType.EnemyDead);
                 GameMediator.Instance.ChangeScore(giveScore);
                 GameMediator.Instance.SpawnItem(gameObject);
                 Died();
@@ -143,12 +144,14 @@ public class Enemy : Character
         }
         if (other.tag == ("HomingMissile"))
         {
+            GameMediator.Instance.PlaySound(SoundType.EnemyDead);
             GameMediator.Instance.ChangeScore(giveScore);
             GameMediator.Instance.SpawnItem(gameObject);
             Died();
         }
         if(other.tag == ("StraightMissile"))
         {
+            GameMediator.Instance.PlaySound(SoundType.EnemyDead);
             GameMediator.Instance.ChangeScore(giveScore);
             GameMediator.Instance.SpawnItem(gameObject);
             Died();

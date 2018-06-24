@@ -13,27 +13,23 @@ public class EnemyAttackPattern : MonoBehaviour
     GameObject shotPos;
 
     public IEnumerator EnemyPattern1() // 하나씩 발사하는 패턴
-
     {
-      
+
         float attackWaitTime = 1.0f;
-        
+ 
         while (true)
         {
             bullet = PoolManager.Instance.GetEnemyBulletObject();
             bullet.transform.position = shotPos.transform.position;
             bullet.transform.rotation = shotPos.transform.rotation;
+            GameMediator.Instance.PlaySound(SoundType.EnemyAttack);
             yield return new WaitForSeconds(attackWaitTime);
         }
     }
 
-
     // 5발 연속으로 발사하는 패턴
-
     public IEnumerator EnemyPattern2() 
-
     {
-      
 
         float attackWaitTime = 0.5f;
 
@@ -46,6 +42,7 @@ public class EnemyAttackPattern : MonoBehaviour
                 bullet = PoolManager.Instance.GetEnemyBulletObject();
                 bullet.transform.position = shotPos.transform.position;
                 bullet.transform.rotation = shotPos.transform.rotation;
+                GameMediator.Instance.PlaySound(SoundType.EnemyAttack);
                 yield return new WaitForSeconds(attackWaitTime);
             }
 
@@ -69,6 +66,7 @@ public class EnemyAttackPattern : MonoBehaviour
             bullet = PoolManager.Instance.GetEnemyBulletObject();
             bullet.transform.position = shotPos.transform.position;
             bullet.transform.rotation = shotPos.transform.rotation;
+            GameMediator.Instance.PlaySound(SoundType.EnemyAttack);
             yield return new WaitForSeconds(attackWaitTime);
 
 
@@ -97,8 +95,9 @@ public class EnemyAttackPattern : MonoBehaviour
                 bullet = PoolManager.Instance.GetEnemyBulletObject();
                 bullet.transform.position = shotPos.transform.position;
                 bullet.transform.rotation = quaternion;
+                
             }
-
+            GameMediator.Instance.PlaySound(SoundType.EnemyAttack);
             yield return new WaitForSeconds(attackWaitTime);
         }
     }

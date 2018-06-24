@@ -108,14 +108,14 @@ public class Player : Character
 
             if (playerType == PlayerType.Deung)
             {
-                
-                SoundManager.Instance.PlayEffectSound("PlayerAttack");
+
+                GameMediator.Instance.PlaySound(SoundType.PlayerAttack);
                 mainAttackCtrl.Attack(power);
 
             }
             else
             {
-                SoundManager.Instance.PlayEffectSound("PlayerAttack");
+                GameMediator.Instance.PlaySound(SoundType.PlayerAttack);
                 mainAttackCtrl.Attack(power);
             }
             timeRate = 0.0f;
@@ -134,7 +134,7 @@ public class Player : Character
     {
         if (other.tag != "Item" && !invincible)
         {
-
+            GameMediator.Instance.PlaySound(SoundType.PlayerHit);
             currentLife--;
             GameMediator.Instance.changeLife();
             invincible = true;

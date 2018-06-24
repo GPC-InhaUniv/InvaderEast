@@ -176,4 +176,9 @@ public class GameMediator : Singleton<GameMediator>
     {
         PoolManager.Instance.PutPlayerMissileObject(gameObject, type);
     }
+
+    public void PlaySound(SoundType soundType)
+    {
+        SoundManager.Instance.PlayEffectSound(soundType);
+    }
 }

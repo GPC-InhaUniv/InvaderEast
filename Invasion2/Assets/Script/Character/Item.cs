@@ -59,6 +59,7 @@ public class Item : MonoBehaviour
     {
         if (other.tag != "Boundary")
         {
+            GameMediator.Instance.PlaySound(SoundType.GetItem);
             switch (itemType)
             {
                 case ItemType.GoldItem:

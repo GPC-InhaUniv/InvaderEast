@@ -52,6 +52,7 @@ public class SoundManager : Singleton<SoundManager>
     public void PlayBackgroundSound()
     {
         audioSource.loop = true;
+        audioSource.volume = 0.5f;
         audioSource.PlayOneShot(backgroundSound, 0.5f);
     }
 
@@ -60,24 +61,29 @@ public class SoundManager : Singleton<SoundManager>
         switch (soundType)
         {
             case SoundType.BossDead:
+                
                 audioSource.PlayOneShot(effectSound[0], 0.5f);
                 break;
             case SoundType.EnemyAttack:
                 audioSource.PlayOneShot(effectSound[1], 0.5f);
                 break;
             case SoundType.EnemyDead:
+                audioSource.volume = 1f;
                 audioSource.PlayOneShot(effectSound[2], 0.5f);
                 break;
             case SoundType.GetItem:
+                audioSource.volume = 0.5f;
                 audioSource.PlayOneShot(effectSound[3], 0.5f);
                 break;
             case SoundType.PlayerAttack:
+                audioSource.volume = 0.5f;
                 audioSource.PlayOneShot(effectSound[4], 0.5f);
                 break;
             case SoundType.PlayerDead:
                 audioSource.PlayOneShot(effectSound[5], 0.5f);
                 break;
             case SoundType.PlayerHit:
+                audioSource.volume = 2f;
                 audioSource.PlayOneShot(effectSound[6], 0.5f);
                 break;
             case SoundType.PlayerMove:
