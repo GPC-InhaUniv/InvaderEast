@@ -47,6 +47,7 @@ public class StoreUICtrl : MonoBehaviour
 
     public void OnTradePowerItem()
     {
+
         if (ScrollPanel.horizontalNormalizedPosition > 0.8)
         {
             ScrollPanel.horizontalNormalizedPosition = 1;
@@ -70,6 +71,7 @@ public class StoreUICtrl : MonoBehaviour
     }
     public void OnTradeLifeItem()
     {
+
         if (ScrollPanel.horizontalNormalizedPosition > 0.8)
         {
             ScrollPanel.horizontalNormalizedPosition = 1;
@@ -95,6 +97,7 @@ public class StoreUICtrl : MonoBehaviour
     }
     public void OnTradePowerRegenItem()
     {
+
         if (ScrollPanel.horizontalNormalizedPosition > 0.8)
         {
             ScrollPanel.horizontalNormalizedPosition = 1;
@@ -119,7 +122,6 @@ public class StoreUICtrl : MonoBehaviour
     }
     public void OnTradeMagnaticItem()
     {
-
 
         if (ScrollPanel.horizontalNormalizedPosition > 0.8)
         {

@@ -13,6 +13,7 @@ public class GameMediator : Singleton<GameMediator>
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Character>();
+        SoundManager.Instance.PlayBackgroundSound();
     }
 
     //게임 데이터와 플레이어의 데이터 읽기
@@ -36,12 +37,13 @@ public class GameMediator : Singleton<GameMediator>
     {
         return player.CurrentLife;
     }
-    // 게임 오버시 score 값 0 입력
+
     public delegate void CheckChangeScore();
     public CheckChangeScore CheckedChangeScore;
     public void ChangeScore(int score)
     {
         GameDataManager.Instance.ChangeScore(score);
+        if(CheckedChangeScore!=null)
         CheckedChangeScore();
     }
 
@@ -49,7 +51,6 @@ public class GameMediator : Singleton<GameMediator>
 
     public void ChangeGold(int gold)
     {
-        Debug.Log("골드 변경");
         GameDataManager.Instance.ChangeGold(gold);
         SaveAndLoader.Instance.SaveData();
 
@@ -57,6 +58,7 @@ public class GameMediator : Singleton<GameMediator>
     public void GameOver()
     {
         GameDataManager.Instance.EndGame();
+        player.CurrentLife = player.MaxLife;
     }
     // Item 종류 : PowerItem, LifeItem, GoldItem,ScoreItem,MagnaticItem, PowerRegenItem
     // count : 골드, 스코어 아이템의 골드량 및 스코어양
@@ -86,6 +88,7 @@ public class GameMediator : Singleton<GameMediator>
     public void ChangePlayerPower(int count)
     {
         player.Power = count;
+        if(changePower !=null)
         changePower();
     }
     public delegate void ChangeLife();
@@ -93,6 +96,7 @@ public class GameMediator : Singleton<GameMediator>
     public void ChangePlayerLife(int count)
     {
         player.MaxLife += count;
+        if(changeLife !=null)
         changeLife();
     }
 

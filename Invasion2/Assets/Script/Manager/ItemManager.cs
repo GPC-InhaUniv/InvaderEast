@@ -21,18 +21,25 @@ public class ItemManager : Singleton<ItemManager>
 {
 
     protected ItemManager() { }
-   
-    private int PowerItemCount;
-    private int LifeItemCount;
-    private bool MagnaticItem;
-    private bool PowerRegenItem;
+    private int powerItemCount;
+    private int lifeItemCount;
+    private bool magnaticItem;
+    private bool powerRegenItem;
+
+    [SerializeField]
+    int incresePower;
+
+
+    public bool PowerRegenItem { get { return powerRegenItem; }}
+    public bool MagnaticItem { get { return magnaticItem; } }
+
     private void Start()
-    {
-        
-        PowerItemCount = 0;
-        LifeItemCount = 0;
-        MagnaticItem = false;
-        PowerRegenItem = false;
+    {     
+        powerItemCount = 0;
+        lifeItemCount = 0;
+        magnaticItem = false;
+        powerRegenItem = false;
+        incresePower = 2;
     }
 
     public void GetItem(ItemType item)
@@ -40,12 +47,12 @@ public class ItemManager : Singleton<ItemManager>
         switch (item)
         {
             case ItemType.PowerItem:
-                PowerItemCount += 3;
-                GameMediator.Instance.ChangePlayerPower(PowerItemCount);
+                powerItemCount += 3;
+                GameMediator.Instance.ChangePlayerPower(powerItemCount);
                 break;
             case ItemType.LifeItem:
-                LifeItemCount += 1;
-                GameMediator.Instance.ChangePlayerLife(LifeItemCount);
+                lifeItemCount += 1;
+                GameMediator.Instance.ChangePlayerLife(lifeItemCount);
                 break;
 
             default:
@@ -72,18 +79,21 @@ public class ItemManager : Singleton<ItemManager>
         switch (item)
         {
             case ItemType.PowerItem:
-                PowerItemCount += 10;
+                powerItemCount += 10;
+       
                 GameMediator.Instance.ChangePlayerPower(10);
                 break;
             case ItemType.LifeItem:
-                LifeItemCount += 10;
+                lifeItemCount += 10;
+        
                 GameMediator.Instance.ChangePlayerLife(10);
                 break;
             case ItemType.MagnaticItem:
-                MagnaticItem = true;
+                magnaticItem = true;
                 break;
             case ItemType.PowerRegenItem:
-                PowerRegenItem = true;
+                powerRegenItem = true;
+                incresePower += 1;
                 break;
             default:
                 break;
@@ -95,18 +105,21 @@ public class ItemManager : Singleton<ItemManager>
         switch (item)
         {
             case ItemType.PowerItem:
-                PowerItemCount -= 10;
+                powerItemCount -= 10;
+          
                 GameMediator.Instance.ChangePlayerPower(-10);
                 break;
             case ItemType.LifeItem:
-                LifeItemCount -= 10;
+                lifeItemCount -= 10;
+       
                 GameMediator.Instance.ChangePlayerLife(-10);
                 break;
             case ItemType.MagnaticItem:
-                MagnaticItem = false;
+                magnaticItem = false;
                 break;
             case ItemType.PowerRegenItem:
-                PowerRegenItem = false;
+                powerRegenItem = false;
+                incresePower += 1;
                 break;
             default:
                 break;

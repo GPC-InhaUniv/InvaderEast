@@ -53,7 +53,7 @@ public class Player : Character
     float countTime;
     private void Start()
     {
-       
+
         DontDestroyOnLoad(gameObject);
         rigidbody = GetComponent<Rigidbody>();
         subAttackCtrl = FindObjectOfType<SubAttackCtrl>();
@@ -71,7 +71,7 @@ public class Player : Character
             if (power >= 30)
                 power = 30;
         }
-        if(invincible)
+        if (invincible)
         {
             countTime += Time.deltaTime;
             if (countTime >= invincibleTime)
@@ -105,13 +105,17 @@ public class Player : Character
         }
         else if (timeRate >= fireRate)
         {
-            
+
             if (playerType == PlayerType.Deung)
             {
-                    mainAttackCtrl.Attack(power);
+                
+                SoundManager.Instance.PlayEffectSound("PlayerAttack");
+                mainAttackCtrl.Attack(power);
+
             }
             else
             {
+                SoundManager.Instance.PlayEffectSound("PlayerAttack");
                 mainAttackCtrl.Attack(power);
             }
             timeRate = 0.0f;
@@ -128,7 +132,7 @@ public class Player : Character
 
     public override void OnTriggerEnter(Collider other)
     {
-        if(other.tag !="Item" && !invincible)
+        if (other.tag != "Item" && !invincible)
         {
 
             currentLife--;
@@ -177,7 +181,7 @@ public class Player : Character
 
     public void ChangeDeungShipFireRate()
     {
-       if(playerType == PlayerType.Deung)
+        if (playerType == PlayerType.Deung)
         {
             if (power >= 10)
                 fireRate = 0.4f;
@@ -186,9 +190,9 @@ public class Player : Character
             if (power >= 30)
                 fireRate = 0.3f;
         }
-       
+
     }
-   
+
     public void EndGame()
     {
         power = 0;

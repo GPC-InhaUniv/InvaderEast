@@ -17,14 +17,18 @@ public class StageClearCtrl : MonoBehaviour {
     int maxScore;
 
     
+
     public void OnClickReturnToTitle()
     {
+        GameMediator.Instance.GameOver();
         Time.timeScale = 1;
         GameMediator.Instance.ChangeScene(SceneState.Title);
+       
     }
 
     public void OnClickRestart()
     {
+        GameMediator.Instance.GameOver();
         Time.timeScale = 1;
         gameObject.SetActive(false);
         StageManager.Instance.restart();
@@ -34,18 +38,8 @@ public class StageClearCtrl : MonoBehaviour {
     private void OnEnable()
     {
         Time.timeScale = 0;
+        scoreText.text = GameMediator.Instance.ReadCurrentScore().ToString();
         maxScore = GameMediator.Instance.ReadCurrentScore();
     }
 
-    private void Update()
-    {
-        if (currentScore < maxScore)
-        {
-            currentScore += addScore;
-        }
-        else if (currentScore > maxScore)
-        {
-            currentScore = maxScore;
-        }
-    }
 }
