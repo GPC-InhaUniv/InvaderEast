@@ -19,7 +19,7 @@ public class MenuUICtrl : MonoBehaviour
         Time.timeScale = 1;
         PoolManager.Instance.ClearQueue();
         StageManager.Instance.SetRestart();
-        InputManager.Instance.ChangeScene(SceneState.CharacterSelect);
+        GameMediator.Instance.ChangeScene(SceneState.CharacterSelect);
     }
 
     public void OnClickResumeButton()

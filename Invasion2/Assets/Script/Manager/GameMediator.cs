@@ -9,7 +9,6 @@ public class GameMediator : Singleton<GameMediator>
     GameDataManager gameDataManager;
     ItemManager itemManager;
     SceneController sceneController;
-    InputManager inputManagere;
     StageManager stageManager;
     Character player;
     // Use this for initialization
@@ -20,7 +19,6 @@ public class GameMediator : Singleton<GameMediator>
         gameDataManager = GameDataManager.Instance;
         itemManager = ItemManager.Instance;
         sceneController = SceneController.Instance;
-        inputManagere = InputManager.Instance;
         stageManager = StageManager.Instance;
         saveAndLoader = SaveAndLoader.Instance;
         DontDestroyOnLoad(gameObject);
@@ -61,11 +59,14 @@ public class GameMediator : Singleton<GameMediator>
     }
 
     // 골드는 변경과 동시에 저장
+    public delegate void CheckChangeGold();
+    public CheckChangeGold CheckedChangeGold;
     public void ChangeGold(int gold)
     {
         Debug.Log("골드 변경");
         gameDataManager.ChangeGold(gold);
         SaveAndLoader.Instance.SaveData();
+        CheckedChangeGold();
 
     }
     public void GameOver()
