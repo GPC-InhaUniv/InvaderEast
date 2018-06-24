@@ -7,6 +7,7 @@ public class SubAttackCtrl : MonoBehaviour
 {
     [SerializeField]
     GameObject straightMissile;
+
     [SerializeField]
     GameObject homingMissile;
   
