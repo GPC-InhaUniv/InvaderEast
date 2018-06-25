@@ -1,15 +1,17 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// 담당자 : 이재환
+/// -----------------------------
+/// 산탄 총의 탄 효과 부분
+/// -----------------------------
+/// </summary>
 public class spread : MonoBehaviour
 {
     const int spreadCount = 24;
     const int maxAngle = 120;
     int angle;
-
-
-
+        
     [SerializeField]
     GameObject shotPosition;
 
@@ -35,9 +37,7 @@ public class spread : MonoBehaviour
             shotPosition.transform.rotation = Quaternion.Euler(0f, angle * i, 0f);
             playerBullet.transform.position = shotPosition.transform.position;
             playerBullet.transform.rotation = shotPosition.transform.rotation;
-            // Debug.Log(angle * i);
-            //playerBullet.transform.rotation = Quaternion.Euler(0f, 10 * i, 0f);
-
+            
         }
         PoolManager.Instance.PutPlayerSpreadBulletObject(gameObject);
     }
@@ -46,6 +46,7 @@ public class spread : MonoBehaviour
     {
         PoolManager.Instance.PutPlayerSpreadBulletObject(gameObject);
     }
+
     private void OnDisable()
     {
 
