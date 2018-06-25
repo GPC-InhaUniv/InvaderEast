@@ -68,19 +68,14 @@ public class StageManager : Singleton<StageManager>
     {
         Debug.Log("SetStage");
         TransformList = GameObject.FindGameObjectsWithTag("EnemySpawnPoint");
-    //    Boundary = GameObject.FindGameObjectWithTag("Boundary").GetComponent<BoxCollider>();
     }
 
     public void Spawn(GameObject enemy)
     {
-     //   if(enemy.tag == "Enemy")
-        {
-            transformNumber = Random.Range(0,TransformList.Length-1);
-            GameObject SpawnEnemy = Factory.CreateEnemy();
-            SpawnEnemy.transform.position = TransformList[transformNumber].transform.position;
-            EnemyList.Add(SpawnEnemy);
-        }
-   //     else Debug.Log("Spawn() 메서드의 tag 불일치!");
+        transformNumber = Random.Range(0, TransformList.Length - 1);
+        GameObject SpawnEnemy = Factory.CreateEnemy();
+        SpawnEnemy.transform.position = TransformList[transformNumber].transform.position;
+        EnemyList.Add(SpawnEnemy);
     }
 
     public void RemoveAllEnemy()
@@ -116,20 +111,6 @@ public class StageManager : Singleton<StageManager>
             StartCoroutine(StageCoroutine(CurrentStage));
         }
     }
-
-
-    public void SetDifficulty(Difficult difficult)
-    {
-        this.difficult = difficult;
-        Debug.Log("Set Difficulty : " + difficult);
-    }
-
-    public Difficult GetDifficulty()
-    {
-        Debug.Log("Get Difficulty : " + difficult);
-        return difficult;
-    }
-
 
     //실질석인 스테이지 타임라인
     IEnumerator StageCoroutine(int stageLevel)

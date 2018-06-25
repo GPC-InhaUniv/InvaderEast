@@ -36,11 +36,6 @@ public class StartSceneCtrl : MonoBehaviour
         HelpPanel.SetActive(true);
     }
 
-    public void OnClickRank()
-    {
-        HelpPanel.SetActive(false);
-    }
-
     public void OnClickExit()
     {
         GameMediator.Instance.ChangeScene(SceneState.End);
