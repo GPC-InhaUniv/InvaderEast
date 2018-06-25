@@ -53,11 +53,6 @@ public class SaveAndLoader : Singleton<SaveAndLoader>
         {
             gameData = (GameData)formatter.Deserialize(stream);
         }   
-
-        /*
-FileStream stream = new FileStream(filePath, FileMode.Open);
-gameData = (GameData)formatter.Deserialize(stream);
-stream.Close();*/
     }
 
     private void BinarySerialize(GameData Data, string filePath)
@@ -67,28 +62,22 @@ stream.Close();*/
         {
             formatter.Serialize(stream, gameData);
         }
-        /*
-            FileStream stream = new FileStream(filePath, FileMode.Create);
-        formatter.Serialize(stream, gameData);
-        stream.Close();*/
     }
 
 
 
 }
 /// <summary>
-///                  [안드로이드 External]
+///                  [안드로이드 External(외부)]
 ///Application.persistentDataPath : /mnt/sdcard/Android/data/번들이름/files
 ///파일 읽기 쓰기 가능
 ///Application.dataPath : /data/app/번들이름-번호.apk
 ///Application.streamingAssetsPath : jar:file:///data/app/번들이름.apk!/assets 
 ///파일이 아닌 WWW로 읽기 가능
-///                  [안드로이드 Internal]
+///                  [안드로이드 Internal(내부)]
 ///Application.persistentDataPath : /data/data/번들이름/files/
 ///파일 읽기 쓰기 가능
 ///Application.dataPath : /data/app/번들이름-번호.apk
 ///Application.streamingAssetsPath : jar:file:///data/app/번들이름.apk!/assets
 ///파일이 아닌 WWW로 읽기 가능
-///
-/// 
 /// </summary>

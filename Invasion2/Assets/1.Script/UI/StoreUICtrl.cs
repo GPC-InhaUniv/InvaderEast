@@ -29,7 +29,6 @@ public class StoreUICtrl : MonoBehaviour
     {
         ScrollPanel = gameObject.GetComponentInChildren<ScrollRect>();
         ShowChange();
-
         GameMediator.Instance.CheckedChangeGold += new GameMediator.DoChangeGoldDelegate(ShowChange);
     }
 
