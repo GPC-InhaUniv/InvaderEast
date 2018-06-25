@@ -28,7 +28,6 @@ public enum EnemyType
 /// </summary>
 public class Enemy : Character
 {
-    [SerializeField]
     protected Direction direction;
     [SerializeField]
     private GameObject shotPos;
@@ -45,7 +44,6 @@ public class Enemy : Character
             direction = value;
         }
     }
-    [SerializeField]
     protected EnemyType enemyType;
     protected int giveScore;
     protected int giveMaxGold;
@@ -67,7 +65,6 @@ public class Enemy : Character
     {
         rigidbody = GetComponent<Rigidbody>();
         enemyPattern = gameObject.GetComponent<EnemyAttackPattern>();
-        // ChangeType(enemyType);
         maxLife = 5;
         GameMediator.Instance.DoGameOver += new GameMediator.DoGameOverDelegate(Died);
         SetEnemyInfo();
@@ -122,7 +119,6 @@ public class Enemy : Character
     private void OnDisable()
     {
         StopAllCoroutines();
-        // StageManager.Instance.RemoveEnemy(gameObject);
     }
     private void OnTriggerExit(Collider other)
     {

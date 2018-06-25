@@ -16,7 +16,6 @@ using System;
 
 public class Player : Character
 {
-    [SerializeField]
     PlayerType playerType;
 
     public PlayerType PlayerType { get { return playerType; } }
@@ -38,10 +37,10 @@ public class Player : Character
     MainAttackCtrl mainAttackCtrl;
     GuaidanceMove homingMove;
 
-    [SerializeField]
     float invincibleTime = 3f;
     bool invincible;
     float countTime;
+
     private void Start()
     {
         currentLife = maxLife;
