@@ -50,7 +50,11 @@ public class GameMediator : Singleton<GameMediator>
         if (CheckedChangeScore != null)
             CheckedChangeScore();
     }
-    public void ChangePlayerMaxLife(int  life)
+    public void ChangeMaxScore(int score)
+    {
+        GameDataManager.Instance.ChangeMaxScore(score);
+    }
+    public void ChangePlayerMaxLife(int life)
     {
         player.MaxLife += life;
     }
@@ -62,12 +66,14 @@ public class GameMediator : Singleton<GameMediator>
         if (CheckedChangeGold != null)
             CheckedChangeGold();
     }
+
+    public delegate void DoGameOverDelegate();
+    public DoGameOverDelegate DoGameOver;
     public void GameOver()
     {
-        GameDataManager.Instance.EndGame();
-        ItemManager.Instance.EndGame(); 
+        if (DoGameOver != null)
+            DoGameOver();
         player.EndGame();
-        StageManager.Instance.SetRestart();
         if (changeLife != null)
             changeLife();
         if (changePower != null)
@@ -140,9 +146,13 @@ public class GameMediator : Singleton<GameMediator>
     {
         ItemManager.Instance.SpawnItem(enemyPos);
     }
+    public void PlaySound(SoundType soundType)
+    {
+        SoundManager.Instance.PlayEffectSound(soundType);
+    }
 
     //pool manager 관련 메서드
-    
+
     public GameObject GetEnemyObject()
     {
         return PoolManager.Instance.GetEnemyObject();
@@ -192,9 +202,14 @@ public class GameMediator : Singleton<GameMediator>
     {
         PoolManager.Instance.PutPlayerMissileObject(gameObject, type);
     }
-    
-    public void PlaySound(SoundType soundType)
+    public GameObject GetItemObjectFromPool()
     {
-        SoundManager.Instance.PlayEffectSound(soundType);
+        return PoolManager.Instance.GetItemObject();
     }
+    public void PutItemObjectAtPool(GameObject gameObject)
+    {
+        PoolManager.Instance.PutItemObject(gameObject);
+    }
+
+
 }

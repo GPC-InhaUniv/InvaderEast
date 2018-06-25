@@ -24,8 +24,6 @@ public class StageClearCtrl : MonoBehaviour {
     public void OnClickRestart()
     {
         GameMediator.Instance.GameOver();
-        if (StageManager.Instance.restart != null)
-            StageManager.Instance.restart();
         StageManager.Instance.NextStage();
         gameObject.SetActive(false);
         Time.timeScale = 1;

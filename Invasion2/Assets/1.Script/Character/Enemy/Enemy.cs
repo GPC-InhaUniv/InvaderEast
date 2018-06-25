@@ -66,7 +66,7 @@ public class Enemy : Character
         enemyPattern = gameObject.GetComponent<EnemyAttackPattern>();
         // ChangeType(enemyType);
         maxLife = 5;
-        StageManager.Instance.restart += new Restart(Died);
+        GameMediator.Instance.DoGameOver += new GameMediator.DoGameOverDelegate(Died);
         SetEnemyInfo();
     }
 
@@ -160,6 +160,6 @@ public class Enemy : Character
 
     private void OnDestroy()
     {
-        StageManager.Instance.restart -= new Restart(Died);
+        GameMediator.Instance.DoGameOver -= new GameMediator.DoGameOverDelegate(Died);
     }
 }

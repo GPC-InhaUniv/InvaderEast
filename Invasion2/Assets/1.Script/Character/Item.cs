@@ -30,7 +30,7 @@ public class Item : MonoBehaviour
     {
         rigidbodyComponent = GetComponent<Rigidbody>();
         rigidbodyComponent.velocity = transform.forward * -speed;
-        StageManager.Instance.restart += new Restart(ReturnPool);
+        GameMediator.Instance.DoGameOver += new GameMediator.DoGameOverDelegate(ReturnPool);
 
     }
 
@@ -117,12 +117,12 @@ public class Item : MonoBehaviour
     {
         if(other.tag == "Boundary")
         {
-            PoolManager.Instance.PutItemObject(gameObject);
+            GameMediator.Instance.PutItemObjectAtPool(gameObject);
         }
     }
 
     private void OnDestroy()
     {
-        StageManager.Instance.restart -= new Restart(ReturnPool);
+        GameMediator.Instance.DoGameOver -= new GameMediator.DoGameOverDelegate(ReturnPool);
     }
 }

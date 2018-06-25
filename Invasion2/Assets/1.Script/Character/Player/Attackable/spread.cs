@@ -17,7 +17,7 @@ public class spread : MonoBehaviour
 
     private void Start()
     {
-        StageManager.Instance.restart += new Restart(ReturnPool);
+        GameMediator.Instance.DoGameOver += new GameMediator.DoGameOverDelegate(ReturnPool);
     }
 
     private void OnEnable()
@@ -54,6 +54,6 @@ public class spread : MonoBehaviour
 
     private void OnDestroy()
     {
-        StageManager.Instance.restart -= new Restart(ReturnPool);
+        GameMediator.Instance.DoGameOver -= new GameMediator.DoGameOverDelegate(ReturnPool);
     }
 }

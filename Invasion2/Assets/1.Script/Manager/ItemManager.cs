@@ -40,6 +40,7 @@ public class ItemManager : Singleton<ItemManager>
         powerRegenItem = false;
         incresePower = 2;
         increseLife = 1;
+        GameMediator.Instance.DoGameOver += new GameMediator.DoGameOverDelegate(EndGame);
     }
 
     public void GetItem(ItemType item)
@@ -121,11 +122,11 @@ public class ItemManager : Singleton<ItemManager>
     public void SpawnItem(GameObject enemyPos)
     {
         GameObject itemObject;
-        itemObject = PoolManager.Instance.GetItemObject();
+        itemObject = GameMediator.Instance.GetItemObjectFromPool();
         itemObject.transform.position = enemyPos.transform.position;
     }
 
-    public void EndGame()
+    private void EndGame()
     {
         increseLife = 1;
         incresePower = 2;

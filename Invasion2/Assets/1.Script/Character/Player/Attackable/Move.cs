@@ -28,7 +28,7 @@ public class Move : MonoBehaviour
 
     void Start()
     {
-        StageManager.Instance.restart += new Restart(ReturnPool);
+        GameMediator.Instance.DoGameOver += new GameMediator.DoGameOverDelegate(ReturnPool);
         transform.position = thisTransform.transform.position;
         transform.rotation = thisTransform.transform.rotation;
     }
@@ -85,6 +85,6 @@ public class Move : MonoBehaviour
 
     private void OnDestroy()
     {
-        StageManager.Instance.restart -= new Restart(ReturnPool);
+        GameMediator.Instance.DoGameOver -= new GameMediator.DoGameOverDelegate(ReturnPool);
     }
 }

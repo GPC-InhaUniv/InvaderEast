@@ -13,7 +13,7 @@ public class MissileMove : MonoBehaviour
     private void Start()
     {
         subAttackCtrl = FindObjectOfType<SubAttackCtrl>();
-        StageManager.Instance.restart += new Restart(ReturnPool);
+        GameMediator.Instance.DoGameOver += new GameMediator.DoGameOverDelegate(ReturnPool);
         rigidbody = GetComponent<Rigidbody>();
         rigidbody.velocity = Vector3.forward * moveSpeed;
     }
@@ -45,5 +45,10 @@ public class MissileMove : MonoBehaviour
         }
     }
 
+
+    private void OnDestroy()
+    {
+        GameMediator.Instance.DoGameOver -= new GameMediator.DoGameOverDelegate(ReturnPool);
+    }
 
 }

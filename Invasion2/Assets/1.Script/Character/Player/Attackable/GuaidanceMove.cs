@@ -45,7 +45,7 @@ public class GuaidanceMove : MonoBehaviour
         {
             FindTarget();
         }
-        StageManager.Instance.restart += new Restart(ReturnPool);
+        GameMediator.Instance.DoGameOver += new GameMediator.DoGameOverDelegate(ReturnPool);
         subAttackCtrl = FindObjectOfType<SubAttackCtrl>();
     }
 
@@ -137,5 +137,9 @@ public class GuaidanceMove : MonoBehaviour
     private void OnDisable()
     {
         
+    }
+    private void OnDestroy()
+    {
+        GameMediator.Instance.DoGameOver -= new GameMediator.DoGameOverDelegate(ReturnPool);
     }
 }
