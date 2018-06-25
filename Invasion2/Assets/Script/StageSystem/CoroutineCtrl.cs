@@ -22,13 +22,13 @@ public class CoroutineCtrl
     const float pattern1EnemySpawnTick = 0.7f;
 
     //등장 패턴 1
-    public IEnumerator StagePattern1()
+    public IEnumerator StagePattern1(int level)
     {
         Debug.Log("등장패턴 1 시작");
-        for (int i = 0; i < pattern1EnemyCount; i++)
+        for (int i = 0; i < pattern1EnemyCount + level; i++)
         {
             stageManager.Spawn(enemy);
-            yield return new WaitForSeconds(pattern1EnemySpawnTick);
+            yield return new WaitForSeconds(pattern1EnemySpawnTick - (level/10));
         }
         Debug.Log("등장패턴 1 종료");
         yield break;
@@ -41,17 +41,17 @@ public class CoroutineCtrl
     const float pattern2RepeatTick = 2f;
 
     //등장 패턴 2
-    public IEnumerator StagePattern2()
+    public IEnumerator StagePattern2(int level)
     {
         Debug.Log("등장패턴 2 시작");
         for (int i = 0; i < pattern2RepeatCount; i++)
         {
-            for (int j = 0; j < pattern2EnemyCount; j++)
+            for (int j = 0; j < pattern2EnemyCount + level; j++)
             {
                 stageManager.Spawn(enemy);
                 yield return new WaitForSeconds(pattern2EnemySpawnTick);
             }
-            yield return new WaitForSeconds(pattern2RepeatTick);
+            yield return new WaitForSeconds(pattern2RepeatTick - (level/5));
         }
         Debug.Log("등장패턴 2 종료");
         yield break;
@@ -62,14 +62,14 @@ public class CoroutineCtrl
     const float pattern3EnemySpawnTick = 0.9f;
 
     //등장 패턴 3
-    public IEnumerator StagePattern3()
+    public IEnumerator StagePattern3(int level)
     {
         Debug.Log("등장패턴 3 시작");
-        for (int i = 0; i < pattern3EnemyCount; i++)
+        for (int i = 0; i < pattern3EnemyCount + (level * 2); i++)
         {
             stageManager.Spawn(enemy);
             stageManager.Spawn(enemy);
-            yield return new WaitForSeconds(pattern3EnemySpawnTick);
+            yield return new WaitForSeconds(pattern3EnemySpawnTick - (level/10));
         }
         Debug.Log("등장패턴 3 종료");
         yield break;
@@ -80,16 +80,16 @@ public class CoroutineCtrl
     const float pattern4EnemySpawnTick = 0.9f;
 
     //등장 패턴 4
-    public IEnumerator StagePattern4()
+    public IEnumerator StagePattern4(int level)
     {
         Debug.Log("등장패턴 4 시작");
-        for (int i = 0; i < pattern4EnemyCount; i++)
+        for (int i = 0; i < pattern4EnemyCount + (level * 3); i++)
         {
             stageManager.Spawn(enemy);
-            yield return new WaitForSeconds(pattern4EnemySpawnTick/2);
+            yield return new WaitForSeconds((pattern4EnemySpawnTick - (level/10)) / 2);
             stageManager.Spawn(enemy);
             stageManager.Spawn(enemy);
-            yield return new WaitForSeconds(pattern4EnemySpawnTick);
+            yield return new WaitForSeconds(pattern4EnemySpawnTick - (level/10));
         }
         Debug.Log("등장패턴 4 종료");
         yield break;

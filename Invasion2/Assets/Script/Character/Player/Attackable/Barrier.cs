@@ -1,12 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 /// <summary>
-/// 담당자 : 이재환
-/// DeungShip 서브 스킬 barrier
-/// -------------------------------
+/// 작성자 : 이재환
 /// 적 공격을 맞으면 배리어 비활성화
 /// 배리어의 쿨타임 시간 (코루틴)
-/// -------------------------------
 /// </summary>
 
 public class Barrier : MonoBehaviour
@@ -37,7 +34,6 @@ public class Barrier : MonoBehaviour
     public IEnumerator ShieldRecharge()
     {
         yield return new WaitForSeconds(CoolTime);
-
         barrierCollider.enabled = true;
         barrierImage.SetActive(true);
     }

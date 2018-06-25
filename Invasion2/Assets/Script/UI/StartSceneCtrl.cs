@@ -12,13 +12,6 @@ public class StartSceneCtrl : MonoBehaviour
 {
     [SerializeField]
     GameObject HelpPanel;
-    [SerializeField]
-    GameDataManager gameDataManager;
-
-    private void Awake()
-    {
-        gameDataManager = GameDataManager.Instance;
-    }
 
     public void OnClickGameStart()
     {

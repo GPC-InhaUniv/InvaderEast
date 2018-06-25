@@ -15,7 +15,7 @@ public class Item : MonoBehaviour
     [SerializeField]
     float speed;
 
-    Rigidbody rigidbody;
+    Rigidbody rigidbodyComponent;
 
     [SerializeField]
     GameObject[] itemModel;
@@ -28,8 +28,8 @@ public class Item : MonoBehaviour
 
     private void Start()
     {
-        rigidbody = GetComponent<Rigidbody>();
-        rigidbody.velocity = transform.forward * -speed;
+        rigidbodyComponent = GetComponent<Rigidbody>();
+        rigidbodyComponent.velocity = transform.forward * -speed;
         StageManager.Instance.restart += new Restart(ReturnPool);
 
     }
@@ -38,6 +38,7 @@ public class Item : MonoBehaviour
     {
         PoolManager.Instance.PutItemObject(gameObject);
     }
+
     private void SetItemInfo()
     {
         itemType = (ItemType)Random.Range(0, 4);
@@ -88,7 +89,6 @@ public class Item : MonoBehaviour
                 break;
         }
     }
-
     
     private void OnTriggerEnter(Collider other)
     {
@@ -120,12 +120,7 @@ public class Item : MonoBehaviour
             PoolManager.Instance.PutItemObject(gameObject);
         }
     }
-    private void OnDisable()
-    {
-       
-    }
 
-    
     private void OnDestroy()
     {
         StageManager.Instance.restart -= new Restart(ReturnPool);

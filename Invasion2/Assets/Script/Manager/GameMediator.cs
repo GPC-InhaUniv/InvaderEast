@@ -37,6 +37,11 @@ public class GameMediator : Singleton<GameMediator>
     {
         return player.CurrentLife;
     }
+    public PlayerType ReadPlayerType()
+    {
+        Player playertype = player as Player;
+        return playertype.PlayerType;
+    }
 
     public delegate void CheckChangeScore();
     public CheckChangeScore CheckedChangeScore;
@@ -46,6 +51,12 @@ public class GameMediator : Singleton<GameMediator>
         if (CheckedChangeScore != null)
             CheckedChangeScore();
     }
+    public void ChangePlayerMaxLife(int  life)
+    {
+        player.MaxLife += life;
+    }
+
+
     public delegate void CheckChangeGold();
     public CheckChangeGold CheckedChangeGold;
 

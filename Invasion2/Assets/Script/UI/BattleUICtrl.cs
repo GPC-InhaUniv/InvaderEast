@@ -13,18 +13,37 @@ public class BattleUICtrl : MonoBehaviour
     public Text lifeText;
     public Image powerGauge;
     public Text score;
-    public Image [] characters;
+    [SerializeField]
+    private Sprite [] characters;
     [SerializeField]
     GameObject MenuPanel;
-
+    [SerializeField]
+    Image characterImage;
 void Start()
     {
         ChangeLife();
         ChangePowerGauge();
+        ChangeCharacterImage(GameMediator.Instance.ReadPlayerType());
         GameMediator.Instance.CheckedChangeScore += new GameMediator.CheckChangeScore(ChangeScore);
         GameMediator.Instance.changePower += new GameMediator.ChangePower(ChangePowerGauge);
         GameMediator.Instance.changeLife += new GameMediator.ChangeLife(ChangeLife);
         
+    }
+
+    void ChangeCharacterImage(PlayerType playerType)
+    {
+        switch (playerType)
+        {
+            case PlayerType.Deung:
+                characterImage.sprite = characters[2];
+                break;
+            case PlayerType.Sin:
+                characterImage.sprite = characters[0];
+                break;
+            case PlayerType.Ho:
+                characterImage.sprite = characters[1];
+                break;
+        }
     }
 
     void ChangeLife()
