@@ -28,7 +28,7 @@ public class Move : MonoBehaviour
 
     void Start()
     {
-        StageManager.Instance.restart += new Restart(ReturnPool);
+        GameMediator.Instance.DoGameOver += new GameMediator.DoGameOverDelegate(ReturnPool);
         transform.position = thisTransform.transform.position;
         transform.rotation = thisTransform.transform.rotation;
     }
@@ -37,12 +37,14 @@ public class Move : MonoBehaviour
     {
         if (tag == "PlayerBullet")
         {
-            PoolManager.Instance.PutPlayerBulletObject(gameObject);
+         
+            GameMediator.Instance.PutPlayerBullet(gameObject);
         }
 
         if (tag == "EnemyBullet")
         {
-            PoolManager.Instance.PutEnemyBulletObject(gameObject);
+         
+            GameMediator.Instance.PutEnemyBullet(gameObject);
         }
     }
 
@@ -51,12 +53,14 @@ public class Move : MonoBehaviour
 
         if (tag == "PlayerBullet" && other.tag != "Boundary")
         {
-            PoolManager.Instance.PutPlayerBulletObject(gameObject);
+         
+            GameMediator.Instance.PutPlayerBullet(gameObject);
         }
 
         if (tag == "EnemyBullet" && other.tag != "Boundary")
         {
-            PoolManager.Instance.PutEnemyBulletObject(gameObject);
+            
+            GameMediator.Instance.PutEnemyBullet(gameObject);
         }
 
     }
@@ -67,18 +71,20 @@ public class Move : MonoBehaviour
         {
             if (tag == "PlayerBullet")
             {
-                PoolManager.Instance.PutPlayerBulletObject(gameObject);
+               
+                GameMediator.Instance.PutPlayerBullet(gameObject);
             }
 
             if (tag == "EnemyBullet")
             {
-                PoolManager.Instance.PutEnemyBulletObject(gameObject);
+              
+                GameMediator.Instance.PutEnemyBullet(gameObject);
             }
         }
     }
 
     private void OnDestroy()
     {
-        StageManager.Instance.restart -= new Restart(ReturnPool);
+        GameMediator.Instance.DoGameOver -= new GameMediator.DoGameOverDelegate(ReturnPool);
     }
 }

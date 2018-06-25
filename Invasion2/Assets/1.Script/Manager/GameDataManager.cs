@@ -2,7 +2,7 @@
 /// <summary>
 /// 담당자 : 김정수
 ///
-///캡슐화 진행 필요 
+///
 /// </summary>
 public class GameDataManager : Singleton<GameDataManager>{
 
@@ -15,6 +15,11 @@ public class GameDataManager : Singleton<GameDataManager>{
     public int Gold { get { return gold; } }
     public int MaxScore { get { return maxScore; }  }
     public int CurrentScore { get { return currentScore; } }
+
+    private void Start()
+    {
+        GameMediator.Instance.DoGameOver += new GameMediator.DoGameOverDelegate(EndGame);
+    }
     public void ChangeGold(int gold)
     {
         this.gold += gold;
@@ -28,8 +33,11 @@ public class GameDataManager : Singleton<GameDataManager>{
             maxScore = currentScore;
         }
     }
-
-    public void EndGame()
+    public void ChangeMaxScore(int score)
+    {
+        maxScore = score;
+    }
+    private void EndGame()
     {
         currentScore = 0;
         SaveAndLoader.Instance.SaveData();

@@ -21,9 +21,8 @@ public class GameController : MonoBehaviour
     }
     void Start()
     {
-        GameMediator.Instance.GameOver();
         StageManager.Instance.NextStage();
-        GameMediator.Instance.changeLife += new GameMediator.ChangeLife(EndGame); 
+        GameMediator.Instance.changeLife += new GameMediator.DoChangeLifeDelegate(EndGame); 
     }
 
     public void EndGame()
@@ -38,6 +37,6 @@ public class GameController : MonoBehaviour
 
     private void OnDestroy()
     {
-        GameMediator.Instance.changeLife -= new GameMediator.ChangeLife(EndGame);
+        GameMediator.Instance.changeLife -= new GameMediator.DoChangeLifeDelegate(EndGame);
     }
 }

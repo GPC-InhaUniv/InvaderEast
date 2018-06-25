@@ -24,9 +24,9 @@ void Start()
         ChangeLife();
         ChangePowerGauge();
         ChangeCharacterImage(GameMediator.Instance.ReadPlayerType());
-        GameMediator.Instance.CheckedChangeScore += new GameMediator.CheckChangeScore(ChangeScore);
-        GameMediator.Instance.changePower += new GameMediator.ChangePower(ChangePowerGauge);
-        GameMediator.Instance.changeLife += new GameMediator.ChangeLife(ChangeLife);
+        GameMediator.Instance.CheckedChangeScore += new GameMediator.DoChangeScoreDelegate(ChangeScore);
+        GameMediator.Instance.changePower += new GameMediator.DoChangePowerDelegate(ChangePowerGauge);
+        GameMediator.Instance.changeLife += new GameMediator.DoChangeLifeDelegate(ChangeLife);
         
     }
 
@@ -70,8 +70,8 @@ void Start()
     }
     private void OnDestroy()
     {
-        GameMediator.Instance.CheckedChangeScore -= new GameMediator.CheckChangeScore(ChangeScore);
-        GameMediator.Instance.changePower -= new GameMediator.ChangePower(ChangePowerGauge);
-        GameMediator.Instance.changeLife -= new GameMediator.ChangeLife(ChangeLife);
+        GameMediator.Instance.CheckedChangeScore -= new GameMediator.DoChangeScoreDelegate(ChangeScore);
+        GameMediator.Instance.changePower -= new GameMediator.DoChangePowerDelegate(ChangePowerGauge);
+        GameMediator.Instance.changeLife -= new GameMediator.DoChangeLifeDelegate(ChangeLife);
     }
 }

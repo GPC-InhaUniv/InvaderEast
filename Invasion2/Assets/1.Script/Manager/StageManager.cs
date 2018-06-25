@@ -14,7 +14,7 @@ public enum Difficult
 /// <summary>
 /// 재시작을 위한 델리게이트
 /// </summary>
-public delegate void Restart();
+
 
 /// <summary>
 /// 담당자 : 최대원
@@ -36,7 +36,7 @@ public class StageManager : Singleton<StageManager>
     [SerializeField]
     BoxCollider Boundary;
 
-    public Restart restart;
+   
     CoroutineCtrl stageCoroutineCtrl;
 
     const int MaxStage = 5;
@@ -53,14 +53,13 @@ public class StageManager : Singleton<StageManager>
     }
 
     private void Start()
-    {
-        
+    {    
         enemyPrefab = Resources.Load("Enemy") as GameObject;
         EnemyList = new List<GameObject>();
         CurrentStage = 0;
         stageCoroutineCtrl = new CoroutineCtrl(this, enemyPrefab);
         Factory = new EnemyFactory();
-        restart += new Restart(SetRestart);
+        GameMediator.Instance.DoGameOver += new GameMediator.DoGameOverDelegate(GameOver);
       
     }
 
@@ -149,7 +148,7 @@ public class StageManager : Singleton<StageManager>
         NextStage();
     }
 
-    public void SetRestart()
+    private void GameOver()
     {
         StopCoroutine(stageCoroutineCtrl.StagePattern1(CurrentStage));
         StopCoroutine(stageCoroutineCtrl.StagePattern2(CurrentStage));
@@ -158,5 +157,5 @@ public class StageManager : Singleton<StageManager>
         CurrentStage = 0;
         StopAllCoroutines();
     }
-   
+
 } 

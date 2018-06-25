@@ -11,8 +11,6 @@ public class MenuUICtrl : MonoBehaviour
         //InputManager.Instance.ChangeScene(SceneState.Battle);
         GameMediator.Instance.GameOver();
         MenuPanel.SetActive(false);
-        if(StageManager.Instance.restart!=null)
-        StageManager.Instance.restart();
         StageManager.Instance.NextStage();
     }
 
@@ -21,7 +19,6 @@ public class MenuUICtrl : MonoBehaviour
         Time.timeScale = 1;
         GameMediator.Instance.GameOver();
         PoolManager.Instance.ClearQueue();
-        StageManager.Instance.SetRestart();
         GameMediator.Instance.ChangeScene(SceneState.CharacterSelect);
     }
 

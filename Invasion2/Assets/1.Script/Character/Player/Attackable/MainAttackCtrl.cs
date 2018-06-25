@@ -35,13 +35,15 @@ public class MainAttackCtrl : MonoBehaviour
 
     void DeungShipAttack()
     {
-        playerBullet = PoolManager.Instance.GetPlayerSpreadBulletObject();
+
+        playerBullet = GameMediator.Instance.GetPlayerSpreadBullet();
         playerBullet.transform.position = shotPosition.transform.position;
     }
 
     void SinShipFirstAttack()
     {
-        playerBullet = PoolManager.Instance.GetPlayerBulletObject();
+
+        playerBullet = GameMediator.Instance.GetPlayerBullet();
         playerBullet.transform.position = shotPosition.transform.position;
 
     }
@@ -51,10 +53,11 @@ public class MainAttackCtrl : MonoBehaviour
         Vector3 positionR = new Vector3(xPosition, 0, yPosition);
         Vector3 positionL = new Vector3(-xPosition, 0, yPosition);
 
-        playerBullet = PoolManager.Instance.GetPlayerBulletObject();
+        playerBullet = GameMediator.Instance.GetPlayerBullet();
         playerBullet.transform.position = shotPosition.transform.position + positionL;
 
-        playerBullet = PoolManager.Instance.GetPlayerBulletObject();
+
+        playerBullet = GameMediator.Instance.GetPlayerBullet();
         playerBullet.transform.position = shotPosition.transform.position + positionR;
 
     }
@@ -83,10 +86,8 @@ public class MainAttackCtrl : MonoBehaviour
 
         for (int i = 0; i < count; i++)
         {
-            playerBullet = PoolManager.Instance.GetPlayerBulletObject();
-
+            playerBullet = GameMediator.Instance.GetPlayerBullet();
             playerBullet.transform.position = shotPosition.transform.position;
-
             playerBullet.transform.rotation = Quaternion.Euler(shotPosition.transform.rotation.x,
                     shotPosition.transform.rotation.y + angle, shotPosition.transform.rotation.z);
 
