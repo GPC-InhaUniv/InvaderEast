@@ -2,7 +2,9 @@
 
 /// <summary>
 /// 담당자 : 이재환
-/// 
+/// -----------------------
+/// Move에 관련한 스크립트
+/// -----------------------
 /// </summary>
 
 public class Move : MonoBehaviour
