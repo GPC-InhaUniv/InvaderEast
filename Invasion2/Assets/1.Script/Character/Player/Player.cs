@@ -54,13 +54,13 @@ public class Player : Character
     float countTime;
     private void Start()
     {
-
+        currentLife = maxLife;
         DontDestroyOnLoad(gameObject);
         rigidbody = GetComponent<Rigidbody>();
         subAttackCtrl = FindObjectOfType<SubAttackCtrl>();
         barrier.SetActive(false);
         mainAttackCtrl = gameObject.GetComponentInChildren<MainAttackCtrl>();
-        GameMediator.Instance.changePower += new GameMediator.ChangePower(ChangeDeungShipFireRate);
+        GameMediator.Instance.changePower += new GameMediator.DoChangePowerDelegate(ChangeDeungShipFireRate);
 
     }
 

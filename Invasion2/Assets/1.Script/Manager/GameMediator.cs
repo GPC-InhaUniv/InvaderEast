@@ -39,12 +39,11 @@ public class GameMediator : Singleton<GameMediator>
     }
     public PlayerType ReadPlayerType()
     {
-        
         return player.PlayerType;
     }
 
-    public delegate void CheckChangeScore();
-    public CheckChangeScore CheckedChangeScore;
+    public delegate void DoChangeScoreDelegate();
+    public DoChangeScoreDelegate CheckedChangeScore;
     public void ChangeScore(int score)
     {
         GameDataManager.Instance.ChangeScore(score);
@@ -55,11 +54,8 @@ public class GameMediator : Singleton<GameMediator>
     {
         player.MaxLife += life;
     }
-
-
-    public delegate void CheckChangeGold();
-    public CheckChangeGold CheckedChangeGold;
-
+    public delegate void DoChangeGoldDelegate();
+    public DoChangeGoldDelegate CheckedChangeGold;
     public void ChangeGold(int gold)
     {
         GameDataManager.Instance.ChangeGold(gold);
@@ -69,10 +65,9 @@ public class GameMediator : Singleton<GameMediator>
     public void GameOver()
     {
         GameDataManager.Instance.EndGame();
-        player.CurrentLife = player.MaxLife;
         ItemManager.Instance.EndGame(); 
         player.EndGame();
-        SaveAndLoader.Instance.SaveData();
+        StageManager.Instance.SetRestart();
         if (changeLife != null)
             changeLife();
         if (changePower != null)
@@ -80,7 +75,7 @@ public class GameMediator : Singleton<GameMediator>
         if (CheckedChangeGold != null)
             CheckedChangeGold();
     }
-    // Item 종류 : PowerItem, LifeItem, GoldItem,ScoreItem,MagnaticItem, PowerRegenItem
+
     // count : 골드, 스코어 아이템의 골드량 및 스코어양
     public void GetItem(ItemType item, int count)
     {
@@ -103,16 +98,16 @@ public class GameMediator : Singleton<GameMediator>
 
 
     // 캐릭터 파워,최대 체력, 장비, 모델 변경
-    public delegate void ChangePower();
-    public ChangePower changePower;
+    public delegate void DoChangePowerDelegate();
+    public DoChangePowerDelegate changePower;
     public void ChangePlayerPower(int count)
     {
         player.Power += count;
         if (changePower != null)
             changePower();
     }
-    public delegate void ChangeLife();
-    public ChangeLife changeLife;
+    public delegate void DoChangeLifeDelegate();
+    public DoChangeLifeDelegate changeLife;
     public void ChangePlayerLife(int count)
     {
         if (player.CurrentLife < player.MaxLife)
@@ -147,6 +142,7 @@ public class GameMediator : Singleton<GameMediator>
     }
 
     //pool manager 관련 메서드
+    
     public GameObject GetEnemyObject()
     {
         return PoolManager.Instance.GetEnemyObject();
@@ -196,7 +192,7 @@ public class GameMediator : Singleton<GameMediator>
     {
         PoolManager.Instance.PutPlayerMissileObject(gameObject, type);
     }
-
+    
     public void PlaySound(SoundType soundType)
     {
         SoundManager.Instance.PlayEffectSound(soundType);

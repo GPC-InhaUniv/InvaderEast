@@ -33,7 +33,7 @@ public class spread : MonoBehaviour
         for (int i = -spreadCount / 2; i < spreadCount/2; i++)
         {
             GameObject playerBullet;
-            playerBullet = PoolManager.Instance.GetPlayerBulletObject();
+            playerBullet = GameMediator.Instance.GetPlayerBullet();
             shotPosition.transform.rotation = Quaternion.Euler(0f, angle * i, 0f);
             playerBullet.transform.position = shotPosition.transform.position;
             playerBullet.transform.rotation = shotPosition.transform.rotation;

@@ -87,7 +87,6 @@ public class Enemy : Character
         {
             case EnemyType.Gyo:
                 giveScore = 100;
-
                 StartCoroutine(enemyPattern.EnemyPattern1());
                 break;
             case EnemyType.Tong:
@@ -114,7 +113,7 @@ public class Enemy : Character
     public void Died()
     {
         StageManager.Instance.RemoveEnemy(gameObject);
-        PoolManager.Instance.PutEnemyObject(gameObject);
+        GameMediator.Instance.PutEnemyObject(gameObject);
     }
 
     private void OnDisable()

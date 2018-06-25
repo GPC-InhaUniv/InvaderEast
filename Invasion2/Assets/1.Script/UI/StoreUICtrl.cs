@@ -30,7 +30,7 @@ public class StoreUICtrl : MonoBehaviour
         ScrollPanel = gameObject.GetComponentInChildren<ScrollRect>();
         ShowChange();
 
-        GameMediator.Instance.CheckedChangeGold += new GameMediator.CheckChangeGold(ShowChange);
+        GameMediator.Instance.CheckedChangeGold += new GameMediator.DoChangeGoldDelegate(ShowChange);
     }
 
     private void ShowChange()
@@ -148,6 +148,6 @@ public class StoreUICtrl : MonoBehaviour
     }
     private void OnDestroy()
     {
-        GameMediator.Instance.CheckedChangeGold -= new GameMediator.CheckChangeGold(ShowChange);
+        GameMediator.Instance.CheckedChangeGold -= new GameMediator.DoChangeGoldDelegate(ShowChange);
     }
 }

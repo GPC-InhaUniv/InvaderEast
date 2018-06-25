@@ -37,12 +37,14 @@ public class Move : MonoBehaviour
     {
         if (tag == "PlayerBullet")
         {
-            PoolManager.Instance.PutPlayerBulletObject(gameObject);
+         
+            GameMediator.Instance.PutPlayerBullet(gameObject);
         }
 
         if (tag == "EnemyBullet")
         {
-            PoolManager.Instance.PutEnemyBulletObject(gameObject);
+         
+            GameMediator.Instance.PutEnemyBullet(gameObject);
         }
     }
 
@@ -51,12 +53,14 @@ public class Move : MonoBehaviour
 
         if (tag == "PlayerBullet" && other.tag != "Boundary")
         {
-            PoolManager.Instance.PutPlayerBulletObject(gameObject);
+         
+            GameMediator.Instance.PutPlayerBullet(gameObject);
         }
 
         if (tag == "EnemyBullet" && other.tag != "Boundary")
         {
-            PoolManager.Instance.PutEnemyBulletObject(gameObject);
+            
+            GameMediator.Instance.PutEnemyBullet(gameObject);
         }
 
     }
@@ -67,12 +71,14 @@ public class Move : MonoBehaviour
         {
             if (tag == "PlayerBullet")
             {
-                PoolManager.Instance.PutPlayerBulletObject(gameObject);
+               
+                GameMediator.Instance.PutPlayerBullet(gameObject);
             }
 
             if (tag == "EnemyBullet")
             {
-                PoolManager.Instance.PutEnemyBulletObject(gameObject);
+              
+                GameMediator.Instance.PutEnemyBullet(gameObject);
             }
         }
     }
