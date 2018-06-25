@@ -1,8 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-
+﻿using UnityEngine;
+/// <summary>
+/// 담장자 : 이재환
+/// -------------------------------
+/// 캐릭터들의 서브공격을 제어 
+/// HomingMissile : 유도 미사일  
+/// StraightMissile : 직선형 미사일
+/// -------------------------------
+/// </summary>
 public class SubAttackCtrl : MonoBehaviour
 {
     [SerializeField]
@@ -15,26 +19,16 @@ public class SubAttackCtrl : MonoBehaviour
 
     public PlayerType playerType;
 
-    [SerializeField]
-    const float CoolTime = 3.0f;
-
-
     void HomingMissile()
     {
         Vector3 rightSpawnPos = transform.position + new Vector3(0.5f, 0.0f, 0.0f);
         Vector3 leftSpawnPos = transform.position + new Vector3(-0.5f, 0.0f, 0.0f);
 
-        //Debug.Log("호밍 미사일 : " + homingMissile);
-        //Debug.Log("스폰 좌표 : " + rightSpawnPos);
-        //Debug.Log("스폰 좌표 : " + leftSpawnPos);
-
         homingMissile = PoolManager.Instance.GetPlayerMissileObject(PlayerType.Sin);
         homingMissile.transform.position = rightSpawnPos;
-        //  homingMissile.transform.rotation = Quaternion.identity;
 
         homingMissile = PoolManager.Instance.GetPlayerMissileObject(PlayerType.Sin);
         homingMissile.transform.position = leftSpawnPos;
-        //    homingMissile.transform.rotation = Quaternion.identity;
 
     }
 
@@ -43,21 +37,16 @@ public class SubAttackCtrl : MonoBehaviour
         Vector3 rightSpawnPos = transform.position + new Vector3(0.5f, 0.0f, 0.0f);
         Vector3 leftSpawnPos = transform.position + new Vector3(-0.5f, 0.0f, 0.0f);
 
-        //Debug.Log("스폰 좌표 : " + rightSpawnPos);
-        //Debug.Log("스폰 좌표 : " + leftSpawnPos);
-
         straightMissile = PoolManager.Instance.GetPlayerMissileObject(PlayerType.Ho);
         straightMissile.transform.position = rightSpawnPos;
-        // straightMissile.transform.rotation = Quaternion.identity;
 
         straightMissile = PoolManager.Instance.GetPlayerMissileObject(PlayerType.Ho);
         straightMissile.transform.position = leftSpawnPos;
-        //  straightMissile.transform.rotation = Quaternion.identity;
+
     }
-    
+
     public void Attack(int power)
     {
-
         switch (playerType)
         {
             case PlayerType.Sin:
