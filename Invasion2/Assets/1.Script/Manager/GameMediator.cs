@@ -5,14 +5,14 @@
 /// </summary>
 public class GameMediator : Singleton<GameMediator>
 {
-    Character player;
+    Player player;
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
     }
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Character>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         SoundManager.Instance.PlayBackgroundSound();
     }
 
@@ -39,8 +39,8 @@ public class GameMediator : Singleton<GameMediator>
     }
     public PlayerType ReadPlayerType()
     {
-        Player playertype = player as Player;
-        return playertype.PlayerType;
+        
+        return player.PlayerType;
     }
 
     public delegate void CheckChangeScore();
@@ -70,7 +70,8 @@ public class GameMediator : Singleton<GameMediator>
     {
         GameDataManager.Instance.EndGame();
         player.CurrentLife = player.MaxLife;
-        ItemManager.Instance.EndGame();
+        ItemManager.Instance.EndGame(); 
+        player.EndGame();
         SaveAndLoader.Instance.SaveData();
         if (changeLife != null)
             changeLife();
@@ -122,8 +123,7 @@ public class GameMediator : Singleton<GameMediator>
 
     public void ChangePlayerType(PlayerType type)
     {
-        Player playerModel = player as Player;
-        playerModel.ChangePlayer(type);
+        player.ChangePlayer(type);
     }
 
     //InputManager에서 플레이어 이동 방향 받아오기
