@@ -5,22 +5,12 @@ using System;
 /// <summary>
 /// 담당자 : 박상원
 /// --------------------------------------------------
-/// Character를 상속받아
-/// MoveController 스크립트에서 이동 방향을
-/// Move 메서드의 매개변수에 전달해주면서
-/// Player의 공격을 활성화하여 이동과 함께
-/// 공격을 하도록 하였습니다.
+/// CharacterSelectSceneCtrl 에서 PlayerType을 전달해주면
+/// 해당 PlayerType에 맞춰 플레이어 캐릭터를 활성화.
 /// --------------------------------------------------
-/// CharacterSelectSceneCtrl 스크립트에서
-/// 캐릭터 선택 씬 화면에서 플레이어 캐릭터 선택시
-/// 선택된 캐릭터 타입을 InputManager에 알려주고
-/// InputManager에서 GameMediator에 전달하여
-/// Character 스크립트를 상속받은 Player 스크립트에
-/// 정의되어 있는 ChangePlayer 메서드로 전달되어
-/// 게임 화면에 표시해줄 플레이어 캐릭터를 활성화한다.
-/// --------------------------------------------------
-/// 스크립트 주석친 부분은 최근 무기 발사와 관련하여
-/// 테스트 하기 위해 남겨둔 코드입니다.
+/// 터치 이동 여부를 확인하여 공격을 On / Off 한다.
+/// 각 플레이어 캐릭터의 탄막 발사 간격 등의 기능도
+/// Player 스크립트에서 담당한다.
 /// --------------------------------------------------
 /// </summary>
 
@@ -97,8 +87,6 @@ public class Player : Character
 
     public override void Attack()
     {
-        //공격 관련 프리펩은 나중에 하나의
-        //오브젝트에 모아놓기로 결정
         if (timeRate <= fireRate)
         {
             timeRate += Time.deltaTime;

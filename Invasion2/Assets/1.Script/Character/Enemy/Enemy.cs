@@ -15,12 +15,15 @@ public enum EnemyType
 
 /// <summary>
 /// -----------------------------------------
-/// 각각의 Enemy 패턴들이 아직 Enemy 스크립트의 
-/// Pattern() 메서드와 결합되지 않음
-/// -----------------------------------------
-/// Character를 상속받아 Character 스크립트에 있는
-/// Move 메서드의 매개변수에 이동 방향을 전달해주면
+/// Character를 상속받았고 Character 스크립트에 있는
+/// Move 메서드의 매개변수에 enum Direction에 추가한
+/// UP,DOWN,LEFT,DOWN 등의 방향을 전달해주면
 /// 이동할 수 있도록 하였고 8방향 이동이 가능하다.
+/// -----------------------------------------
+/// Enemy 타입은 총 4가지이며 ChangeType 함수에
+/// enum EnemyType에 들어있는 EnemyType 중 하나가
+/// 전달되면 switch을 이용하여 EnemyType에 맞는
+/// EnemyPattern을 실행하는 코루틴을 시작한다.
 /// -----------------------------------------
 /// </summary>
 public class Enemy : Character
@@ -87,7 +90,6 @@ public class Enemy : Character
         {
             case EnemyType.Gyo:
                 giveScore = 100;
-
                 StartCoroutine(enemyPattern.EnemyPattern1());
                 break;
             case EnemyType.Tong:
