@@ -29,6 +29,7 @@ public class Player : Character
     [SerializeField]
     PlayerType playerType;
 
+    public PlayerType PlayerType { get { return playerType; } }
     [SerializeField]
     int attackMaxCount;
     int attackCount;

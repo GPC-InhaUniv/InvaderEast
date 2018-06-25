@@ -33,9 +33,7 @@ public class Barrier : MonoBehaviour
 
     public IEnumerator ShieldRecharge()
     {
-        Debug.Log("실드 재생성중");
         yield return new WaitForSeconds(CoolTime);
-        Debug.Log("실드 생성");
         barrierCollider.enabled = true;
         barrierImage.SetActive(true);
     }

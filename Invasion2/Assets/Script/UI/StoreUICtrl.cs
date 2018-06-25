@@ -79,7 +79,7 @@ public class StoreUICtrl : MonoBehaviour
             ScrollPanel.horizontalNormalizedPosition = 1;
             if (GameMediator.Instance.ReadPlayerGold() >= SalePrice && !purchase)
             {
-                Debug.Log("LifeItem 구입!");
+               
                 purchase = true;
                 GameMediator.Instance.ChangeGold(-SalePrice);
                 GameMediator.Instance.BuyItem(ItemType.LifeItem);

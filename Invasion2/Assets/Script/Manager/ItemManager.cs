@@ -80,8 +80,8 @@ public class ItemManager : Singleton<ItemManager>
                 GameMediator.Instance.ChangePlayerPower(10);
                 break;
             case ItemType.LifeItem:
-                increseLife += 1;
-                GameMediator.Instance.ChangePlayerLife(increseLife);
+                Debug.Log("LifeItem 구입!");
+                GameMediator.Instance.ChangePlayerMaxLife(1);
                 break;
             case ItemType.MagnaticItem:
                 magnaticItem = true;
@@ -104,8 +104,7 @@ public class ItemManager : Singleton<ItemManager>
                 GameMediator.Instance.ChangePlayerPower(-10);
                 break;
             case ItemType.LifeItem:
-                increseLife -= 1;
-                GameMediator.Instance.ChangePlayerLife(-10);
+                GameMediator.Instance.ChangePlayerMaxLife(-1);
                 break;
             case ItemType.MagnaticItem:
                 magnaticItem = false;
