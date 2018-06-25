@@ -21,14 +21,13 @@ using UnityEngine.UI;
 /// </summary>
 public class MoveController : MonoBehaviour
 {
-    public RawImage pannelImage;
-    [SerializeField]
-    protected Transform Stick;
-    protected Transform StickPannel;
-    protected Vector3 centerPos;
-    protected Vector3 directionPos;
-    Vector3 touchPos;
-    float StickRadius = 60f;
+    private RawImage pannelImage;
+    private Transform Stick;
+    private Transform StickPannel;
+    private Vector3 centerPos;
+    private Vector3 directionPos;
+    private Vector3 touchPos;
+    private float StickRadius = 60f;
 
     private void Start()
     {
