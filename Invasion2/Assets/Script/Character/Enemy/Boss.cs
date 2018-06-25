@@ -119,7 +119,6 @@ public class Boss : Enemy
         {
             if (i % 4 == 0)
                 continue;
-            Quaternion AngleOfFire = Quaternion.Euler(0, (-i * 15)-90, 0);
             GameObject bullet = PoolManager.Instance.GetEnemyBulletObject();
             bullet.transform.position = mainShotPos.transform.position;
             bullet.transform.rotation = mainShotPos.transform.rotation;

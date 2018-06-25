@@ -10,19 +10,18 @@ public class Move : MonoBehaviour
     [SerializeField]
     float speed;
 
-    Rigidbody rigidbody;
+    Rigidbody rigidbodyComponent;
     Transform thisTransform;
 
     private void Awake()
     {
-        rigidbody = GetComponent<Rigidbody>();
+        rigidbodyComponent = GetComponent<Rigidbody>();
         thisTransform = gameObject.transform;
     }
 
-
     private void FixedUpdate()
     {
-        rigidbody.velocity = transform.forward * speed;
+        rigidbodyComponent.velocity = transform.forward * speed;
     }
 
     void Start()
@@ -74,10 +73,6 @@ public class Move : MonoBehaviour
                 PoolManager.Instance.PutEnemyBulletObject(gameObject);
             }
         }
-    }
-
-    private void OnDisable()
-    {
     }
 
     private void OnDestroy()

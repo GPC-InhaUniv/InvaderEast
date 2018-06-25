@@ -13,14 +13,12 @@ public class StageClearCtrl : MonoBehaviour {
     Text getScoreText;
     [SerializeField]
     Text maxScoreText;
-    const int addScore = 7;
 
     public void OnClickReturnToTitle()
     {
         GameMediator.Instance.GameOver();
         Time.timeScale = 1;
         GameMediator.Instance.ChangeScene(SceneState.CharacterSelect);
-       
     }
 
     public void OnClickRestart()
@@ -39,5 +37,4 @@ public class StageClearCtrl : MonoBehaviour {
         getScoreText.text = GameMediator.Instance.ReadCurrentScore().ToString();
         maxScoreText.text = GameMediator.Instance.ReadPlayerMaxScore().ToString();
     }
-
 }

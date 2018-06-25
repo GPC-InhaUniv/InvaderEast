@@ -39,7 +39,7 @@ public class StageManager : Singleton<StageManager>
     public Restart restart;
     CoroutineCtrl stageCoroutineCtrl;
 
-    const int MaxStage = 3;
+    const int MaxStage = 5;
     int CurrentStage;
     Difficult difficult;
     int transformNumber;
@@ -101,22 +101,20 @@ public class StageManager : Singleton<StageManager>
 
     public void NextStage()
     {
-        
-            if (CurrentStage == 0)
-            {
-                StartCoroutine(StageCoroutine(CurrentStage));
-                CurrentStage++;
-            }
-            else if (CurrentStage <= MaxStage)
-            {
-                StopCoroutine(StageCoroutine(CurrentStage));
-                StartCoroutine(StageCoroutine(CurrentStage++));
-            }
-            else
-            {
-                Debug.Log("다음 스테이지 없음");
-            }
-        
+        if (CurrentStage == 0)
+        {
+            StartCoroutine(StageCoroutine(CurrentStage));
+            CurrentStage++;
+        }
+        else if (CurrentStage <= MaxStage)
+        {
+            StopCoroutine(StageCoroutine(CurrentStage));
+            StartCoroutine(StageCoroutine(CurrentStage++));
+        }
+        else
+        {
+            StartCoroutine(StageCoroutine(CurrentStage));
+        }
     }
 
 
@@ -136,50 +134,48 @@ public class StageManager : Singleton<StageManager>
     //실질석인 스테이지 타임라인
     IEnumerator StageCoroutine(int stageLevel)
     {
-       
         Debug.Log("스테이지 " + stageLevel + " 시작");
         yield return new WaitForSeconds(callCoroutineTick);
 
-        StartCoroutine(stageCoroutineCtrl.StagePattern1());
+        StartCoroutine(stageCoroutineCtrl.StagePattern1(stageLevel));
         yield return new WaitForSeconds(callCoroutineTick);
 
-        StartCoroutine(stageCoroutineCtrl.StagePattern2());
+        StartCoroutine(stageCoroutineCtrl.StagePattern2(stageLevel));
         yield return new WaitForSeconds(callCoroutineTick * 3);
 
-        StartCoroutine(stageCoroutineCtrl.StagePattern3());
+        StartCoroutine(stageCoroutineCtrl.StagePattern3(stageLevel));
         yield return new WaitForSeconds(callCoroutineTick * 2);
 
-        StartCoroutine(stageCoroutineCtrl.StagePattern4());
+        StartCoroutine(stageCoroutineCtrl.StagePattern4(stageLevel));
         yield return new WaitForSeconds(callCoroutineTick);
 
-        StartCoroutine(stageCoroutineCtrl.StagePattern1());
+        StartCoroutine(stageCoroutineCtrl.StagePattern1(stageLevel));
         yield return new WaitForSeconds(callCoroutineTick);
 
-        StartCoroutine(stageCoroutineCtrl.StagePattern4());
+        StartCoroutine(stageCoroutineCtrl.StagePattern4(stageLevel));
         yield return new WaitForSeconds(callCoroutineTick);
 
-        StartCoroutine(stageCoroutineCtrl.StagePattern2());
+        StartCoroutine(stageCoroutineCtrl.StagePattern2(stageLevel));
         yield return new WaitForSeconds(callCoroutineTick * 3);
 
-        StartCoroutine(stageCoroutineCtrl.StagePattern1());
-        StartCoroutine(stageCoroutineCtrl.StagePattern1());
+        StartCoroutine(stageCoroutineCtrl.StagePattern1(stageLevel));
+        StartCoroutine(stageCoroutineCtrl.StagePattern1(stageLevel));
         yield return new WaitForSeconds(callCoroutineTick);
 
-        StartCoroutine(stageCoroutineCtrl.StagePattern2());
-        StartCoroutine(stageCoroutineCtrl.StagePattern3());
-        yield return new WaitForSeconds(callCoroutineTick);
+        StartCoroutine(stageCoroutineCtrl.StagePattern2(stageLevel));
+        StartCoroutine(stageCoroutineCtrl.StagePattern3(stageLevel));
 
-        yield break;
+        NextStage();
     }
 
     public void SetRestart()
     {
+        StopCoroutine(stageCoroutineCtrl.StagePattern1(CurrentStage));
+        StopCoroutine(stageCoroutineCtrl.StagePattern2(CurrentStage));
+        StopCoroutine(stageCoroutineCtrl.StagePattern3(CurrentStage));
+        StopCoroutine(stageCoroutineCtrl.StagePattern4(CurrentStage));
         CurrentStage = 0;
         StopAllCoroutines();
-        StopCoroutine(stageCoroutineCtrl.StagePattern1());
-        StopCoroutine(stageCoroutineCtrl.StagePattern2());
-        StopCoroutine(stageCoroutineCtrl.StagePattern3());
-        StopCoroutine(stageCoroutineCtrl.StagePattern4());
     }
    
 } 

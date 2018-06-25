@@ -5,12 +5,12 @@ using UnityEngine;
 public class BossBulletMove : MonoBehaviour {
 
     public float speed;
-    Rigidbody rigidbody;
+    Rigidbody rigidbodyComponent;
 
     void Start()
     {
-        rigidbody = GetComponent<Rigidbody>();
-        rigidbody.velocity = transform.forward * speed;
+        rigidbodyComponent = GetComponent<Rigidbody>();
+        rigidbodyComponent.velocity = transform.forward * speed;
 
     }
   
