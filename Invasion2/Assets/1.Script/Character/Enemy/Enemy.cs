@@ -44,10 +44,14 @@ public class Enemy : Character
             direction = value;
         }
     }
+
     protected EnemyType enemyType;
     protected int giveScore;
     protected int giveMaxGold;
+
+
     EnemyAttackPattern enemyPattern;
+
 
     private void OnEnable()
     {
@@ -82,7 +86,6 @@ public class Enemy : Character
     //타입 변경시마다 코루틴 종료
     private void ChangeType(EnemyType type)
     {
-
         switch (type)
         {
             case EnemyType.Gyo:

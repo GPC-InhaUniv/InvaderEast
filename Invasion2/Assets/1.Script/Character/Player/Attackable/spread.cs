@@ -46,12 +46,7 @@ public class spread : MonoBehaviour
     {
         PoolManager.Instance.PutPlayerSpreadBulletObject(gameObject);
     }
-
-    private void OnDisable()
-    {
-
-    }
-
+       
     private void OnDestroy()
     {
         GameMediator.Instance.DoGameOver -= new GameMediator.DoGameOverDelegate(ReturnPool);
