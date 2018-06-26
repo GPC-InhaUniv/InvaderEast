@@ -113,7 +113,7 @@ public class Enemy : Character
     public void Died()
     {
         StageManager.Instance.RemoveEnemy(gameObject);
-        GameMediator.Instance.PutEnemyObject(gameObject);
+        GameMediator.Instance.PutEnemyObjectAtPool(gameObject);
     }
 
     private void OnDisable()

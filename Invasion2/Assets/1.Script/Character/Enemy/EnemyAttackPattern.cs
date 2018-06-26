@@ -19,7 +19,7 @@ public class EnemyAttackPattern : MonoBehaviour
  
         while (true)
         {
-            bullet = GameMediator.Instance.GetEnemyBullet();
+            bullet = GameMediator.Instance.GetEnemyBulletFromPool();
             bullet.transform.position = shotPos.transform.position;
             bullet.transform.rotation = shotPos.transform.rotation;
             GameMediator.Instance.PlaySound(SoundType.EnemyAttack);
@@ -39,7 +39,7 @@ public class EnemyAttackPattern : MonoBehaviour
         {
             for (int i = 0; i < 5; i++)
             {
-                bullet = GameMediator.Instance.GetEnemyBullet();
+                bullet = GameMediator.Instance.GetEnemyBulletFromPool();
                 bullet.transform.position = shotPos.transform.position;
                 bullet.transform.rotation = shotPos.transform.rotation;
                 GameMediator.Instance.PlaySound(SoundType.EnemyAttack);
@@ -63,7 +63,7 @@ public class EnemyAttackPattern : MonoBehaviour
         while (true)
         {
             shotPos.transform.LookAt(player.transform);
-            bullet = GameMediator.Instance.GetEnemyBullet();
+            bullet = GameMediator.Instance.GetEnemyBulletFromPool();
             bullet.transform.position = shotPos.transform.position;
             bullet.transform.rotation = shotPos.transform.rotation;
             GameMediator.Instance.PlaySound(SoundType.EnemyAttack);
@@ -92,7 +92,7 @@ public class EnemyAttackPattern : MonoBehaviour
             for (int i = 0; i < 5; i++)
             {
                 quaternion = Quaternion.AngleAxis(startAngle + (gapAngle * i), Vector3.up); 
-                bullet = GameMediator.Instance.GetEnemyBullet();
+                bullet = GameMediator.Instance.GetEnemyBulletFromPool();
                 bullet.transform.position = shotPos.transform.position;
                 bullet.transform.rotation = quaternion;
                 
