@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
-using System;
 
 /// <summary>
 /// 담당자 : 박상원
@@ -130,7 +128,6 @@ public class Player : Character
 
     }
 
-
     public void ChangePlayer(PlayerType type)
     {
         switch (type)
@@ -186,5 +183,4 @@ public class Player : Character
         power = 0;
         currentLife = maxLife;
     }
-
 }

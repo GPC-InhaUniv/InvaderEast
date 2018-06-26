@@ -18,7 +18,6 @@ public enum PlayerType
 public enum Direction
 {
     STOP,
-    
     LEFT =1,
     LEFTDOWN=2,
     DOWN=3,
@@ -27,8 +26,6 @@ public enum Direction
     LEFTUP,
     RIGHTUP,
     UP,
-
-
 }
 
 /// <summary>
@@ -126,5 +123,4 @@ public abstract class Character : MonoBehaviour
     public abstract void Attack();
 
     public abstract void OnTriggerEnter(Collider other);
-    
 }
