@@ -153,52 +153,53 @@ public class GameMediator : Singleton<GameMediator>
 
     //pool manager 관련 메서드
 
-    public GameObject GetEnemyObject()
+    public GameObject GetEnemyObjectFromPool()
     {
         return PoolManager.Instance.GetEnemyObject();
     }
 
-    public void PutEnemyObject(GameObject gameObject)
+    public void PutEnemyObjectAtPool(GameObject gameObject)
     {
         PoolManager.Instance.PutEnemyObject(gameObject);
     }
 
-    public GameObject GetEnemyBullet()
+    public GameObject GetEnemyBulletFromPool()
     {
         return PoolManager.Instance.GetEnemyBulletObject();
     }
 
-    public void PutEnemyBullet(GameObject gameObject)
+    public void PutEnemyBulletAtPool(GameObject gameObject)
     {
         PoolManager.Instance.PutEnemyBulletObject(gameObject);
     }
 
-    public GameObject GetPlayerBullet()
+    public GameObject GetPlayerBulletFromPool()
     {
         return PoolManager.Instance.GetPlayerBulletObject();
     }
 
-    public void PutPlayerBullet(GameObject gameObject)
+    public void PutPlayerBulletAtPool(GameObject gameObject)
     {
         PoolManager.Instance.PutPlayerBulletObject(gameObject);
     }
 
-    public GameObject GetPlayerSpreadBullet()
+    
+    public GameObject GetPlayerSpreadBulletFromPool()
     {
         return PoolManager.Instance.GetPlayerSpreadBulletObject();
     }
 
-    public void PutPlayerSpreadBullet(GameObject gameObject)
+    public void PutPlayerSpreadBulletAtPool(GameObject gameObject)
     {
         PoolManager.Instance.PutPlayerSpreadBulletObject(gameObject);
     }
 
-    public GameObject GetPlayerMissile(PlayerType type)
+    public GameObject GetPlayerMissileFromPool(PlayerType type)
     {
         return PoolManager.Instance.GetPlayerMissileObject(type);
     }
 
-    public void PutPlayerMissile(GameObject gameObject, PlayerType type)
+    public void PutPlayerMissileAtPool(GameObject gameObject, PlayerType type)
     {
         PoolManager.Instance.PutPlayerMissileObject(gameObject, type);
     }

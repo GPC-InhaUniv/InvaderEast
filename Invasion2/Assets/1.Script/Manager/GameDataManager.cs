@@ -1,8 +1,6 @@
 ﻿using UnityEngine;
 /// <summary>
 /// 담당자 : 김정수
-///
-///
 /// </summary>
 public class GameDataManager : Singleton<GameDataManager>{
 

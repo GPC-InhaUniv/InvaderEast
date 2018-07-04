@@ -29,7 +29,10 @@ public class SoundManager : Singleton<SoundManager>
 
 	void Awake ()
     {
+
+       
         audioSource = gameObject.AddComponent(typeof(AudioSource)) as AudioSource;
+       
         audioSource = GetComponent<AudioSource>();
 
         effectSound = new AudioClip[effectSoundIndex];

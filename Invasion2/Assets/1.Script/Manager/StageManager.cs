@@ -81,7 +81,7 @@ public class StageManager : Singleton<StageManager>
     {
         foreach (GameObject item in EnemyList)
         {
-            GameMediator.Instance.PutEnemyObject(item.gameObject);
+            GameMediator.Instance.PutEnemyObjectAtPool(item.gameObject);
         }
         EnemyList.Clear();
         Debug.Log("RemoveAllEnemy 완료");
@@ -90,7 +90,7 @@ public class StageManager : Singleton<StageManager>
     public void RemoveEnemy(GameObject enemy)
     { 
         EnemyList.Remove(enemy);
-        GameMediator.Instance.PutEnemyObject(enemy);
+        GameMediator.Instance.PutEnemyObjectAtPool(enemy);
     }
 
     public void NextStage()
