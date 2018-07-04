@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using UnityEngine;
+
 /// <summary>
 /// 담당자 : 이재환
 /// -----------------------------
 /// 산탄 총의 탄 효과 부분
 /// -----------------------------
 /// </summary>
+
 public class spread : MonoBehaviour
 {
     const int spreadCount = 24;

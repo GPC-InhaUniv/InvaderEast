@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -12,6 +10,7 @@ using UnityEngine;
 /// HoShipAttack : 부채꼴 모양의 탄
 /// ------------------------------------
 /// </summary>
+
 public class MainAttackCtrl : MonoBehaviour
 {
     const float xInterval = 0.22f;
